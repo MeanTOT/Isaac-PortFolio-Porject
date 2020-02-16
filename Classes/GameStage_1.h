@@ -14,6 +14,9 @@ private:
 	MapCase_2* mapCase_2;
 	MapCase_3* mapCase_3;
 
+	PhysicsBody* edgeSegment[8];
+	Node* edgeNode[8];
+
 public:
 	static Scene* createScene();
 	virtual bool init();

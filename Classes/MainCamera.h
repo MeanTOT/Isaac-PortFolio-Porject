@@ -24,4 +24,5 @@ public:
 	void MoveRT();
 	void MoveLB();
 	void MoveLT();
+	void SetActivationControl();
 };

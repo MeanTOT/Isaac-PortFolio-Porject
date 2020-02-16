@@ -179,81 +179,85 @@ void Isaac::tick()
 void Isaac::IsaacMoving()
 {
 	// 움직일시 아이작 머리와 몸방향 //
-	if (MoveR)
+	if (!CI->camera->getNumberOfRunningActions())
 	{
-		isaacPhysicBody->applyImpulse(Vect(MoveSpeed, 0));
+		if (MoveR)
+		{
+			isaacPhysicBody->applyImpulse(Vect(MoveSpeed, 0));
 
-		if (!isaacHead_Base->getNumberOfRunningActions())
-		{
-			isaacHead_Base->setFlippedX(false);
-			isaacHead_Base->setSpriteFrame("IsaacHead3.png");
+			if (!isaacHead_Base->getNumberOfRunningActions())
+			{
+				isaacHead_Base->setFlippedX(false);
+				isaacHead_Base->setSpriteFrame("IsaacHead3.png");
+			}
 		}
-	}
-	if (MoveL)
-	{
-		isaacPhysicBody->applyImpulse(Vect(-MoveSpeed, 0));
+		if (MoveL)
+		{
+			isaacPhysicBody->applyImpulse(Vect(-MoveSpeed, 0));
 
-		if (!isaacHead_Base->getNumberOfRunningActions())
-		{
-			isaacHead_Base->setFlippedX(true);
-			isaacHead_Base->setSpriteFrame("IsaacHead3.png");
+			if (!isaacHead_Base->getNumberOfRunningActions())
+			{
+				isaacHead_Base->setFlippedX(true);
+				isaacHead_Base->setSpriteFrame("IsaacHead3.png");
+			}
 		}
-	}
-	if (MoveU)
-	{
-		isaacPhysicBody->applyImpulse(Vect(0, MoveSpeed));
+		if (MoveU)
+		{
+			isaacPhysicBody->applyImpulse(Vect(0, MoveSpeed));
 
-		if (!isaacHead_Base->getNumberOfRunningActions())
+			if (!isaacHead_Base->getNumberOfRunningActions())
+			{
+				isaacHead_Base->setSpriteFrame("IsaacHead5.png");
+			}
+		}
+		if (MoveD)
 		{
-			isaacHead_Base->setSpriteFrame("IsaacHead5.png");
-		}	
-	}
-	if (MoveD)
-	{
-		isaacPhysicBody->applyImpulse(Vect(0, -MoveSpeed));
+			isaacPhysicBody->applyImpulse(Vect(0, -MoveSpeed));
 
-		if (!isaacHead_Base->getNumberOfRunningActions())
-		{
-			isaacHead_Base->setSpriteFrame("IsaacHead1.png");
+			if (!isaacHead_Base->getNumberOfRunningActions())
+			{
+				isaacHead_Base->setSpriteFrame("IsaacHead1.png");
+			}
 		}
-	}
 
 
-	if (MoveU)
-	{
-		if (!isaacBody_Base->getNumberOfRunningActions())
-		{
-			isaacBody_Base->runAction(IsaacWalkAnimateUD);
-		}
-	}
-	else if (MoveD)
-	{
-		if (!isaacBody_Base->getNumberOfRunningActions())
-		{
-			isaacBody_Base->runAction(IsaacWalkAnimateUD);
-		}
-	}
-	else if (MoveR)
-	{
-		isaacBody_Base->setFlippedX(false);
-		if (!isaacBody_Base->getNumberOfRunningActions())
-		{
-			isaacBody_Base->runAction(IsaacWalkAnimateRL);
-		}
-	}
-	else if (MoveL)
-	{
-		isaacBody_Base->setFlippedX(true);
-		if (!isaacBody_Base->getNumberOfRunningActions())
-		{
-			isaacBody_Base->runAction(IsaacWalkAnimateRL);
-		}
-	}
 
-	if (!MoveR && !MoveL && !MoveU && !MoveD)
-	{
-		isaacBody_Base->stopAllActions();
-		isaacBody_Base->setSpriteFrame("IsaacWalk_UD (4).png");
+		if (MoveU)
+		{
+			if (!isaacBody_Base->getNumberOfRunningActions())
+			{
+				isaacBody_Base->runAction(IsaacWalkAnimateUD);
+			}
+		}
+		else if (MoveD)
+		{
+			if (!isaacBody_Base->getNumberOfRunningActions())
+			{
+				isaacBody_Base->runAction(IsaacWalkAnimateUD);
+			}
+		}
+		else if (MoveR)
+		{
+			isaacBody_Base->setFlippedX(false);
+			if (!isaacBody_Base->getNumberOfRunningActions())
+			{
+				isaacBody_Base->runAction(IsaacWalkAnimateRL);
+			}
+		}
+		else if (MoveL)
+		{
+			isaacBody_Base->setFlippedX(true);
+			if (!isaacBody_Base->getNumberOfRunningActions())
+			{
+				isaacBody_Base->runAction(IsaacWalkAnimateRL);
+			}
+		}
+
+		if (!MoveR && !MoveL && !MoveU && !MoveD)
+		{
+			isaacBody_Base->stopAllActions();
+			isaacBody_Base->setSpriteFrame("IsaacWalk_UD (4).png");
+		}
 	}
 }
 

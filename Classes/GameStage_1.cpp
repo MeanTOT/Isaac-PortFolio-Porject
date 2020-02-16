@@ -24,11 +24,36 @@ bool GameStage_1::init()
 	auto edgeBody = PhysicsBody::createEdgeBox(Size(DI->getWinSize().width - 100, DI->getWinSize().height - 70), PHYSICSBODY_MATERIAL_DEFAULT, 3);
 	edgeBody->setContactTestBitmask(true);
 	edgeBody->setCollisionBitmask(10);
+	
+	auto node = Node::create();
+	node->setPosition(Point(DI->getWinSize() / 2));
+	node->setPhysicsBody(edgeBody);
+	this->addChild(node);
 
-	auto edgeNode = Node::create();
-	edgeNode->setPosition(Point(DI->getWinSize() / 2));
-	edgeNode->setPhysicsBody(edgeBody);
-	this->addChild(edgeNode);
+	edgeSegment[0] = PhysicsBody::createEdgeSegment(Vec2(-240, 90), Vec2(-10,90));
+	edgeSegment[1] = PhysicsBody::createEdgeSegment(Vec2(10, 90), Vec2(240, 90));
+	edgeSegment[2] = PhysicsBody::createEdgeSegment(Vec2(-240, -90), Vec2(-10, -90));
+	edgeSegment[3] = PhysicsBody::createEdgeSegment(Vec2(10, -90), Vec2(240, -90));
+
+	edgeSegment[4] = PhysicsBody::createEdgeSegment(Vec2(-180, 135), Vec2(-180, 10));
+	edgeSegment[5] = PhysicsBody::createEdgeSegment(Vec2(-180, -135), Vec2(-180, -10));
+	edgeSegment[6] = PhysicsBody::createEdgeSegment(Vec2(180, 135), Vec2(180, 10));
+	edgeSegment[7] = PhysicsBody::createEdgeSegment(Vec2(180, -135), Vec2(180, -10));
+	
+
+	for (int i = 0; i < 8; i++)
+	{
+		edgeSegment[i]->setContactTestBitmask(true);
+		edgeSegment[i]->setCollisionBitmask(15);
+
+		edgeNode[i] = Node::create();
+		edgeNode[i]->setPosition(Point(DI->getWinSize() / 2));
+		edgeNode[i]->setPhysicsBody(edgeSegment[i]);
+		this->addChild(edgeNode[i]);
+	}
+
+
+	
 
 
 	// ∏  ¡¶¿€ //

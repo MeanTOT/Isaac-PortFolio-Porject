@@ -532,6 +532,7 @@ void KeyBordControl::CreateContactListener(Scene * scene)
 {
 	contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(KeyBordControl::onContactBegin, this);
+	contactListener->onContactPostSolve = CC_CALLBACK_2(KeyBordControl::onContactPostSolve, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, scene);
 }
 
@@ -542,6 +543,7 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// 2. 오브젝트
 	// 5, 아이작총알 , 그림자
 	// 10 . 벽
+	// 15 . 두번째 벽
 
 	auto a = contact.getShapeA()->getBody();
 	auto b = contact.getShapeB()->getBody();
@@ -555,6 +557,12 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 
 	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 5 ||
 		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 5)
+	{
+		return false;
+	}
+
+	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 15 ||
+		b->getCollisionBitmask() == 15 && a->getCollisionBitmask() == 5)
 	{
 		return false;
 	}
@@ -583,7 +591,15 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			a->getNode()->setTag(EraseBulletTag);
 	}
 
+
 	
 
 	return true;
 }
+
+void KeyBordControl::onContactPostSolve(PhysicsContact & contact, const PhysicsContactPostSolve & solve)
+{
+	auto a = contact.getShapeA()->getBody();
+	auto b = contact.getShapeB()->getBody();
+}
+ 

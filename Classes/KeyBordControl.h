@@ -33,6 +33,7 @@ public:
 	void OptionPointerControl(Sprite* sprite1, Sprite* sprite2);
 	void CreateContactListener(Scene* scene);
 	bool onContactBegin(PhysicsContact& contact);
+	void onContactPostSolve(PhysicsContact& contact, const PhysicsContactPostSolve& solve);
 
 };
 

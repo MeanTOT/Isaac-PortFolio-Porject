@@ -28,22 +28,22 @@ void MainCamera::releaseInstance()
 
 void MainCamera::MoveR()
 {
-	camera->runAction(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(DI->getWinSize().width, 0)), 3));
+	camera->runAction(Sequence::create(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(DI->getWinSize().width, 0)), 3),CallFunc::create(CC_CALLBACK_0(MainCamera::SetActivationControl,this)), nullptr));
 }
 
 void MainCamera::MoveL()
 {
-	camera->runAction(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(-DI->getWinSize().width, 0)), 3));
+	camera->runAction(Sequence::create(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(-DI->getWinSize().width, 0)), 3), CallFunc::create(CC_CALLBACK_0(MainCamera::SetActivationControl, this)), nullptr));
 }
 
 void MainCamera::MoveT()
 {
-	camera->runAction(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(0, DI->getWinSize().height)), 3));
+	camera->runAction(Sequence::create(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(0, DI->getWinSize().height)), 3), CallFunc::create(CC_CALLBACK_0(MainCamera::SetActivationControl, this)), nullptr));
 }
 
 void MainCamera::MoveB()
 {
-	camera->runAction(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(0, -DI->getWinSize().height)), 3));
+	camera->runAction(Sequence::create(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(0, -DI->getWinSize().height)), 3), CallFunc::create(CC_CALLBACK_0(MainCamera::SetActivationControl, this)), nullptr));
 }
 
 void MainCamera::MoveRB()
@@ -64,5 +64,10 @@ void MainCamera::MoveLB()
 void MainCamera::MoveLT()
 {
 	camera->runAction(EaseInOut::create(MoveBy::create(CameraSpeed, Vec2(-DI->getWinSize().width, DI->getWinSize().height)), 3));
+}
+
+void MainCamera::SetActivationControl()
+{
+	Player->setControlAtivation(true);
 }
 
