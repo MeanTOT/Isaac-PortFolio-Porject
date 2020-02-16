@@ -41,8 +41,8 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 
 	mapRB = Sprite::createWithSpriteFrameName("01_basement_01.png");
 	mapRB->setAnchorPoint({ 0,1 });
-	mapRB->setFlipX(true);
-	mapRB->setFlipY(true);
+	mapRB->setFlippedX(true);
+	mapRB->setFlippedY(true);
 	mapRB->setScaleY(0.9f);
 	mapRB->setPosition(position);
 	scene->addChild(mapRB, BackGroundZoder);
@@ -159,6 +159,7 @@ void MapBase::CollisionToDoor()
 		else
 			Player->getIsaacPysicBody()->setCollisionBitmask(1);
 
+		int vecsize = Player->objectVec.size();
 
 		if (isMakeDoorB)
 		{
@@ -168,7 +169,7 @@ void MapBase::CollisionToDoor()
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x, Player->getIsaacBody()->getPosition().y - 100);
 				Player->getIsaacPysicBody()->setPositionOffset(Player->getIsaacPysicBody()->getPositionOffset() + Vec2(0, DI->getWinSize().height));
 				
-				for (int i = 0; i < Player->objectVec.size(); i++)
+				for (int i = 0; i < vecsize; i++)
 				{
 					Player->objectVec[i]->Rock_BaseMentPhysics->setPositionOffset(
 						Player->objectVec[i]->Rock_BaseMentPhysics->getPositionOffset() + Vec2(0, DI->getWinSize().height));
@@ -186,7 +187,7 @@ void MapBase::CollisionToDoor()
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x, Player->getIsaacBody()->getPosition().y + 100);
 				Player->getIsaacPysicBody()->setPositionOffset(Player->getIsaacPysicBody()->getPositionOffset() + Vec2(0, -DI->getWinSize().height));
 
-				for (int i = 0; i < Player->objectVec.size(); i++)
+				for (int i = 0; i < vecsize; i++)
 				{
 					Player->objectVec[i]->Rock_BaseMentPhysics->setPositionOffset(
 						Player->objectVec[i]->Rock_BaseMentPhysics->getPositionOffset() + Vec2(0, -DI->getWinSize().height));
@@ -204,7 +205,7 @@ void MapBase::CollisionToDoor()
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x + 100, Player->getIsaacBody()->getPosition().y);
 				Player->getIsaacPysicBody()->setPositionOffset(Player->getIsaacPysicBody()->getPositionOffset() + Vec2(-DI->getWinSize().width, 0));
 
-				for (int i = 0; i < Player->objectVec.size(); i++)
+				for (int i = 0; i < vecsize; i++)
 				{
 
 					Player->objectVec[i]->Rock_BaseMentPhysics->setPositionOffset(
@@ -223,7 +224,7 @@ void MapBase::CollisionToDoor()
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x - 100, Player->getIsaacBody()->getPosition().y);
 				Player->getIsaacPysicBody()->setPositionOffset(Player->getIsaacPysicBody()->getPositionOffset() + Vec2(DI->getWinSize().width, 0));
 
-				for (int i = 0; i < Player->objectVec.size(); i++)
+				for (int i = 0; i < vecsize; i++)
 				{
 
 					Player->objectVec[i]->Rock_BaseMentPhysics->setPositionOffset(

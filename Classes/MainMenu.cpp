@@ -384,7 +384,7 @@ void MainMenu::tick(float delta)
 
 	for (int i = 0; i < 10; ++i)
 	{
-		Characters[i]->setZOrder(Characters[i]->getPositionY() * -1);
+		Characters[i]->setLocalZOrder(Characters[i]->getPositionY() * -1);
 		KCI->CharSelectSetPos(Characters);
 	}
 

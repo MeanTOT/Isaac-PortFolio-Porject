@@ -9,7 +9,7 @@ Bullet::Bullet()
 void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 {
 	BulletEraseAnimation = Animation::create();
-	BulletEraseAnimation->setDelayPerUnit(0.1f);
+	BulletEraseAnimation->setDelayPerUnit(0.07f);
 	BulletEraseAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_tearpoofa_01.png"));
 	BulletEraseAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_tearpoofa_02.png"));
 	BulletEraseAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_tearpoofa_03.png"));

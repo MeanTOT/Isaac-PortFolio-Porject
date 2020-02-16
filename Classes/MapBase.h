@@ -3,7 +3,7 @@
 #include "ObjectBase.h"
 #include "Rocks.h"
 
-class MapBase
+class MapBase : public Scene
 {
 private:
 	SpriteFrameCache* cache;
