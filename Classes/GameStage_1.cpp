@@ -67,6 +67,16 @@ void GameStage_1::tick(float delta)
 		}
 	}
 
+	for (int i = 0; i < Player->objectVec.size(); i++)
+	{
+		Player->objectVec[i]->tick();
+
+		if (Player->objectVec[i]->ObjectSprite->getTag() == ObjectErase)
+		{
+			Player->objectVec.erase(Player->objectVec.begin() + i);
+		}
+	}
+
 	DCI->ShowDebug(sceneWorld);
 }
 

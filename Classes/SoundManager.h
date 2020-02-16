@@ -14,6 +14,7 @@ private:
 	int tearFire5;
 	int titleScreenJingle;
 	int dipteraSonata;
+	int fireBurning;
 
 	SoundManager();
 	~SoundManager() {};
@@ -35,6 +36,8 @@ public:
 	void PlayCharSelectLeft();
 	void PlayCharSelectRight();
 	void PlayTearFire5();
+	void PlayFireBurning();
+	void StopFireBurning();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

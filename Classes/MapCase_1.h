@@ -4,7 +4,7 @@
 class MapCase_1 : public MapBase
 {
 private:
-	Rocks* RocksMaker[3];
+	Sprite* controlsImage;
 public:
 	MapCase_1(Scene* scene, Vec2 position);
 	~MapCase_1();

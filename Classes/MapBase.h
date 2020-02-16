@@ -2,6 +2,8 @@
 #include "ProjectFW.h"
 #include "ObjectBase.h"
 #include "Rocks.h"
+#include "Poop.h"
+#include "Fire.h"
 
 class MapBase : public Scene
 {

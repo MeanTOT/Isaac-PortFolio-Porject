@@ -2,20 +2,15 @@
 
 MapCase_1::MapCase_1(Scene* scene, Vec2 position)
 {
-	RocksMaker[0] = new Rocks;
-	RocksMaker[1] = new Rocks;
+	controlsImage = Sprite::create("MapImage/controls.png");
+	controlsImage->setPosition(position);
+	scene->addChild(controlsImage, -99998);
 
 	this->CreateBaseMentRoom(scene, position);
 	this->CreateNormalDoorR(scene, Vec2(position.x + 200,position.y));
 	this->CreateNormalDoorL(scene, Vec2(position.x - 200, position.y));
 	this->CreateNormalDoorT(scene, Vec2(position.x, position.y + 111));
 	this->CreateNormalDoorB(scene, Vec2(position.x, position.y - 111));
-
-	RocksMaker[0]->CreateRockBaseMent(scene, Vec2(position.x - 100, position.y), 1);
-	RocksMaker[1]->CreateRockBaseMent(scene, Vec2(position.x + 100, position.y), 1);
-
-	Player->objectVec.push_back(RocksMaker[0]);
-	Player->objectVec.push_back(RocksMaker[1]);
 
 	RoomNumber = 1;
 	RoomClear = false;

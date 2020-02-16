@@ -120,8 +120,6 @@ void MapBase::CreateNormalDoorB(Scene * scene, Vec2 position)
 
 void MapBase::CollisionToDoor()
 {
-	
-
 	if (Player->getRoomNumber() == RoomNumber)
 	{
 		if (isMakeDoorB &&
@@ -171,8 +169,8 @@ void MapBase::CollisionToDoor()
 				
 				for (int i = 0; i < vecsize; i++)
 				{
-					Player->objectVec[i]->Rock_BaseMentPhysics->setPositionOffset(
-						Player->objectVec[i]->Rock_BaseMentPhysics->getPositionOffset() + Vec2(0, DI->getWinSize().height));
+					Player->objectVec[i]->ObjectPhysics->setPositionOffset(
+						Player->objectVec[i]->ObjectPhysics->getPositionOffset() + Vec2(0, DI->getWinSize().height));
 				}
 
 				CI->MoveB();
@@ -189,8 +187,8 @@ void MapBase::CollisionToDoor()
 
 				for (int i = 0; i < vecsize; i++)
 				{
-					Player->objectVec[i]->Rock_BaseMentPhysics->setPositionOffset(
-						Player->objectVec[i]->Rock_BaseMentPhysics->getPositionOffset() + Vec2(0, -DI->getWinSize().height));
+					Player->objectVec[i]->ObjectPhysics->setPositionOffset(
+						Player->objectVec[i]->ObjectPhysics->getPositionOffset() + Vec2(0, -DI->getWinSize().height));
 				}
 
 				CI->MoveT();
@@ -208,8 +206,8 @@ void MapBase::CollisionToDoor()
 				for (int i = 0; i < vecsize; i++)
 				{
 
-					Player->objectVec[i]->Rock_BaseMentPhysics->setPositionOffset(
-						Player->objectVec[i]->Rock_BaseMentPhysics->getPositionOffset() + Vec2(-DI->getWinSize().width, 0));
+					Player->objectVec[i]->ObjectPhysics->setPositionOffset(
+						Player->objectVec[i]->ObjectPhysics->getPositionOffset() + Vec2(-DI->getWinSize().width, 0));
 				}
 
 				CI->MoveR();
@@ -227,8 +225,8 @@ void MapBase::CollisionToDoor()
 				for (int i = 0; i < vecsize; i++)
 				{
 
-					Player->objectVec[i]->Rock_BaseMentPhysics->setPositionOffset(
-						Player->objectVec[i]->Rock_BaseMentPhysics->getPositionOffset() + Vec2(DI->getWinSize().width, 0));
+					Player->objectVec[i]->ObjectPhysics->setPositionOffset(
+						Player->objectVec[i]->ObjectPhysics->getPositionOffset() + Vec2(DI->getWinSize().width, 0));
 				}
 
 				CI->MoveL();

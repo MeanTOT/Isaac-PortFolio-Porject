@@ -1,5 +1,21 @@
 #include "RandomGeneration.h"
 
+RandomGeneration* RandomGeneration::instance = nullptr;
+
+RandomGeneration * RandomGeneration::getInstance()
+{
+	if (!instance)
+		instance = new RandomGeneration;
+
+	return instance;
+}
+
+void RandomGeneration::releaseInstance()
+{
+	if (instance)
+		delete instance;
+}
+
 // min부터 max 까지의 난수를 생성
 int RandomGeneration::getRandomNumberWithRange(int min, int max)
 {

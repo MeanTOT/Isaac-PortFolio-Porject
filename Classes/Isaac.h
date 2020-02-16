@@ -36,6 +36,13 @@ enum BulletTAG // 151 ~ 200
 	ActivationBulletTag,
 };
 
+enum ObjectTAG // 201 ~ 250
+{
+	ObjectHit = 201,
+	ObjectIdle,
+	ObjectErase,
+};
+
 class Isaac
 {
 private:
@@ -175,6 +182,7 @@ public:
 	void IsaacMoving();
 	void BulletFire();
 	void PushBackBullet();
+	void IsaacSetZoder();
 };
 
 

@@ -9,7 +9,7 @@ Bullet::Bullet()
 void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 {
 	BulletEraseAnimation = Animation::create();
-	BulletEraseAnimation->setDelayPerUnit(0.07f);
+	BulletEraseAnimation->setDelayPerUnit(0.04f);
 	BulletEraseAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_tearpoofa_01.png"));
 	BulletEraseAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_tearpoofa_02.png"));
 	BulletEraseAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_tearpoofa_03.png"));
@@ -97,7 +97,7 @@ void Bullet::EraseBullet()
 		{
 			if (range <= 0)
 			{
-				bullet->runAction(Sequence::create(MoveBy::create(0.2f,Vec2(0, -Player->getMaxHeight())), CallFunc::create(CC_CALLBACK_0(Bullet::ErasePhysicsBody,this)),
+				bullet->runAction(Sequence::create(MoveBy::create(0.2f, Vec2(0, -Player->getMaxHeight())), CallFunc::create(CC_CALLBACK_0(Bullet::ErasePhysicsBody, this)),
 					BulletEraseAnimate, RemoveSelf::create(), nullptr));
 
 				log("액션실행");
@@ -119,8 +119,6 @@ void Bullet::RangeCount()
 {
 	if (bullet->getTag() == ActivationBulletTag)
 		range -= 0.6f;
-
-	log("%f", range);
 	
 	if (range <= 0)
 	{

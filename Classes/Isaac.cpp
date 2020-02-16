@@ -173,6 +173,7 @@ void Isaac::tick()
 {
 	IsaacMoving();
 	BulletFire();
+	IsaacSetZoder();
 }
 
 void Isaac::IsaacMoving()
@@ -309,5 +310,10 @@ void Isaac::PushBackBullet()
 	Bullet* isaacBullet = new Bullet;
 	isaacBullet->CreateIsaacBullet(_scene, isaacBody_Base->getPosition());
 	isaacBulletVec.push_back(isaacBullet);
+}
+
+void Isaac::IsaacSetZoder()
+{
+	isaacBody_Base->setZOrder(isaacBody_Base->getPositionY() * -1);
 }
  

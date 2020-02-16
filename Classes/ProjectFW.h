@@ -22,6 +22,7 @@
 #include "SoundManager.h"
 #include "KeyBordControl.h"
 #include "Isaac.h"
+#include "RandomGeneration.h"
 
 // Difinision
 #define DI Director::getInstance() // Director Instance
@@ -30,6 +31,7 @@
 #define SMI SoundManager::getInstance() // Sound Manager Instance
 #define KCI KeyBordControl::getInstance() // Keybord Control Instance
 #define Player Isaac::getInstance() // Isaac Instance
+#define RGI RandomGeneration::getInstance() // RandomGeneration Instance
 
 #define Position_50_50_ Vec2(Director::getInstance()->getWinSize().width / 2, Director::getInstance()->getWinSize().height / 2) // Press Start Screen
 #define Position_50_49_ Vec2(Director::getInstance()->getWinSize().width / 2, (Director::getInstance()->getWinSize().height / 2) * -1) // File Select Screen

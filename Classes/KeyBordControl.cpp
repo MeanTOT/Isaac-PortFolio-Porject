@@ -566,6 +566,11 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			b->getNode()->setTag(EraseBulletTag);
 		if (a->getCollisionBitmask() == 5)
 			a->getNode()->setTag(EraseBulletTag);
+
+		if (b->getCollisionBitmask() == 2)
+			b->getNode()->setTag(ObjectHit);
+		if (a->getCollisionBitmask() == 2)
+			a->getNode()->setTag(ObjectHit);
 	}
 
 

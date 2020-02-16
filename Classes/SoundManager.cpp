@@ -64,6 +64,20 @@ void SoundManager::PlayTearFire5()
 	tearFire5 = AudioEngine::play2d("Sound/Sfx/tear fire 5.mp3", false, sfxVolume);
 }
 
+void SoundManager::PlayFireBurning()
+{
+	if (AudioEngine::getState(fireBurning) != AudioEngine::AudioState::PLAYING)
+	{
+		fireBurning = AudioEngine::play2d("Sound/Sfx/fire burning.mp3", true, sfxVolume);
+		log("사운드재생");
+	}
+}
+
+void SoundManager::StopFireBurning()
+{
+	AudioEngine::stop(fireBurning);
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);

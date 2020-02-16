@@ -10,6 +10,17 @@ public:
 	ObjectBase() {}
 	~ObjectBase() {}
 
-	Sprite* Rock_BaseMent;
-	PhysicsBody* Rock_BaseMentPhysics;
+	int ObjectHp;
+	int _index;
+	
+	SpriteFrameCache* Obcache;
+
+	Sprite* ObjectSprite;
+	PhysicsBody* ObjectPhysics;
+
+	Animation* ObjectAnimation;
+	Animate* ObjectAnimate;
+
+	virtual void tick() {}
+	virtual void CreateObject(Scene* scene, Vec2 position, int index) {}
 };

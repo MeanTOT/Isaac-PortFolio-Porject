@@ -1,14 +1,19 @@
 #pragma once
 #include "ObjectBase.h"
 
-class Rocks : public ObjectBase
+class Fire : public ObjectBase
 {
 private:
-	
-public:
-	Rocks() {}
-	~Rocks() {}
 
-	void tick();
+public:
+	Fire() {}
+	~Fire() {}
+
+	Sprite* fire;
+
+
 	void CreateObject(Scene* scene, Vec2 position, int index);
+	void tick();
 };
+
+
