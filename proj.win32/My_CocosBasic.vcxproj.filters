@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameStage">
+      <UniqueIdentifier>{324d8be4-e197-4d22-be9e-34fedcea979a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MapCase">
+      <UniqueIdentifier>{16f38f20-c56e-4ab1-9a41-50801a4f38fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Other">
+      <UniqueIdentifier>{ce527743-8baf-40ed-8d40-c5b1914b7c90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SingleTon">
+      <UniqueIdentifier>{75c65299-fa63-4992-93f3-033aea4a8795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SingleTon\Camera">
+      <UniqueIdentifier>{ea6b4f96-eeb8-4bc4-bab9-383cd369d5dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SingleTon\DebugMod">
+      <UniqueIdentifier>{a5c14aeb-0e0d-404b-9274-eb2ed786af16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MainMenu">
+      <UniqueIdentifier>{b43837a1-56b2-408b-a382-9fddefa0a607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SingleTon\Sound">
+      <UniqueIdentifier>{1e748db0-bb83-42bd-875b-79661dd3abf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SingleTon\Isaac[Player]">
+      <UniqueIdentifier>{7517c674-432b-4007-8a6f-50dd161b27c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SingleTon\Keybord">
+      <UniqueIdentifier>{5a096c97-52f2-489e-8ec6-5c4ee0e0941c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\LodingScene">
+      <UniqueIdentifier>{f1111281-8cb8-4bb1-955f-46fe82adcb1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Object">
+      <UniqueIdentifier>{acdcfb26-5b3a-48b4-98db-90f277f718b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Bullet">
+      <UniqueIdentifier>{0f12faf6-e679-447c-beb7-9c9f6cc91789}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameStage_1.cpp">
+      <Filter>src\GameStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapCase_1.cpp">
+      <Filter>src\MapCase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapCase_2.cpp">
+      <Filter>src\MapCase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainCamera.cpp">
+      <Filter>src\SingleTon\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DebugCall.cpp">
+      <Filter>src\SingleTon\DebugMod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapBase.cpp">
+      <Filter>src\MapCase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainMenu.cpp">
+      <Filter>src\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SoundManager.cpp">
+      <Filter>src\SingleTon\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\KeyBordControl.cpp">
+      <Filter>src\SingleTon\Keybord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RandomGeneration.cpp">
+      <Filter>src\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Isaac.cpp">
+      <Filter>src\SingleTon\Isaac[Player]</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ProjectFW.cpp">
+      <Filter>src\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LabelTypingEffect.cpp">
+      <Filter>src\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LodingScreen1.cpp">
+      <Filter>src\LodingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapCase_3.cpp">
+      <Filter>src\MapCase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ObjectBase.cpp">
+      <Filter>src\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Rocks.cpp">
+      <Filter>src\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bullet.cpp">
+      <Filter>src\Bullet</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameStage_1.h">
+      <Filter>src\GameStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapCase_1.h">
+      <Filter>src\MapCase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ProjectFW.h">
+      <Filter>src\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapCase_2.h">
+      <Filter>src\MapCase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainCamera.h">
+      <Filter>src\SingleTon\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DebugCall.h">
+      <Filter>src\SingleTon\DebugMod</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapBase.h">
+      <Filter>src\MapCase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMenu.h">
+      <Filter>src\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SoundManager.h">
+      <Filter>src\SingleTon\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\KeyBordControl.h">
+      <Filter>src\SingleTon\Keybord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RandomGeneration.h">
+      <Filter>src\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Isaac.h">
+      <Filter>src\SingleTon\Isaac[Player]</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LabelTypingEffect.h">
+      <Filter>src\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LodingScreen1.h">
+      <Filter>src\LodingScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapCase_3.h">
+      <Filter>src\MapCase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ObjectBase.h">
+      <Filter>src\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Rocks.h">
+      <Filter>src\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bullet.h">
+      <Filter>src\Bullet</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
