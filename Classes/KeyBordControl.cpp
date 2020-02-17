@@ -579,6 +579,8 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			b->getNode()->setTag(ObjectHit);
 		if (a->getCollisionBitmask() == 2)
 			a->getNode()->setTag(ObjectHit);
+
+		
 	}
 
 

@@ -47,6 +47,8 @@ void Poop::CreateObject(Scene * scene, Vec2 position, int index)
 
 	ObjectHp = 4;
 	_index = index;
+
+	Player->objectVec.push_back(this);
 }
 
 void Poop::tick()

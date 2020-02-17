@@ -30,10 +30,10 @@ Isaac::Isaac()
 	// [Player Info] //
 	MoveSpeed = 25.0f;
 	BulletFireCycle = 0.15f;
-	bulletRange = 300.0f;
-	bulletMoveSpeed = 2000.0f;
-	basicHeight = 10.0f;
-	maxHeight = 10.0f;
+	bulletRange = 450.0f;
+	bulletMoveSpeed = 3000.0f;
+	basicHeight = 15.0f;
+	maxHeight = 15.0f;
 
 
 

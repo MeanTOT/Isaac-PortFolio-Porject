@@ -86,8 +86,9 @@ void GameStage_1::tick(float delta)
 	{
 		Player->isaacBulletVec[i]->tick();
 
-		if (Player->isaacBulletVec[i]->bullet->getTag() == EraseBulletTag)
+		if (Player->isaacBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
 		{
+			//delete[] Player->isaacBulletVec[i];
 			Player->isaacBulletVec.erase(Player->isaacBulletVec.begin() + i);
 		}
 	}

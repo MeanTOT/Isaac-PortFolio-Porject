@@ -40,8 +40,6 @@ public:
 	Sprite* doorB;
 	Sprite* doorB_1;
 
-	std::vector<ObjectBase*> obvec;
-
 	void CreateBaseMentRoom(Scene* scene, Vec2 position);
 	void CreateNormalDoorL(Scene* scene, Vec2 position);
 	void CreateNormalDoorR(Scene* scene, Vec2 position);

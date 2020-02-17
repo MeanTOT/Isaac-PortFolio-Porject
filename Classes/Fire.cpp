@@ -133,6 +133,8 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 	}
 
 	_index = index;
+
+	Player->objectVec.push_back(this);
 }
 
 void Fire::tick()

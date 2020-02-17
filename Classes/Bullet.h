@@ -10,6 +10,9 @@ private:
 	Animation* BulletEraseAnimation;
 	Animate* BulletEraseAnimate;
 
+	Sequence* eraseAction1;
+	Sequence* eraseAction2;
+
 	float range;
 
 public:
@@ -27,5 +30,6 @@ public:
 	void EraseBullet();
 	void RangeCount();
 	void ErasePhysicsBody();
+	void EraseBulletVec();
 	
 };

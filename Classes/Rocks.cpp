@@ -91,6 +91,8 @@ void Rocks::CreateObject(Scene* scene, Vec2 position, int index)
 	ObjectSprite->setZOrder(ObjectSprite->getPositionY() * -1);
 
 	ObjectHp = 0;
+
+	Player->objectVec.push_back(this);
 }
 
 void Rocks::tick()

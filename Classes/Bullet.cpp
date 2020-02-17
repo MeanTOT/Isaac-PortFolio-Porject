@@ -29,14 +29,22 @@ void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 	BulletEraseAnimate = Animate::create(BulletEraseAnimation);
 	BulletEraseAnimate->retain();
 
-	bullet = Sprite::create("Bullet/tears_08.png");
+	eraseAction1 = Sequence::create(MoveBy::create(0.2f, Vec2(0, -Player->getMaxHeight())), CallFunc::create(CC_CALLBACK_0(Bullet::ErasePhysicsBody, this)),BulletEraseAnimate,
+		CallFunc::create(CC_CALLBACK_0(Bullet::EraseBulletVec, this)), RemoveSelf::create(), nullptr);
+	eraseAction1->setTag(1);
+	eraseAction1->retain();
+	eraseAction2 = Sequence::create(BulletEraseAnimate, CallFunc::create(CC_CALLBACK_0(Bullet::EraseBulletVec, this)),RemoveSelf::create(),nullptr);
+	eraseAction2->setTag(2);
+	eraseAction2->retain();
+
+	bullet = Sprite::create("Bullet/tears_06.png");
 	bullet->setPosition(position.x + Player->getIsaacPysicBody()->getPositionOffset().x, position.y + 10 + Player->getIsaacPysicBody()->getPositionOffset().y);
 	bullet->setTag(ActivationBulletTag);
 
 	bulletPhysics = PhysicsBody::createCircle(bullet->getContentSize().width / 6, PhysicsMaterial(0, 0, 0));
-	bulletPhysics->setPositionOffset(Vec2(0, -Player->getBasicHeight()));
+	//bulletPhysics->setPositionOffset(Vec2(0, -Player->getBasicHeight()));
 	bulletPhysics->setContactTestBitmask(true);
-	bulletPhysics->setCollisionBitmask(5);
+	bulletPhysics->setCollisionBitmask(0);
 	bullet->addComponent(bulletPhysics);
 
 	scene->addChild(bullet);
@@ -44,6 +52,7 @@ void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 	bulletShadow = Sprite::create("Player/shadow.png");
 	bulletShadow->setPosition(bullet->getPosition().x, bullet->getPosition().y - Player->getBasicHeight());
 	bulletShadow->setScale(0.1f);
+	bulletShadow->setOpacity(100);
 	bulletShadow->setTag(ActivationBulletTag);
 
 	bulletShadowPhysics = PhysicsBody::createCircle(bulletShadow->getContentSize().width / 6, PhysicsMaterial(0, 0, 0));
@@ -91,46 +100,52 @@ void Bullet::MoveBullet()
 
 void Bullet::EraseBullet()
 {
-	if (bullet->getTag() == EraseBulletTag)
+	if (bulletShadow->getTag() == EraseBulletTag)
 	{
-		if (!bullet->getNumberOfRunningActions())
+		if (!bullet->getNumberOfRunningActionsByTag(2))
 		{
-			if (range <= 0)
-			{
-				bullet->runAction(Sequence::create(MoveBy::create(0.2f, Vec2(0, -Player->getMaxHeight())), CallFunc::create(CC_CALLBACK_0(Bullet::ErasePhysicsBody, this)),
-					BulletEraseAnimate, RemoveSelf::create(), nullptr));
+			bullet->stopAllActions();
 
-				log("액션실행");
-			}
-			else
-			{
-				bullet->runAction(Sequence::create(BulletEraseAnimate, RemoveSelf::create(), nullptr));
+			bullet->runAction(eraseAction2);
+			bulletShadow->runAction(Sequence::create(DelayTime::create(5), RemoveSelf::create(), nullptr));
 
-				bulletPhysics->removeFromWorld();
-				bulletShadowPhysics->removeFromWorld();
+			ErasePhysicsBody();
+		}
+	}
 
-				bulletShadow->removeFromParent();
-			}
+	if (bulletShadow->getTag() == EraseBulletTag2)
+	{
+		if (!bullet->getNumberOfRunningActionsByTag(1))
+		{
+			bullet->runAction(eraseAction1);
+			bulletShadow->runAction(Sequence::create(DelayTime::create(5), RemoveSelf::create(), nullptr));
 		}
 	}
 }
 
 void Bullet::RangeCount()
 {
-	if (bullet->getTag() == ActivationBulletTag)
+	if (bulletShadow->getTag() == ActivationBulletTag)
 		range -= 0.6f;
 	
 	if (range <= 0)
 	{
-		bullet->setTag(EraseBulletTag);
+		bulletShadow->setTag(EraseBulletTag2);
+		range = 1;
 	}
+
 }
 
 void Bullet::ErasePhysicsBody()
 {
 	bulletPhysics->removeFromWorld();
 	bulletShadowPhysics->removeFromWorld();
-
-	bulletShadow->removeFromParent();
+	bulletShadow->setVisible(false);
 }
+
+void Bullet::EraseBulletVec()
+{
+	bulletShadow->setTag(EraseOnVec);
+}
+
 

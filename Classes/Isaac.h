@@ -33,6 +33,8 @@ enum WalkVector // 101 ~ 150
 enum BulletTAG // 151 ~ 200
 {
 	EraseBulletTag = 151,
+	EraseBulletTag2,
+	EraseOnVec,
 	ActivationBulletTag,
 };
 

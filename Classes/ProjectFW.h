@@ -40,6 +40,8 @@
 #define Position_51_47_ Vec2((Director::getInstance()->getWinSize().width / 2) * 3, (Director::getInstance()->getWinSize().height / 2) * -5) // Option Screen
 #define Position_51_49_ Vec2((Director::getInstance()->getWinSize().width / 2) * 3, (Director::getInstance()->getWinSize().height / 2) * -1) // Stats Screen
 #define Position_51_50_ Vec2((Director::getInstance()->getWinSize().width / 2) * 3, Director::getInstance()->getWinSize().height / 2)
+#define Position_49_50_ Vec2((Director::getInstance()->getWinSize().width / 2) * -1, Director::getInstance()->getWinSize().height / 2)
+#define Position_50_51_ Vec2(Director::getInstance()->getWinSize().width / 2, (Director::getInstance()->getWinSize().height / 2) * 3)
 
 #define BackGroundZoder -100000
 #define DoorZoder -99999
