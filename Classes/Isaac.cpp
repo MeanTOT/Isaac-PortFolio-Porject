@@ -1,6 +1,7 @@
 #include "Isaac.h"
 #include "ObjectBase.h"
 #include "Bullet.h"
+#include "IsaacBoom.h"
 
 Isaac* Isaac::instance = nullptr;
 
@@ -23,6 +24,8 @@ Isaac::Isaac()
 	OptionIndex = 0;
 	OptionSfxIndex = 2;
 	OptionBgmIndex = 2;
+
+	BombCount = 1;
 	
 
 	// ------- Float ------- //
@@ -52,6 +55,8 @@ Isaac::Isaac()
 	BulletFireL = false;
 	BulletFireU = false;
 	BulletFireD = false;
+
+	BombActivation = false;
 
 	// ------- First Scene ------- //
 
@@ -153,7 +158,7 @@ void Isaac::CreateIsaac(Scene* scene)
 	isaacPhysicBody->setContactTestBitmask(true);
 	isaacBody_Base->addComponent(isaacPhysicBody);
 
-	scene->addChild(isaacBody_Base, -1);
+	scene->addChild(isaacBody_Base, 100000);
 
 	// ¸Ó¸® //
 	isaacHead_Base = Sprite::createWithSpriteFrameName("IsaacHead1.png");
@@ -174,6 +179,7 @@ void Isaac::tick()
 	IsaacMoving();
 	BulletFire();
 	IsaacSetZoder();
+
 }
 
 void Isaac::IsaacMoving()
@@ -318,6 +324,16 @@ void Isaac::PushBackBullet()
 
 void Isaac::IsaacSetZoder()
 {
-	isaacBody_Base->setZOrder(isaacBody_Base->getPositionY() * -1);
+	isaacBody_Base->setLocalZOrder(isaacBody_Base->getPositionY() * -1);
+}
+
+void Isaac::CreateBomb()
+{
+	if (!BombActivation && BombCount > 0)
+	{
+		isaacBoom = new IsaacBoom(_scene, Player->getIsaacBody()->getPosition());
+		BombActivation = true;
+		BombCount -= 1;
+	}
 }
  

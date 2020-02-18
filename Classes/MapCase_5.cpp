@@ -1,22 +1,20 @@
-#include "MapCase_3.h"
+#include "MapCase_5.h"
 
-MapCase_3::MapCase_3(Scene * scene, Vec2 position)
+MapCase_5::MapCase_5(Scene * scene, Vec2 position)
 {
-	RocksMaker = new Rocks;
-
 	this->CreateBaseMentRoom(scene, position);
-	this->CreateNormalDoorL(scene, position);
+	this->CreateNormalDoorB(scene, position);
 
-	RoomNumber = 3;
+	RoomNumber = 5;
 	RoomClear = false;
 }
 
-MapCase_3::~MapCase_3()
+MapCase_5::~MapCase_5()
 {
 
 }
 
-void MapCase_3::tick()
+void MapCase_5::tick()
 {
 	if (mapLT->getPosition().x - mapLT->getContentSize().width < Player->getIsaacBody()->getPosition().x &&
 		mapLT->getPosition().x + mapLT->getContentSize().width > Player->getIsaacBody()->getPosition().x &&
@@ -27,7 +25,6 @@ void MapCase_3::tick()
 	}
 
 
-	
 	this->CollisionToDoor();
 }
 

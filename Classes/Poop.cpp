@@ -60,6 +60,11 @@ void Poop::tick()
 		ObjectSprite->setTag(ObjectIdle);
 	}
 
+	if (ObjectSprite->getTag() == ObjectCollisionBomb)
+	{
+		ObjectHp = 0;
+	}
+
 	if (_index == 1)
 	{
 		if (ObjectHp == 4)

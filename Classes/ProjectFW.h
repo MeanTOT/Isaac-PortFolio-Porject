@@ -46,6 +46,9 @@
 #define BackGroundZoder -100000
 #define DoorZoder -99999
 
+#define DoorCorrectionRL 200
+#define DoorCorrectionUD 111
+
 // using namespace
 USING_NS_CC; // for cocos2d
 USING_NS_CC_EXT; // the same using namespace extension

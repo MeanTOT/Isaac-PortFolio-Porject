@@ -54,13 +54,13 @@ bool GameStage_1::init()
 
 
 	
-
-
 	// 甘 力累 //
 
 	mapCase_1 = new MapCase_1(this, Position_50_50_);
 	mapCase_2 = new MapCase_2(this, Position_50_49_);
 	mapCase_3 = new MapCase_3(this, Position_51_50_);
+	mapCase_4 = new MapCase_4(this, Position_49_50_);
+	mapCase_5 = new MapCase_5(this, Position_50_51_);
 
 
 	// 胶纳领 包府 //
@@ -81,6 +81,8 @@ void GameStage_1::tick(float delta)
 	mapCase_1->tick();
 	mapCase_2->tick();
 	mapCase_3->tick();
+	mapCase_4->tick();
+	mapCase_5->tick();
 
 	for (int i = 0; i < Player->isaacBulletVec.size(); i++)
 	{

@@ -86,15 +86,31 @@ void Rocks::CreateObject(Scene* scene, Vec2 position, int index)
 	ObjectSprite->setPosition(position);
 	ObjectSprite->setTag(ObjectIdle);
 
-	scene->addChild(ObjectSprite, -ObjectSprite->getPosition().y);
+	scene->addChild(ObjectSprite, -1 * ObjectSprite->getPosition().y);
 
-	ObjectSprite->setZOrder(ObjectSprite->getPositionY() * -1);
-
-	ObjectHp = 0;
+	ObjectHp = 1;
 
 	Player->objectVec.push_back(this);
+
+	_scene = scene;
 }
 
 void Rocks::tick()
 {
+	if (ObjectSprite->getTag() == ObjectCollisionBomb)
+	{
+		ObjectHp = 0;
+	}
+
+	if (ObjectHp == 0)
+	{
+
+		ObjectSprite->setTexture("Object/Rock/rocks_basement_04.png");
+		ObjectSprite->setTag(ObjectErase);
+		ObjectSprite->setLocalZOrder(ObjectSprite->getZOrder() - 5000);
+		ObjectSprite->setVisible(false);
+		ObjectPhysics->removeFromWorld();
+
+		_dregs = new Dregs(_scene, ObjectSprite->getPosition(), ObjectRock, ObjectSprite->getLocalZOrder());
+	}
 }

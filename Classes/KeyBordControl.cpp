@@ -348,6 +348,15 @@ void KeyBordControl::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 		}
 	}
 	break;
+	case EventKeyboard::KeyCode::KEY_E:
+	{
+		if (Player->getNowScene() == StageScreen)
+		{
+			Player->CreateBomb();
+			return;
+		}
+	}
+	break;
 	default:
 		break;
 	}
@@ -542,6 +551,8 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// 1, 아이작 바디
 	// 2. 오브젝트
 	// 5, 아이작총알 , 그림자
+	// 6. 아이작 폭탄
+	// 7. 폭팔범위
 	// 10 . 벽
 	// 15 . 두번째 벽
 
@@ -591,6 +602,26 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			b->getNode()->setTag(EraseBulletTag);
 		if (a->getCollisionBitmask() == 5)
 			a->getNode()->setTag(EraseBulletTag);
+	}
+
+	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 6 ||
+		b->getCollisionBitmask() == 6 && a->getCollisionBitmask() == 5)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+	}
+
+	if (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 7 ||
+		b->getCollisionBitmask() == 2 && a->getCollisionBitmask() == 7)
+	{
+		if (b->getCollisionBitmask() == 2)
+			b->getNode()->setTag(ObjectCollisionBomb);
+		if (a->getCollisionBitmask() == 2)
+			a->getNode()->setTag(ObjectCollisionBomb);
+
+		log("폭탄과 충돌!");
 	}
 
 

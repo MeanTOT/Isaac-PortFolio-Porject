@@ -63,12 +63,12 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 void MapBase::CreateNormalDoorR(Scene * scene, Vec2 position)
 {
 	doorR = Sprite::create("MapImage/Door/door_01_normaldoor_01.png");
-	doorR->setPosition(position);
+	doorR->setPosition(Vec2(position.x + DoorCorrectionRL, position.y));
 	doorR->setRotation(90);
 	scene->addChild(doorR, DoorZoder + 1);
 
 	doorR_1 = Sprite::create("MapImage/Door/door_01_normaldoor_02.png");
-	doorR_1->setPosition(position);
+	doorR_1->setPosition(Vec2(position.x + DoorCorrectionRL,position.y));
 	doorR_1->setRotation(90);
 	scene->addChild(doorR_1, DoorZoder);
 
@@ -78,12 +78,12 @@ void MapBase::CreateNormalDoorR(Scene * scene, Vec2 position)
 void MapBase::CreateNormalDoorL(Scene * scene, Vec2 position)
 {
 	doorL = Sprite::create("MapImage/Door/door_01_normaldoor_01.png");
-	doorL->setPosition(position);
+	doorL->setPosition(Vec2(position.x - DoorCorrectionRL, position.y));
 	doorL->setRotation(-90);
 	scene->addChild(doorL, DoorZoder + 1);
 
 	doorL_1 = Sprite::create("MapImage/Door/door_01_normaldoor_02.png");
-	doorL_1->setPosition(position);
+	doorL_1->setPosition(Vec2(position.x - DoorCorrectionRL, position.y));
 	doorL_1->setRotation(-90);
 	scene->addChild(doorL_1, DoorZoder);
 
@@ -93,11 +93,11 @@ void MapBase::CreateNormalDoorL(Scene * scene, Vec2 position)
 void MapBase::CreateNormalDoorT(Scene * scene, Vec2 position)
 {
 	doorT = Sprite::create("MapImage/Door/door_01_normaldoor_01.png");
-	doorT->setPosition(position);
+	doorT->setPosition(Vec2(position.x, position.y + DoorCorrectionUD));
 	scene->addChild(doorT, DoorZoder + 1);
 
 	doorT_1 = Sprite::create("MapImage/Door/door_01_normaldoor_02.png");
-	doorT_1->setPosition(position);
+	doorT_1->setPosition(Vec2(position.x, position.y + DoorCorrectionUD));
 	scene->addChild(doorT_1, DoorZoder);
 
 	isMakeDoorT = true;
@@ -106,12 +106,12 @@ void MapBase::CreateNormalDoorT(Scene * scene, Vec2 position)
 void MapBase::CreateNormalDoorB(Scene * scene, Vec2 position)
 {
 	doorB = Sprite::create("MapImage/Door/door_01_normaldoor_01.png");
-	doorB->setPosition(position);
+	doorB->setPosition(Vec2(position.x, position.y - DoorCorrectionUD));
 	doorB->setFlippedY(true);
 	scene->addChild(doorB, DoorZoder + 1);
 
 	doorB_1 = Sprite::create("MapImage/Door/door_01_normaldoor_02.png");
-	doorB_1->setPosition(position);
+	doorB_1->setPosition(Vec2(position.x, position.y - DoorCorrectionUD));
 	doorB_1->setFlippedY(true);
 	scene->addChild(doorB_1, DoorZoder);
 

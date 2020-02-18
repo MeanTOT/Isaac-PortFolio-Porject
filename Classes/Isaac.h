@@ -5,6 +5,8 @@ class ObjectBase;
 
 class Bullet;
 
+class IsaacBoom;
+
 enum NowScene // 1 ~ 50
 {
 	PressStartScene = 1,
@@ -43,6 +45,14 @@ enum ObjectTAG // 201 ~ 250
 	ObjectHit = 201,
 	ObjectIdle,
 	ObjectErase,
+	ObjectCollisionBomb,
+};
+
+enum ObjectName // 251 ~ 300
+{
+	ObjectRock = 251,
+	ObjectFire,
+	ObjectPoop,
 };
 
 class Isaac
@@ -63,6 +73,8 @@ private:
 	Sprite* isaacBody_Base; // Isaac ¸öÅë
 	PhysicsBody* isaacPhysicBody; // Isaac ÇÇÁ÷½º ¸öÅë 
 	Sprite* isaacShadow; // Isaac ±×¸²ÀÚ
+
+	IsaacBoom* isaacBoom; // ¾ÆÀÌÀÛ ÆøÅº
 
 	Animation* BulletFireAnimatioR;
 	Animate* BulletFireAnimateR;
@@ -85,6 +97,7 @@ private:
 	int OptionSfxIndex; // ¿É¼ÇSfx ÀÎµ¦½º
 	int OptionBgmIndex; // ¿É¼ÇBgm ÀÎµ¦½º
 	int RoomNumber; // ¹æÀ» ±¸ºÐÇÏ´Â ÀÎµ¦½º
+	int BombCount; // ÆøÅº °¹¼ö
 
 	float MoveSpeed; // Isaac ½ºÇÇµå
 	float BulletFireCycle; // ÃÑ¾Ë¹ß»ç¼Óµµ(ÁÖ±â)
@@ -104,9 +117,7 @@ private:
 	bool BulletFireL; // ÃÑ¾Ë¹ß»ç L
 	bool BulletFireU; // ÃÑ¾Ë¹ß»ç U
 	bool BulletFireD; // ÃÑ¾Ë¹ß»ç D
-
-	// vector //
-
+	bool BombActivation; // ÆøÅº È°¼ºÈ­
 
 public:
 	static Isaac* getInstance();
@@ -144,8 +155,11 @@ public:
 	void setMoveU(int moveu) { MoveU = moveu; }
 	bool getMoveD() { return MoveD; }
 	void setMoveD(int moved) { MoveD = moved; }
+	bool getBombActivation() { return BombActivation; }
+	void setBombActivation(int bombactivation) { BombActivation = bombactivation; }
 	PhysicsBody* getIsaacPysicBody() { return isaacPhysicBody; }
 	Sprite* getIsaacBody() { return isaacBody_Base; }
+	Sprite* getIsaacHead() { return isaacHead_Base; }
 
 	// ------------------------------------------------------ float ------------------------------------------------------ // 
 	float getBulletRange() { return bulletRange; }
@@ -185,6 +199,7 @@ public:
 	void BulletFire();
 	void PushBackBullet();
 	void IsaacSetZoder();
+	void CreateBomb();
 };
 
 

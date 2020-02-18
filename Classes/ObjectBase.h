@@ -1,5 +1,6 @@
 #pragma once
 #include "ProjectFW.h"
+#include "Dregs.h"
 
 class ObjectBase
 {
@@ -12,6 +13,8 @@ public:
 
 	int ObjectHp;
 	int _index;
+
+	Scene* _scene;
 	
 	SpriteFrameCache* Obcache;
 

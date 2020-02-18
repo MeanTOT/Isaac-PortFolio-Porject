@@ -146,6 +146,11 @@ void Fire::tick()
 		ObjectSprite->setTag(ObjectIdle);
 	}
 
+	if (ObjectSprite->getTag() == ObjectCollisionBomb)
+	{
+		ObjectHp = 0;
+	}
+
 	if (ObjectHp == 3)
 	{
 		fire->setScale(1.0f);
