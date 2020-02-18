@@ -12,8 +12,6 @@ private:
 
 	Sprite* shading_1_1;
 
-	Vec2 _position;
-
 public:
 	MapBase();
 	~MapBase();
@@ -21,10 +19,14 @@ public:
 	int RoomNumber;
 
 	bool RoomClear;
+	bool FirstEnter;
 	bool isMakeDoorR;
 	bool isMakeDoorL;
 	bool isMakeDoorT;
 	bool isMakeDoorB;
+
+	Scene* _scene;
+	Vec2 _position;
 
 	Sprite* mapLT;
 	Sprite* mapLB;

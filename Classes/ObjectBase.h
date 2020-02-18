@@ -15,6 +15,7 @@ public:
 	int _index;
 
 	Scene* _scene;
+	Vec2 _position;
 	
 	SpriteFrameCache* Obcache;
 

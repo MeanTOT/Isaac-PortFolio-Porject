@@ -2,49 +2,62 @@
 
 Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 {
+	cache = SpriteFrameCache::getInstance();
+	cache->addSpriteFramesWithFile("Object/Dregs/PoopDregs1.plist");
+
 	switch (objectname)
 	{
 	case ObjectRock:
 	{
-		auto Dregs1 = Sprite::create("Object/Rock/rocks_basement_Dregs_01.png");
-		Dregs1->setPosition(position.x + Player->getIsaacPysicBody()->getPositionOffset().x, position.y + Player->getIsaacPysicBody()->getPositionOffset().y);
-		scene->addChild(Dregs1, zoder - 5000);
+		dregs[0] = Sprite::create("Object/Rock/rocks_basement_Dregs_01.png");
+		dregs[1] = Sprite::create("Object/Rock/rocks_basement_Dregs_02.png");
+		dregs[2] = Sprite::create("Object/Rock/rocks_basement_Dregs_03.png");
+		dregs[3] = Sprite::create("Object/Rock/rocks_basement_Dregs_04.png");
+		
+		for (int i = 0; i < 4; i++)
+		{
+			dregs[i]->setPosition(position.x, position.y);
+			scene->addChild(dregs[i], zoder);
+			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
 
-		auto Dregs2 = Sprite::create("Object/Rock/rocks_basement_Dregs_02.png");
-		Dregs2->setPosition(position.x + Player->getIsaacPysicBody()->getPositionOffset().x, position.y + Player->getIsaacPysicBody()->getPositionOffset().y);
-		scene->addChild(Dregs2, zoder - 5000);
-
-		auto Dregs3 = Sprite::create("Object/Rock/rocks_basement_Dregs_03.png");
-		Dregs3->setPosition(position.x + Player->getIsaacPysicBody()->getPositionOffset().x, position.y + Player->getIsaacPysicBody()->getPositionOffset().y);
-		scene->addChild(Dregs3, zoder - 5000);
-
-		auto Dregs4 = Sprite::create("Object/Rock/rocks_basement_Dregs_04.png");
-		Dregs4->setPosition(position.x + Player->getIsaacPysicBody()->getPositionOffset().x, position.y + Player->getIsaacPysicBody()->getPositionOffset().y);
-		scene->addChild(Dregs4, zoder - 5000);
-
-		auto randomPosX1 = RGI->getRandomNumberWithRange(-25, 25);
-		auto randomPosY1 = RGI->getRandomNumberWithRange(-25, 25);
-		auto randomPosX2 = RGI->getRandomNumberWithRange(-25, 25);
-		auto randomPosY2 = RGI->getRandomNumberWithRange(-25, 25);
-		auto randomPosX3 = RGI->getRandomNumberWithRange(-25, 25);
-		auto randomPosY3 = RGI->getRandomNumberWithRange(-25, 25);
-		auto randomPosX4 = RGI->getRandomNumberWithRange(-25, 25);
-		auto randomPosY4 = RGI->getRandomNumberWithRange(-25, 25);
-
-		auto randomHeight1 = RGI->getRandomNumberWithRange(0, 50);
-		auto randomHeight2 = RGI->getRandomNumberWithRange(0, 50);
-		auto randomHeight3 = RGI->getRandomNumberWithRange(0, 50);
-		auto randomHeight4 = RGI->getRandomNumberWithRange(0, 50);
-
-		Dregs1->runAction(JumpBy::create(0.5f,Vec2(randomPosX1, randomPosY1), randomHeight1, 1));
-		Dregs2->runAction(JumpBy::create(0.5f,Vec2(randomPosX2, randomPosY2), randomHeight2, 1));
-		Dregs3->runAction(JumpBy::create(0.5f,Vec2(randomPosX3, randomPosY3), randomHeight3, 1));
-		Dregs4->runAction(JumpBy::create(0.5f,Vec2(randomPosX4, randomPosY4), randomHeight4, 1));
+			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+		}
 	}
 		break;
 	case ObjectFire:
+	{
+
+	}
 		break;
 	case ObjectPoop:
+	{
+		dregs[0] = Sprite::createWithSpriteFrameName("poopDregs1_01.png");
+		dregs[1] = Sprite::createWithSpriteFrameName("poopDregs1_02.png");
+		dregs[2] = Sprite::createWithSpriteFrameName("poopDregs1_03.png");
+		dregs[3] = Sprite::createWithSpriteFrameName("poopDregs1_04.png");
+		dregs[4] = Sprite::createWithSpriteFrameName("poopDregs1_05.png");
+		dregs[5] = Sprite::createWithSpriteFrameName("poopDregs1_06.png");
+		dregs[6] = Sprite::createWithSpriteFrameName("poopDregs1_07.png");
+		dregs[7] = Sprite::createWithSpriteFrameName("poopDregs1_08.png");
+
+		for (int i = 0; i < 8; i++)
+		{
+			randomAddChild[i] = RGI->getPercentage(0.5f);
+
+			if (!randomAddChild[i])
+				continue;
+
+			dregs[i]->setPosition(position.x, position.y);
+			scene->addChild(dregs[i], zoder);
+			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
+
+			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+		}
+	}		 
 		break;
 	default:
 		break;

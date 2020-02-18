@@ -93,6 +93,7 @@ void Rocks::CreateObject(Scene* scene, Vec2 position, int index)
 	Player->objectVec.push_back(this);
 
 	_scene = scene;
+	_position = position;
 }
 
 void Rocks::tick()
@@ -111,6 +112,6 @@ void Rocks::tick()
 		ObjectSprite->setVisible(false);
 		ObjectPhysics->removeFromWorld();
 
-		_dregs = new Dregs(_scene, ObjectSprite->getPosition(), ObjectRock, ObjectSprite->getLocalZOrder());
+		_dregs = new Dregs(_scene, _position, ObjectRock, ObjectSprite->getLocalZOrder());
 	}
 }

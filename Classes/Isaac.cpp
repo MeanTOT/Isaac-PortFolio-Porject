@@ -25,12 +25,17 @@ Isaac::Isaac()
 	OptionSfxIndex = 2;
 	OptionBgmIndex = 2;
 
+	// [Isaac Info] //
 	BombCount = 1;
+	coinCount = 0;
+	keyCount = 0;
+	MaxHp = 6;
+	Hp = 6;
 	
 
 	// ------- Float ------- //
 
-	// [Player Info] //
+	// [Isaac Info] //
 	MoveSpeed = 25.0f;
 	BulletFireCycle = 0.15f;
 	bulletRange = 450.0f;
@@ -172,6 +177,38 @@ void Isaac::CreateIsaac(Scene* scene)
 	isaacShadow->setScale(0.15f);
 	isaacShadow->setPosition(isaacBody_Base->getContentSize().width / 2, isaacBody_Base->getContentSize().height / 2 - 7);
 	isaacBody_Base->addChild(isaacShadow, -2);
+
+	coinUiIcon = Sprite::create("UI/StagePlayerUI_01.png");
+	bombUiIcon = Sprite::create("UI/StagePlayerUI_04.png");
+	keyUiIcon = Sprite::create("UI/StagePlayerUI_02.png");
+	scene->addChild(coinUiIcon, 5000);
+	scene->addChild(bombUiIcon, 5000);
+	scene->addChild(keyUiIcon, 5000);
+
+	coinUitext = Label::createWithTTF("0", "Fonts/upheavtt.ttf",12);
+	coinUitext->setColor(Color3B::WHITE);
+	coinUitext->setAnchorPoint({ 0,0.5 });
+	coinUitext->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(coinUitext, 5000);
+	bombUitext = Label::createWithTTF("0","Fonts/upheavtt.ttf", 12);
+	bombUitext->setColor(Color3B::WHITE);
+	bombUitext->setAnchorPoint({ 0,0.5 });
+	bombUitext->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(bombUitext, 5000);
+	keyUitext = Label::createWithTTF("0","Fonts/upheavtt.ttf", 12);
+	keyUitext->setColor(Color3B::WHITE);
+	keyUitext->setAnchorPoint({ 0,0.5 });
+	keyUitext->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(keyUitext, 5000);
+
+	for (int i = 0; i < 10; i++)
+	{
+		HeartIcon[i] = Sprite::create("UI/ui_hearts_01.png");
+		HeartIcon[i]->setAnchorPoint({ 0,0 });
+
+		scene->addChild(HeartIcon[i]);
+	}
+
 }
 
 void Isaac::tick()
@@ -179,6 +216,7 @@ void Isaac::tick()
 	IsaacMoving();
 	BulletFire();
 	IsaacSetZoder();
+	setUIPosition();
 
 }
 
@@ -320,6 +358,14 @@ void Isaac::PushBackBullet()
 	Bullet* isaacBullet = new Bullet;
 	isaacBullet->CreateIsaacBullet(_scene, isaacBody_Base->getPosition());
 	isaacBulletVec.push_back(isaacBullet);
+
+	bool randomsound = RGI->getPercentage(0.5f);
+
+	if (randomsound)
+		SMI->PlayTearFire4();
+	if (!randomsound)
+		SMI->PlayTearFire5();
+
 }
 
 void Isaac::IsaacSetZoder()
@@ -336,4 +382,52 @@ void Isaac::CreateBomb()
 		BombCount -= 1;
 	}
 }
+
+void Isaac::setUIPosition()
+{
+	coinUiIcon->setPosition(CI->camera->getPosition().x - 200, CI->camera->getPosition().y + 88);
+	bombUiIcon->setPosition(CI->camera->getPosition().x - 200, CI->camera->getPosition().y + 74);
+	keyUiIcon->setPosition(CI->camera->getPosition().x - 200, CI->camera->getPosition().y + 60);
+
+	coinUitext->setPosition(CI->camera->getPosition().x - 190, CI->camera->getPosition().y + 88);
+	bombUitext->setPosition(CI->camera->getPosition().x - 190, CI->camera->getPosition().y + 74);
+	keyUitext->setPosition(CI->camera->getPosition().x - 190, CI->camera->getPosition().y + 60);
+
+	bombUitext->setString(String::createWithFormat("%02d", BombCount)->_string.c_str());
+	coinUitext->setString(String::createWithFormat("%02d", coinCount)->_string.c_str());
+	keyUitext->setString(String::createWithFormat("%02d", keyCount)->_string.c_str());
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (i == 0)
+		{
+			HeartIcon[i]->setPosition(CI->camera->getPosition().x - 150, CI->camera->getPosition().y + 110);
+		}
+		else
+		{
+			HeartIcon[i]->setPosition(HeartIcon[i - 1]->getBoundingBox().getMaxX(), HeartIcon[i - 1]->getBoundingBox().getMinY());
+		}
+
+		if (i < MaxHp / 2)
+		{
+			HeartIcon[i]->setVisible(true);
+
+			if (i < Hp / 2)
+			{
+				HeartIcon[i]->setTexture("UI/ui_hearts_01.png");
+			}
+			else if (i == Hp / 2 && Hp % 2 == 1)
+				HeartIcon[i]->setTexture("UI/ui_hearts_02.png");
+			else 
+				HeartIcon[i]->setTexture("UI/ui_hearts_03.png");
+		
+		}
+		else
+		{
+			HeartIcon[i]->setVisible(false);
+
+		}
+	}
+}
+
  

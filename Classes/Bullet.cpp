@@ -29,16 +29,17 @@ void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 	BulletEraseAnimate = Animate::create(BulletEraseAnimation);
 	BulletEraseAnimate->retain();
 
-	eraseAction1 = Sequence::create(MoveBy::create(0.2f, Vec2(0, -Player->getMaxHeight())), CallFunc::create(CC_CALLBACK_0(Bullet::ErasePhysicsBody, this)),BulletEraseAnimate,
+	eraseAction1 = Sequence::create(MoveBy::create(0.2f, Vec2(0, -Player->getMaxHeight())), CallFunc::create(CC_CALLBACK_0(Bullet::ErasePhysicsBody, this)),
+		CallFunc::create(CC_CALLBACK_0(Bullet::PlayBulletEraseSound, this)),BulletEraseAnimate,
 		CallFunc::create(CC_CALLBACK_0(Bullet::EraseBulletVec, this)), RemoveSelf::create(), nullptr);
 	eraseAction1->setTag(1);
 	eraseAction1->retain();
-	eraseAction2 = Sequence::create(BulletEraseAnimate, CallFunc::create(CC_CALLBACK_0(Bullet::EraseBulletVec, this)),RemoveSelf::create(),nullptr);
+	eraseAction2 = Sequence::create(CallFunc::create(CC_CALLBACK_0(Bullet::PlayBulletEraseSound, this)),BulletEraseAnimate, CallFunc::create(CC_CALLBACK_0(Bullet::EraseBulletVec, this)),RemoveSelf::create(),nullptr);
 	eraseAction2->setTag(2);
 	eraseAction2->retain();
 
 	bullet = Sprite::create("Bullet/tears_06.png");
-	bullet->setPosition(position.x + Player->getIsaacPysicBody()->getPositionOffset().x, position.y + 10 + Player->getIsaacPysicBody()->getPositionOffset().y);
+	bullet->setPosition(position.x, position.y + 10);
 	bullet->setTag(ActivationBulletTag);
 
 	bulletPhysics = PhysicsBody::createCircle(bullet->getContentSize().width / 6, PhysicsMaterial(0, 0, 0));
@@ -47,7 +48,7 @@ void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 	bulletPhysics->setCollisionBitmask(0);
 	bullet->addComponent(bulletPhysics);
 
-	scene->addChild(bullet);
+	scene->addChild(bullet, -1 * bullet->getPosition().y);
 
 	bulletShadow = Sprite::create("Player/shadow.png");
 	bulletShadow->setPosition(bullet->getPosition().x, bullet->getPosition().y - Player->getBasicHeight());
@@ -80,6 +81,7 @@ void Bullet::MoveBullet()
 	{
 		bulletPhysics->applyImpulse(Vec2(Player->getBulletMoveSpeed() / Player->getMaxHeight(), Player->getIsaacPysicBody()->getVelocity().y / 4));
 		bulletShadowPhysics->applyImpulse(Vec2(Player->getBulletMoveSpeed() / Player->getMaxHeight(), Player->getIsaacPysicBody()->getVelocity().y / 4));
+		//bullet->runAction(JumpBy::create(1.f, Vec2(0,0), 50, 1));
 	}
 	else if (Player->getBulletFireL())
 	{
@@ -146,6 +148,11 @@ void Bullet::ErasePhysicsBody()
 void Bullet::EraseBulletVec()
 {
 	bulletShadow->setTag(EraseOnVec);
+}
+
+void Bullet::PlayBulletEraseSound()
+{
+	SMI->PlayTearBlock();
 }
 
 

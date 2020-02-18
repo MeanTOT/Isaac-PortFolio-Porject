@@ -19,6 +19,7 @@ bool GameStage_1::init()
 	if (!Scene::init())
 		return false;
 	
+	CI->CreateCamera(this);
 
 	// 물리효과 구현 범위 //
 	auto edgeBody = PhysicsBody::createEdgeBox(Size(DI->getWinSize().width - 100, DI->getWinSize().height - 70), PHYSICSBODY_MATERIAL_DEFAULT, 3);
@@ -26,9 +27,9 @@ bool GameStage_1::init()
 	edgeBody->setCollisionBitmask(10);
 	
 	auto node = Node::create();
-	node->setPosition(Point(DI->getWinSize() / 2));
+	node->setPosition(Point(0,0));
 	node->setPhysicsBody(edgeBody);
-	this->addChild(node);
+	CI->camera->addChild(node);
 
 	edgeSegment[0] = PhysicsBody::createEdgeSegment(Vec2(-240, 90), Vec2(-10,90));
 	edgeSegment[1] = PhysicsBody::createEdgeSegment(Vec2(10, 90), Vec2(240, 90));
@@ -47,11 +48,10 @@ bool GameStage_1::init()
 		edgeSegment[i]->setCollisionBitmask(15);
 
 		edgeNode[i] = Node::create();
-		edgeNode[i]->setPosition(Point(DI->getWinSize() / 2));
+		edgeNode[i]->setPosition(Point(0,0));
 		edgeNode[i]->setPhysicsBody(edgeSegment[i]);
-		this->addChild(edgeNode[i]);
+		CI->camera->addChild(edgeNode[i]);
 	}
-
 
 	
 	// 맵 제작 //
@@ -70,7 +70,6 @@ bool GameStage_1::init()
 	Player->CreateIsaac(this);
 	KCI->CreateKeyListener(this);
 	KCI->CreateContactListener(this);
-	CI->CreateCamera(this);
 
 	return true;
 }
@@ -106,6 +105,7 @@ void GameStage_1::tick(float delta)
 	}
 
 	DCI->ShowDebug(sceneWorld);
+
 }
 
 void GameStage_1::onEnterTransitionDidFinish()

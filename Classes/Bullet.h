@@ -31,5 +31,6 @@ public:
 	void RangeCount();
 	void ErasePhysicsBody();
 	void EraseBulletVec();
+	void PlayBulletEraseSound();
 	
 };

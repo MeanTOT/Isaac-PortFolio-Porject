@@ -7,6 +7,7 @@ MapCase_5::MapCase_5(Scene * scene, Vec2 position)
 
 	RoomNumber = 5;
 	RoomClear = false;
+	FirstEnter = false;
 }
 
 MapCase_5::~MapCase_5()

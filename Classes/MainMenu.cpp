@@ -10,7 +10,10 @@ bool MainMenu::init()
 	if (!Scene::init())
 		return false;
 
-	
+	// 카메라 생성
+	CI->CreateCamera(this);
+
+
 	// ---------- PressStart Screen ---------- //
 	
 	// 백그라운드
@@ -330,7 +333,14 @@ bool MainMenu::init()
 	OptionPointer->setPosition(Position_51_47_.x + 60, Position_51_47_.y + -10);
 	this->addChild(OptionPointer);
 
-
+	// 오버레이
+	menuOverlay1 = Sprite::create("TitleMenu/menuoverlay.png");
+	menuOverlay1->setPosition(DI->getWinSize().width / 2, DI->getWinSize().height / 2);
+	this->addChild(menuOverlay1);
+	menuOverlay2 = Sprite::create("TitleMenu/menushadow.png");
+	menuOverlay2->setPosition(0, 0);
+	menuOverlay2->setAnchorPoint({ 0,0 });
+	this->addChild(menuOverlay2);
 
 
 
@@ -343,18 +353,6 @@ bool MainMenu::init()
 	// 키보드 생성 
 	KCI->CreateKeyListener(this);
 
-	// 카메라 생성
-	CI->CreateCamera(this);
-
-	// 오버레이
-	menuOverlay1 = Sprite::create("TitleMenu/menuoverlay.png");
-	menuOverlay1->setPosition(DI->getWinSize().width / 2, DI->getWinSize().height / 2);
-	this->addChild(menuOverlay1);
-	menuOverlay2 = Sprite::create("TitleMenu/menushadow.png");
-	menuOverlay2->setPosition(0, 0);
-	menuOverlay2->setAnchorPoint({ 0,0 });
-	this->addChild(menuOverlay2);
-
 	return true;
 }
 
@@ -363,6 +361,9 @@ void MainMenu::tick(float delta)
 	// ------- 사운드를 실시간으로 조정  ------- //
 	SMI->RunnigBgmVolume();
 	SMI->RunnigSfxVolume();
+
+	menuOverlay1->setPosition(CI->camera->getPosition());
+	menuOverlay2->setPosition(CI->camera->getPosition().x - DI->getWinSize().width / 2, CI->camera->getPosition().y - DI->getWinSize().height / 2);
 
 
 	// ------- MainMenu Screen  ------- //

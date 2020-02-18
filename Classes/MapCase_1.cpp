@@ -14,6 +14,7 @@ MapCase_1::MapCase_1(Scene* scene, Vec2 position)
 
 	RoomNumber = 1;
 	RoomClear = false;
+	FirstEnter = false;
 }
 
 MapCase_1::~MapCase_1()

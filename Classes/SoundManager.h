@@ -12,9 +12,12 @@ private:
 	int charSelectLeft;
 	int charSelectRight;
 	int tearFire5;
+	int tearFire4;
+	int tearBlock;
 	int titleScreenJingle;
 	int dipteraSonata;
 	int fireBurning;
+	int explosion1;
 
 	SoundManager();
 	~SoundManager() {};
@@ -36,8 +39,11 @@ public:
 	void PlayCharSelectLeft();
 	void PlayCharSelectRight();
 	void PlayTearFire5();
+	void PlayTearFire4();
+	void PlayTearBlock();
 	void PlayFireBurning();
 	void StopFireBurning();
+	void PlayExplosion1();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

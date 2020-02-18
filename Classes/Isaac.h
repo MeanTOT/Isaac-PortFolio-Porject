@@ -76,6 +76,15 @@ private:
 
 	IsaacBoom* isaacBoom; // ¾ÆÀÌÀÛ ÆøÅº
 
+	Sprite* coinUiIcon;
+	Sprite* bombUiIcon;
+	Sprite* keyUiIcon;
+	Sprite* HeartIcon[10]; 
+
+	Label* coinUitext;
+	Label* bombUitext;
+	Label* keyUitext;
+
 	Animation* BulletFireAnimatioR;
 	Animate* BulletFireAnimateR;
 	Animation* BulletFireAnimatioL;
@@ -98,6 +107,10 @@ private:
 	int OptionBgmIndex; // ¿É¼ÇBgm ÀÎµ¦½º
 	int RoomNumber; // ¹æÀ» ±¸ºÐÇÏ´Â ÀÎµ¦½º
 	int BombCount; // ÆøÅº °¹¼ö
+	int coinCount; // ÄÚÀÎ °¹¼ö
+	int keyCount; // ¿­¼è °¹¼ö
+	int MaxHp;
+	int Hp;
 
 	float MoveSpeed; // Isaac ½ºÇÇµå
 	float BulletFireCycle; // ÃÑ¾Ë¹ß»ç¼Óµµ(ÁÖ±â)
@@ -171,6 +184,18 @@ public:
 	float getMaxHeight() { return maxHeight; }
 	void setMaxHeight(float maxheight) { maxHeight = maxheight; }
 
+	// ------------------------------------------------------ int ------------------------------------------------------ // 
+	int getBombCount() { return BombCount; }
+	void setBombCount(float bombcount) { BombCount = bombcount; }
+	int getCoinCount() { return coinCount; }
+	void setCoinCount(float coincount) { coinCount = coincount; }
+	int getKeyCount() { return keyCount; }
+	void setKeybCount(float keycount) { keyCount = keycount; }
+	int getMaxHp() { return MaxHp; }
+	void setMaxHp(float maxhp) { MaxHp = maxhp; }
+	int getHp() { return Hp; }
+	void setHp(float hp) { Hp = hp; }
+
 
 
 	// Isaac ¸Ó¸®¹æÇâ //
@@ -200,6 +225,7 @@ public:
 	void PushBackBullet();
 	void IsaacSetZoder();
 	void CreateBomb();
+	void setUIPosition();
 };
 
 

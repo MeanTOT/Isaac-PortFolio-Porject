@@ -6,6 +6,7 @@
 #include "MapCase_4.h"
 #include "MapCase_5.h"
 #include "Bullet.h"
+#include "Dregs.h"
 
 class GameStage_1 : public Scene
 {
@@ -20,6 +21,8 @@ private:
 
 	PhysicsBody* edgeSegment[8];
 	Node* edgeNode[8];
+
+	Dregs* test;
 
 public:
 	static Scene* createScene();

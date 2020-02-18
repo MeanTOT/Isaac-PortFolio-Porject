@@ -46,9 +46,12 @@ void Poop::CreateObject(Scene * scene, Vec2 position, int index)
 	ObjectSprite->setZOrder(ObjectSprite->getPositionY() * -1);
 
 	ObjectHp = 4;
-	_index = index;
 
 	Player->objectVec.push_back(this);
+
+	_index = index;
+	_scene = scene;
+	_position = position;
 }
 
 void Poop::tick()
@@ -85,6 +88,8 @@ void Poop::tick()
 		}
 		if (ObjectHp == 0)
 		{
+			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
+
 			ObjectSprite->setTexture("Object/Poop/grid_poop_05.png");
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
@@ -115,6 +120,8 @@ void Poop::tick()
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
+
+			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
 	}
 	if (_index == 3)
@@ -141,6 +148,8 @@ void Poop::tick()
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
+
+			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
 	}
 	if (_index == 4)
@@ -167,6 +176,8 @@ void Poop::tick()
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
+
+			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
 	}
 	if (_index == 5)
@@ -193,6 +204,8 @@ void Poop::tick()
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
+
+			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
 	}
 }

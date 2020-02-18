@@ -620,6 +620,13 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			b->getNode()->setTag(ObjectCollisionBomb);
 		if (a->getCollisionBitmask() == 2)
 			a->getNode()->setTag(ObjectCollisionBomb);
+	}
+
+	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 7 ||
+		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 7)
+	{
+		
+		Player->setHp(Player->getHp() - 1);
 
 		log("ÆøÅº°ú Ãæµ¹!");
 	}

@@ -158,7 +158,7 @@ void MapBase::CollisionToDoor()
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(1);
 		}
-			
+		
 
 		int vecsize = Player->objectVec.size();
 
@@ -168,14 +168,7 @@ void MapBase::CollisionToDoor()
 				doorB->getBoundingBox().getMinY() < Player->getIsaacBody()->getPosition().y)
 			{
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x, Player->getIsaacBody()->getPosition().y - 70);
-				Player->getIsaacPysicBody()->setPositionOffset(Player->getIsaacPysicBody()->getPositionOffset() + Vec2(0, DI->getWinSize().height));
-				
-				for (int i = 0; i < vecsize; i++)
-				{
-					Player->objectVec[i]->ObjectPhysics->setPositionOffset(
-						Player->objectVec[i]->ObjectPhysics->getPositionOffset() + Vec2(0, DI->getWinSize().height));
-				}
-
+			
 				CI->MoveB();
 			}
 		}
@@ -186,14 +179,7 @@ void MapBase::CollisionToDoor()
 				doorT->getBoundingBox().getMaxY() > Player->getIsaacBody()->getPosition().y)
 			{
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x, Player->getIsaacBody()->getPosition().y + 70);
-				Player->getIsaacPysicBody()->setPositionOffset(Player->getIsaacPysicBody()->getPositionOffset() + Vec2(0, -DI->getWinSize().height));
-
-				for (int i = 0; i < vecsize; i++)
-				{
-					Player->objectVec[i]->ObjectPhysics->setPositionOffset(
-						Player->objectVec[i]->ObjectPhysics->getPositionOffset() + Vec2(0, -DI->getWinSize().height));
-				}
-
+				
 				CI->MoveT();
 			}
 		}
@@ -204,15 +190,7 @@ void MapBase::CollisionToDoor()
 				doorR->getBoundingBox().getMaxX() > Player->getIsaacBody()->getPosition().x)
 			{
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x + 100, Player->getIsaacBody()->getPosition().y);
-				Player->getIsaacPysicBody()->setPositionOffset(Player->getIsaacPysicBody()->getPositionOffset() + Vec2(-DI->getWinSize().width, 0));
-
-				for (int i = 0; i < vecsize; i++)
-				{
-
-					Player->objectVec[i]->ObjectPhysics->setPositionOffset(
-						Player->objectVec[i]->ObjectPhysics->getPositionOffset() + Vec2(-DI->getWinSize().width, 0));
-				}
-
+				
 				CI->MoveR();
 			}
 		}
@@ -223,15 +201,7 @@ void MapBase::CollisionToDoor()
 				doorL->getBoundingBox().getMinX() < Player->getIsaacBody()->getPosition().x)
 			{
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x - 100, Player->getIsaacBody()->getPosition().y);
-				Player->getIsaacPysicBody()->setPositionOffset(Player->getIsaacPysicBody()->getPositionOffset() + Vec2(DI->getWinSize().width, 0));
-
-				for (int i = 0; i < vecsize; i++)
-				{
-
-					Player->objectVec[i]->ObjectPhysics->setPositionOffset(
-						Player->objectVec[i]->ObjectPhysics->getPositionOffset() + Vec2(DI->getWinSize().width, 0));
-				}
-
+				
 				CI->MoveL();
 			}
 		}

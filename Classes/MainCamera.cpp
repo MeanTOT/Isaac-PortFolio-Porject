@@ -4,12 +4,14 @@ MainCamera* MainCamera::instance = nullptr;
 
 void MainCamera::CreateCamera(Scene * scene)
 {
-	camera = Camera::createOrthographic(DI->getWinSize().width, DI->getWinSize().height, 1, 1000);
+	/*camera = Camera::createOrthographic(DI->getWinSize().width, DI->getWinSize().height, 1, 1000);
 	camera->setCameraFlag(CameraFlag::USER1);
 	camera->setPosition3D({ 0,0,1 });
 	camera->lookAt(camera->getPosition3D());
 	scene->setCameraMask((unsigned short)CameraFlag::USER1);
-	scene->addChild(camera);
+	scene->addChild(camera);*/
+
+	camera = scene->getDefaultCamera();
 }
 
 MainCamera * MainCamera::getInstance()
