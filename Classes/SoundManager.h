@@ -18,6 +18,8 @@ private:
 	int dipteraSonata;
 	int fireBurning;
 	int explosion1;
+	int ErrorBuzz;
+	int insectSwarm;
 
 	SoundManager();
 	~SoundManager() {};
@@ -44,6 +46,8 @@ public:
 	void PlayFireBurning();
 	void StopFireBurning();
 	void PlayExplosion1();
+	void PlayErrorBuzz();   
+	void PlayInsectSwarm();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

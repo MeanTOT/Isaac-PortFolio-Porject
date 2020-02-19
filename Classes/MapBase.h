@@ -1,9 +1,12 @@
 #pragma once
 #include "ProjectFW.h"
 #include "ObjectBase.h"
+#include "MonsterBase.h"
 #include "Rocks.h"
 #include "Poop.h"
 #include "Fire.h"
+#include "Fly.h"
+#include "EffectPoof.h"
 
 class MapBase : public Scene
 {
@@ -11,6 +14,7 @@ private:
 	SpriteFrameCache* cache;
 
 	Sprite* shading_1_1;
+	Sprite* overlay_1_1;
 
 public:
 	MapBase();
@@ -28,6 +32,8 @@ public:
 	Scene* _scene;
 	Vec2 _position;
 
+	Rect mapRect;
+
 	Sprite* mapLT;
 	Sprite* mapLB;
 	Sprite* mapRT;
@@ -42,13 +48,25 @@ public:
 	Sprite* doorB;
 	Sprite* doorB_1;
 
+	Sprite* closeDoorR;
+	Sprite* closeDoorR_1;
+	Sprite* closeDoorL;
+	Sprite* closeDoorL_1;
+	Sprite* closeDoorT;
+	Sprite* closeDoorT_1;
+	Sprite* closeDoorB;
+	Sprite* closeDoorB_1;
+
+
 	void CreateBaseMentRoom(Scene* scene, Vec2 position);
-	void CreateNormalDoorL(Scene* scene, Vec2 position);
-	void CreateNormalDoorR(Scene* scene, Vec2 position);
-	void CreateNormalDoorT(Scene* scene, Vec2 position);
-	void CreateNormalDoorB(Scene* scene, Vec2 position);
+	void CreateNormalDoorL(Scene* scene, Vec2 position, DoorName doorname);
+	void CreateNormalDoorR(Scene* scene, Vec2 position, DoorName doorname);
+	void CreateNormalDoorT(Scene* scene, Vec2 position, DoorName doorname);
+	void CreateNormalDoorB(Scene* scene, Vec2 position, DoorName doorname);
 
 	void CollisionToDoor();
+	void ClearCheck();
+	void SetRoomNumber();
 
 
 	virtual void tick() {};

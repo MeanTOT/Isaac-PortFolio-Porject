@@ -3,10 +3,10 @@
 MapCase_5::MapCase_5(Scene * scene, Vec2 position)
 {
 	this->CreateBaseMentRoom(scene, position);
-	this->CreateNormalDoorB(scene, position);
+	this->CreateNormalDoorB(scene, position, NormalDoor);
 
 	RoomNumber = 5;
-	RoomClear = false;
+	RoomClear = true;
 	FirstEnter = false;
 }
 
@@ -17,15 +17,8 @@ MapCase_5::~MapCase_5()
 
 void MapCase_5::tick()
 {
-	if (mapLT->getPosition().x - mapLT->getContentSize().width < Player->getIsaacBody()->getPosition().x &&
-		mapLT->getPosition().x + mapLT->getContentSize().width > Player->getIsaacBody()->getPosition().x &&
-		mapLT->getPosition().y - mapLT->getContentSize().height < Player->getIsaacBody()->getPosition().y &&
-		mapLT->getPosition().y + mapLT->getContentSize().height > Player->getIsaacBody()->getPosition().y)
-	{
-		Player->setRoomNumber(RoomNumber);
-	}
-
-
+	this->SetRoomNumber();
 	this->CollisionToDoor();
+	this->ClearCheck();
 }
 

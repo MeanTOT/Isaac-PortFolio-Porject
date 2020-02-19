@@ -16,7 +16,7 @@ IsaacBoom::IsaacBoom(Scene* scene, Vec2 position)
 	BoomPhysic->setCollisionBitmask(6);
 	Boom->addComponent(BoomPhysic);
 
-	scene->addChild(Boom, Player->getIsaacBody()->getZOrder() - 50000);
+	scene->addChild(Boom, Player->getIsaacBody()->getZOrder());
 
 	BoomAnimation = Animation::create();
 	BoomAnimation->setDelayPerUnit(0.05f);
@@ -29,27 +29,8 @@ IsaacBoom::IsaacBoom(Scene* scene, Vec2 position)
 	BoomRepeat = Repeat::create(BoomAnimate, 10);
 	BoomRepeat->retain();
 
-	ExplosionAnimation = Animation::create();
-	ExplosionAnimation->setDelayPerUnit(0.05f);
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_01.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_02.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_03.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_04.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_05.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_06.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_07.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_08.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_09.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_10.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_11.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_12.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_13.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_14.png"));
-	ExplosionAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_explosion_15.png"));
-	ExplosionAnimate = Animate::create(ExplosionAnimation);
-	ExplosionAnimate->retain();
-
-	Boom->runAction(Sequence::create(BoomRepeat, CallFunc::create(CC_CALLBACK_0(IsaacBoom::ErasePhysicsBody, this)), ExplosionAnimate, RemoveSelf::create(), nullptr));
+	Boom->runAction(Sequence::create(BoomRepeat, CallFunc::create(CC_CALLBACK_0(IsaacBoom::ErasePhysicsBody, this)),
+		CallFunc::create(CC_CALLBACK_0(IsaacBoom::CreateExplosion, this, scene, position)), RemoveSelf::create(), nullptr));
 
 }
 
@@ -60,9 +41,15 @@ void IsaacBoom::ErasePhysicsBody()
 
 	ExplosionPhysic = PhysicsBody::createBox(Boom->getContentSize() * 2, PhysicsMaterial(10, 0, 0));
 	ExplosionPhysic->setContactTestBitmask(true);
+	ExplosionPhysic->setDynamic(false);
 	ExplosionPhysic->setCollisionBitmask(7);
 	ExplosionPhysic->setPositionOffset(Vec2(35, 0));
 	Boom->setPhysicsBody(ExplosionPhysic);
 
 	SMI->PlayExplosion1();
+}
+
+void IsaacBoom::CreateExplosion(Scene* scene, Vec2 position)
+{
+	explosion = new Explosion(scene, position, BaseMentBomb);
 }

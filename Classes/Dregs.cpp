@@ -17,7 +17,7 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 		for (int i = 0; i < 4; i++)
 		{
 			dregs[i]->setPosition(position.x, position.y);
-			scene->addChild(dregs[i], zoder);
+			scene->addChild(dregs[i], zoder - 5000);
 			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
@@ -50,7 +50,7 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 				continue;
 
 			dregs[i]->setPosition(position.x, position.y);
-			scene->addChild(dregs[i], zoder);
+			scene->addChild(dregs[i], zoder - 5000);
 			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);

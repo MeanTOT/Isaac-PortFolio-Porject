@@ -1,5 +1,6 @@
 #pragma once
 #include "ProjectFW.h"
+#include "Explosion.h"
 
 class IsaacBoom
 {
@@ -14,12 +15,12 @@ private:
 	Animate* BoomAnimate;
 	Repeat* BoomRepeat;
 
-	Animation* ExplosionAnimation;
-	Animate* ExplosionAnimate;
+	Explosion* explosion;
 
 public:
 	IsaacBoom(Scene* scene, Vec2 position);
 	~IsaacBoom() {}
 
 	void ErasePhysicsBody();
+	void CreateExplosion(Scene* scene, Vec2 position);
 };

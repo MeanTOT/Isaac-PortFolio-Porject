@@ -104,6 +104,16 @@ void GameStage_1::tick(float delta)
 		}
 	}
 
+	for (int i = 0; i < Player->monsterVec.size(); i++)
+	{
+		Player->monsterVec[i]->tick();
+
+		if (Player->monsterVec[i]->monsterSprite->getTag() == MonsterErase)
+		{
+			Player->monsterVec.erase(Player->monsterVec.begin() + i);
+		}
+	}
+
 	DCI->ShowDebug(sceneWorld);
 
 }

@@ -88,12 +88,12 @@ void Poop::tick()
 		}
 		if (ObjectHp == 0)
 		{
-			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
-
 			ObjectSprite->setTexture("Object/Poop/grid_poop_05.png");
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
+
+			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
 	}
 	if (_index == 2)

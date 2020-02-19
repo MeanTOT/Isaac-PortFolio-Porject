@@ -73,6 +73,7 @@ void Bullet::tick()
 {
 	RangeCount();
 	EraseBullet();
+	SetZorder();
 }
 
 void Bullet::MoveBullet()
@@ -153,6 +154,16 @@ void Bullet::EraseBulletVec()
 void Bullet::PlayBulletEraseSound()
 {
 	SMI->PlayTearBlock();
+}
+
+void Bullet::SetZorder()
+{
+	if (bulletShadow->getTag() == ActivationBulletTag)
+	{
+		bulletShadow->setZOrder(bulletShadow->getPositionY() * -1);
+		bullet->setZOrder(bullet->getPositionY() * -1);
+	}
+
 }
 
 

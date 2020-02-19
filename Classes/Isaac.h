@@ -7,6 +7,8 @@ class Bullet;
 
 class IsaacBoom;
 
+class MonsterBase;
+
 enum NowScene // 1 ~ 50
 {
 	PressStartScene = 1,
@@ -55,6 +57,37 @@ enum ObjectName // 251 ~ 300
 	ObjectPoop,
 };
 
+enum DoorName // 301 ~ 350
+{
+	NormalDoor = 301,
+	TreasureDoor,
+};
+
+enum MonsterTAG // 351 ~ 400
+{
+	MonsterColiisionBullet = 351,
+	MonsterIdle,
+	MonsterErase,
+	MonsterCollisionBomb,
+	MonsterEraseOnVec,
+};
+
+enum BombKind// 401 ~ 450
+{
+	BaseMentBomb = 401,
+};
+
+enum MonsterKind // 451 ~ 500
+{
+	MonsterKind_Fly = 451,
+};
+
+enum IsaacInfo// 501 ~ 550
+{
+	IsaacIdle = 501,
+	IsaacTakeDamage
+};
+
 class Isaac
 {
 private:
@@ -75,6 +108,8 @@ private:
 	Sprite* isaacShadow; // Isaac 그림자
 
 	IsaacBoom* isaacBoom; // 아이작 폭탄
+
+	IsaacInfo _isaacInfo; // 아이작상태
 
 	Sprite* coinUiIcon;
 	Sprite* bombUiIcon;
@@ -118,6 +153,9 @@ private:
 	float bulletMoveSpeed; // 총알 움직임 스피드 
 	float basicHeight; // 총알 기본 높이 
 	float maxHeight; // 총알 최대 높이
+	float BaseDmg; // 기본공격력
+	float totalDmgUps; // 획득한 아이템들의 데미지 합계
+	float effectiveDmg; // 최종데미지
 
 
 	bool ControlAtivation; // 유저에게 조종권을 준다.
@@ -140,6 +178,7 @@ public:
 	// Scene,Screen Control //
 	NowScene getNowScene() { return nowScene; }
 	void setNowScene(NowScene nowscene) { nowScene = nowscene; }
+	void setIsaacInfo(IsaacInfo isaacinfo) { _isaacInfo = isaacinfo; }
 	int getMainMenuIndex() { return mainMenuIndex; }
 	void setMainMenuIndex(int mainmenuindex) { mainMenuIndex = mainmenuindex; }
 	int getCharSelectIndex() { return charSelectIndex; }
@@ -183,6 +222,12 @@ public:
 	void setBasicHeight(float basicheight) { basicHeight = basicheight; }
 	float getMaxHeight() { return maxHeight; }
 	void setMaxHeight(float maxheight) { maxHeight = maxheight; }
+	float getBaseDmg() { return BaseDmg; }
+	void setBaseDmg(float basedmg) { BaseDmg = basedmg; }
+	float getTotalDmgUps() { return totalDmgUps; }
+	void setTotalDmgUps(float totaldmgups) { totalDmgUps = totaldmgups; }
+	float getEffectiveDmg() { return effectiveDmg; }
+	void setEffectiveDmg(float effectivedmg) { effectiveDmg = effectivedmg; }
 
 	// ------------------------------------------------------ int ------------------------------------------------------ // 
 	int getBombCount() { return BombCount; }
@@ -190,7 +235,7 @@ public:
 	int getCoinCount() { return coinCount; }
 	void setCoinCount(float coincount) { coinCount = coincount; }
 	int getKeyCount() { return keyCount; }
-	void setKeybCount(float keycount) { keyCount = keycount; }
+	void setKeyCount(float keycount) { keyCount = keycount; }
 	int getMaxHp() { return MaxHp; }
 	void setMaxHp(float maxhp) { MaxHp = maxhp; }
 	int getHp() { return Hp; }
@@ -212,6 +257,7 @@ public:
 	// vector //
 	std::vector <ObjectBase*> objectVec;
 	std::vector <Bullet*> isaacBulletVec;
+	std::vector <MonsterBase*> monsterVec;
 
 
 	// 함수들을 모으는 함수 //
@@ -226,6 +272,7 @@ public:
 	void IsaacSetZoder();
 	void CreateBomb();
 	void setUIPosition();
+	void SetIsaacInfo();
 };
 
 

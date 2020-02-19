@@ -32,5 +32,6 @@ public:
 	void ErasePhysicsBody();
 	void EraseBulletVec();
 	void PlayBulletEraseSound();
+	void SetZorder();
 	
 };

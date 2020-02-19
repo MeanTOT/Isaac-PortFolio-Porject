@@ -13,6 +13,7 @@ Isaac::Isaac()
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Player/IsaacHead_Base.plist");
 	cache->addSpriteFramesWithFile("Player/IsaacWalk_Base.plist");
+	cache->addSpriteFramesWithFile("Player/IsaacInfo.plist");
 
 
 	// ------- Int ------- //
@@ -42,8 +43,9 @@ Isaac::Isaac()
 	bulletMoveSpeed = 3000.0f;
 	basicHeight = 15.0f;
 	maxHeight = 15.0f;
-
-
+	BaseDmg = 3.5f;
+	totalDmgUps = 0.0f;
+	effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
 
 
 	// ------- Bool ------- //
@@ -209,6 +211,8 @@ void Isaac::CreateIsaac(Scene* scene)
 		scene->addChild(HeartIcon[i]);
 	}
 
+	_isaacInfo = IsaacIdle;
+
 }
 
 void Isaac::tick()
@@ -217,7 +221,7 @@ void Isaac::tick()
 	BulletFire();
 	IsaacSetZoder();
 	setUIPosition();
-
+	SetIsaacInfo();
 }
 
 void Isaac::IsaacMoving()
@@ -229,7 +233,7 @@ void Isaac::IsaacMoving()
 		{
 			isaacPhysicBody->applyImpulse(Vect(MoveSpeed, 0));
 
-			if (!isaacHead_Base->getNumberOfRunningActions())
+			if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
 			{
 				isaacHead_Base->setFlippedX(false);
 				isaacHead_Base->setSpriteFrame("IsaacHead3.png");
@@ -239,7 +243,7 @@ void Isaac::IsaacMoving()
 		{
 			isaacPhysicBody->applyImpulse(Vect(-MoveSpeed, 0));
 
-			if (!isaacHead_Base->getNumberOfRunningActions())
+			if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
 			{
 				isaacHead_Base->setFlippedX(true);
 				isaacHead_Base->setSpriteFrame("IsaacHead3.png");
@@ -249,7 +253,7 @@ void Isaac::IsaacMoving()
 		{
 			isaacPhysicBody->applyImpulse(Vect(0, MoveSpeed));
 
-			if (!isaacHead_Base->getNumberOfRunningActions())
+			if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
 			{
 				isaacHead_Base->setSpriteFrame("IsaacHead5.png");
 			}
@@ -258,46 +262,48 @@ void Isaac::IsaacMoving()
 		{
 			isaacPhysicBody->applyImpulse(Vect(0, -MoveSpeed));
 
-			if (!isaacHead_Base->getNumberOfRunningActions())
+			if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
 			{
 				isaacHead_Base->setSpriteFrame("IsaacHead1.png");
 			}
 		}
 
+		if (_isaacInfo == IsaacIdle)
+		{
+			if (MoveU)
+			{
+				if (!isaacBody_Base->getNumberOfRunningActions())
+				{
+					isaacBody_Base->runAction(IsaacWalkAnimateUD);
+				}
+			}
+			else if (MoveD)
+			{
+				if (!isaacBody_Base->getNumberOfRunningActions())
+				{
+					isaacBody_Base->runAction(IsaacWalkAnimateUD);
+				}
+			}
+			else if (MoveR)
+			{
+				isaacBody_Base->setFlippedX(false);
+				if (!isaacBody_Base->getNumberOfRunningActions())
+				{
+					isaacBody_Base->runAction(IsaacWalkAnimateRL);
+				}
+			}
+			else if (MoveL)
+			{
+				isaacBody_Base->setFlippedX(true);
+				if (!isaacBody_Base->getNumberOfRunningActions())
+				{
+					isaacBody_Base->runAction(IsaacWalkAnimateRL);
+				}
+			}
+		}
 
 
-		if (MoveU)
-		{
-			if (!isaacBody_Base->getNumberOfRunningActions())
-			{
-				isaacBody_Base->runAction(IsaacWalkAnimateUD);
-			}
-		}
-		else if (MoveD)
-		{
-			if (!isaacBody_Base->getNumberOfRunningActions())
-			{
-				isaacBody_Base->runAction(IsaacWalkAnimateUD);
-			}
-		}
-		else if (MoveR)
-		{
-			isaacBody_Base->setFlippedX(false);
-			if (!isaacBody_Base->getNumberOfRunningActions())
-			{
-				isaacBody_Base->runAction(IsaacWalkAnimateRL);
-			}
-		}
-		else if (MoveL)
-		{
-			isaacBody_Base->setFlippedX(true);
-			if (!isaacBody_Base->getNumberOfRunningActions())
-			{
-				isaacBody_Base->runAction(IsaacWalkAnimateRL);
-			}
-		}
-
-		if (!MoveR && !MoveL && !MoveU && !MoveD)
+		if (!MoveR && !MoveL && !MoveU && !MoveD && _isaacInfo == IsaacIdle)
 		{
 			isaacBody_Base->stopAllActions();
 			isaacBody_Base->setSpriteFrame("IsaacWalk_UD (4).png");
@@ -310,7 +316,7 @@ void Isaac::BulletFire()
 	// 총알 발사시 Isaac 머리 방향 //
 	if (BulletFireR)
 	{
-		if (!isaacHead_Base->getNumberOfRunningActions()) 
+		if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle) 
 		{
 			isaacHead_Base->setFlippedX(false);
 			isaacHead_Base->runAction(BulletFireAnimateR);
@@ -320,7 +326,7 @@ void Isaac::BulletFire()
 	}
 	else if (BulletFireL)
 	{
-		if (!isaacHead_Base->getNumberOfRunningActions())
+		if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
 		{
 			isaacHead_Base->setFlippedX(true);
 			isaacHead_Base->runAction(BulletFireAnimateL);
@@ -330,7 +336,7 @@ void Isaac::BulletFire()
 	}
 	else if (BulletFireU)
 	{
-		if (!isaacHead_Base->getNumberOfRunningActions())
+		if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
 		{
 			isaacHead_Base->runAction(BulletFireAnimateU);
 
@@ -339,7 +345,7 @@ void Isaac::BulletFire()
 	}
 	else if (BulletFireD)
 	{
-		if (!isaacHead_Base->getNumberOfRunningActions())
+		if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
 		{
 			isaacHead_Base->runAction(BulletFireAnimateD);
 			
@@ -347,7 +353,7 @@ void Isaac::BulletFire()
 		}
 	}
 
-	if (!BulletFireR && !BulletFireL && !BulletFireU && !BulletFireD && !isaacBody_Base->getNumberOfRunningActions() && !isaacHead_Base->getNumberOfRunningActions())
+	if (!BulletFireR && !BulletFireL && !BulletFireU && !BulletFireD && !isaacBody_Base->getNumberOfRunningActions() && !isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
 	{
 		isaacHead_Base->setSpriteFrame("IsaacHead1.png");
 	}
@@ -370,7 +376,7 @@ void Isaac::PushBackBullet()
 
 void Isaac::IsaacSetZoder()
 {
-	isaacBody_Base->setLocalZOrder(isaacBody_Base->getPositionY() * -1);
+	isaacBody_Base->setZOrder(isaacBody_Base->getPositionY() * -1);
 }
 
 void Isaac::CreateBomb()
@@ -427,6 +433,15 @@ void Isaac::setUIPosition()
 			HeartIcon[i]->setVisible(false);
 
 		}
+	}
+}
+
+void Isaac::SetIsaacInfo()
+{
+	if (_isaacInfo == IsaacTakeDamage)
+	{
+		isaacBody_Base->setTexture("Player/character_isaac_09.png");
+		isaacHead_Base->setVisible(false);
 	}
 }
 

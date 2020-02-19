@@ -39,6 +39,16 @@ void KeyBordControl::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 		}
 	}
 	break;
+	case EventKeyboard::KeyCode::KEY_F2:
+	{
+		if (Player->getNowScene() == StageScreen)
+		{
+			Player->setCoinCount(50);
+			Player->setBombCount(50);
+			Player->setKeyCount(50);
+		}
+	}
+	break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
 	{
 		if (Player->getNowScene() == PressStartScene)
@@ -88,6 +98,11 @@ void KeyBordControl::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 			{
 				Player->setNowScene(StageScreen);
 				Player->setSceneChange(true);
+				return;
+			}
+			else
+			{
+				SMI->PlayErrorBuzz();
 				return;
 			}
 		}
@@ -550,6 +565,7 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// CollisionBitMask
 	// 1, ¾ÆÀÌÀÛ ¹Ùµð
 	// 2. ¿ÀºêÁ§Æ®
+	// 3. ¸ó½ºÅÍ ¹Ùµð (°øÁßÀ¯´Ö)
 	// 5, ¾ÆÀÌÀÛÃÑ¾Ë , ±×¸²ÀÚ
 	// 6. ¾ÆÀÌÀÛ ÆøÅº
 	// 7. ÆøÆÈ¹üÀ§
@@ -574,6 +590,19 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 
 	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 15 ||
 		b->getCollisionBitmask() == 15 && a->getCollisionBitmask() == 5)
+	{
+		return false;
+	}
+
+	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 15 ||
+		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 15)
+	{
+		return false;
+	}
+
+
+	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 2 ||
+		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 2)
 	{
 		return false;
 	}
@@ -627,8 +656,26 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	{
 		
 		Player->setHp(Player->getHp() - 1);
+	}
 
-		log("ÆøÅº°ú Ãæµ¹!");
+	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 5 ||
+		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 5)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+
+		if (b->getCollisionBitmask() == 3)
+			b->getNode()->setTag(MonsterColiisionBullet);
+		if (a->getCollisionBitmask() == 3)
+			a->getNode()->setTag(MonsterColiisionBullet);
+	}
+
+	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 1 ||
+		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 1)
+	{
+		Player->setIsaacInfo(IsaacTakeDamage);
 	}
 
 

@@ -3,6 +3,7 @@
 // include library
 #include <string>
 #include <map>
+#include <cmath>
 #include "cocos2d.h"
 #include "ui/UIEditBox/UIEditBox.h"
 #include "ui/CocosGUI.h"
@@ -44,7 +45,8 @@
 #define Position_50_51_ Vec2(Director::getInstance()->getWinSize().width / 2, (Director::getInstance()->getWinSize().height / 2) * 3)
 
 #define BackGroundZoder -100000
-#define DoorZoder -99999
+#define DoorZoder -90000
+#define StageOverlayZoder 5000
 
 #define DoorCorrectionRL 200
 #define DoorCorrectionUD 111

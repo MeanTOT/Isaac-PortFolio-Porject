@@ -92,6 +92,26 @@ void SoundManager::PlayExplosion1()
 	explosion1 = AudioEngine::play2d("Sound/Sfx/boss-explosions-1.mp3", false, sfxVolume);
 }
 
+void SoundManager::PlayErrorBuzz()
+{
+	if (AudioEngine::getState(ErrorBuzz) != AudioEngine::AudioState::PLAYING)
+	{
+		ErrorBuzz = AudioEngine::play2d("Sound/Sfx/boss 2 intro errorbuzz.mp3", false, sfxVolume);
+	}
+}
+
+void SoundManager::PlayInsectSwarm()
+{
+	if (AudioEngine::getState(insectSwarm) != AudioEngine::AudioState::PLAYING)
+	{
+		insectSwarm = AudioEngine::play2d("Sound/Sfx/insect swarm.mp3", false, sfxVolume / 2);
+	}
+	if (AudioEngine::getCurrentTime(insectSwarm) >= 0.7f)
+	{
+		insectSwarm = AudioEngine::play2d("Sound/Sfx/insect swarm.mp3", false, sfxVolume / 2);
+	}
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);
