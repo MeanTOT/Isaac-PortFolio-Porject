@@ -43,7 +43,7 @@ void Poop::CreateObject(Scene * scene, Vec2 position, int index)
 
 	scene->addChild(ObjectSprite, -ObjectSprite->getPosition().y);
 
-	ObjectSprite->setZOrder(ObjectSprite->getPositionY() * -1);
+	ObjectSprite->setLocalZOrder(ObjectSprite->getPositionY() * -1);
 
 	ObjectHp = 4;
 
@@ -90,7 +90,7 @@ void Poop::tick()
 		{
 			ObjectSprite->setTexture("Object/Poop/grid_poop_05.png");
 			ObjectSprite->setTag(ObjectErase);
-			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
+			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
 
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
@@ -118,7 +118,7 @@ void Poop::tick()
 		{
 			ObjectSprite->setTexture("Object/Poop/grid_poop_10.png");
 			ObjectSprite->setTag(ObjectErase);
-			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
+			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
 
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
@@ -146,7 +146,7 @@ void Poop::tick()
 		{
 			ObjectSprite->setTexture("Object/Poop/grid_poop_15.png");
 			ObjectSprite->setTag(ObjectErase);
-			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
+			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
 
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
@@ -174,7 +174,7 @@ void Poop::tick()
 		{
 			ObjectSprite->setTexture("Object/Poop/grid_poop_20.png");
 			ObjectSprite->setTag(ObjectErase);
-			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
+			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
 
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
@@ -202,7 +202,7 @@ void Poop::tick()
 		{
 			ObjectSprite->setTexture("Object/Poop/grid_poop_25.png");
 			ObjectSprite->setTag(ObjectErase);
-			ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
+			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
 
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());

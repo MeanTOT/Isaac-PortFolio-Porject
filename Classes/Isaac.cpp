@@ -32,6 +32,9 @@ Isaac::Isaac()
 	keyCount = 0;
 	MaxHp = 6;
 	Hp = 6;
+	stageNumber = 1;
+	godModeCount1 = 15;
+	godModeCount2 = 10;
 	
 
 	// ------- Float ------- //
@@ -46,6 +49,10 @@ Isaac::Isaac()
 	BaseDmg = 3.5f;
 	totalDmgUps = 0.0f;
 	effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
+	totalLuck = 0.0f;
+	BaseLuck = 10.0f;
+	itemInvLuck = totalLuck / BaseLuck;
+
 
 
 	// ------- Bool ------- //
@@ -64,6 +71,8 @@ Isaac::Isaac()
 	BulletFireD = false;
 
 	BombActivation = false;
+
+	GodMode = false;
 
 	// ------- First Scene ------- //
 
@@ -135,7 +144,6 @@ Isaac::Isaac()
 	IsaacWalkAnimateUD = Animate::create(IsaacWalkAnimationUD);
 	IsaacWalkAnimateUD->setTag(WalkUpDown);
 	IsaacWalkAnimateUD->retain();
-
 }
 
 Isaac * Isaac::getInstance()
@@ -221,7 +229,7 @@ void Isaac::tick()
 	BulletFire();
 	IsaacSetZoder();
 	setUIPosition();
-	SetIsaacInfo();
+	SetGodMode();
 }
 
 void Isaac::IsaacMoving()
@@ -233,7 +241,7 @@ void Isaac::IsaacMoving()
 		{
 			isaacPhysicBody->applyImpulse(Vect(MoveSpeed, 0));
 
-			if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
+			if (!isaacHead_Base->getNumberOfRunningActions())
 			{
 				isaacHead_Base->setFlippedX(false);
 				isaacHead_Base->setSpriteFrame("IsaacHead3.png");
@@ -243,7 +251,7 @@ void Isaac::IsaacMoving()
 		{
 			isaacPhysicBody->applyImpulse(Vect(-MoveSpeed, 0));
 
-			if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
+			if (!isaacHead_Base->getNumberOfRunningActions())
 			{
 				isaacHead_Base->setFlippedX(true);
 				isaacHead_Base->setSpriteFrame("IsaacHead3.png");
@@ -253,7 +261,7 @@ void Isaac::IsaacMoving()
 		{
 			isaacPhysicBody->applyImpulse(Vect(0, MoveSpeed));
 
-			if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
+			if (!isaacHead_Base->getNumberOfRunningActions())
 			{
 				isaacHead_Base->setSpriteFrame("IsaacHead5.png");
 			}
@@ -262,48 +270,47 @@ void Isaac::IsaacMoving()
 		{
 			isaacPhysicBody->applyImpulse(Vect(0, -MoveSpeed));
 
-			if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
+			if (!isaacHead_Base->getNumberOfRunningActions())
 			{
 				isaacHead_Base->setSpriteFrame("IsaacHead1.png");
 			}
 		}
 
-		if (_isaacInfo == IsaacIdle)
+		
+		if (MoveU)
 		{
-			if (MoveU)
+			if (!isaacBody_Base->getNumberOfRunningActions())
 			{
-				if (!isaacBody_Base->getNumberOfRunningActions())
-				{
-					isaacBody_Base->runAction(IsaacWalkAnimateUD);
-				}
-			}
-			else if (MoveD)
-			{
-				if (!isaacBody_Base->getNumberOfRunningActions())
-				{
-					isaacBody_Base->runAction(IsaacWalkAnimateUD);
-				}
-			}
-			else if (MoveR)
-			{
-				isaacBody_Base->setFlippedX(false);
-				if (!isaacBody_Base->getNumberOfRunningActions())
-				{
-					isaacBody_Base->runAction(IsaacWalkAnimateRL);
-				}
-			}
-			else if (MoveL)
-			{
-				isaacBody_Base->setFlippedX(true);
-				if (!isaacBody_Base->getNumberOfRunningActions())
-				{
-					isaacBody_Base->runAction(IsaacWalkAnimateRL);
-				}
+				isaacBody_Base->runAction(IsaacWalkAnimateUD);
 			}
 		}
+		else if (MoveD)
+		{
+			if (!isaacBody_Base->getNumberOfRunningActions())
+			{
+				isaacBody_Base->runAction(IsaacWalkAnimateUD);
+			}
+		}
+		else if (MoveR)
+		{
+			isaacBody_Base->setFlippedX(false);
+			if (!isaacBody_Base->getNumberOfRunningActions())
+			{
+				isaacBody_Base->runAction(IsaacWalkAnimateRL);
+			}
+		}
+		else if (MoveL)
+		{
+			isaacBody_Base->setFlippedX(true);
+			if (!isaacBody_Base->getNumberOfRunningActions())
+			{
+				isaacBody_Base->runAction(IsaacWalkAnimateRL);
+			}
+		}
+		
 
 
-		if (!MoveR && !MoveL && !MoveU && !MoveD && _isaacInfo == IsaacIdle)
+		if (!MoveR && !MoveL && !MoveU && !MoveD)
 		{
 			isaacBody_Base->stopAllActions();
 			isaacBody_Base->setSpriteFrame("IsaacWalk_UD (4).png");
@@ -316,7 +323,7 @@ void Isaac::BulletFire()
 	// 총알 발사시 Isaac 머리 방향 //
 	if (BulletFireR)
 	{
-		if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle) 
+		if (!isaacHead_Base->getNumberOfRunningActions()) 
 		{
 			isaacHead_Base->setFlippedX(false);
 			isaacHead_Base->runAction(BulletFireAnimateR);
@@ -326,7 +333,7 @@ void Isaac::BulletFire()
 	}
 	else if (BulletFireL)
 	{
-		if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
+		if (!isaacHead_Base->getNumberOfRunningActions())
 		{
 			isaacHead_Base->setFlippedX(true);
 			isaacHead_Base->runAction(BulletFireAnimateL);
@@ -336,7 +343,7 @@ void Isaac::BulletFire()
 	}
 	else if (BulletFireU)
 	{
-		if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
+		if (!isaacHead_Base->getNumberOfRunningActions())
 		{
 			isaacHead_Base->runAction(BulletFireAnimateU);
 
@@ -345,7 +352,7 @@ void Isaac::BulletFire()
 	}
 	else if (BulletFireD)
 	{
-		if (!isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
+		if (!isaacHead_Base->getNumberOfRunningActions())
 		{
 			isaacHead_Base->runAction(BulletFireAnimateD);
 			
@@ -353,7 +360,7 @@ void Isaac::BulletFire()
 		}
 	}
 
-	if (!BulletFireR && !BulletFireL && !BulletFireU && !BulletFireD && !isaacBody_Base->getNumberOfRunningActions() && !isaacHead_Base->getNumberOfRunningActions() && _isaacInfo == IsaacIdle)
+	if (!BulletFireR && !BulletFireL && !BulletFireU && !BulletFireD && !isaacBody_Base->getNumberOfRunningActions() && !isaacHead_Base->getNumberOfRunningActions())
 	{
 		isaacHead_Base->setSpriteFrame("IsaacHead1.png");
 	}
@@ -376,7 +383,7 @@ void Isaac::PushBackBullet()
 
 void Isaac::IsaacSetZoder()
 {
-	isaacBody_Base->setZOrder(isaacBody_Base->getPositionY() * -1);
+	isaacBody_Base->setLocalZOrder(isaacBody_Base->getPositionY() * -1);
 }
 
 void Isaac::CreateBomb()
@@ -436,13 +443,59 @@ void Isaac::setUIPosition()
 	}
 }
 
-void Isaac::SetIsaacInfo()
+void Isaac::SetGodMode()
 {
 	if (_isaacInfo == IsaacTakeDamage)
 	{
-		isaacBody_Base->setTexture("Player/character_isaac_09.png");
-		isaacHead_Base->setVisible(false);
+		if (!GodMode)
+		{
+			Hp -= 1;
+
+			GodMode = true;
+
+			auto randomindex = RGI->getRandomNumberWithRange(1, 3);
+
+			switch (randomindex)
+			{
+			case 1:
+				SMI->PlayHurtGrunt1();
+				break;
+			case 2:
+				SMI->PlayHurtGrunt2();
+				break;
+			case 3:
+				SMI->PlayHurtGrunt3();
+				break;
+			default:
+				break;
+			}
+		}
+
+		godModeCount1--;
+
+		if (godModeCount1 > 7)
+		{
+			isaacBody_Base->setVisible(false);
+		}
+		else
+		{
+			isaacBody_Base->setVisible(true);
+		}
+
+		if (godModeCount1 <= 0)
+		{
+			godModeCount1 = 15;
+			godModeCount2--;
+		}
+
+		if (godModeCount2 <= 0)
+		{
+			isaacBody_Base->setVisible(true);
+			_isaacInfo = IsaacIdle;
+			godModeCount1 = 15;
+			godModeCount2 = 10;
+			GodMode = false;
+		}
 	}
 }
-
  

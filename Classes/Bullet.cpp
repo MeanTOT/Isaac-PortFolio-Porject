@@ -29,7 +29,8 @@ void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 	BulletEraseAnimate = Animate::create(BulletEraseAnimation);
 	BulletEraseAnimate->retain();
 
-	eraseAction1 = Sequence::create(MoveBy::create(0.2f, Vec2(0, -Player->getMaxHeight())), CallFunc::create(CC_CALLBACK_0(Bullet::ErasePhysicsBody, this)),
+	eraseAction1 = Sequence::create(MoveBy::create(0.2f, Vec2(0, -Player->getMaxHeight())),
+		CallFunc::create(CC_CALLBACK_0(Bullet::ErasePhysicsBody, this)),
 		CallFunc::create(CC_CALLBACK_0(Bullet::PlayBulletEraseSound, this)),BulletEraseAnimate,
 		CallFunc::create(CC_CALLBACK_0(Bullet::EraseBulletVec, this)), RemoveSelf::create(), nullptr);
 	eraseAction1->setTag(1);
@@ -160,8 +161,8 @@ void Bullet::SetZorder()
 {
 	if (bulletShadow->getTag() == ActivationBulletTag)
 	{
-		bulletShadow->setZOrder(bulletShadow->getPositionY() * -1);
-		bullet->setZOrder(bullet->getPositionY() * -1);
+		bulletShadow->setLocalZOrder(bulletShadow->getPositionY() * -1);
+		bullet->setLocalZOrder(bullet->getPositionY() * -1);
 	}
 
 }

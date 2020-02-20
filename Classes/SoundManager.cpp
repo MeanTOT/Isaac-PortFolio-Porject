@@ -112,6 +112,26 @@ void SoundManager::PlayInsectSwarm()
 	}
 }
 
+void SoundManager::StopInsectSwarm()
+{
+	AudioEngine::stop(insectSwarm);
+}
+
+void SoundManager::PlayHurtGrunt1()
+{
+	hurtGrunt1 = AudioEngine::play2d("Sound/Sfx/hurt grunt .mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayHurtGrunt2()
+{
+	hurtGrunt2 = AudioEngine::play2d("Sound/Sfx/hurt grunt 1.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayHurtGrunt3()
+{
+	hurtGrunt3 = AudioEngine::play2d("Sound/Sfx/hurt grunt 2.mp3", false, sfxVolume);
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);

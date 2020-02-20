@@ -7,6 +7,7 @@ private:
 	SpriteFrameCache* cache; // Ä³½¬
 
 	Sprite* ExplosionSprite;
+	Sprite* ExplosionTraceSprite;
 	PhysicsBody* ExplosionPhysic;
 
 	Animation* ExplosionAnimation;

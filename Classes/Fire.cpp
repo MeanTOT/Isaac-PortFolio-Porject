@@ -40,8 +40,8 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 		scene->addChild(fire);
 
 
-		ObjectSprite->setZOrder(ObjectSprite->getPositionY() * -1);
-		fire->setZOrder(ObjectSprite->getPositionY() * -1 + 1);
+		ObjectSprite->setLocalZOrder(ObjectSprite->getPositionY() * -1);
+		fire->setLocalZOrder(ObjectSprite->getPositionY() * -1 + 1);
 
 		ObjectHp = 3;
 	}
@@ -83,8 +83,8 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 		scene->addChild(fire);
 
 
-		ObjectSprite->setZOrder(ObjectSprite->getPositionY() * -1);
-		fire->setZOrder(ObjectSprite->getPositionY() * -1 + 1);
+		ObjectSprite->setLocalZOrder(ObjectSprite->getPositionY() * -1);
+		fire->setLocalZOrder(ObjectSprite->getPositionY() * -1 + 1);
 
 		ObjectHp = 3;
 	}
@@ -126,8 +126,8 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 		scene->addChild(fire);
 
 
-		ObjectSprite->setZOrder(ObjectSprite->getPositionY() * -1);
-		fire->setZOrder(ObjectSprite->getPositionY() * -1 + 1);
+		ObjectSprite->setLocalZOrder(ObjectSprite->getPositionY() * -1);
+		fire->setLocalZOrder(ObjectSprite->getPositionY() * -1 + 1);
 
 		ObjectHp = 3;
 	}
@@ -178,7 +178,7 @@ void Fire::tick()
 	if (ObjectHp == 0)
 	{
 		ObjectSprite->setTag(ObjectErase);
-		ObjectSprite->setZOrder(ObjectSprite->getZOrder() - 5000);
+		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 		ObjectPhysics->removeFromWorld();
 		fire->removeFromParent();
 		if (_index == 1)

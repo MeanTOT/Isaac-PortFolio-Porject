@@ -68,6 +68,7 @@ bool GameStage_1::init()
 
 
 	Player->CreateIsaac(this);
+	Player->setStageNumber(1);
 	KCI->CreateKeyListener(this);
 	KCI->CreateContactListener(this);
 

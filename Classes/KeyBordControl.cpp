@@ -566,6 +566,7 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// 1, 아이작 바디
 	// 2. 오브젝트
 	// 3. 몬스터 바디 (공중유닛)
+	// 4. 몬스터 바디 (지상유닛)
 	// 5, 아이작총알 , 그림자
 	// 6. 아이작 폭탄
 	// 7. 폭팔범위
@@ -654,8 +655,7 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 7 ||
 		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 7)
 	{
-		
-		Player->setHp(Player->getHp() - 1);
+		Player->setIsaacInfo(IsaacTakeDamage);
 	}
 
 	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 5 ||
@@ -672,12 +672,31 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			a->getNode()->setTag(MonsterColiisionBullet);
 	}
 
+	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 5 ||
+		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 5)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+
+		if (b->getCollisionBitmask() == 4)
+			b->getNode()->setTag(MonsterColiisionBullet);
+		if (a->getCollisionBitmask() == 4)
+			a->getNode()->setTag(MonsterColiisionBullet);
+	}
+
 	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 1 ||
 		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 1)
 	{
 		Player->setIsaacInfo(IsaacTakeDamage);
 	}
 
+	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 1 ||
+		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 1)
+	{
+		Player->setIsaacInfo(IsaacTakeDamage);
+	}
 
 	
 

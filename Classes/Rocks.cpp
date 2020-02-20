@@ -108,7 +108,7 @@ void Rocks::tick()
 
 		ObjectSprite->setTexture("Object/Rock/rocks_basement_04.png");
 		ObjectSprite->setTag(ObjectErase);
-		ObjectSprite->setLocalZOrder(ObjectSprite->getZOrder() - 5000);
+		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 		ObjectSprite->setVisible(false);
 		ObjectPhysics->removeFromWorld();
 

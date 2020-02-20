@@ -1,19 +1,18 @@
 #pragma once
 #include "MonsterBase.h"
 
-
-class Fly : public MonsterBase
+class Dip : public MonsterBase
 {
 private:
-
+	int AttackCycle;
 public:
-	Fly(Scene* scene, Vec2 position);
-	~Fly() {}
+	Dip(Scene* scene, Vec2 position);
+	~Dip() {}
 
 	void tick();
 	void SetZorder();
-	void FollowPlayer();
+	void ChangeTag();
 	void MonsterSetTag();
 	void MonsterEraseCall();
-
+	void DoAttack();
 };

@@ -20,6 +20,11 @@ private:
 	int explosion1;
 	int ErrorBuzz;
 	int insectSwarm;
+	int hurtGrunt1;
+	int hurtGrunt2;
+	int hurtGrunt3;
+
+
 
 	SoundManager();
 	~SoundManager() {};
@@ -48,6 +53,10 @@ public:
 	void PlayExplosion1();
 	void PlayErrorBuzz();   
 	void PlayInsectSwarm();
+	void StopInsectSwarm();
+	void PlayHurtGrunt1();
+	void PlayHurtGrunt2();
+	void PlayHurtGrunt3();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

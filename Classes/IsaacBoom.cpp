@@ -16,7 +16,7 @@ IsaacBoom::IsaacBoom(Scene* scene, Vec2 position)
 	BoomPhysic->setCollisionBitmask(6);
 	Boom->addComponent(BoomPhysic);
 
-	scene->addChild(Boom, Player->getIsaacBody()->getZOrder());
+	scene->addChild(Boom, Player->getIsaacBody()->getLocalZOrder());
 
 	BoomAnimation = Animation::create();
 	BoomAnimation->setDelayPerUnit(0.05f);

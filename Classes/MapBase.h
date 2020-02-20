@@ -59,10 +59,10 @@ public:
 
 
 	void CreateBaseMentRoom(Scene* scene, Vec2 position);
-	void CreateNormalDoorL(Scene* scene, Vec2 position, DoorName doorname);
-	void CreateNormalDoorR(Scene* scene, Vec2 position, DoorName doorname);
-	void CreateNormalDoorT(Scene* scene, Vec2 position, DoorName doorname);
-	void CreateNormalDoorB(Scene* scene, Vec2 position, DoorName doorname);
+	void CreateDoorL(Scene* scene, Vec2 position, DoorName doorname);
+	void CreateDoorR(Scene* scene, Vec2 position, DoorName doorname);
+	void CreateDoorT(Scene* scene, Vec2 position, DoorName doorname);
+	void CreateDoorB(Scene* scene, Vec2 position, DoorName doorname);
 
 	void CollisionToDoor();
 	void ClearCheck();

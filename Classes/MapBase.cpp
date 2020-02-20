@@ -115,7 +115,7 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 
 }
 
-void MapBase::CreateNormalDoorR(Scene * scene, Vec2 position, DoorName doorname)
+void MapBase::CreateDoorR(Scene * scene, Vec2 position, DoorName doorname)
 {
 	switch (doorname)
 	{
@@ -142,21 +142,48 @@ void MapBase::CreateNormalDoorR(Scene * scene, Vec2 position, DoorName doorname)
 		closeDoorR_1->setRotation(90);
 		closeDoorR_1->setAnchorPoint({ 0,0.5 });
 		scene->addChild(closeDoorR_1, DoorZoder - 1);
+
+		doorR->setTag(OpenDoor);
 	}
 		break;
 	case TreasureDoor:
+	{
+		doorR = Sprite::create("MapImage/Door/door_treasureroomdoor_01.png");
+		doorR->setPosition(Vec2(position.x + DoorCorrectionRL, position.y));
+		doorR->setRotation(90);
+		scene->addChild(doorR, DoorZoder + 1);
+
+		doorR_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_02.png");
+		doorR_1->setPosition(Vec2(position.x + DoorCorrectionRL, position.y));
+		doorR_1->setRotation(90);
+		scene->addChild(doorR_1, DoorZoder - 2);
+
+		closeDoorR = Sprite::create("MapImage/Door/door_treasureroomdoor_03.png");
+		closeDoorR->setPosition(Vec2(position.x + DoorCorrectionRL - 5, position.y));
+		closeDoorR->setAnchorPoint({ 1,0.5 });
+		closeDoorR->setRotation(90);
+		scene->addChild(closeDoorR, DoorZoder - 1);
+
+		closeDoorR_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_06.png");
+		closeDoorR_1->setPosition(Vec2(position.x + DoorCorrectionRL - 5, position.y + 5));
+		closeDoorR_1->setRotation(90);
+		closeDoorR_1->setAnchorPoint({ 0,0.5 });
+		scene->addChild(closeDoorR_1, DoorZoder - 1);
+
+		doorR->setTag(CloseDoor);
+	}
 		break;
 	default:
 		break;
 	}
 
-	closeDoorR->setVisible(false);
-	closeDoorR_1->setVisible(false);
+	closeDoorR->setVisible(true);
+	closeDoorR_1->setVisible(true);
 
 	isMakeDoorR = true;
 }
 
-void MapBase::CreateNormalDoorL(Scene * scene, Vec2 position, DoorName doorname)
+void MapBase::CreateDoorL(Scene * scene, Vec2 position, DoorName doorname)
 {
 	switch (doorname)
 	{
@@ -183,21 +210,48 @@ void MapBase::CreateNormalDoorL(Scene * scene, Vec2 position, DoorName doorname)
 		closeDoorL_1->setRotation(-90);
 		closeDoorL_1->setAnchorPoint({ 0,0.5 });
 		scene->addChild(closeDoorL_1, DoorZoder - 1);
+
+		doorL->setTag(OpenDoor);
 	}
 	break;
 	case TreasureDoor:
+	{
+		doorL = Sprite::create("MapImage/Door/door_treasureroomdoor_01.png");
+		doorL->setPosition(Vec2(position.x - DoorCorrectionRL, position.y));
+		doorL->setRotation(-90);
+		scene->addChild(doorL, DoorZoder + 1);
+
+		doorL_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_02.png");
+		doorL_1->setPosition(Vec2(position.x - DoorCorrectionRL, position.y));
+		doorL_1->setRotation(-90);
+		scene->addChild(doorL_1, DoorZoder - 2);
+
+		closeDoorL = Sprite::create("MapImage/Door/door_treasureroomdoor_03.png");
+		closeDoorL->setPosition(Vec2(position.x - DoorCorrectionRL + 5, position.y));
+		closeDoorL->setAnchorPoint({ 1,0.5 });
+		closeDoorL->setRotation(-90);
+		scene->addChild(closeDoorL, DoorZoder - 1);
+
+		closeDoorL_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_06.png");
+		closeDoorL_1->setPosition(Vec2(position.x - DoorCorrectionRL + 5, position.y - 5));
+		closeDoorL_1->setRotation(-90);
+		closeDoorL_1->setAnchorPoint({ 0,0.5 });
+		scene->addChild(closeDoorL_1, DoorZoder - 1);
+
+		doorL->setTag(TreasureDoor);
+	}
 		break;
 	default:
 		break;
 	}
 
-	closeDoorL->setVisible(false);
-	closeDoorL_1->setVisible(false);
+	closeDoorL->setVisible(true);
+	closeDoorL_1->setVisible(true);
 
 	isMakeDoorL = true;
 }
 
-void MapBase::CreateNormalDoorT(Scene * scene, Vec2 position, DoorName doorname)
+void MapBase::CreateDoorT(Scene * scene, Vec2 position, DoorName doorname)
 {
 	switch (doorname)
 	{
@@ -220,21 +274,44 @@ void MapBase::CreateNormalDoorT(Scene * scene, Vec2 position, DoorName doorname)
 		closeDoorT_1->setPosition(Vec2(position.x, position.y + DoorCorrectionUD - 5));
 		closeDoorT_1->setAnchorPoint({ 0,0.5 });
 		scene->addChild(closeDoorT_1, DoorZoder - 1);
+
+		doorT->setTag(OpenDoor);
 	}
 	break;
 	case TreasureDoor:
+	{
+		doorT = Sprite::create("MapImage/Door/door_treasureroomdoor_01.png");
+		doorT->setPosition(Vec2(position.x, position.y + DoorCorrectionUD));
+		scene->addChild(doorT, DoorZoder + 1);
+
+		doorT_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_02.png");
+		doorT_1->setPosition(Vec2(position.x, position.y + DoorCorrectionUD));
+		scene->addChild(doorT_1, DoorZoder - 2);
+
+		closeDoorT = Sprite::create("MapImage/Door/door_treasureroomdoor_03.png");
+		closeDoorT->setPosition(Vec2(position.x, position.y + DoorCorrectionUD - 5));
+		closeDoorT->setAnchorPoint({ 1,0.5 });
+		scene->addChild(closeDoorT, DoorZoder - 1);
+
+		closeDoorT_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_06.png");
+		closeDoorT_1->setPosition(Vec2(position.x - 5, position.y + DoorCorrectionUD - 5));
+		closeDoorT_1->setAnchorPoint({ 0,0.5 });
+		scene->addChild(closeDoorT_1, DoorZoder - 1);
+
+		doorT->setTag(CloseDoor);
+	}
 		break;
 	default:
 		break;
 	}
 
-	closeDoorT->setVisible(false);
-	closeDoorT_1->setVisible(false);
+	closeDoorT->setVisible(true);
+	closeDoorT_1->setVisible(true);
 
 	isMakeDoorT = true;
 }
 
-void MapBase::CreateNormalDoorB(Scene * scene, Vec2 position, DoorName doorname)
+void MapBase::CreateDoorB(Scene * scene, Vec2 position, DoorName doorname)
 {
 	switch (doorname)
 	{
@@ -261,16 +338,43 @@ void MapBase::CreateNormalDoorB(Scene * scene, Vec2 position, DoorName doorname)
 		closeDoorB_1->setAnchorPoint({ 0,0.5 });
 		closeDoorB_1->setFlippedY(true);
 		scene->addChild(closeDoorB_1, DoorZoder - 1);
+
+		doorB->setTag(OpenDoor);
 	}
 	break;
 	case TreasureDoor:
+	{
+		doorB = Sprite::create("MapImage/Door/door_treasureroomdoor_01.png");
+		doorB->setPosition(Vec2(position.x, position.y - DoorCorrectionUD));
+		doorB->setFlippedY(true);
+		scene->addChild(doorB, DoorZoder + 1);
+
+		doorB_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_02.png");
+		doorB_1->setPosition(Vec2(position.x, position.y - DoorCorrectionUD));
+		doorB_1->setFlippedY(true);
+		scene->addChild(doorB_1, DoorZoder - 2);
+
+		closeDoorB = Sprite::create("MapImage/Door/door_treasureroomdoor_03.png");
+		closeDoorB->setPosition(Vec2(position.x, position.y - DoorCorrectionUD + 5));
+		closeDoorB->setAnchorPoint({ 1,0.5 });
+		closeDoorB->setFlippedY(true);
+		scene->addChild(closeDoorB, DoorZoder - 1);
+
+		closeDoorB_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_06.png");
+		closeDoorB_1->setPosition(Vec2(position.x - 5, position.y - DoorCorrectionUD + 5));
+		closeDoorB_1->setAnchorPoint({ 0,0.5 });
+		closeDoorB_1->setFlippedY(true);
+		scene->addChild(closeDoorB_1, DoorZoder - 1);
+
+		doorB->setTag(CloseDoor);
+	}
 		break;
 	default:
 		break;
 	}
 
-	closeDoorB->setVisible(false);
-	closeDoorB_1->setVisible(false);
+	closeDoorB->setVisible(true);
+	closeDoorB_1->setVisible(true);
 
 	isMakeDoorB = true;
 }
@@ -283,7 +387,7 @@ void MapBase::CollisionToDoor()
 			doorB->getBoundingBox().getMidX() - 10 < Player->getIsaacBody()->getPosition().x &&
 			doorB->getBoundingBox().getMidX() + 10 > Player->getIsaacBody()->getPosition().x &&
 			doorB->getBoundingBox().getMinY() < Player->getIsaacBody()->getPosition().y &&
-			doorB->getBoundingBox().getMaxY() > Player->getIsaacBody()->getPosition().y)
+			doorB->getBoundingBox().getMaxY() > Player->getIsaacBody()->getPosition().y && doorB->getTag() == OpenDoor)
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(0);
 		}
@@ -291,7 +395,7 @@ void MapBase::CollisionToDoor()
 			doorT->getBoundingBox().getMidX() - 10 < Player->getIsaacBody()->getPosition().x &&
 			doorT->getBoundingBox().getMidX() + 10 > Player->getIsaacBody()->getPosition().x &&
 			doorT->getBoundingBox().getMinY() < Player->getIsaacBody()->getPosition().y &&
-			doorT->getBoundingBox().getMaxY() > Player->getIsaacBody()->getPosition().y)
+			doorT->getBoundingBox().getMaxY() > Player->getIsaacBody()->getPosition().y && doorT->getTag() == OpenDoor)
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(0);
 		}
@@ -299,7 +403,7 @@ void MapBase::CollisionToDoor()
 			doorR->getBoundingBox().getMidY() - 10 < Player->getIsaacBody()->getPosition().y &&
 			doorR->getBoundingBox().getMidY() + 10 > Player->getIsaacBody()->getPosition().y &&
 			doorR->getBoundingBox().getMinX() < Player->getIsaacBody()->getPosition().x &&
-			doorR->getBoundingBox().getMaxX() > Player->getIsaacBody()->getPosition().x)
+			doorR->getBoundingBox().getMaxX() > Player->getIsaacBody()->getPosition().x && doorR->getTag() == OpenDoor)
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(0);
 		}
@@ -307,7 +411,7 @@ void MapBase::CollisionToDoor()
 			doorL->getBoundingBox().getMidY() - 10 < Player->getIsaacBody()->getPosition().y &&
 			doorL->getBoundingBox().getMidY() + 10 > Player->getIsaacBody()->getPosition().y &&
 			doorL->getBoundingBox().getMinX() < Player->getIsaacBody()->getPosition().x &&
-			doorL->getBoundingBox().getMaxX() > Player->getIsaacBody()->getPosition().x)
+			doorL->getBoundingBox().getMaxX() > Player->getIsaacBody()->getPosition().x && doorL->getTag() == OpenDoor)
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(0);
 		}
@@ -369,27 +473,32 @@ void MapBase::CollisionToDoor()
 
 void MapBase::ClearCheck()
 {
+	if (Player->monsterVec.size() == 0)
+		RoomClear = true;
+	else
+		RoomClear = false;
+
 	if (RoomClear)
 	{
-		if (isMakeDoorR)
+		if (isMakeDoorR && doorR->getTag() == OpenDoor)
 		{
 			closeDoorR->setVisible(false);
 			closeDoorR_1->setVisible(false);
 		}
 		
-		if (isMakeDoorL)
+		if (isMakeDoorL && doorL->getTag() == OpenDoor)
 		{
 			closeDoorL->setVisible(false);
 			closeDoorL_1->setVisible(false);
 		}
 
-		if (isMakeDoorT)
+		if (isMakeDoorT && doorT->getTag() == OpenDoor)
 		{
 			closeDoorT->setVisible(false);
 			closeDoorT_1->setVisible(false);
 		}
 
-		if (isMakeDoorB)
+		if (isMakeDoorB && doorB->getTag() == OpenDoor)
 		{
 			closeDoorB->setVisible(false);
 			closeDoorB_1->setVisible(false);

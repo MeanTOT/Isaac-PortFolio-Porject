@@ -61,12 +61,15 @@ enum DoorName // 301 ~ 350
 {
 	NormalDoor = 301,
 	TreasureDoor,
+	OpenDoor,
+	CloseDoor,
 };
 
 enum MonsterTAG // 351 ~ 400
 {
 	MonsterColiisionBullet = 351,
 	MonsterIdle,
+	MonsterAttack,
 	MonsterErase,
 	MonsterCollisionBomb,
 	MonsterEraseOnVec,
@@ -80,12 +83,18 @@ enum BombKind// 401 ~ 450
 enum MonsterKind // 451 ~ 500
 {
 	MonsterKind_Fly = 451,
+	MonsterKind_Dip,
 };
 
 enum IsaacInfo// 501 ~ 550
 {
 	IsaacIdle = 501,
-	IsaacTakeDamage
+	IsaacTakeDamage,
+};
+
+enum AtionTag // 1001 ~ 1500
+{
+
 };
 
 class Isaac
@@ -101,20 +110,19 @@ private:
 
 	NowScene nowScene; // 현재 맵을 구분하는 enum
 	BulletVector bulletVector; // Bullet의 방향 enum
-
-	Sprite* isaacHead_Base; // Isaac 머리
-	Sprite* isaacBody_Base; // Isaac 몸통
-	PhysicsBody* isaacPhysicBody; // Isaac 피직스 몸통 
-	Sprite* isaacShadow; // Isaac 그림자
+	IsaacInfo _isaacInfo; // 아이작상태
 
 	IsaacBoom* isaacBoom; // 아이작 폭탄
 
-	IsaacInfo _isaacInfo; // 아이작상태
-
+	Sprite* isaacHead_Base; // Isaac 머리
+	Sprite* isaacBody_Base; // Isaac 몸통
+	Sprite* isaacShadow; // Isaac 그림자
 	Sprite* coinUiIcon;
 	Sprite* bombUiIcon;
 	Sprite* keyUiIcon;
 	Sprite* HeartIcon[10]; 
+
+	PhysicsBody* isaacPhysicBody; // Isaac 피직스 몸통 
 
 	Label* coinUitext;
 	Label* bombUitext;
@@ -128,7 +136,6 @@ private:
 	Animate* BulletFireAnimateU;
 	Animation* BulletFireAnimatioD;
 	Animate* BulletFireAnimateD;
-
 	Animation* IsaacWalkAnimationRL;
 	Animate* IsaacWalkAnimateRL;
 	Animation* IsaacWalkAnimationUD;
@@ -141,11 +148,14 @@ private:
 	int OptionSfxIndex; // 옵션Sfx 인덱스
 	int OptionBgmIndex; // 옵션Bgm 인덱스
 	int RoomNumber; // 방을 구분하는 인덱스
+	int stageNumber; // 스테이지를 구분하는 인덱스
 	int BombCount; // 폭탄 갯수
 	int coinCount; // 코인 갯수
 	int keyCount; // 열쇠 갯수
-	int MaxHp;
-	int Hp;
+	int MaxHp; // 최대체력
+	int Hp; // 체력
+	int godModeCount1;
+	int godModeCount2;
 
 	float MoveSpeed; // Isaac 스피드
 	float BulletFireCycle; // 총알발사속도(주기)
@@ -156,7 +166,9 @@ private:
 	float BaseDmg; // 기본공격력
 	float totalDmgUps; // 획득한 아이템들의 데미지 합계
 	float effectiveDmg; // 최종데미지
-
+	float totalLuck; // 아이템으로 얻은 운의 합 max == 10
+	float BaseLuck; // 기본 운
+	float itemInvLuck; // 적용될 최종 운
 
 	bool ControlAtivation; // 유저에게 조종권을 준다.
 	bool SceneChange; // 씬전환
@@ -169,6 +181,7 @@ private:
 	bool BulletFireU; // 총알발사 U
 	bool BulletFireD; // 총알발사 D
 	bool BombActivation; // 폭탄 활성화
+	bool GodMode; // 무적
 
 public:
 	static Isaac* getInstance();
@@ -228,6 +241,12 @@ public:
 	void setTotalDmgUps(float totaldmgups) { totalDmgUps = totaldmgups; }
 	float getEffectiveDmg() { return effectiveDmg; }
 	void setEffectiveDmg(float effectivedmg) { effectiveDmg = effectivedmg; }
+	float getTotalLuck() { return totalLuck; }
+	void setTotalLuck(float totalluck) { totalLuck = totalluck; }
+	float getBaseLuck() { return BaseLuck; }
+	void setBaseLuck(float baseluck) { BaseLuck = baseluck; }
+	float getItemInvLuck() { return itemInvLuck; }
+	void setItemInvLuck(float iteminvluck) { itemInvLuck = iteminvluck; }
 
 	// ------------------------------------------------------ int ------------------------------------------------------ // 
 	int getBombCount() { return BombCount; }
@@ -240,6 +259,8 @@ public:
 	void setMaxHp(float maxhp) { MaxHp = maxhp; }
 	int getHp() { return Hp; }
 	void setHp(float hp) { Hp = hp; }
+	int getStageNumber() { return stageNumber; }
+	void setStageNumber(float stagenumber) { stageNumber = stagenumber; }
 
 
 
@@ -272,7 +293,8 @@ public:
 	void IsaacSetZoder();
 	void CreateBomb();
 	void setUIPosition();
-	void SetIsaacInfo();
+	void SetGodMode();
+
 };
 
 

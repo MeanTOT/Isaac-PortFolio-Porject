@@ -4,8 +4,8 @@ Fly::Fly(Scene* scene, Vec2 position)
 {
 	monsterHeight = 10.0f;
 	monsterMoveSpeed = 4.0f;
-	maxHp = 10.f;
-	hp = 10.f;
+	maxHp = 10.f * Player->getStageNumber();
+	hp = 10.f * Player->getStageNumber();
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Fly/Monster_Fly.plist");
@@ -54,6 +54,9 @@ Fly::Fly(Scene* scene, Vec2 position)
 	monsterAnimate2->retain();
 
 	Player->monsterVec.push_back(this);
+
+	_scene = scene;
+	_position = position;
 }
 
 void Fly::tick()
@@ -100,18 +103,20 @@ void Fly::MonsterSetTag()
 	{
 		hp -= Player->getEffectiveDmg();
 
-		log("%f", hp);
-
+		this->HitEffect();
 		monsterSprite->setTag(MonsterIdle);
 	}
 
 	if (hp <= 0 && monsterSprite->getTag() != MonsterErase)
 	{
+		SMI->StopInsectSwarm();
+		effectBlood = new EffectBlood(_scene, monsterSprite->getPosition(), MonsterKind_Fly);
 		monsterSprite->stopAllActions();
 		monsterPhysics->removeFromWorld();
 		monsterShadowSprite->setVisible(false);
 		monsterSprite->runAction(Sequence::create(monsterAnimate2, CallFunc::create(CC_CALLBACK_0(Fly::MonsterEraseCall, this)), RemoveSelf::create(), nullptr));
 		monsterSprite->setTag(MonsterErase);
+
 	}
 }
 
