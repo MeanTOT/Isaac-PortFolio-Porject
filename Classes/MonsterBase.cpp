@@ -17,9 +17,5 @@ void MonsterBase::HitEffect()
 
 void MonsterBase::ChangeColor()
 {
-	if (monsterSprite->getColor() == Color3B::RED)
-	{
-		monsterSprite->setColor(Color3B::WHITE);
-		return;
-	}
+	monsterSprite->setColor(Color3B::WHITE);
 }

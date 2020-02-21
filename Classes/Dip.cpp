@@ -16,9 +16,9 @@ Dip::Dip(Scene * scene, Vec2 position)
 	monsterSprite->setPosition(position);
 	monsterSprite->setTag(MonsterIdle);
 
-	monsterPhysics = PhysicsBody::createCircle(monsterSprite->getContentSize().width / 4, PhysicsMaterial(0, 1, 0));
+	monsterPhysics = PhysicsBody::createCircle(monsterSprite->getContentSize().width / 4, PhysicsMaterial(0, 1.5f, 0));
 	monsterPhysics->setCollisionBitmask(4);
-	monsterPhysics->setLinearDamping(1.0f);
+	monsterPhysics->setLinearDamping(0.5f);
 	monsterPhysics->setPositionOffset(Vec2(0, -1 * monsterHeight));
 	monsterPhysics->setContactTestBitmask(true);
 
@@ -42,6 +42,8 @@ Dip::Dip(Scene * scene, Vec2 position)
 
 	monsterAnimation2 = Animation::create();
 	monsterAnimation2->setDelayPerUnit(0.1f);
+	monsterAnimation2->addSpriteFrame(cache->getSpriteFrameByName("monster_dip_04.png"));
+	monsterAnimation2->addSpriteFrame(cache->getSpriteFrameByName("monster_dip_05.png"));
 	monsterAnimation2->addSpriteFrame(cache->getSpriteFrameByName("monster_dip_04.png"));
 	monsterAnimation2->addSpriteFrame(cache->getSpriteFrameByName("monster_dip_05.png"));
 	monsterAnimate2 = Animate::create(monsterAnimation2);
