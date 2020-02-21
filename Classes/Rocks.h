@@ -1,5 +1,6 @@
 #pragma once
 #include "ObjectBase.h"
+#include "Explosion.h"
 
 class Rocks : public ObjectBase
 {
@@ -14,5 +15,9 @@ public:
 
 	Sprite* RockDregs[4];
 	Dregs* _dregs; 
+
+	int _index;
+
+	Explosion* _explosion;
 
 };

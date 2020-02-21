@@ -41,8 +41,9 @@ void MapCase_4::tick()
 		DipMaker[3] = new EffectPoof(_scene, Vec2(_position.x + 170, _position.y - 80), MonsterKind_Dip);
 	}
 
-	this->SetRoomNumber();
+
 	this->CollisionToDoor();
 	this->ClearCheck();
+	this->SetRoomNumber();
 }
 

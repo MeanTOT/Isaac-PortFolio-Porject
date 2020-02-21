@@ -100,9 +100,12 @@ void Dip::MonsterSetTag()
 	if (monsterSprite->getTag() == MonsterColiisionBullet)
 	{
 		hp -= Player->getEffectiveDmg();
+		monsterSprite->setTag(MonsterIdle);
+
+		if (hp <= 0)
+			return;
 
 		this->HitEffect();
-		monsterSprite->setTag(MonsterIdle);
 	}
 
 	if (hp <= 0 && monsterSprite->getTag() != MonsterErase)

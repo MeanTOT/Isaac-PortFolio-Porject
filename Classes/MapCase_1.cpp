@@ -28,10 +28,15 @@ void MapCase_1::tick()
 		FirstEnter = true;
 
 		log("1번방 첫입장");
+
+	
 	}
 
-	this->SetRoomNumber();
-	this->CollisionToDoor();
-	this->ClearCheck();
-		
+	if (Player->getRoomNumber() == RoomNumber)
+	{
+		this->CollisionToDoor();
+		this->ClearCheck();
+	}
+
+	this->SetRoomNumber();	
 }

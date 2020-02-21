@@ -49,8 +49,7 @@ void MapCase_5::tick()
 		RocksMaker[16]->CreateObject(_scene, Vec2(_position.x + 160, _position.y + 64), 1);
 	}
 
-	this->SetRoomNumber();
 	this->CollisionToDoor();
 	this->ClearCheck();
+	this->SetRoomNumber();
 }
-

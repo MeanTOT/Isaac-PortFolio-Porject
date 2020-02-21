@@ -583,6 +583,13 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 		return false;
 	}
 
+	//// 아이작과 외벽 충돌
+	//if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 10 ||
+	//	b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 10)
+	//{
+	//	return false;
+	//}
+
 	// 아이작 총알끼리 충돌
 	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 5 ||
 		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 5)

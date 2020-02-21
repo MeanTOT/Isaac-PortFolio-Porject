@@ -92,6 +92,7 @@ void Rocks::CreateObject(Scene* scene, Vec2 position, int index)
 
 	Player->objectVec.push_back(this);
 
+	_index = index;
 	_scene = scene;
 	_position = position;
 }
@@ -113,5 +114,10 @@ void Rocks::tick()
 		ObjectPhysics->removeFromWorld();
 
 		_dregs = new Dregs(_scene, _position, ObjectRock, ObjectSprite->getLocalZOrder());
+
+		if (_index == 6)
+		{
+			_explosion = new Explosion(_scene, _position, BaseMentBomb);
+		}
 	}
 }

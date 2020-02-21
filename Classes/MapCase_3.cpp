@@ -40,10 +40,10 @@ void MapCase_3::tick()
 		FlyMaker[1] = new EffectPoof(_scene, Vec2(_position.x,_position.y), MonsterKind_Fly);
 		FlyMaker[2] = new EffectPoof(_scene, Vec2(_position.x,_position.y - 32), MonsterKind_Fly);
 	}
-	
 
-	this->SetRoomNumber();
+
 	this->CollisionToDoor();
 	this->ClearCheck();
+	this->SetRoomNumber();
 }
 
