@@ -2,6 +2,7 @@
 #include "ProjectFW.h"
 #include "Fly.h"
 #include "Dip.h"
+#include "Horf.h"
 
 class EffectPoof
 {
@@ -15,6 +16,7 @@ private:
 
 	Fly* FlyMaker;
 	Dip* DipMaker;
+	Horf* HorfMaker;
 
 public:
 	EffectPoof(Scene* scene, Vec2 position, MonsterKind monsterkind);
@@ -22,6 +24,7 @@ public:
 
 	void CreateFly(Scene * scene, Vec2 position);
 	void CreateDip(Scene * scene, Vec2 position);
+	void CreateHorf(Scene * scene, Vec2 position);
 };
 
 

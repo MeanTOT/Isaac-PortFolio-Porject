@@ -114,6 +114,12 @@ void Rocks::tick()
 		ObjectPhysics->removeFromWorld();
 
 		_dregs = new Dregs(_scene, _position, ObjectRock, ObjectSprite->getLocalZOrder());
+		
+		if (RGI->getPercentage(Player->getItemInvLuck()))
+			coinMaker = new Coin(_scene, _position);
+
+		log("%f", Player->getItemInvLuck());
+
 
 		if (_index == 6)
 		{

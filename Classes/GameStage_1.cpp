@@ -62,6 +62,7 @@ bool GameStage_1::init()
 	mapCase_4 = new MapCase_4(this, Position_49_50_);
 	mapCase_5 = new MapCase_5(this, Position_50_51_);
 	mapCase_6 = new MapCase_6(this, Position_50_48_);
+	mapCase_7 = new MapCase_7(this, Position_50_52_);
 
 
 	// ½ºÄÉÁì °ü¸® //
@@ -85,6 +86,7 @@ void GameStage_1::tick(float delta)
 	mapCase_4->tick();
 	mapCase_5->tick();
 	mapCase_6->tick();
+	mapCase_7->tick();
 
 	for (int i = 0; i < Player->isaacBulletVec.size(); i++)
 	{
@@ -97,6 +99,17 @@ void GameStage_1::tick(float delta)
 		}
 	}
 
+	for (int i = 0; i < Player->monsterBulletVec.size(); i++)
+	{
+		Player->monsterBulletVec[i]->tick();
+
+		if (Player->monsterBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
+		{
+			//delete[] Player->isaacBulletVec[i];
+			Player->monsterBulletVec.erase(Player->monsterBulletVec.begin() + i);
+		}
+	}
+
 	for (int i = 0; i < Player->objectVec.size(); i++)
 	{
 		Player->objectVec[i]->tick();
@@ -104,6 +117,16 @@ void GameStage_1::tick(float delta)
 		if (Player->objectVec[i]->ObjectSprite->getTag() == ObjectErase)
 		{
 			Player->objectVec.erase(Player->objectVec.begin() + i);
+		}
+	}
+
+	for (int i = 0; i < Player->itemBaseVec.size(); i++)
+	{
+		Player->itemBaseVec[i]->tick();
+
+		if (Player->itemBaseVec[i]->itemSprite->getTag() == ItemErase)
+		{
+			Player->itemBaseVec.erase(Player->itemBaseVec.begin() + i);
 		}
 	}
 

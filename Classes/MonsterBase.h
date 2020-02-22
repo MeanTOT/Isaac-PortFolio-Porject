@@ -25,6 +25,7 @@ protected:
 
 	float monsterHeight;
 	float monsterMoveSpeed;
+	float mosnterBulletMoveSpeed;
 	float maxHp;
 	float hp;
 
@@ -49,6 +50,7 @@ public:
 	virtual void MonsterEraseCall() {}
 	virtual void ChangeTag() {}
 	virtual void DoAttack() {}
+	virtual void CreateBullet() {}
 
 	void HitEffect();
 	void ChangeColor();

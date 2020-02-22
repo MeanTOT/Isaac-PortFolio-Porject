@@ -23,6 +23,12 @@ private:
 	int hurtGrunt1;
 	int hurtGrunt2;
 	int hurtGrunt3;
+	int pennyPickUp;
+	int pennyDrop;
+	int offFire;
+	int plop;
+	int doorUnlock;
+	int shakeyKidRoar;
 
 
 
@@ -57,6 +63,12 @@ public:
 	void PlayHurtGrunt1();
 	void PlayHurtGrunt2();
 	void PlayHurtGrunt3();
+	void PlayPennyPickUp();
+	void PlayPennyDrop();
+	void PlayOffFire();
+	void PlayPlop();
+	void PlayDoorUnlock();
+	void PlayShakeyKidRoar();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

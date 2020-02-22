@@ -394,15 +394,15 @@ void MapBase::CollisionToDoor()
 		else if (isMakeDoorT && RoomClear &&
 			doorT->getBoundingBox().getMidX() - 10 < Player->getIsaacBody()->getPosition().x &&
 			doorT->getBoundingBox().getMidX() + 10 > Player->getIsaacBody()->getPosition().x &&
-			doorT->getBoundingBox().getMinY() < Player->getIsaacBody()->getPosition().y &&
-			doorT->getBoundingBox().getMaxY() - 10 > Player->getIsaacBody()->getPosition().y && doorT->getTag() == OpenDoor)
+			doorT->getBoundingBox().getMinY() - 10< Player->getIsaacBody()->getPosition().y &&
+			doorT->getBoundingBox().getMaxY() > Player->getIsaacBody()->getPosition().y && doorT->getTag() == OpenDoor)
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(0);
 		}
 		else if (isMakeDoorR && RoomClear &&
 			doorR->getBoundingBox().getMidY() - 10 < Player->getIsaacBody()->getPosition().y &&
 			doorR->getBoundingBox().getMidY() + 10 > Player->getIsaacBody()->getPosition().y &&
-			doorR->getBoundingBox().getMinX() - 10< Player->getIsaacBody()->getPosition().x &&
+			doorR->getBoundingBox().getMinX() - 10 < Player->getIsaacBody()->getPosition().x &&
 			doorR->getBoundingBox().getMaxX() > Player->getIsaacBody()->getPosition().x && doorR->getTag() == OpenDoor)
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(0);
@@ -410,8 +410,8 @@ void MapBase::CollisionToDoor()
 		else if (isMakeDoorL && RoomClear &&
 			doorL->getBoundingBox().getMidY() - 10 < Player->getIsaacBody()->getPosition().y &&
 			doorL->getBoundingBox().getMidY() + 10 > Player->getIsaacBody()->getPosition().y &&
-			doorL->getBoundingBox().getMinX() + 10< Player->getIsaacBody()->getPosition().x &&
-			doorL->getBoundingBox().getMaxX() > Player->getIsaacBody()->getPosition().x && doorL->getTag() == OpenDoor)
+			doorL->getBoundingBox().getMinX() < Player->getIsaacBody()->getPosition().x &&
+			doorL->getBoundingBox().getMaxX() + 10 > Player->getIsaacBody()->getPosition().x && doorL->getTag() == OpenDoor)
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(0);
 		}
@@ -419,12 +419,8 @@ void MapBase::CollisionToDoor()
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(1);
 		}
-	
-
-		log("%d", isMakeDoorB);
 
 		int vecsize = Player->objectVec.size();
-
 		if (isMakeDoorB && RoomClear)
 		{
 			if (doorB->getBoundingBox().getMidY() > Player->getIsaacBody()->getPosition().y &&

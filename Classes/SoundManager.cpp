@@ -132,6 +132,36 @@ void SoundManager::PlayHurtGrunt3()
 	hurtGrunt3 = AudioEngine::play2d("Sound/Sfx/hurt grunt 2.mp3", false, sfxVolume);
 }
 
+void SoundManager::PlayPennyPickUp()
+{
+	pennyPickUp = AudioEngine::play2d("Sound/Sfx/penny-pickup-1.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayPennyDrop()
+{
+	pennyDrop = AudioEngine::play2d("Sound/Sfx/penny-drop-1.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayOffFire()
+{
+	offFire = AudioEngine::play2d("Sound/Sfx/steam-half-sec.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayPlop()
+{
+	plop= AudioEngine::play2d("Sound/Sfx/plop.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayDoorUnlock()
+{
+	doorUnlock = AudioEngine::play2d("Sound/Sfx/unlock.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayShakeyKidRoar()
+{
+	shakeyKidRoar = AudioEngine::play2d("Sound/Sfx/shakey-kid-roar.mp3", false, sfxVolume);
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);

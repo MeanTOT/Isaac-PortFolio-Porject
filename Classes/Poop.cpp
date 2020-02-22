@@ -92,6 +92,10 @@ void Poop::tick()
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
+			SMI->PlayPlop();
+
+			if (RGI->getPercentage(Player->getItemInvLuck()))
+				coinMaker = new Coin(_scene, _position);
 
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
@@ -121,6 +125,11 @@ void Poop::tick()
 			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
 
+			SMI->PlayPlop();
+
+			if (RGI->getPercentage(Player->getItemInvLuck()))
+				coinMaker = new Coin(_scene, _position);
+
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
 	}
@@ -148,6 +157,11 @@ void Poop::tick()
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
+
+			SMI->PlayPlop();
+
+			if (RGI->getPercentage(Player->getItemInvLuck()))
+				coinMaker = new Coin(_scene, _position);
 
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
@@ -177,6 +191,11 @@ void Poop::tick()
 			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
 
+			SMI->PlayPlop();
+
+			if (RGI->getPercentage(Player->getItemInvLuck()))
+				coinMaker = new Coin(_scene, _position);
+
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}
 	}
@@ -204,6 +223,11 @@ void Poop::tick()
 			ObjectSprite->setTag(ObjectErase);
 			ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 			ObjectPhysics->removeFromWorld();
+
+			SMI->PlayPlop();
+
+			if (RGI->getPercentage(Player->getItemInvLuck()))
+				coinMaker = new Coin(_scene, _position);
 
 			_dregs = new Dregs(_scene, _position, ObjectPoop, ObjectSprite->getLocalZOrder());
 		}

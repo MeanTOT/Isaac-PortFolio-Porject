@@ -49,7 +49,7 @@ Isaac::Isaac()
 	BaseDmg = 3.5f;
 	totalDmgUps = 0.0f;
 	effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
-	totalLuck = 0.0f;
+	totalLuck = 1.0f;
 	BaseLuck = 10.0f;
 	itemInvLuck = totalLuck / BaseLuck;
 

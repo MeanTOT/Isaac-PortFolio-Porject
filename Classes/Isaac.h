@@ -5,9 +5,13 @@ class ObjectBase;
 
 class Bullet;
 
+class MonsterBullet;
+
 class IsaacBoom;
 
 class MonsterBase;
+
+class ItemBase;
 
 enum NowScene // 1 ~ 50
 {
@@ -55,6 +59,7 @@ enum ObjectName // 251 ~ 300
 	ObjectRock = 251,
 	ObjectFire,
 	ObjectPoop,
+	ObjectMonster,
 };
 
 enum DoorName // 301 ~ 350
@@ -84,6 +89,7 @@ enum MonsterKind // 451 ~ 500
 {
 	MonsterKind_Fly = 451,
 	MonsterKind_Dip,
+	MonsterKind_Horf,
 };
 
 enum IsaacInfo// 501 ~ 550
@@ -92,10 +98,16 @@ enum IsaacInfo// 501 ~ 550
 	IsaacTakeDamage,
 };
 
-enum AtionTag // 1001 ~ 1500
+enum ItemTag// 551 ~ 600
 {
-
+	ItemIdle = 551,
+	ItemErase,
 };
+
+//enum AtionTag // 1001 ~ 1500
+//{
+//
+//};
 
 class Isaac
 {
@@ -279,6 +291,8 @@ public:
 	std::vector <ObjectBase*> objectVec;
 	std::vector <Bullet*> isaacBulletVec;
 	std::vector <MonsterBase*> monsterVec;
+	std::vector <MonsterBullet*> monsterBulletVec;
+	std::vector <ItemBase*> itemBaseVec;
 
 
 	// 함수들을 모으는 함수 //
@@ -294,6 +308,7 @@ public:
 	void CreateBomb();
 	void setUIPosition();
 	void SetGodMode();
+
 
 };
 

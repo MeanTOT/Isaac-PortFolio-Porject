@@ -22,7 +22,7 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 
 		ObjectPhysics = PhysicsBody::createBox(ObjectSprite->getContentSize() / 2, PhysicsMaterial(0, 0, 0));
 		ObjectPhysics->setDynamic(false);
-		ObjectPhysics->setCollisionBitmask(2);
+		ObjectPhysics->setCollisionBitmask(8);
 		ObjectPhysics->setContactTestBitmask(true);
 
 		ObjectSprite->setPhysicsBody(ObjectPhysics);
@@ -65,7 +65,7 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 
 		ObjectPhysics = PhysicsBody::createBox(ObjectSprite->getContentSize() / 2, PhysicsMaterial(0, 0, 0));
 		ObjectPhysics->setDynamic(false);
-		ObjectPhysics->setCollisionBitmask(2);
+		ObjectPhysics->setCollisionBitmask(8);
 		ObjectPhysics->setContactTestBitmask(true);
 
 		ObjectSprite->setPhysicsBody(ObjectPhysics);
@@ -108,7 +108,7 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 
 		ObjectPhysics = PhysicsBody::createBox(ObjectSprite->getContentSize() / 2, PhysicsMaterial(0, 0, 0));
 		ObjectPhysics->setDynamic(false);
-		ObjectPhysics->setCollisionBitmask(2);
+		ObjectPhysics->setCollisionBitmask(8);
 		ObjectPhysics->setContactTestBitmask(true);
 
 		ObjectSprite->setPhysicsBody(ObjectPhysics);
@@ -180,7 +180,14 @@ void Fire::tick()
 		ObjectSprite->setTag(ObjectErase);
 		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 		ObjectPhysics->removeFromWorld();
+
+		SMI->PlayOffFire();
+
 		fire->removeFromParent();
+
+		if (RGI->getPercentage(Player->getItemInvLuck()))
+			coinMaker = new Coin(_scene, _position);
+
 		if (_index == 1)
 			ObjectSprite->setSpriteFrame("grid_fireplace_02.png");
 		if (_index == 2)

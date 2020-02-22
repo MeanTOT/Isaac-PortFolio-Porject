@@ -1,6 +1,7 @@
 #pragma once
 #include "ProjectFW.h"
 #include "Dregs.h"
+#include "Coin.h"
 
 class ObjectBase
 {
@@ -24,6 +25,8 @@ public:
 
 	Animation* ObjectAnimation;
 	Animate* ObjectAnimate;
+
+	Coin* coinMaker;
 
 	virtual void tick() {}
 	virtual void CreateObject(Scene* scene, Vec2 position, int index) {}

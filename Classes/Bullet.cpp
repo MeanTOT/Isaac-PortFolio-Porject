@@ -57,7 +57,7 @@ void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 	bulletShadow->setOpacity(100);
 	bulletShadow->setTag(ActivationBulletTag);
 
-	bulletShadowPhysics = PhysicsBody::createCircle(bulletShadow->getContentSize().width / 6, PhysicsMaterial(0, 0, 0));
+	bulletShadowPhysics = PhysicsBody::createCircle(bulletShadow->getContentSize().width / 2, PhysicsMaterial(0, 0, 0));
 	bulletShadowPhysics->setPositionOffset(Vec2(0, 0));
 	bulletShadowPhysics->setContactTestBitmask(true);
 	bulletShadowPhysics->setCollisionBitmask(5);
