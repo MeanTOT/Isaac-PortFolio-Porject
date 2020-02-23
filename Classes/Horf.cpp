@@ -2,7 +2,7 @@
 
 Horf::Horf(Scene* scene, Vec2 position)
 {
-	monsterHeight = 20.0f;
+	monsterHeight = 15.0f;
 	monsterMoveSpeed = 0.0f;
 	maxHp = 10.f * Player->getStageNumber();
 	hp = 10.f * Player->getStageNumber();
@@ -76,16 +76,11 @@ void Horf::tick()
 	SetZorder();
 	FollowPlayer();
 	MonsterSetTag();
-
-	if (hp > 0)
-	{
-		
-	}
 }
 
 void Horf::SetZorder()
 {
-	monsterSprite->setLocalZOrder(monsterSprite->getPositionY() * -1);
+	monsterSprite->setLocalZOrder(monsterSprite->getPositionY() * -1 + monsterHeight);
 }
 
 void Horf::FollowPlayer()
@@ -112,13 +107,39 @@ void Horf::MonsterSetTag()
 	if (hp <= 0 && monsterSprite->getTag() != MonsterErase)
 	{
 		effectBlood = new EffectBlood(_scene, monsterSprite->getPosition(), MonsterKind_Horf);
-		_dregs = new Dregs(_scene, _position, ObjectMonster, monsterSprite->getLocalZOrder());
-		monsterSprite->stopAllActions();
+		_dregs = new Dregs(_scene, monsterSprite->getPosition(), ObjectMonster, monsterSprite->getLocalZOrder());
+
 		monsterPhysics->removeFromWorld();
+
 		monsterShadowSprite->setVisible(false);
+
+		monsterSprite->stopAllActions();
 		monsterSprite->runAction(Sequence::create(monsterAnimate2, CallFunc::create(CC_CALLBACK_0(Horf::MonsterEraseCall, this)), RemoveSelf::create(), nullptr));
 		monsterSprite->setTag(MonsterErase);
 
+
+		auto randomindex = RGI->getRandomNumberWithRange(1, 5);
+
+		switch (randomindex)
+		{
+		case 1:
+			SMI->PlayMeatyDeaths1();
+			break;
+		case 2:
+			SMI->PlayMeatyDeaths2();
+			break;
+		case 3:
+			SMI->PlayMeatyDeaths3();
+			break;
+		case 4:
+			SMI->PlayMeatyDeaths4();
+			break;
+		case 5:
+			SMI->PlayMeatyDeaths5();
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -137,16 +158,16 @@ void Horf::CreateBullet()
 	if (monsterSprite->getPosition().x - 60 < Player->getIsaacBody()->getPosition().x && monsterSprite->getPosition().x + 60 > Player->getIsaacBody()->getPosition().x)
 	{
 		auto _monsterBullet = new MonsterBullet;
-		_monsterBullet->CreateIsaacBullet(_scene, _position, (Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x) * mosnterBulletMoveSpeed,
-			(Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)  * mosnterBulletMoveSpeed, 10);
+		_monsterBullet->CreateIsaacBullet(_scene, monsterSprite->getPosition(), (Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x) * mosnterBulletMoveSpeed,
+			(Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)  * mosnterBulletMoveSpeed, monsterHeight);
 
 		SMI->PlayShakeyKidRoar();
 	}
 	else if (monsterSprite->getPosition().y - 60 < Player->getIsaacBody()->getPosition().y && monsterSprite->getPosition().y + 60 > Player->getIsaacBody()->getPosition().y)
 	{
 		auto _monsterBullet = new MonsterBullet;
-		_monsterBullet->CreateIsaacBullet(_scene, _position, (Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x) * mosnterBulletMoveSpeed,
-			(Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)  * mosnterBulletMoveSpeed, 10);
+		_monsterBullet->CreateIsaacBullet(_scene, monsterSprite->getPosition(), (Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x) * mosnterBulletMoveSpeed,
+			(Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)  * mosnterBulletMoveSpeed, monsterHeight);
 
 		SMI->PlayShakeyKidRoar();
 	}

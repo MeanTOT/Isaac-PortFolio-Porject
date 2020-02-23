@@ -9,6 +9,7 @@ MapBase::MapBase()
 	isMakeDoorL = false;
 	isMakeDoorT = false;
 	isMakeDoorB = false;
+	
 }
 
 MapBase::~MapBase()
@@ -173,12 +174,41 @@ void MapBase::CreateDoorR(Scene * scene, Vec2 position, DoorName doorname)
 		doorR->setTag(CloseDoor);
 	}
 		break;
+	case TreasureNoneKeyDoor:
+	{
+		doorR = Sprite::create("MapImage/Door/door_treasureroomdoor_01.png");
+		doorR->setPosition(Vec2(position.x + DoorCorrectionRL, position.y));
+		doorR->setRotation(90);
+		scene->addChild(doorR, DoorZoder + 1);
+
+		doorR_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_02.png");
+		doorR_1->setPosition(Vec2(position.x + DoorCorrectionRL, position.y));
+		doorR_1->setRotation(90);
+		scene->addChild(doorR_1, DoorZoder - 2);
+
+		closeDoorR = Sprite::create("MapImage/Door/door_treasureroomdoor_03.png");
+		closeDoorR->setPosition(Vec2(position.x + DoorCorrectionRL - 5, position.y));
+		closeDoorR->setAnchorPoint({ 1,0.5 });
+		closeDoorR->setRotation(90);
+		scene->addChild(closeDoorR, DoorZoder - 1);
+
+		closeDoorR_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_06.png");
+		closeDoorR_1->setPosition(Vec2(position.x + DoorCorrectionRL - 5, position.y + 5));
+		closeDoorR_1->setRotation(90);
+		closeDoorR_1->setAnchorPoint({ 0,0.5 });
+		scene->addChild(closeDoorR_1, DoorZoder - 1);
+
+		doorR->setTag(OpenDoor);
+	}
+	break;
 	default:
 		break;
 	}
 
 	closeDoorR->setVisible(true);
 	closeDoorR_1->setVisible(true);
+
+	_doorname = doorname;
 
 	isMakeDoorR = true;
 }
@@ -238,12 +268,41 @@ void MapBase::CreateDoorL(Scene * scene, Vec2 position, DoorName doorname)
 		closeDoorL_1->setAnchorPoint({ 0,0.5 });
 		scene->addChild(closeDoorL_1, DoorZoder - 1);
 
-		doorL->setTag(TreasureDoor);
+		doorL->setTag(CloseDoor);
 	}
 		break;
+	case TreasureNoneKeyDoor:
+	{
+		doorL = Sprite::create("MapImage/Door/door_treasureroomdoor_01.png");
+		doorL->setPosition(Vec2(position.x - DoorCorrectionRL, position.y));
+		doorL->setRotation(-90);
+		scene->addChild(doorL, DoorZoder + 1);
+
+		doorL_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_02.png");
+		doorL_1->setPosition(Vec2(position.x - DoorCorrectionRL, position.y));
+		doorL_1->setRotation(-90);
+		scene->addChild(doorL_1, DoorZoder - 2);
+
+		closeDoorL = Sprite::create("MapImage/Door/door_treasureroomdoor_03.png");
+		closeDoorL->setPosition(Vec2(position.x - DoorCorrectionRL + 5, position.y));
+		closeDoorL->setAnchorPoint({ 1,0.5 });
+		closeDoorL->setRotation(-90);
+		scene->addChild(closeDoorL, DoorZoder - 1);
+
+		closeDoorL_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_06.png");
+		closeDoorL_1->setPosition(Vec2(position.x - DoorCorrectionRL + 5, position.y - 5));
+		closeDoorL_1->setRotation(-90);
+		closeDoorL_1->setAnchorPoint({ 0,0.5 });
+		scene->addChild(closeDoorL_1, DoorZoder - 1);
+
+		doorL->setTag(OpenDoor);
+	}
+	break;
 	default:
 		break;
 	}
+
+	_doorname = doorname;
 
 	closeDoorL->setVisible(true);
 	closeDoorL_1->setVisible(true);
@@ -301,9 +360,34 @@ void MapBase::CreateDoorT(Scene * scene, Vec2 position, DoorName doorname)
 		doorT->setTag(CloseDoor);
 	}
 		break;
+	case TreasureNoneKeyDoor:
+	{
+		doorT = Sprite::create("MapImage/Door/door_treasureroomdoor_01.png");
+		doorT->setPosition(Vec2(position.x, position.y + DoorCorrectionUD));
+		scene->addChild(doorT, DoorZoder + 1);
+
+		doorT_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_02.png");
+		doorT_1->setPosition(Vec2(position.x, position.y + DoorCorrectionUD));
+		scene->addChild(doorT_1, DoorZoder - 2);
+
+		closeDoorT = Sprite::create("MapImage/Door/door_treasureroomdoor_03.png");
+		closeDoorT->setPosition(Vec2(position.x, position.y + DoorCorrectionUD - 5));
+		closeDoorT->setAnchorPoint({ 1,0.5 });
+		scene->addChild(closeDoorT, DoorZoder - 1);
+
+		closeDoorT_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_06.png");
+		closeDoorT_1->setPosition(Vec2(position.x - 5, position.y + DoorCorrectionUD - 5));
+		closeDoorT_1->setAnchorPoint({ 0,0.5 });
+		scene->addChild(closeDoorT_1, DoorZoder - 1);
+
+		doorT->setTag(OpenDoor);
+	}
+	break;
 	default:
 		break;
 	}
+
+	_doorname = doorname;
 
 	closeDoorT->setVisible(true);
 	closeDoorT_1->setVisible(true);
@@ -369,9 +453,38 @@ void MapBase::CreateDoorB(Scene * scene, Vec2 position, DoorName doorname)
 		doorB->setTag(CloseDoor);
 	}
 		break;
+	case TreasureNoneKeyDoor:
+	{
+		doorB = Sprite::create("MapImage/Door/door_treasureroomdoor_01.png");
+		doorB->setPosition(Vec2(position.x, position.y - DoorCorrectionUD));
+		doorB->setFlippedY(true);
+		scene->addChild(doorB, DoorZoder + 1);
+
+		doorB_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_02.png");
+		doorB_1->setPosition(Vec2(position.x, position.y - DoorCorrectionUD));
+		doorB_1->setFlippedY(true);
+		scene->addChild(doorB_1, DoorZoder - 2);
+
+		closeDoorB = Sprite::create("MapImage/Door/door_treasureroomdoor_03.png");
+		closeDoorB->setPosition(Vec2(position.x, position.y - DoorCorrectionUD + 5));
+		closeDoorB->setAnchorPoint({ 1,0.5 });
+		closeDoorB->setFlippedY(true);
+		scene->addChild(closeDoorB, DoorZoder - 1);
+
+		closeDoorB_1 = Sprite::create("MapImage/Door/door_treasureroomdoor_06.png");
+		closeDoorB_1->setPosition(Vec2(position.x - 5, position.y - DoorCorrectionUD + 5));
+		closeDoorB_1->setAnchorPoint({ 0,0.5 });
+		closeDoorB_1->setFlippedY(true);
+		scene->addChild(closeDoorB_1, DoorZoder - 1);
+
+		doorB->setTag(OpenDoor);
+	}
+	break;
 	default:
 		break;
 	}
+
+	_doorname = doorname;
 
 	closeDoorB->setVisible(true);
 	closeDoorB_1->setVisible(true);
@@ -381,6 +494,8 @@ void MapBase::CreateDoorB(Scene * scene, Vec2 position, DoorName doorname)
 
 void MapBase::CollisionToDoor()
 {
+	// ------------------------------------- [ 문이 열려있을때 피직스 충돌 정지 ] ------------------------------------- //
+
 	if (Player->getRoomNumber() == RoomNumber)
 	{
 		if (isMakeDoorB && RoomClear &&
@@ -419,6 +534,8 @@ void MapBase::CollisionToDoor()
 		{
 			Player->getIsaacPysicBody()->setCollisionBitmask(1);
 		}
+
+		// ------------------------------------- [ 문 통과시 카메라 액션 ] ------------------------------------- //
 
 		int vecsize = Player->objectVec.size();
 		if (isMakeDoorB && RoomClear)
@@ -464,6 +581,98 @@ void MapBase::CollisionToDoor()
 				CI->MoveL();
 			}
 		}
+
+		// ------------------------------------- [ 잠겨있는 문을 열쇠로 열때 ] ------------------------------------- //
+
+		if (isMakeDoorB && RoomClear &&
+			doorB->getBoundingBox().getMidX() - 10 < Player->getIsaacBody()->getPosition().x &&
+			doorB->getBoundingBox().getMidX() + 10 > Player->getIsaacBody()->getPosition().x &&
+			doorB->getBoundingBox().getMinY() < Player->getIsaacBody()->getPosition().y &&
+			doorB->getBoundingBox().getMaxY() + 10 > Player->getIsaacBody()->getPosition().y && doorB->getTag() == CloseDoor)
+		{
+			if (_doorname == TreasureDoor)
+			{
+				if (Player->getKeyCount() > 0)
+				{
+					Player->getDoorOpenKey()->setVisible(true);
+					Player->getDoorOpenKey()->setPosition(doorB->getPosition().x, doorB->getPosition().y + 10);
+					Player->getDoorOpenKey()->setRotation(180);
+					if (!Player->getDoorOpenKey()->getNumberOfRunningActions())
+					{
+						Player->getDoorOpenKey()->runAction(Sequence::create(CallFunc::create(CC_CALLBACK_0(MapBase::PlayUnlockSound, this)), Player->getDoorOpenkeyAnimate(),
+							CallFunc::create(CC_CALLBACK_0(MapBase::ChangeDoorBTag, this)), nullptr));
+					}
+					
+				}
+			}
+		}
+		if (isMakeDoorT && RoomClear &&
+			doorT->getBoundingBox().getMidX() - 10 < Player->getIsaacBody()->getPosition().x &&
+			doorT->getBoundingBox().getMidX() + 10 > Player->getIsaacBody()->getPosition().x &&
+			doorT->getBoundingBox().getMinY() - 10 < Player->getIsaacBody()->getPosition().y &&
+			doorT->getBoundingBox().getMaxY() > Player->getIsaacBody()->getPosition().y && doorT->getTag() == CloseDoor)
+		{
+			if (_doorname == TreasureDoor)
+			{
+				if (Player->getKeyCount() > 0)
+				{
+					Player->getDoorOpenKey()->setVisible(true);
+					Player->getDoorOpenKey()->setPosition(doorT->getPosition().x, doorT->getPosition().y - 10);
+
+					if (!Player->getDoorOpenKey()->getNumberOfRunningActions())
+					{
+						Player->getDoorOpenKey()->runAction(Sequence::create(CallFunc::create(CC_CALLBACK_0(MapBase::PlayUnlockSound, this)), Player->getDoorOpenkeyAnimate(),
+							CallFunc::create(CC_CALLBACK_0(MapBase::ChangeDoorTTag, this)), nullptr));
+					}			
+				}
+			}
+		}
+		if (isMakeDoorR && RoomClear &&
+			doorR->getBoundingBox().getMidY() - 10 < Player->getIsaacBody()->getPosition().y &&
+			doorR->getBoundingBox().getMidY() + 10 > Player->getIsaacBody()->getPosition().y &&
+			doorR->getBoundingBox().getMinX() - 10 < Player->getIsaacBody()->getPosition().x &&
+			doorR->getBoundingBox().getMaxX() > Player->getIsaacBody()->getPosition().x && doorR->getTag() == CloseDoor)
+		{
+			if (_doorname == TreasureDoor)
+			{
+				if (Player->getKeyCount() > 0)
+				{
+					Player->getDoorOpenKey()->setVisible(true);
+					Player->getDoorOpenKey()->setPosition(doorR->getPosition().x - 10, doorR->getPosition().y);
+					Player->getDoorOpenKey()->setRotation(90);
+
+					if (!Player->getDoorOpenKey()->getNumberOfRunningActions())
+					{
+						Player->getDoorOpenKey()->runAction(Sequence::create(CallFunc::create(CC_CALLBACK_0(MapBase::PlayUnlockSound, this)), Player->getDoorOpenkeyAnimate(),
+							CallFunc::create(CC_CALLBACK_0(MapBase::ChangeDoorRTag, this)), nullptr));
+					}
+				}
+
+			}
+		}
+		if (isMakeDoorL && RoomClear &&
+			doorL->getBoundingBox().getMidY() - 10 < Player->getIsaacBody()->getPosition().y &&
+			doorL->getBoundingBox().getMidY() + 10 > Player->getIsaacBody()->getPosition().y &&
+			doorL->getBoundingBox().getMinX() < Player->getIsaacBody()->getPosition().x &&
+			doorL->getBoundingBox().getMaxX() + 10 > Player->getIsaacBody()->getPosition().x && doorL->getTag() == CloseDoor)
+		{
+			if (_doorname == TreasureDoor)
+			{
+				if (Player->getKeyCount() > 0)
+				{
+					Player->getDoorOpenKey()->setVisible(true);
+					Player->getDoorOpenKey()->setPosition(doorL->getPosition().x + 10, doorL->getPosition().y);
+					Player->getDoorOpenKey()->setRotation(-90);
+
+					if (!Player->getDoorOpenKey()->getNumberOfRunningActions())
+					{
+						Player->getDoorOpenKey()->runAction(Sequence::create(CallFunc::create(CC_CALLBACK_0(MapBase::PlayUnlockSound, this)), Player->getDoorOpenkeyAnimate(),
+							CallFunc::create(CC_CALLBACK_0(MapBase::ChangeDoorLTag, this)), nullptr));
+					}
+				}
+			}
+		}
+		
 	}
 
 
@@ -471,10 +680,21 @@ void MapBase::CollisionToDoor()
 
 void MapBase::ClearCheck()
 {
-	if (Player->monsterVec.size() == 0)
-		RoomClear = true;
-	else
-		RoomClear = false;
+	if (Player->getRoomNumber() == RoomNumber)
+	{
+		if (Player->monsterVec.size() == 0)
+		{
+			if (!RoomClear)
+			{
+				RoomClear = true;
+				SMI->PlayDoorHeavyOpen();
+				log("roomclear");
+			}
+		}
+		else
+			RoomClear = false;
+
+	}
 
 	if (RoomClear)
 	{
@@ -536,4 +756,37 @@ void MapBase::SetRoomNumber()
 	{
 		Player->setRoomNumber(RoomNumber);
 	}
+}
+
+void MapBase::ChangeDoorRTag()
+{
+	doorR->setTag(OpenDoor);
+	Player->getDoorOpenKey()->setVisible(false);
+	Player->setKeyCount(Player->getKeyCount() - 1);
+}
+
+void MapBase::ChangeDoorLTag()
+{
+	doorL->setTag(OpenDoor);
+	Player->getDoorOpenKey()->setVisible(false);
+	Player->setKeyCount(Player->getKeyCount() - 1);
+}
+
+void MapBase::ChangeDoorTTag()
+{
+	doorT->setTag(OpenDoor);
+	Player->getDoorOpenKey()->setVisible(false);
+	Player->setKeyCount(Player->getKeyCount() - 1);
+}
+
+void MapBase::ChangeDoorBTag()
+{
+	doorB->setTag(OpenDoor);
+	Player->getDoorOpenKey()->setVisible(false);
+	Player->setKeyCount(Player->getKeyCount() - 1);
+}
+
+void MapBase::PlayUnlockSound()
+{
+	SMI->PlayUnLock();
 }

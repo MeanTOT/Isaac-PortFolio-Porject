@@ -7,6 +7,8 @@
 #include "MapCase_5.h"
 #include "MapCase_6.h"
 #include "MapCase_7.h"
+#include "MapCase_8.h"
+#include "MapCase_ItemRoom1.h"
 #include "Bullet.h"
 #include "Dregs.h"
 
@@ -22,6 +24,9 @@ private:
 	MapCase_5* mapCase_5;
 	MapCase_6* mapCase_6;
 	MapCase_7* mapCase_7;
+	MapCase_8* mapCase_8;
+	MapCase_ItemRoom1* mapCase_ItemRoom1;
+
 
 	PhysicsBody* edgeSegment[8];
 	Node* edgeNode[8];

@@ -4,9 +4,12 @@ Dip::Dip(Scene * scene, Vec2 position)
 {
 	monsterHeight = 5.0f;
 	monsterMoveSpeed = 100.0f;
-	maxHp = 10.f * Player->getStageNumber();
-	hp = 10.f * Player->getStageNumber();
-	AttackCycle = 100;
+	maxHp = 4.f * Player->getStageNumber();
+	hp = 4.f * Player->getStageNumber();
+
+	auto randomCycle = RGI->getRandomNumberWithRange(70, 130);
+
+	AttackCycle = randomCycle;
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Dip/Monster_Dip.plist");
@@ -110,12 +113,38 @@ void Dip::MonsterSetTag()
 
 	if (hp <= 0 && monsterSprite->getTag() != MonsterErase)
 	{
-		monsterSprite->stopAllActions();
-		monsterPhysics->removeFromWorld();
-		monsterShadowSprite->setVisible(false);
-		monsterSprite->runAction(Sequence::create(monsterAnimate3, CallFunc::create(CC_CALLBACK_0(Dip::MonsterEraseCall, this)), RemoveSelf::create(), nullptr));
 		_dregs = new Dregs(_scene, monsterSprite->getPosition(), ObjectPoop, monsterSprite->getLocalZOrder());
+
+		monsterPhysics->removeFromWorld();
+
+		monsterShadowSprite->setVisible(false);
+
+		monsterSprite->stopAllActions();
+		monsterSprite->runAction(Sequence::create(monsterAnimate3, CallFunc::create(CC_CALLBACK_0(Dip::MonsterEraseCall, this)), RemoveSelf::create(), nullptr));
 		monsterSprite->setTag(MonsterErase);
+
+		auto randomindex = RGI->getRandomNumberWithRange(1, 5);
+
+		switch (randomindex)
+		{
+		case 1:
+			SMI->PlayMeatyDeaths1();
+			break;
+		case 2:
+			SMI->PlayMeatyDeaths2();
+			break;
+		case 3:
+			SMI->PlayMeatyDeaths3();
+			break;
+		case 4:
+			SMI->PlayMeatyDeaths4();
+			break;
+		case 5:
+			SMI->PlayMeatyDeaths5();
+			break;
+		default:
+			break;
+		}
 	}
 }
 

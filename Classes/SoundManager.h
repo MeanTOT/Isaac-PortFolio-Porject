@@ -29,7 +29,17 @@ private:
 	int plop;
 	int doorUnlock;
 	int shakeyKidRoar;
-
+	int rockCrumble1;
+	int rockCrumble2;
+	int rockCrumble3;
+	int meatyDeaths1;
+	int meatyDeaths2;
+	int meatyDeaths3;
+	int meatyDeaths4;
+	int meatyDeaths5;
+	int unLock;
+	int doorHeavyClose;
+	int doorHeavyOpen;
 
 
 	SoundManager();
@@ -69,6 +79,17 @@ public:
 	void PlayPlop();
 	void PlayDoorUnlock();
 	void PlayShakeyKidRoar();
+	void PlayRockCrumble1();
+	void PlayRockCrumble2();
+	void PlayRockCrumble3();
+	void PlayMeatyDeaths1();
+	void PlayMeatyDeaths2();
+	void PlayMeatyDeaths3();
+	void PlayMeatyDeaths4();
+	void PlayMeatyDeaths5();
+	void PlayUnLock();
+	void PlayDoorHeavyClose();
+	void PlayDoorHeavyOpen();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

@@ -8,7 +8,7 @@ MapCase_7::MapCase_7(Scene * scene, Vec2 position)
 	_scene = scene;
 	_position = position;
 	RoomNumber = 7;
-	RoomClear = true;
+	RoomClear = false;
 	FirstEnter = false;
 }
 
@@ -44,6 +44,8 @@ void MapCase_7::tick()
 		HorfMaker[1] = new EffectPoof(_scene, Vec2(_position.x, _position.y - 32), MonsterKind_Horf);
 		HorfMaker[2] = new EffectPoof(_scene, Vec2(_position.x - 32, _position.y), MonsterKind_Horf);
 		HorfMaker[3] = new EffectPoof(_scene, Vec2(_position.x + 32, _position.y), MonsterKind_Horf);
+
+		SMI->PlayDoorHeavyClose();
 	}
 
 	this->CollisionToDoor();

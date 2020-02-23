@@ -21,6 +21,7 @@ public:
 	~MapBase();
 
 	int RoomNumber;
+	DoorName _doorname;
 
 	bool RoomClear;
 	bool FirstEnter;
@@ -33,6 +34,11 @@ public:
 	Vec2 _position;
 
 	Rect mapRect;
+	
+	Animation* DoorOpenkeyAnimation;
+	Animate* DoorOpenkeyAnimate;
+
+	Sprite* DoorOpenKey;
 
 	Sprite* mapLT;
 	Sprite* mapLB;
@@ -67,6 +73,12 @@ public:
 	void CollisionToDoor();
 	void ClearCheck();
 	void SetRoomNumber();
+
+	void ChangeDoorRTag();
+	void ChangeDoorLTag();
+	void ChangeDoorTTag();
+	void ChangeDoorBTag();
+	void PlayUnlockSound();
 
 
 	virtual void tick() {};

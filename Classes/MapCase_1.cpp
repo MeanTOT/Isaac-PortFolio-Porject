@@ -2,6 +2,7 @@
 
 MapCase_1::MapCase_1(Scene* scene, Vec2 position)
 {
+
 	controlsImage = Sprite::create("MapImage/controls.png");
 	controlsImage->setPosition(position);
 	scene->addChild(controlsImage, BackGroundZoder + 1);
@@ -28,15 +29,10 @@ void MapCase_1::tick()
 		FirstEnter = true;
 
 		log("1번방 첫입장");
+	}
 
 	
-	}
-
-	if (Player->getRoomNumber() == RoomNumber)
-	{
-		this->CollisionToDoor();
-		this->ClearCheck();
-	}
-
+	this->CollisionToDoor();
+	this->ClearCheck();
 	this->SetRoomNumber();	
 }

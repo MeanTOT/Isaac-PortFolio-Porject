@@ -20,7 +20,7 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 
 		ObjectSprite = Sprite::createWithSpriteFrameName("grid_fireplace_01.png");
 
-		ObjectPhysics = PhysicsBody::createBox(ObjectSprite->getContentSize() / 2, PhysicsMaterial(0, 0, 0));
+		ObjectPhysics = PhysicsBody::createBox(ObjectSprite->getContentSize() / 1.5f, PhysicsMaterial(0, 0, 0));
 		ObjectPhysics->setDynamic(false);
 		ObjectPhysics->setCollisionBitmask(8);
 		ObjectPhysics->setContactTestBitmask(true);
@@ -175,7 +175,7 @@ void Fire::tick()
 			fire->runAction(ObjectAnimate);
 		}
 	}
-	if (ObjectHp == 0)
+	if (ObjectHp <= 0)
 	{
 		ObjectSprite->setTag(ObjectErase);
 		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
@@ -183,7 +183,8 @@ void Fire::tick()
 
 		SMI->PlayOffFire();
 
-		fire->removeFromParent();
+		fire->setVisible(false);
+		fire->runAction(Sequence::createWithTwoActions(DelayTime::create(2), RemoveSelf::create()));
 
 		if (RGI->getPercentage(Player->getItemInvLuck()))
 			coinMaker = new Coin(_scene, _position);
@@ -194,6 +195,5 @@ void Fire::tick()
 			ObjectSprite->setSpriteFrame("grid_fireplace_blue_02.png");
 		if (_index == 3)
 			ObjectSprite->setSpriteFrame("grid_fireplace_purple_02.png");
-
 	}
 }

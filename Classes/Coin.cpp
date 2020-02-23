@@ -6,7 +6,7 @@ Coin::Coin(Scene * scene, Vec2 position)
 	cache->addSpriteFramesWithFile("ITEMS/PickupCoin.plist");
 
 	itemSprite = Sprite::createWithSpriteFrameName("pickup_coin_01.png");
-	itemSprite->setPosition(position.x, position.y + 10);
+	itemSprite->setPosition(position.x, position.y);
 	itemSprite->setTag(ItemIdle);
 
 	itemPhysics = PhysicsBody::createCircle(itemSprite->getContentSize().width / 8, PhysicsMaterial(0, 0, 0));

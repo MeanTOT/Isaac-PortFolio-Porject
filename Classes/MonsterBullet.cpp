@@ -51,7 +51,12 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 	bulletShadowPhysics = PhysicsBody::createCircle(bulletShadow->getContentSize().width / 2, PhysicsMaterial(0, 0, 0));
 	bulletShadowPhysics->setPositionOffset(Vec2(0, 0));
 	bulletShadowPhysics->setContactTestBitmask(true);
-	bulletShadowPhysics->setCollisionBitmask(9);
+
+	if (height >= 20)
+		bulletShadowPhysics->setCollisionBitmask(13); // ³ôÀºÃÑ¾Ë
+	else
+		bulletShadowPhysics->setCollisionBitmask(9); // ÀÏ¹Ý ÃÑ¾Ë
+
 	bulletShadow->addComponent(bulletShadowPhysics);
 
 	scene->addChild(bulletShadow, -2);
@@ -64,7 +69,7 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 	eraseAction2 = Sequence::create(CallFunc::create(CC_CALLBACK_0(MonsterBullet::PlayBulletEraseSound, this)), BulletEraseAnimate, CallFunc::create(CC_CALLBACK_0(MonsterBullet::EraseBulletVec, this)), RemoveSelf::create(), nullptr);
 	eraseAction2->setTag(2);
 	eraseAction2->retain();
-	eraseAction3 = Sequence::create(JumpBy::create(height / 10,Vec2(0,0), height, 1), CallFunc::create(CC_CALLBACK_0(MonsterBullet::ChangeTag,this)) ,nullptr);
+	eraseAction3 = Sequence::create(JumpBy::create(height / 30,Vec2(0,0), height, 1), CallFunc::create(CC_CALLBACK_0(MonsterBullet::ChangeTag,this)) ,nullptr);
 	eraseAction3->setTag(3);
 	eraseAction3->retain();
 	
@@ -144,8 +149,8 @@ void MonsterBullet::SetZorder()
 {
 	if (bulletShadow->getTag() == ActivationBulletTag)
 	{
-		bulletShadow->setLocalZOrder(bulletShadow->getPositionY() * -1);
-		bullet->setLocalZOrder(bullet->getPositionY() * -1);
+		bulletShadow->setLocalZOrder(bulletShadow->getPositionY() * -1 + _height);
+		bullet->setLocalZOrder(bullet->getPositionY() * -1 + _height);
 	}
 }
 

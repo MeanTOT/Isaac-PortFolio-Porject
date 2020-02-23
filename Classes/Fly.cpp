@@ -3,9 +3,9 @@
 Fly::Fly(Scene* scene, Vec2 position)
 {
 	monsterHeight = 10.0f;
-	monsterMoveSpeed = 4.0f;
-	maxHp = 10.f * Player->getStageNumber();
-	hp = 10.f * Player->getStageNumber();
+	monsterMoveSpeed = 2.0f;
+	maxHp = 5.f * Player->getStageNumber();
+	hp = 5.f * Player->getStageNumber();
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Fly/Monster_Fly.plist");
@@ -74,7 +74,7 @@ void Fly::tick()
 void Fly::SetZorder()
 {
 
-	monsterSprite->setLocalZOrder(monsterSprite->getPositionY() * -1);
+	monsterSprite->setLocalZOrder(monsterSprite->getPositionY() * -1 + monsterHeight);
 
 }
 
@@ -110,12 +110,39 @@ void Fly::MonsterSetTag()
 	if (hp <= 0 && monsterSprite->getTag() != MonsterErase)
 	{
 		SMI->StopInsectSwarm();
+
 		effectBlood = new EffectBlood(_scene, monsterSprite->getPosition(), MonsterKind_Fly);
+
 		monsterSprite->stopAllActions();
-		monsterPhysics->removeFromWorld();
-		monsterShadowSprite->setVisible(false);
 		monsterSprite->runAction(Sequence::create(monsterAnimate2, CallFunc::create(CC_CALLBACK_0(Fly::MonsterEraseCall, this)), RemoveSelf::create(), nullptr));
 		monsterSprite->setTag(MonsterErase);
+
+		monsterPhysics->removeFromWorld();
+
+		monsterShadowSprite->setVisible(false);
+
+		auto randomindex = RGI->getRandomNumberWithRange(1, 5);
+
+		switch (randomindex)
+		{
+		case 1:
+			SMI->PlayMeatyDeaths1();
+			break;
+		case 2:
+			SMI->PlayMeatyDeaths2();
+			break;
+		case 3:
+			SMI->PlayMeatyDeaths3();
+			break;
+		case 4:
+			SMI->PlayMeatyDeaths4();
+			break;
+		case 5:
+			SMI->PlayMeatyDeaths5();
+			break;
+		default:
+			break;
+		}
 
 	}
 }

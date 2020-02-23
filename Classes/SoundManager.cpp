@@ -104,11 +104,11 @@ void SoundManager::PlayInsectSwarm()
 {
 	if (AudioEngine::getState(insectSwarm) != AudioEngine::AudioState::PLAYING)
 	{
-		insectSwarm = AudioEngine::play2d("Sound/Sfx/insect swarm.mp3", false, sfxVolume / 2);
+		insectSwarm = AudioEngine::play2d("Sound/Sfx/insect swarm.mp3", false, 0.05f);
 	}
 	if (AudioEngine::getCurrentTime(insectSwarm) >= 0.7f)
 	{
-		insectSwarm = AudioEngine::play2d("Sound/Sfx/insect swarm.mp3", false, sfxVolume / 2);
+		insectSwarm = AudioEngine::play2d("Sound/Sfx/insect swarm.mp3", false, 0.05f);
 	}
 }
 
@@ -160,6 +160,61 @@ void SoundManager::PlayDoorUnlock()
 void SoundManager::PlayShakeyKidRoar()
 {
 	shakeyKidRoar = AudioEngine::play2d("Sound/Sfx/shakey-kid-roar.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayRockCrumble1()
+{
+	rockCrumble1 = AudioEngine::play2d("Sound/Sfx/rock_crumble_0.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayRockCrumble2()
+{
+	rockCrumble2 = AudioEngine::play2d("Sound/Sfx/rock_crumble_2.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayRockCrumble3()
+{
+	rockCrumble3 = AudioEngine::play2d("Sound/Sfx/rock_crumble_3.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMeatyDeaths1()
+{
+	meatyDeaths1 = AudioEngine::play2d("Sound/Sfx/meaty_deaths_0.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMeatyDeaths2()
+{
+	meatyDeaths2 = AudioEngine::play2d("Sound/Sfx/meaty_deaths_1.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMeatyDeaths3()
+{
+	meatyDeaths3 = AudioEngine::play2d("Sound/Sfx/meaty_deaths_2.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMeatyDeaths4()
+{
+	meatyDeaths4 = AudioEngine::play2d("Sound/Sfx/meaty_deaths_3.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMeatyDeaths5()
+{
+	meatyDeaths5 = AudioEngine::play2d("Sound/Sfx/meaty_deaths_4.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayUnLock()
+{
+	unLock = AudioEngine::play2d("Sound/Sfx/unlock.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayDoorHeavyClose()
+{
+	doorHeavyClose = AudioEngine::play2d("Sound/Sfx/door_heavy_close.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayDoorHeavyOpen()
+{
+	doorHeavyOpen = AudioEngine::play2d("Sound/Sfx/door_heavy_open.mp3", false, sfxVolume);
 }
 
 void SoundManager::RunnigBgmVolume()

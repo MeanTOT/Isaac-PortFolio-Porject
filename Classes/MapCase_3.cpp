@@ -4,6 +4,7 @@ MapCase_3::MapCase_3(Scene * scene, Vec2 position)
 {
 	this->CreateBaseMentRoom(scene, position);
 	this->CreateDoorL(scene, position, NormalDoor);
+	this->CreateDoorR(scene, position, TreasureDoor);
 
 	_scene = scene;
 	_position = position;
@@ -39,6 +40,8 @@ void MapCase_3::tick()
 		FlyMaker[0] = new EffectPoof(_scene, Vec2(_position.x,_position.y + 32), MonsterKind_Fly);
 		FlyMaker[1] = new EffectPoof(_scene, Vec2(_position.x,_position.y), MonsterKind_Fly);
 		FlyMaker[2] = new EffectPoof(_scene, Vec2(_position.x,_position.y - 32), MonsterKind_Fly);
+
+		SMI->PlayDoorHeavyClose();
 	}
 
 

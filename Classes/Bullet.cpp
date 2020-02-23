@@ -40,7 +40,7 @@ void Bullet::CreateIsaacBullet(Scene* scene, Vec2 position)
 	eraseAction2->retain();
 
 	bullet = Sprite::create("Bullet/tears_06.png");
-	bullet->setPosition(position.x, position.y + 10);
+	bullet->setPosition(position.x, position.y + 15);
 	bullet->setTag(ActivationBulletTag);
 
 	bulletPhysics = PhysicsBody::createCircle(bullet->getContentSize().width / 6, PhysicsMaterial(0, 0, 0));

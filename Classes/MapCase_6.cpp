@@ -52,10 +52,6 @@ void MapCase_6::tick()
 		RocksMaker[13]->CreateObject(_scene, Vec2(_position.x - 32, _position.y - 32), 2);
 		RocksMaker[14]->CreateObject(_scene, Vec2(_position.x - 64, _position.y), 1);
 
-
-
-
-
 		FireMaker[0]->CreateObject(_scene, Vec2(_position.x - 140, _position.y - 55), 1);
 		FireMaker[1]->CreateObject(_scene, Vec2(_position.x + 140, _position.y - 55), 1);
 		FireMaker[2]->CreateObject(_scene, Vec2(_position.x - 140, _position.y + 55), 1);
@@ -65,7 +61,7 @@ void MapCase_6::tick()
 		FireMaker[5]->CreateObject(_scene, Vec2(_position.x, _position.y + 32), 1);
 		FireMaker[6]->CreateObject(_scene, Vec2(_position.x - 96, _position.y), 1);
 		FireMaker[7]->CreateObject(_scene, Vec2(_position.x + 96, _position.y), 1);
-	
+
 	}
 
 

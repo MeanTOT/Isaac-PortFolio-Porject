@@ -111,6 +111,7 @@ void Rocks::tick()
 		ObjectSprite->setTag(ObjectErase);
 		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 		ObjectSprite->setVisible(false);
+
 		ObjectPhysics->removeFromWorld();
 
 		_dregs = new Dregs(_scene, _position, ObjectRock, ObjectSprite->getLocalZOrder());
@@ -119,6 +120,23 @@ void Rocks::tick()
 			coinMaker = new Coin(_scene, _position);
 
 		log("%f", Player->getItemInvLuck());
+
+		auto randomindex = RGI->getRandomNumberWithRange(1, 3);
+
+		switch (randomindex)
+		{
+		case 1:
+			SMI->PlayRockCrumble1();
+			break;
+		case 2:
+			SMI->PlayRockCrumble2();
+			break;
+		case 3:
+			SMI->PlayRockCrumble3();
+			break;
+		default:
+			break;
+		}
 
 
 		if (_index == 6)

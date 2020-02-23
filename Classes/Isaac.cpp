@@ -14,6 +14,7 @@ Isaac::Isaac()
 	cache->addSpriteFramesWithFile("Player/IsaacHead_Base.plist");
 	cache->addSpriteFramesWithFile("Player/IsaacWalk_Base.plist");
 	cache->addSpriteFramesWithFile("Player/IsaacInfo.plist");
+	cache->addSpriteFramesWithFile("MapImage/Door/TreasureDoor_KeyAnimation.plist");
 
 
 	// ------- Int ------- //
@@ -144,6 +145,15 @@ Isaac::Isaac()
 	IsaacWalkAnimateUD = Animate::create(IsaacWalkAnimationUD);
 	IsaacWalkAnimateUD->setTag(WalkUpDown);
 	IsaacWalkAnimateUD->retain();
+
+	DoorOpenkeyAnimation = Animation::create();
+	DoorOpenkeyAnimation->setDelayPerUnit(0.1f);
+	DoorOpenkeyAnimation->addSpriteFrame(cache->getSpriteFrameByName("treasureroomdoor_keyanimation_01.png"));
+	DoorOpenkeyAnimation->addSpriteFrame(cache->getSpriteFrameByName("treasureroomdoor_keyanimation_02.png"));
+	DoorOpenkeyAnimation->addSpriteFrame(cache->getSpriteFrameByName("treasureroomdoor_keyanimation_03.png"));
+	DoorOpenkeyAnimation->addSpriteFrame(cache->getSpriteFrameByName("treasureroomdoor_keyanimation_04.png"));
+	DoorOpenkeyAnimate = Animate::create(DoorOpenkeyAnimation);
+	DoorOpenkeyAnimate->retain();
 }
 
 Isaac * Isaac::getInstance()
@@ -163,6 +173,11 @@ void Isaac::releaseInstance()
 void Isaac::CreateIsaac(Scene* scene)
 {
 	_scene = scene;
+
+	DoorOpenKey = Sprite::createWithSpriteFrameName("treasureroomdoor_key.png");
+	DoorOpenKey->setPosition(Position_50_50_);
+	DoorOpenKey->setVisible(false);
+	scene->addChild(DoorOpenKey);
 
 	// ¸öÅë //
 	isaacBody_Base = Sprite::createWithSpriteFrameName("IsaacWalk_UD (4).png");
@@ -398,13 +413,13 @@ void Isaac::CreateBomb()
 
 void Isaac::setUIPosition()
 {
-	coinUiIcon->setPosition(CI->camera->getPosition().x - 200, CI->camera->getPosition().y + 88);
-	bombUiIcon->setPosition(CI->camera->getPosition().x - 200, CI->camera->getPosition().y + 74);
-	keyUiIcon->setPosition(CI->camera->getPosition().x - 200, CI->camera->getPosition().y + 60);
+	coinUiIcon->setPosition(CI->camera->getPosition().x - 220, CI->camera->getPosition().y + 88);
+	bombUiIcon->setPosition(CI->camera->getPosition().x - 220, CI->camera->getPosition().y + 74);
+	keyUiIcon->setPosition(CI->camera->getPosition().x - 220, CI->camera->getPosition().y + 60);
 
-	coinUitext->setPosition(CI->camera->getPosition().x - 190, CI->camera->getPosition().y + 88);
-	bombUitext->setPosition(CI->camera->getPosition().x - 190, CI->camera->getPosition().y + 74);
-	keyUitext->setPosition(CI->camera->getPosition().x - 190, CI->camera->getPosition().y + 60);
+	coinUitext->setPosition(CI->camera->getPosition().x - 210, CI->camera->getPosition().y + 88);
+	bombUitext->setPosition(CI->camera->getPosition().x - 210, CI->camera->getPosition().y + 74);
+	keyUitext->setPosition(CI->camera->getPosition().x - 210, CI->camera->getPosition().y + 60);
 
 	bombUitext->setString(String::createWithFormat("%02d", BombCount)->_string.c_str());
 	coinUitext->setString(String::createWithFormat("%02d", coinCount)->_string.c_str());
@@ -414,7 +429,7 @@ void Isaac::setUIPosition()
 	{
 		if (i == 0)
 		{
-			HeartIcon[i]->setPosition(CI->camera->getPosition().x - 150, CI->camera->getPosition().y + 110);
+			HeartIcon[i]->setPosition(CI->camera->getPosition().x - 130, CI->camera->getPosition().y + 110);
 		}
 		else
 		{

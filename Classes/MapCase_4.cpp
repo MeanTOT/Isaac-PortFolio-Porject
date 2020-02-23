@@ -4,11 +4,12 @@ MapCase_4::MapCase_4(Scene * scene, Vec2 position)
 {
 	this->CreateBaseMentRoom(scene, position);
 	this->CreateDoorR(scene, position, NormalDoor);
+	this->CreateDoorL(scene, position, NormalDoor);
 
 	_scene = scene;
 	_position = position;
 	RoomNumber = 4;
-	RoomClear = true;
+	RoomClear = false;
 	FirstEnter = false;
 }
 
@@ -39,6 +40,8 @@ void MapCase_4::tick()
 		DipMaker[1] = new EffectPoof(_scene, Vec2(_position.x + 170, _position.y + 80), MonsterKind_Dip);
 		DipMaker[2] = new EffectPoof(_scene, Vec2(_position.x - 170, _position.y - 80), MonsterKind_Dip);
 		DipMaker[3] = new EffectPoof(_scene, Vec2(_position.x + 170, _position.y - 80), MonsterKind_Dip);
+
+		SMI->PlayDoorHeavyClose();
 	}
 
 

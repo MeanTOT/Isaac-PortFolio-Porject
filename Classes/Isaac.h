@@ -66,6 +66,7 @@ enum DoorName // 301 ~ 350
 {
 	NormalDoor = 301,
 	TreasureDoor,
+	TreasureNoneKeyDoor,
 	OpenDoor,
 	CloseDoor,
 };
@@ -90,6 +91,7 @@ enum MonsterKind // 451 ~ 500
 	MonsterKind_Fly = 451,
 	MonsterKind_Dip,
 	MonsterKind_Horf,
+	MonsterKind_Pooter,
 };
 
 enum IsaacInfo// 501 ~ 550
@@ -133,6 +135,7 @@ private:
 	Sprite* bombUiIcon;
 	Sprite* keyUiIcon;
 	Sprite* HeartIcon[10]; 
+	Sprite* DoorOpenKey;
 
 	PhysicsBody* isaacPhysicBody; // Isaac 피직스 몸통 
 
@@ -152,6 +155,8 @@ private:
 	Animate* IsaacWalkAnimateRL;
 	Animation* IsaacWalkAnimationUD;
 	Animate* IsaacWalkAnimateUD;
+	Animation* DoorOpenkeyAnimation;
+	Animate* DoorOpenkeyAnimate;
 
 	int mainMenuIndex; // 메인메뉴 인덱스
 	int charSelectIndex; // 캐릭터 선택 인덱스
@@ -237,6 +242,8 @@ public:
 	PhysicsBody* getIsaacPysicBody() { return isaacPhysicBody; }
 	Sprite* getIsaacBody() { return isaacBody_Base; }
 	Sprite* getIsaacHead() { return isaacHead_Base; }
+	Sprite* getDoorOpenKey() { return DoorOpenKey; }
+	Animate* getDoorOpenkeyAnimate() { return DoorOpenkeyAnimate; }
 
 	// ------------------------------------------------------ float ------------------------------------------------------ // 
 	float getBulletRange() { return bulletRange; }

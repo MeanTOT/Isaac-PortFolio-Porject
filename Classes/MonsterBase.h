@@ -29,6 +29,8 @@ protected:
 	float maxHp;
 	float hp;
 
+	float AttackCycle;
+
 private:
 
 public:
