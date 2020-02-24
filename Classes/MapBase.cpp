@@ -116,6 +116,105 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 
 }
 
+void MapBase::CreateBaseMentBossRoom(Scene * scene, Vec2 position)
+{
+	_position = position;
+
+	mapLT = Sprite::createWithSpriteFrameName("01_basement_04.png");
+	mapLT->setAnchorPoint({ 1,0 });
+	mapLT->setScaleY(0.9f);
+	mapLT->setPosition(position);
+	scene->addChild(mapLT, BackGroundZoder);
+
+	mapLB = Sprite::createWithSpriteFrameName("01_basement_04.png");
+	mapLB->setAnchorPoint({ 1,1 });
+	mapLB->setFlippedY(true);
+	mapLB->setScaleY(0.9f);
+	mapLB->setPosition(position);
+	scene->addChild(mapLB, BackGroundZoder);
+
+	mapRT = Sprite::createWithSpriteFrameName("01_basement_04.png");
+	mapRT->setAnchorPoint({ 0,0 });
+	mapRT->setFlippedX(true);
+	mapRT->setScaleY(0.9f);
+	mapRT->setPosition(position);
+	scene->addChild(mapRT, BackGroundZoder);
+
+	mapRB = Sprite::createWithSpriteFrameName("01_basement_04.png");
+	mapRB->setAnchorPoint({ 0,1 });
+	mapRB->setFlippedX(true);
+	mapRB->setFlippedY(true);
+	mapRB->setScaleY(0.9f);
+	mapRB->setPosition(position);
+	scene->addChild(mapRB, BackGroundZoder);
+
+	shading_1_1 = Sprite::create("MapImage/shading.png");
+	shading_1_1->setPosition(position);
+	shading_1_1->setScaleX(1.1f);
+	scene->addChild(shading_1_1);
+
+	auto randomOverlay = RGI->getRandomNumberWithRange(1, 5);
+
+	switch (randomOverlay)
+	{
+	case 1:
+	{
+		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_1.png");
+		overlay_1_1->setPosition(position);
+		overlay_1_1->setScaleX(0.72398);
+		overlay_1_1->setScaleY(0.62937);
+		scene->addChild(overlay_1_1, StageOverlayZoder);
+	}
+	break;
+	case 2:
+	{
+		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_2.png");
+		overlay_1_1->setPosition(position);
+		overlay_1_1->setScaleX(0.72398);
+		overlay_1_1->setScaleY(0.62937);
+		scene->addChild(overlay_1_1, StageOverlayZoder);
+	}
+	break;
+	case 3:
+	{
+		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_3.png");
+		overlay_1_1->setPosition(position);
+		overlay_1_1->setScaleX(0.72398);
+		overlay_1_1->setScaleY(0.62937);
+		scene->addChild(overlay_1_1, StageOverlayZoder);
+	}
+	break;
+	case 4:
+	{
+		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_4.png");
+		overlay_1_1->setPosition(position);
+		overlay_1_1->setScaleX(0.72398);
+		overlay_1_1->setScaleY(0.62937);
+		scene->addChild(overlay_1_1, StageOverlayZoder);
+	}
+	break;
+	case 5:
+	{
+		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_5.png");
+		overlay_1_1->setPosition(position);
+		overlay_1_1->setScaleX(0.72398);
+		overlay_1_1->setScaleY(0.62937);
+		scene->addChild(overlay_1_1, StageOverlayZoder);
+	}
+	break;
+	default:
+		break;
+	}
+
+	//안티 적용
+	mapLT->getTexture()->setAliasTexParameters();
+	mapLB->getTexture()->setAliasTexParameters();
+	mapRT->getTexture()->setAliasTexParameters();
+	mapRB->getTexture()->setAliasTexParameters();
+
+	mapRect = Rect(position.x - DI->getWinSize().width / 2, position.y - DI->getWinSize().height / 2, DI->getWinSize().width, DI->getWinSize().height);
+}
+
 void MapBase::CreateDoorR(Scene * scene, Vec2 position, DoorName doorname)
 {
 	switch (doorname)
@@ -201,6 +300,42 @@ void MapBase::CreateDoorR(Scene * scene, Vec2 position, DoorName doorname)
 		doorR->setTag(OpenDoor);
 	}
 	break;
+	case BossRoomDoor:
+	{
+		doorR = Sprite::create("MapImage/Door/door_bossroomdoor_01.png");
+		doorR->setPosition(Vec2(position.x + DoorCorrectionRL, position.y));
+		doorR->setRotation(90);
+		scene->addChild(doorR, DoorZoder + 1);
+
+		doorR_1 = Sprite::create("MapImage/Door/door_bossroomdoor_02.png");
+		doorR_1->setPosition(Vec2(position.x + DoorCorrectionRL, position.y));
+		doorR_1->setRotation(90);
+		doorR_1->setScaleX(1.4f);
+		scene->addChild(doorR_1, DoorZoder - 2);
+
+		closeDoorR = Sprite::create("MapImage/Door/door_bossroomdoor_03.png");
+		closeDoorR->setPosition(Vec2(position.x + DoorCorrectionRL - 5, position.y - 5));
+		closeDoorR->setAnchorPoint({ 1,0.5 });
+		closeDoorR->setRotation(90);
+		closeDoorR->setScaleX(1.4f);
+		scene->addChild(closeDoorR, DoorZoder - 1);
+
+		closeDoorR_1 = Sprite::create("MapImage/Door/door_bossroomdoor_04.png");
+		closeDoorR_1->setPosition(Vec2(position.x + DoorCorrectionRL - 5, position.y));
+		closeDoorR_1->setRotation(90);
+		closeDoorR_1->setAnchorPoint({ 0,0.5 });
+		closeDoorR_1->setScaleX(1.4f);
+		scene->addChild(closeDoorR_1, DoorZoder - 1);
+
+		BossDoorLightR = Sprite::create("MapImage/Door/door_bossroomdoor_07.png");
+		BossDoorLightR->setPosition(Vec2(position.x + DoorCorrectionRL - 33, position.y));
+		BossDoorLightR->setRotation(90);
+		BossDoorLightR->setVisible(false);
+		scene->addChild(BossDoorLightR, DoorZoder - 1);
+
+		doorR->setTag(OpenDoor);
+	}
+		break;
 	default:
 		break;
 	}
@@ -298,6 +433,43 @@ void MapBase::CreateDoorL(Scene * scene, Vec2 position, DoorName doorname)
 		doorL->setTag(OpenDoor);
 	}
 	break;
+	case BossRoomDoor:
+	{
+		doorL = Sprite::create("MapImage/Door/door_bossroomdoor_01.png");
+		doorL->setPosition(Vec2(position.x - DoorCorrectionRL, position.y));
+		doorL->setRotation(-90);
+		scene->addChild(doorL, DoorZoder + 1);
+
+		doorL_1 = Sprite::create("MapImage/Door/door_bossroomdoor_02.png");
+		doorL_1->setPosition(Vec2(position.x - DoorCorrectionRL, position.y));
+		doorL_1->setScaleX(1.4f);
+		doorL_1->setRotation(-90);
+
+		scene->addChild(doorL_1, DoorZoder - 2);
+
+		closeDoorL = Sprite::create("MapImage/Door/door_bossroomdoor_03.png");
+		closeDoorL->setPosition(Vec2(position.x - DoorCorrectionRL + 5, position.y + 5));
+		closeDoorL->setAnchorPoint({ 1,0.5 });
+		closeDoorL->setScaleX(1.4f);
+		closeDoorL->setRotation(-90);
+		scene->addChild(closeDoorL, DoorZoder - 1);
+
+		closeDoorL_1 = Sprite::create("MapImage/Door/door_bossroomdoor_04.png");
+		closeDoorL_1->setPosition(Vec2(position.x - DoorCorrectionRL + 5, position.y));
+		closeDoorL_1->setRotation(-90);
+		closeDoorL_1->setScaleX(1.4f);
+		closeDoorL_1->setAnchorPoint({ 0,0.5 });
+		scene->addChild(closeDoorL_1, DoorZoder - 1);
+
+		BossDoorLightL = Sprite::create("MapImage/Door/door_bossroomdoor_07.png");
+		BossDoorLightL->setPosition(Vec2(position.x - DoorCorrectionRL + 33, position.y));
+		BossDoorLightL->setRotation(-90);
+		BossDoorLightL->setVisible(false);
+		scene->addChild(BossDoorLightL, DoorZoder - 1);
+
+		doorL->setTag(OpenDoor);
+	}
+	break;
 	default:
 		break;
 	}
@@ -379,6 +551,37 @@ void MapBase::CreateDoorT(Scene * scene, Vec2 position, DoorName doorname)
 		closeDoorT_1->setPosition(Vec2(position.x - 5, position.y + DoorCorrectionUD - 5));
 		closeDoorT_1->setAnchorPoint({ 0,0.5 });
 		scene->addChild(closeDoorT_1, DoorZoder - 1);
+
+		doorT->setTag(OpenDoor);
+	}
+	break;
+	case BossRoomDoor:
+	{
+		doorT = Sprite::create("MapImage/Door/door_bossroomdoor_01.png");
+		doorT->setPosition(Vec2(position.x, position.y + DoorCorrectionUD));
+		scene->addChild(doorT, DoorZoder + 1);
+
+		doorT_1 = Sprite::create("MapImage/Door/door_bossroomdoor_02.png");
+		doorT_1->setPosition(Vec2(position.x, position.y + DoorCorrectionUD));
+		doorT_1->setScaleX(1.4f);
+		scene->addChild(doorT_1, DoorZoder - 2);
+
+		closeDoorT = Sprite::create("MapImage/Door/door_bossroomdoor_03.png");
+		closeDoorT->setPosition(Vec2(position.x + 5, position.y + DoorCorrectionUD - 5));
+		closeDoorT->setScaleX(1.4f);
+		closeDoorT->setAnchorPoint({ 1,0.5 });
+		scene->addChild(closeDoorT, DoorZoder - 1);
+
+		closeDoorT_1 = Sprite::create("MapImage/Door/door_bossroomdoor_04.png");
+		closeDoorT_1->setPosition(Vec2(position.x, position.y + DoorCorrectionUD - 5));
+		closeDoorT_1->setScaleX(1.4f);
+		closeDoorT_1->setAnchorPoint({ 0,0.5 });
+		scene->addChild(closeDoorT_1, DoorZoder - 1);
+
+		BossDoorLightT = Sprite::create("MapImage/Door/door_bossroomdoor_07.png");
+		BossDoorLightT->setPosition(Vec2(position.x, position.y + DoorCorrectionUD - 33));
+		BossDoorLightT->setVisible(false);
+		scene->addChild(BossDoorLightT, DoorZoder - 1);
 
 		doorT->setTag(OpenDoor);
 	}
@@ -476,6 +679,42 @@ void MapBase::CreateDoorB(Scene * scene, Vec2 position, DoorName doorname)
 		closeDoorB_1->setAnchorPoint({ 0,0.5 });
 		closeDoorB_1->setFlippedY(true);
 		scene->addChild(closeDoorB_1, DoorZoder - 1);
+
+		doorB->setTag(OpenDoor);
+	}
+	break;
+	case BossRoomDoor:
+	{
+		doorB = Sprite::create("MapImage/Door/door_bossroomdoor_01.png");
+		doorB->setPosition(Vec2(position.x, position.y - DoorCorrectionUD));
+		doorB->setFlippedY(true);
+		scene->addChild(doorB, DoorZoder + 1);
+
+		doorB_1 = Sprite::create("MapImage/Door/door_bossroomdoor_02.png");
+		doorB_1->setPosition(Vec2(position.x, position.y - DoorCorrectionUD));
+		doorB_1->setFlippedY(true);
+		doorB_1->setScaleX(1.4f);
+		scene->addChild(doorB_1, DoorZoder - 2);
+
+		closeDoorB = Sprite::create("MapImage/Door/door_bossroomdoor_03.png");
+		closeDoorB->setPosition(Vec2(position.x + 5, position.y - DoorCorrectionUD + 5));
+		closeDoorB->setAnchorPoint({ 1,0.5 });
+		closeDoorB->setFlippedY(true);
+		closeDoorB->setScaleX(1.4f);
+		scene->addChild(closeDoorB, DoorZoder - 1);
+
+		closeDoorB_1 = Sprite::create("MapImage/Door/door_bossroomdoor_04.png");
+		closeDoorB_1->setPosition(Vec2(position.x, position.y - DoorCorrectionUD + 5));
+		closeDoorB_1->setAnchorPoint({ 0,0.5 });
+		closeDoorB_1->setFlippedY(true);
+		closeDoorB_1->setScaleX(1.4f);
+		scene->addChild(closeDoorB_1, DoorZoder - 1);
+
+		BossDoorLightB = Sprite::create("MapImage/Door/door_bossroomdoor_07.png");
+		BossDoorLightB->setPosition(Vec2(position.x, position.y - DoorCorrectionUD + 33));
+		BossDoorLightB->setVisible(false);
+		BossDoorLightB->setFlippedY(true);
+		scene->addChild(BossDoorLightB, DoorZoder - 1);
 
 		doorB->setTag(OpenDoor);
 	}
@@ -671,11 +910,8 @@ void MapBase::CollisionToDoor()
 					}
 				}
 			}
-		}
-		
+		}	
 	}
-
-
 }
 
 void MapBase::ClearCheck()
@@ -702,24 +938,44 @@ void MapBase::ClearCheck()
 		{
 			closeDoorR->setVisible(false);
 			closeDoorR_1->setVisible(false);
+
+			if (_doorname == BossRoomDoor)
+			{
+				//BossDoorLightR->setVisible(true);
+			}
 		}
 		
 		if (isMakeDoorL && doorL->getTag() == OpenDoor)
 		{
 			closeDoorL->setVisible(false);
 			closeDoorL_1->setVisible(false);
+
+			if (_doorname == BossRoomDoor)
+			{
+				//BossDoorLightL->setVisible(true);
+			}
 		}
 
 		if (isMakeDoorT && doorT->getTag() == OpenDoor)
 		{
 			closeDoorT->setVisible(false);
 			closeDoorT_1->setVisible(false);
+
+			if (_doorname == BossRoomDoor)
+			{
+				//BossDoorLightT->setVisible(true);
+			}
 		}
 
 		if (isMakeDoorB && doorB->getTag() == OpenDoor)
 		{
 			closeDoorB->setVisible(false);
 			closeDoorB_1->setVisible(false);
+
+			if (_doorname == BossRoomDoor)
+			{
+				//BossDoorLightB->setVisible(true);
+			}
 		}
 	}
 	else
@@ -728,24 +984,45 @@ void MapBase::ClearCheck()
 		{
 			closeDoorR->setVisible(true);
 			closeDoorR_1->setVisible(true);
+
+			if (_doorname == BossRoomDoor)
+			{
+				//BossDoorLightR->setVisible(false);
+			}
 		}
 
 		if (isMakeDoorL)
 		{
 			closeDoorL->setVisible(true);
 			closeDoorL_1->setVisible(true);
+
+			if (_doorname == BossRoomDoor)
+			{
+				//BossDoorLightL->setVisible(false);
+			}
 		}
 
 		if (isMakeDoorT)
 		{
 			closeDoorT->setVisible(true);
 			closeDoorT_1->setVisible(true);
+
+			if (_doorname == BossRoomDoor)
+			{
+				//BossDoorLightT->setVisible(false);
+			}
 		}
 
 		if (isMakeDoorB)
 		{
 			closeDoorB->setVisible(true);
 			closeDoorB_1->setVisible(true);
+
+			if (_doorname == BossRoomDoor)
+			{
+				//BossDoorLightB->setVisible(false);
+			}
+		
 		}
 	}
 }

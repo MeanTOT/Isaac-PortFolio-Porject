@@ -4,6 +4,7 @@
 #include "MonsterBase.h"
 #include "Rocks.h"
 #include "Poop.h"
+#include "altar.h"
 #include "Fire.h"
 #include "Fly.h"
 #include "EffectPoof.h"
@@ -63,8 +64,14 @@ public:
 	Sprite* closeDoorB;
 	Sprite* closeDoorB_1;
 
+	Sprite* BossDoorLightR;
+	Sprite* BossDoorLightL;
+	Sprite* BossDoorLightT;
+	Sprite* BossDoorLightB;
+
 
 	void CreateBaseMentRoom(Scene* scene, Vec2 position);
+	void CreateBaseMentBossRoom(Scene* scene, Vec2 position);
 	void CreateDoorL(Scene* scene, Vec2 position, DoorName doorname);
 	void CreateDoorR(Scene* scene, Vec2 position, DoorName doorname);
 	void CreateDoorT(Scene* scene, Vec2 position, DoorName doorname);

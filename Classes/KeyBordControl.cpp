@@ -49,6 +49,14 @@ void KeyBordControl::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 		}
 	}
 	break;
+	case EventKeyboard::KeyCode::KEY_F3:
+	{
+		if (Player->getNowScene() == StageScreen)
+		{
+			Player->showDebugInfo();
+		}
+	}
+	break;
 	case EventKeyboard::KeyCode::KEY_SPACE:
 	{
 		if (Player->getNowScene() == PressStartScene)
@@ -327,7 +335,8 @@ void KeyBordControl::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 	{
 		if (Player->getNowScene() == StageScreen)
 		{
-			Player->getIsaacBody()->stopAllActions();
+			if (!Player->getIsIsaacGetItem())
+				Player->getIsaacBody()->stopAllActions();
 			Player->setMoveL(true);
 			return;
 		}
@@ -337,7 +346,8 @@ void KeyBordControl::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 	{
 		if (Player->getNowScene() == StageScreen)
 		{
-			Player->getIsaacBody()->stopAllActions();
+			if (!Player->getIsIsaacGetItem())
+				Player->getIsaacBody()->stopAllActions();
 			Player->setMoveR(true);
 			return;
 		}
@@ -347,7 +357,8 @@ void KeyBordControl::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 	{
 		if (Player->getNowScene() == StageScreen)
 		{
-			Player->getIsaacBody()->stopAllActions();
+			if (!Player->getIsIsaacGetItem())
+				Player->getIsaacBody()->stopAllActions();
 			Player->setMoveU(true);
 			return;
 		}
@@ -357,7 +368,8 @@ void KeyBordControl::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * event)
 	{
 		if (Player->getNowScene() == StageScreen)
 		{
-			Player->getIsaacBody()->stopAllActions();
+			if (!Player->getIsIsaacGetItem())
+				Player->getIsaacBody()->stopAllActions();
 			Player->setMoveD(true);
 			return;
 		}
@@ -560,6 +572,8 @@ void KeyBordControl::CreateContactListener(Scene * scene)
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, scene);
 }
 
+
+// Pysics Body 충돌 처리
 bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 {
 	// CollisionBitMask
@@ -573,12 +587,15 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// 8. 데미지입는 오브젝트[불,가시]
 	// 9. 몬스터 총알
 	// 10 . 벽
-	// 11 . 아이템
-	// 13. 몬스터 높은 총알
+	// 11 . 드랍아이템
+	// 12 . 패시브아이템
+	// 13 . 몬스터 높은 총알
 	// 15 . 두번째 벽
 
 	auto a = contact.getShapeA()->getBody();
 	auto b = contact.getShapeB()->getBody();
+
+	// --------------------------------------------- [아이작 바디] --------------------------------------------- //
 
 	// 아이작과 아이작총알,그림자 충돌
 	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 5 ||
@@ -587,12 +604,41 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 		return false;
 	}
 
-	//// 아이작과 외벽 충돌
-	//if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 10 ||
-	//	b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 10)
-	//{
-	//	return false;
-	//}
+	// 아이작과 폭팔 충돌
+	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 7 ||
+		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 7)
+	{
+		Player->setIsaacInfo(IsaacTakeDamage);
+	}
+
+	// 아이작과 드랍 아이템
+	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 11 ||
+		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 11)
+	{
+		if (b->getCollisionBitmask() == 11)
+			b->getNode()->setTag(ItemErase);
+		if (a->getCollisionBitmask() == 11)
+			a->getNode()->setTag(ItemErase);
+	}
+
+	// 아이작과 패시브 아이템
+	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 12 ||
+		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 12)
+	{
+		if (b->getCollisionBitmask() == 12)
+			b->getNode()->setTag(ItemErase);
+		if (a->getCollisionBitmask() == 12)
+			a->getNode()->setTag(ItemErase);
+	}
+
+	// 아이작과 불,가시 등등 과 충돌
+	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 8 ||
+		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 8)
+	{
+		Player->setIsaacInfo(IsaacTakeDamage);
+	}
+
+	// --------------------------------------------- [아이작 총알] --------------------------------------------- //
 
 	// 아이작 총알끼리 충돌
 	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 5 ||
@@ -603,10 +649,70 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 
 	// 아이작 총알과 두번째 벽 충돌
 	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 15 ||
-		b->getCollisionBitmask() == 15 && a->getCollisionBitmask() == 5)
+		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 15)
 	{
 		return false;
 	}
+
+	// 아이작 총알과 오브젝트 충돌
+	if (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 5 ||
+		b->getCollisionBitmask() == 8 && a->getCollisionBitmask() == 5)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+
+		if (b->getCollisionBitmask() == 8)
+			b->getNode()->setTag(ObjectHit);
+		if (a->getCollisionBitmask() == 8)
+			a->getNode()->setTag(ObjectHit);
+	}
+
+	// 아이작 총알과 오브젝트 충돌
+	if (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 5 ||
+		b->getCollisionBitmask() == 2 && a->getCollisionBitmask() == 5)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+
+		if (b->getCollisionBitmask() == 2)
+			b->getNode()->setTag(ObjectHit);
+		if (a->getCollisionBitmask() == 2)
+			a->getNode()->setTag(ObjectHit);
+	}
+
+	//아이작 총알과 벽 충돌
+	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 10 ||
+		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 10)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+	}
+
+	// 아이작 총알과 폭탄 충돌 
+	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 6 ||
+		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 6)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+	}
+
+	// 아이작총알과 드랍아이템
+	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 11 ||
+		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 11)
+	{
+		return false;
+	}
+
+
+	// --------------------------------------------- [몬스터 바디] --------------------------------------------- //
 
 	// 몬스터와 두번째벽 충돌
 	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 15 ||
@@ -628,6 +734,50 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	{
 		return false;
 	}
+
+	// 몬스터와 아이작총알 충돌
+	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 5 ||
+		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 5)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+
+		if (b->getCollisionBitmask() == 3)
+			b->getNode()->setTag(MonsterColiisionBullet);
+		if (a->getCollisionBitmask() == 3)
+			a->getNode()->setTag(MonsterColiisionBullet);
+	}
+
+
+	// 몬스터와 아이작총알 충돌
+	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 5 ||
+		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 5)
+	{
+		if (b->getCollisionBitmask() == 5)
+			b->getNode()->setTag(EraseBulletTag);
+		if (a->getCollisionBitmask() == 5)
+			a->getNode()->setTag(EraseBulletTag);
+
+		if (b->getCollisionBitmask() == 4)
+			b->getNode()->setTag(MonsterColiisionBullet);
+		if (a->getCollisionBitmask() == 4)
+			a->getNode()->setTag(MonsterColiisionBullet);
+	}
+
+	// 몬스터와 아이작 충돌
+	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 1 ||
+		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 1)
+		Player->setIsaacInfo(IsaacTakeDamage);
+
+	// 몬스터와 아이작 충돌
+	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 1 ||
+		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 1)
+		Player->setIsaacInfo(IsaacTakeDamage);
+
+
+	// --------------------------------------------- [몬스터 총알] --------------------------------------------- //
 
 	// 몬스터 총알과 내벽 충돌
 	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 15 ||
@@ -734,21 +884,6 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 		return false;
 	}
 
-	// 아이작 총알과 오브젝트 충돌
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 2 ||
-		b->getCollisionBitmask() == 2 && a->getCollisionBitmask() == 5)
-	{
-		if (b->getCollisionBitmask() == 5)
-			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
-			a->getNode()->setTag(EraseBulletTag);
-
-		if (b->getCollisionBitmask() == 2)
-			b->getNode()->setTag(ObjectHit);
-		if (a->getCollisionBitmask() == 2)
-			a->getNode()->setTag(ObjectHit);
-	}
-
 	// 몬스터 총알과 오브젝트 충돌
 	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 2 ||
 		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 2)
@@ -779,130 +914,6 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			a->getNode()->setTag(EraseBulletTag);
 	}
 
-	// 아이작 총알과 오브젝트 충돌
-	if (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 8 && a->getCollisionBitmask() == 5)
-	{
-		if (b->getCollisionBitmask() == 5)
-			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
-			a->getNode()->setTag(EraseBulletTag);
-
-		if (b->getCollisionBitmask() == 8)
-			b->getNode()->setTag(ObjectHit);
-		if (a->getCollisionBitmask() == 8)
-			a->getNode()->setTag(ObjectHit);
-	}
-
-	//아이작 총알과 벽 충돌
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 10 ||
-		b->getCollisionBitmask() == 10 && a->getCollisionBitmask() == 5)
-	{
-		if (b->getCollisionBitmask() == 5)
-			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
-			a->getNode()->setTag(EraseBulletTag);
-	}
-
-	// 아이작 총알과 폭탄 충돌 
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 6 ||
-		b->getCollisionBitmask() == 6 && a->getCollisionBitmask() == 5)
-	{
-		if (b->getCollisionBitmask() == 5)
-			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
-			a->getNode()->setTag(EraseBulletTag);
-	}
-
-	// 오브젝트와 폭팔 충돌
-	if (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 2 && a->getCollisionBitmask() == 7)
-	{
-		if (b->getCollisionBitmask() == 2)
-			b->getNode()->setTag(ObjectCollisionBomb);
-		if (a->getCollisionBitmask() == 2)
-			a->getNode()->setTag(ObjectCollisionBomb);
-	}
-
-	// 오브젝트와 폭팔 충돌
-	if (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 8 && a->getCollisionBitmask() == 7)
-	{
-		if (b->getCollisionBitmask() == 8)
-			b->getNode()->setTag(ObjectCollisionBomb);
-		if (a->getCollisionBitmask() == 8)
-			a->getNode()->setTag(ObjectCollisionBomb);
-	}
-
-	// 아이작과 폭팔 충돌
-	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 7)
-	{
-		Player->setIsaacInfo(IsaacTakeDamage);
-	}
-
-	// 아이작과 아이템
-	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 11 ||
-		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 11)
-	{
-		if (b->getCollisionBitmask() == 11)
-			b->getNode()->setTag(ItemErase);
-		if (a->getCollisionBitmask() == 11)
-			a->getNode()->setTag(ItemErase);
-	}
-
-	// 몬스터와 아이작총알 충돌
-	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 5)
-	{
-		if (b->getCollisionBitmask() == 5)
-			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
-			a->getNode()->setTag(EraseBulletTag);
-
-		if (b->getCollisionBitmask() == 3)
-			b->getNode()->setTag(MonsterColiisionBullet);
-		if (a->getCollisionBitmask() == 3)
-			a->getNode()->setTag(MonsterColiisionBullet);
-	}
-
-
-	// 몬스터와 아이작총알 충돌
-	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 5)
-	{
-		if (b->getCollisionBitmask() == 5)
-			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
-			a->getNode()->setTag(EraseBulletTag);
-
-		if (b->getCollisionBitmask() == 4)
-			b->getNode()->setTag(MonsterColiisionBullet);
-		if (a->getCollisionBitmask() == 4)
-			a->getNode()->setTag(MonsterColiisionBullet);
-	}
-
-	// 몬스터와 아이작 충돌
-	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 1 ||
-		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 1)
-	{
-		Player->setIsaacInfo(IsaacTakeDamage);
-	}
-
-	// 몬스터와 아이작 충돌
-	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 1 ||
-		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 1)
-	{
-		Player->setIsaacInfo(IsaacTakeDamage);
-	}
-
-	// 아이작과 불,가시 등등 과 충돌
-	if (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 1 ||
-		b->getCollisionBitmask() == 8 && a->getCollisionBitmask() == 1)
-	{
-		Player->setIsaacInfo(IsaacTakeDamage);
-	}
-
 	// 몬스터총알 과 아이작 충돌
 	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 1 ||
 		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 1)
@@ -925,6 +936,29 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			b->getNode()->setTag(EraseBulletTag);
 		if (a->getCollisionBitmask() == 13)
 			a->getNode()->setTag(EraseBulletTag);
+	}
+
+
+
+
+	// 오브젝트와 폭팔 충돌
+	if (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 7 ||
+		b->getCollisionBitmask() == 2 && a->getCollisionBitmask() == 7)
+	{
+		if (b->getCollisionBitmask() == 2)
+			b->getNode()->setTag(ObjectCollisionBomb);
+		if (a->getCollisionBitmask() == 2)
+			a->getNode()->setTag(ObjectCollisionBomb);
+	}
+
+	// 오브젝트와 폭팔 충돌
+	if (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 7 ||
+		b->getCollisionBitmask() == 8 && a->getCollisionBitmask() == 7)
+	{
+		if (b->getCollisionBitmask() == 8)
+			b->getNode()->setTag(ObjectCollisionBomb);
+		if (a->getCollisionBitmask() == 8)
+			a->getNode()->setTag(ObjectCollisionBomb);
 	}
 	
 

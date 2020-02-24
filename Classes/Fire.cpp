@@ -133,6 +133,8 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 	}
 
 	_index = index;
+	_scene = scene;
+	_position = position;
 
 	Player->objectVec.push_back(this);
 }
@@ -181,13 +183,13 @@ void Fire::tick()
 		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 		ObjectPhysics->removeFromWorld();
 
+		if (RGI->getPercentage(Player->getItemInvLuck()))
+			coinMaker = new Coin(_scene, _position);
+
 		SMI->PlayOffFire();
 
 		fire->setVisible(false);
 		fire->runAction(Sequence::createWithTwoActions(DelayTime::create(2), RemoveSelf::create()));
-
-		if (RGI->getPercentage(Player->getItemInvLuck()))
-			coinMaker = new Coin(_scene, _position);
 
 		if (_index == 1)
 			ObjectSprite->setSpriteFrame("grid_fireplace_02.png");

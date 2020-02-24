@@ -14,7 +14,9 @@ Isaac::Isaac()
 	cache->addSpriteFramesWithFile("Player/IsaacHead_Base.plist");
 	cache->addSpriteFramesWithFile("Player/IsaacWalk_Base.plist");
 	cache->addSpriteFramesWithFile("Player/IsaacInfo.plist");
+	cache->addSpriteFramesWithFile("Player/GetItemAction.plist");
 	cache->addSpriteFramesWithFile("MapImage/Door/TreasureDoor_KeyAnimation.plist");
+	
 
 
 	// ------- Int ------- //
@@ -36,6 +38,7 @@ Isaac::Isaac()
 	stageNumber = 1;
 	godModeCount1 = 15;
 	godModeCount2 = 10;
+	getItemCount1 = 100;
 	
 
 	// ------- Float ------- //
@@ -74,6 +77,10 @@ Isaac::Isaac()
 	BombActivation = false;
 
 	GodMode = false;
+
+	isIsaacGetItem = false;
+
+	isShowDebug = false;
 
 	// ------- First Scene ------- //
 
@@ -154,6 +161,14 @@ Isaac::Isaac()
 	DoorOpenkeyAnimation->addSpriteFrame(cache->getSpriteFrameByName("treasureroomdoor_keyanimation_04.png"));
 	DoorOpenkeyAnimate = Animate::create(DoorOpenkeyAnimation);
 	DoorOpenkeyAnimate->retain();
+
+	GetItemAnimation = Animation::create();
+	GetItemAnimation->setDelayPerUnit(0.05f);
+	GetItemAnimation->addSpriteFrame(cache->getSpriteFrameByName("character_isaac_1.png"));
+	GetItemAnimation->addSpriteFrame(cache->getSpriteFrameByName("character_isaac_2.png"));
+	GetItemAnimation->addSpriteFrame(cache->getSpriteFrameByName("character_isaac_3.png"));
+	GetItemAnimate = Animate::create(GetItemAnimation);
+	GetItemAnimate->retain();
 }
 
 Isaac * Isaac::getInstance()
@@ -203,6 +218,18 @@ void Isaac::CreateIsaac(Scene* scene)
 	isaacShadow->setPosition(isaacBody_Base->getContentSize().width / 2, isaacBody_Base->getContentSize().height / 2 - 7);
 	isaacBody_Base->addChild(isaacShadow, -2);
 
+	// 아이템 먹었을때 아이콘
+	getItemSprite = Sprite::create("ITEMS/collectibles_138_stigmata.png");
+	getItemSprite->setPosition(isaacBody_Base->getContentSize().width / 2, isaacBody_Base->getContentSize().height / 2 + 15);
+	getItemSprite->setVisible(false);
+	isaacBody_Base->addChild(getItemSprite);
+
+	getItemBackGround = Sprite::create("ITEMS/effect_024_streak.png");
+	getItemBackGround->setVisible(false);
+	getItemBackGround->setScaleX(0.001f);
+	scene->addChild(getItemBackGround);
+
+	// 소비아이템 아이콘 
 	coinUiIcon = Sprite::create("UI/StagePlayerUI_01.png");
 	bombUiIcon = Sprite::create("UI/StagePlayerUI_04.png");
 	keyUiIcon = Sprite::create("UI/StagePlayerUI_02.png");
@@ -226,6 +253,56 @@ void Isaac::CreateIsaac(Scene* scene)
 	keyUitext->enableOutline(Color4B::BLACK, 1);
 	scene->addChild(keyUitext, 5000);
 
+	showDebug_moveSeepd = Label::createWithTTF("0", "Fonts/upheavtt.ttf", 12);
+	showDebug_moveSeepd->setColor(Color3B::WHITE);
+	showDebug_moveSeepd->setAnchorPoint({ 0,0.5 });
+	showDebug_moveSeepd->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(showDebug_moveSeepd, 5000);
+	showDebug_FireCycle = Label::createWithTTF("0", "Fonts/upheavtt.ttf", 12);
+	showDebug_FireCycle->setColor(Color3B::WHITE);
+	showDebug_FireCycle->setAnchorPoint({ 0,0.5 });
+	showDebug_FireCycle->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(showDebug_FireCycle, 5000);
+	showDebug_bulletRange = Label::createWithTTF("0", "Fonts/upheavtt.ttf", 12);
+	showDebug_bulletRange->setColor(Color3B::WHITE);
+	showDebug_bulletRange->setAnchorPoint({ 0,0.5 });
+	showDebug_bulletRange->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(showDebug_bulletRange, 5000);
+	showDebug_bulletMoveSpeed = Label::createWithTTF("0", "Fonts/upheavtt.ttf", 12);
+	showDebug_bulletMoveSpeed->setColor(Color3B::WHITE);
+	showDebug_bulletMoveSpeed->setAnchorPoint({ 0,0.5 });
+	showDebug_bulletMoveSpeed->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(showDebug_bulletMoveSpeed, 5000);
+	showDebug_effectiveDmg = Label::createWithTTF("0", "Fonts/upheavtt.ttf", 12);
+	showDebug_effectiveDmg->setColor(Color3B::WHITE);
+	showDebug_effectiveDmg->setAnchorPoint({ 0,0.5 });
+	showDebug_effectiveDmg->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(showDebug_effectiveDmg, 5000);
+	showDebug_ItemInvLuck = Label::createWithTTF("0", "Fonts/upheavtt.ttf", 12);
+	showDebug_ItemInvLuck->setColor(Color3B::WHITE);
+	showDebug_ItemInvLuck->setAnchorPoint({ 0,0.5 });
+	showDebug_ItemInvLuck->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(showDebug_ItemInvLuck, 5000);
+	getItemInfoText1 = Label::createWithTTF("0", "Fonts/upheavtt.ttf", 20);
+	getItemInfoText1->setColor(Color3B::WHITE);
+	getItemInfoText1->setVisible(false);
+	getItemInfoText1->setAnchorPoint({ 0.5,0.5 });
+	getItemInfoText1->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(getItemInfoText1, 5000);
+	getItemInfoText2 = Label::createWithTTF("0", "Fonts/upheavtt.ttf", 14);
+	getItemInfoText2->setColor(Color3B::WHITE);
+	getItemInfoText2->setVisible(false);
+	getItemInfoText2->setAnchorPoint({ 0.5,0.5 });
+	getItemInfoText2->enableOutline(Color4B::BLACK, 1);
+	scene->addChild(getItemInfoText2, 5000);
+
+	showDebug_moveSeepd->setVisible(false);
+	showDebug_FireCycle->setVisible(false);
+	showDebug_bulletRange->setVisible(false);
+	showDebug_bulletMoveSpeed->setVisible(false);
+	showDebug_effectiveDmg->setVisible(false);
+	showDebug_ItemInvLuck->setVisible(false);
+
 	for (int i = 0; i < 10; i++)
 	{
 		HeartIcon[i] = Sprite::create("UI/ui_hearts_01.png");
@@ -245,6 +322,23 @@ void Isaac::tick()
 	IsaacSetZoder();
 	setUIPosition();
 	SetGodMode();
+
+	if (isIsaacGetItem)
+	{
+		getItemCount1--;
+
+
+		if (getItemCount1 <= 0)
+		{
+			IsaacChangeInfo1();
+			getItemCount1 = 100;
+		}
+	}
+
+	effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
+	itemInvLuck = totalLuck / BaseLuck;
+
+	getItemBackGround->setPosition(CI->camera->getPosition().x, CI->camera->getPosition().y + 90);
 }
 
 void Isaac::IsaacMoving()
@@ -258,8 +352,11 @@ void Isaac::IsaacMoving()
 
 			if (!isaacHead_Base->getNumberOfRunningActions())
 			{
-				isaacHead_Base->setFlippedX(false);
-				isaacHead_Base->setSpriteFrame("IsaacHead3.png");
+				if (!isIsaacGetItem)
+				{
+					isaacHead_Base->setFlippedX(false);
+					isaacHead_Base->setSpriteFrame("IsaacHead3.png");
+				}
 			}
 		}
 		if (MoveL)
@@ -268,8 +365,11 @@ void Isaac::IsaacMoving()
 
 			if (!isaacHead_Base->getNumberOfRunningActions())
 			{
-				isaacHead_Base->setFlippedX(true);
-				isaacHead_Base->setSpriteFrame("IsaacHead3.png");
+				if (!isIsaacGetItem)
+				{
+					isaacHead_Base->setFlippedX(true);
+					isaacHead_Base->setSpriteFrame("IsaacHead3.png");
+				}
 			}
 		}
 		if (MoveU)
@@ -278,7 +378,8 @@ void Isaac::IsaacMoving()
 
 			if (!isaacHead_Base->getNumberOfRunningActions())
 			{
-				isaacHead_Base->setSpriteFrame("IsaacHead5.png");
+				if (!isIsaacGetItem)
+					isaacHead_Base->setSpriteFrame("IsaacHead5.png");
 			}
 		}
 		if (MoveD)
@@ -287,7 +388,8 @@ void Isaac::IsaacMoving()
 
 			if (!isaacHead_Base->getNumberOfRunningActions())
 			{
-				isaacHead_Base->setSpriteFrame("IsaacHead1.png");
+				if (!isIsaacGetItem)
+					isaacHead_Base->setSpriteFrame("IsaacHead1.png");
 			}
 		}
 
@@ -296,14 +398,16 @@ void Isaac::IsaacMoving()
 		{
 			if (!isaacBody_Base->getNumberOfRunningActions())
 			{
-				isaacBody_Base->runAction(IsaacWalkAnimateUD);
+				if (!isIsaacGetItem)
+					isaacBody_Base->runAction(IsaacWalkAnimateUD);
 			}
 		}
 		else if (MoveD)
 		{
 			if (!isaacBody_Base->getNumberOfRunningActions())
 			{
-				isaacBody_Base->runAction(IsaacWalkAnimateUD);
+				if (!isIsaacGetItem)
+					isaacBody_Base->runAction(IsaacWalkAnimateUD);
 			}
 		}
 		else if (MoveR)
@@ -311,7 +415,8 @@ void Isaac::IsaacMoving()
 			isaacBody_Base->setFlippedX(false);
 			if (!isaacBody_Base->getNumberOfRunningActions())
 			{
-				isaacBody_Base->runAction(IsaacWalkAnimateRL);
+				if (!isIsaacGetItem)
+					isaacBody_Base->runAction(IsaacWalkAnimateRL);
 			}
 		}
 		else if (MoveL)
@@ -319,7 +424,8 @@ void Isaac::IsaacMoving()
 			isaacBody_Base->setFlippedX(true);
 			if (!isaacBody_Base->getNumberOfRunningActions())
 			{
-				isaacBody_Base->runAction(IsaacWalkAnimateRL);
+				if (!isIsaacGetItem)
+					isaacBody_Base->runAction(IsaacWalkAnimateRL);
 			}
 		}
 		
@@ -327,8 +433,11 @@ void Isaac::IsaacMoving()
 
 		if (!MoveR && !MoveL && !MoveU && !MoveD)
 		{
-			isaacBody_Base->stopAllActions();
-			isaacBody_Base->setSpriteFrame("IsaacWalk_UD (4).png");
+			if (!isIsaacGetItem)
+			{
+				isaacBody_Base->stopAllActions();
+				isaacBody_Base->setSpriteFrame("IsaacWalk_UD (4).png");
+			}
 		}
 	}
 }
@@ -377,7 +486,8 @@ void Isaac::BulletFire()
 
 	if (!BulletFireR && !BulletFireL && !BulletFireU && !BulletFireD && !isaacBody_Base->getNumberOfRunningActions() && !isaacHead_Base->getNumberOfRunningActions())
 	{
-		isaacHead_Base->setSpriteFrame("IsaacHead1.png");
+		if (!isIsaacGetItem)
+			isaacHead_Base->setSpriteFrame("IsaacHead1.png");
 	}
 }
 
@@ -424,6 +534,20 @@ void Isaac::setUIPosition()
 	bombUitext->setString(String::createWithFormat("%02d", BombCount)->_string.c_str());
 	coinUitext->setString(String::createWithFormat("%02d", coinCount)->_string.c_str());
 	keyUitext->setString(String::createWithFormat("%02d", keyCount)->_string.c_str());
+
+	showDebug_moveSeepd->setPosition(CI->camera->getPosition().x - 230, CI->camera->getPosition().y + 30);
+	showDebug_FireCycle->setPosition(CI->camera->getPosition().x - 230, CI->camera->getPosition().y + 16);
+	showDebug_bulletRange->setPosition(CI->camera->getPosition().x - 230, CI->camera->getPosition().y + 2);
+	showDebug_bulletMoveSpeed->setPosition(CI->camera->getPosition().x - 230, CI->camera->getPosition().y - 12);
+	showDebug_effectiveDmg->setPosition(CI->camera->getPosition().x - 230, CI->camera->getPosition().y - 26);
+	showDebug_ItemInvLuck->setPosition(CI->camera->getPosition().x - 230, CI->camera->getPosition().y - 40);
+
+	showDebug_moveSeepd->setString(String::createWithFormat("MoveSpeed : %.2f", MoveSpeed)->_string.c_str());
+	showDebug_FireCycle->setString(String::createWithFormat("FireCycle : %.2f", BulletFireCycle)->_string.c_str());
+	showDebug_bulletRange->setString(String::createWithFormat("BulletRange : %.2f", bulletRange)->_string.c_str());
+	showDebug_bulletMoveSpeed->setString(String::createWithFormat("BulletMoveSpeed : %.2f", bulletMoveSpeed)->_string.c_str());
+	showDebug_effectiveDmg->setString(String::createWithFormat("EffectiveDmg : %.2f", effectiveDmg)->_string.c_str());
+	showDebug_ItemInvLuck->setString(String::createWithFormat("ItemInvLuck : %.2f", itemInvLuck)->_string.c_str());
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -511,6 +635,79 @@ void Isaac::SetGodMode()
 			godModeCount2 = 10;
 			GodMode = false;
 		}
+	}
+}
+
+void Isaac::doGetItemAction(ItemKind itemkind)
+{
+	//_isaacInfo = IsaacGetItem;
+	isIsaacGetItem = true;
+
+	switch (itemkind)
+	{
+	case StigmataITEM:
+	{
+		MaxHp = MaxHp + 2;
+		Hp = Hp + 2;
+
+		totalDmgUps = totalDmgUps + 0.3f;
+
+		getItemSprite->setTexture("ITEMS/collectibles_138_stigmata.png");
+
+		getItemInfoText1->setString("STIGMATA");
+		getItemInfoText2->setString("DMG + HP up");
+	}
+		break;
+	default:
+		break;
+	}
+
+	getItemInfoText1->setVisible(true);
+	getItemInfoText2->setVisible(true);
+	getItemInfoText1->setPosition(CI->camera->getPosition().x, CI->camera->getPosition().y + 95);
+	getItemInfoText2->setPosition(CI->camera->getPosition().x, CI->camera->getPosition().y + 75);
+
+	isaacBody_Base->stopAllActions();
+	isaacBody_Base->runAction(GetItemAnimate);
+	isaacHead_Base->setVisible(false);
+
+	getItemSprite->setVisible(true);
+
+	getItemBackGround->setVisible(true);
+	getItemBackGround->runAction(ScaleTo::create(0.2f, 1.f));
+}
+
+void Isaac::IsaacChangeInfo1()
+{
+	isaacHead_Base->setVisible(true);
+	isIsaacGetItem = false;
+	getItemSprite->setVisible(false);
+	getItemBackGround->runAction(ScaleTo::create(0.2f, 0.01f));
+	getItemInfoText1->setVisible(false);
+	getItemInfoText2->setVisible(false);
+}
+
+void Isaac::showDebugInfo()
+{
+	if (!isShowDebug)
+	{
+		isShowDebug = true;
+		showDebug_moveSeepd->setVisible(true);
+		showDebug_FireCycle->setVisible(true);
+		showDebug_bulletRange->setVisible(true);
+		showDebug_bulletMoveSpeed->setVisible(true);
+		showDebug_effectiveDmg->setVisible(true);
+		showDebug_ItemInvLuck->setVisible(true);
+	}
+	else
+	{
+		isShowDebug = false;
+		showDebug_moveSeepd->setVisible(false);
+		showDebug_FireCycle->setVisible(false);
+		showDebug_bulletRange->setVisible(false);
+		showDebug_bulletMoveSpeed->setVisible(false);
+		showDebug_effectiveDmg->setVisible(false);
+		showDebug_ItemInvLuck->setVisible(false);
 	}
 }
  

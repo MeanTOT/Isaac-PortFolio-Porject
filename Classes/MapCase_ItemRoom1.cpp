@@ -22,10 +22,16 @@ void MapCase_ItemRoom1::tick()
 	if (!FirstEnter && Player->getRoomNumber() == RoomNumber)
 	{
 		FirstEnter = true;
+		
+		PoopMaker[0] = new Poop;
+		PoopMaker[1] = new Poop;
+		_stigmata = new Stigmata(_scene, Vec2(_position.x, _position.y + 18));
+		_altar = new altar;
+		
+		PoopMaker[0]->CreateObject(_scene, Vec2(_position.x - 32, _position.y), 1);
+		PoopMaker[1]->CreateObject(_scene, Vec2(_position.x + 32, _position.y), 1);
 
-		altar = Sprite::create("ITEMS/altar.png");
-		altar->setPosition(_position);
-		_scene->addChild(altar);
+		_altar->CreateObject(_scene, _position, 1);
 
 		log("9[아이템방]번방 첫입장");
 	}

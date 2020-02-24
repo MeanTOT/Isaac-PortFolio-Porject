@@ -67,6 +67,7 @@ enum DoorName // 301 ~ 350
 	NormalDoor = 301,
 	TreasureDoor,
 	TreasureNoneKeyDoor,
+	BossRoomDoor,
 	OpenDoor,
 	CloseDoor,
 };
@@ -98,12 +99,18 @@ enum IsaacInfo// 501 ~ 550
 {
 	IsaacIdle = 501,
 	IsaacTakeDamage,
+	IsaacGetItem,
 };
 
 enum ItemTag// 551 ~ 600
 {
 	ItemIdle = 551,
 	ItemErase,
+};
+
+enum ItemKind// 601 ~ 650
+{
+	StigmataITEM = 601,
 };
 
 //enum AtionTag // 1001 ~ 1500
@@ -136,12 +143,24 @@ private:
 	Sprite* keyUiIcon;
 	Sprite* HeartIcon[10]; 
 	Sprite* DoorOpenKey;
+	Sprite* getItemSprite;
+	Sprite* getItemBackGround;
 
 	PhysicsBody* isaacPhysicBody; // Isaac 피직스 몸통 
 
 	Label* coinUitext;
 	Label* bombUitext;
 	Label* keyUitext;
+
+	Label* showDebug_moveSeepd;
+	Label* showDebug_FireCycle;
+	Label* showDebug_bulletRange;
+	Label* showDebug_bulletMoveSpeed;
+	Label* showDebug_effectiveDmg;
+	Label* showDebug_ItemInvLuck;
+
+	Label* getItemInfoText1;
+	Label* getItemInfoText2;
 
 	Animation* BulletFireAnimatioR;
 	Animate* BulletFireAnimateR;
@@ -157,6 +176,8 @@ private:
 	Animate* IsaacWalkAnimateUD;
 	Animation* DoorOpenkeyAnimation;
 	Animate* DoorOpenkeyAnimate;
+	Animation* GetItemAnimation;
+	Animate* GetItemAnimate;
 
 	int mainMenuIndex; // 메인메뉴 인덱스
 	int charSelectIndex; // 캐릭터 선택 인덱스
@@ -173,6 +194,7 @@ private:
 	int Hp; // 체력
 	int godModeCount1;
 	int godModeCount2;
+	int getItemCount1;
 
 	float MoveSpeed; // Isaac 스피드
 	float BulletFireCycle; // 총알발사속도(주기)
@@ -199,6 +221,8 @@ private:
 	bool BulletFireD; // 총알발사 D
 	bool BombActivation; // 폭탄 활성화
 	bool GodMode; // 무적
+	bool isIsaacGetItem;
+	bool isShowDebug;
 
 public:
 	static Isaac* getInstance();
@@ -292,6 +316,7 @@ public:
 	void setBulletFireU(int bulletfireu) { BulletFireU = bulletfireu; }
 	bool getBulletFireD() { return BulletFireD; }
 	void setBulletFireD(int bulletfired) { BulletFireD = bulletfired; }
+	bool getIsIsaacGetItem() { return isIsaacGetItem; }
 
 
 	// vector //
@@ -315,6 +340,9 @@ public:
 	void CreateBomb();
 	void setUIPosition();
 	void SetGodMode();
+	void doGetItemAction(ItemKind itemkind);
+	void IsaacChangeInfo1();
+	void showDebugInfo();
 
 
 };

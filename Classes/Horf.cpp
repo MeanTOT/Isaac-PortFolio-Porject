@@ -6,7 +6,7 @@ Horf::Horf(Scene* scene, Vec2 position)
 	monsterMoveSpeed = 0.0f;
 	maxHp = 10.f * Player->getStageNumber();
 	hp = 10.f * Player->getStageNumber();
-	mosnterBulletMoveSpeed = 1.5f;
+	mosnterBulletMoveSpeed = 2.3f;
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Horf/Monster_Horf.plist");
@@ -56,8 +56,6 @@ Horf::Horf(Scene* scene, Vec2 position)
 	monsterAnimate2 = Animate::create(monsterAnimation2);
 	monsterAnimate2->retain();
 
-	Player->monsterVec.push_back(this);
-
 	auto act1 = MoveBy::create(0.05, Vec2(5, 0));
 	auto act2 = MoveBy::create(0.05, Vec2(-5, 0));
 	auto act3 = DelayTime::create(3);
@@ -69,6 +67,8 @@ Horf::Horf(Scene* scene, Vec2 position)
 
 	_scene = scene;
 	_position = position;
+
+	Player->monsterVec.push_back(this);
 }
 
 void Horf::tick()

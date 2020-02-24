@@ -65,6 +65,7 @@ bool GameStage_1::init()
 	mapCase_7 = new MapCase_7(this, Position_50_52_);
 	mapCase_8 = new MapCase_8(this, Position_48_50_);
 	mapCase_ItemRoom1 = new MapCase_ItemRoom1(this, Position_52_50_);
+	mapCase_BossRoom1 = new MapCase_BossRoom(this, Position_51_49_);
 
 
 	// ½ºÄÉÁì °ü¸® //
@@ -91,6 +92,7 @@ void GameStage_1::tick(float delta)
 	mapCase_7->tick();
 	mapCase_8->tick();
 	mapCase_ItemRoom1->tick();
+	mapCase_BossRoom1->tick();
 
 	for (int i = 0; i < Player->isaacBulletVec.size(); i++)
 	{
