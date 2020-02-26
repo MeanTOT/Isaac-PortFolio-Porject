@@ -93,6 +93,7 @@ enum MonsterKind // 451 ~ 500
 	MonsterKind_Dip,
 	MonsterKind_Horf,
 	MonsterKind_Pooter,
+	MonsterKind_Dingle,
 };
 
 enum IsaacInfo// 501 ~ 550
@@ -111,6 +112,7 @@ enum ItemTag// 551 ~ 600
 enum ItemKind// 601 ~ 650
 {
 	StigmataITEM = 601,
+	TheSadOnionITEM,
 };
 
 //enum AtionTag // 1001 ~ 1500
@@ -223,6 +225,7 @@ private:
 	bool GodMode; // ¹«Àû
 	bool isIsaacGetItem;
 	bool isShowDebug;
+	bool isLoadingScene;
 
 public:
 	static Isaac* getInstance();
@@ -317,6 +320,9 @@ public:
 	bool getBulletFireD() { return BulletFireD; }
 	void setBulletFireD(int bulletfired) { BulletFireD = bulletfired; }
 	bool getIsIsaacGetItem() { return isIsaacGetItem; }
+	
+	bool getIsLoadingScene() { return isLoadingScene; }
+	void setIsLoadingScene(bool isloadingscene) { isLoadingScene = isloadingscene; }
 
 
 	// vector //

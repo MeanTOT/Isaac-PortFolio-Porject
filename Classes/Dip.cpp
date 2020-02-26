@@ -14,6 +14,7 @@ Dip::Dip(Scene * scene, Vec2 position)
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Dip/Monster_Dip.plist");
 	cache->addSpriteFramesWithFile("Bullet/Effect_ShitPoof.plist");
+	cache->addSpriteFramesWithFile("Monster/Dingle/Boss_Dingle.plist");
 
 	monsterSprite = Sprite::createWithSpriteFrameName("monster_dip_01.png");
 	monsterSprite->setPosition(position);
@@ -161,6 +162,62 @@ void Dip::DoAttack()
 	if (AttackCycle <= 0)
 	{
 		AttackCycle = 100;
+
+		auto randomTraceIndex = RGI->getRandomNumberWithRange(1, 6);
+
+		switch (randomTraceIndex)
+		{
+		case 1:
+		{
+			auto dingleTrace = Sprite::createWithSpriteFrameName("boss_dingle_53.png");
+			dingleTrace->setPosition(monsterSprite->getPosition());
+			dingleTrace->setScale(0.3f);
+			_scene->addChild(dingleTrace, -5000);
+		}
+		break;
+		case 2:
+		{
+			auto dingleTrace = Sprite::createWithSpriteFrameName("boss_dingle_54.png");
+			dingleTrace->setPosition(monsterSprite->getPosition());
+			dingleTrace->setScale(0.3f);
+			_scene->addChild(dingleTrace, -5000);
+		}
+		break;
+		case 3:
+		{
+			auto dingleTrace = Sprite::createWithSpriteFrameName("boss_dingle_55.png");
+			dingleTrace->setPosition(monsterSprite->getPosition());
+			dingleTrace->setScale(0.3f);
+			_scene->addChild(dingleTrace, -5000);
+		}
+		break;
+		case 4:
+		{
+			auto dingleTrace = Sprite::createWithSpriteFrameName("boss_dingle_56.png");
+			dingleTrace->setPosition(monsterSprite->getPosition());
+			dingleTrace->setScale(0.3f);
+			_scene->addChild(dingleTrace, -5000);
+		}
+		break;
+		case 5:
+		{
+			auto dingleTrace = Sprite::createWithSpriteFrameName("boss_dingle_57.png");
+			dingleTrace->setPosition(monsterSprite->getPosition());
+			dingleTrace->setScale(0.3f);
+			_scene->addChild(dingleTrace, -5000);
+		}
+		break;
+		case 6:
+		{
+			auto dingleTrace = Sprite::createWithSpriteFrameName("boss_dingle_58.png");
+			dingleTrace->setPosition(monsterSprite->getPosition());
+			dingleTrace->setScale(0.3f);
+			_scene->addChild(dingleTrace, -5000);
+		}
+		break;
+		default:
+			break;
+		}
 
 		if (Rect(monsterSprite->getPosition().x - 150, monsterSprite->getPosition().y - 150, 300, 300).containsPoint(Player->getIsaacBody()->getPosition()))
 		{

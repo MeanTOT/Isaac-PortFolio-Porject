@@ -40,6 +40,14 @@ private:
 	int unLock;
 	int doorHeavyClose;
 	int doorHeavyOpen;
+	int bossFightIntroJingle;
+	int castlePortCullis;
+	int basicBossFight;
+	int bossFightJingleOutro;
+	int powerUp1;
+	int powerUp2;
+	int powerUp3;
+	int powerUp4;
 
 
 	SoundManager();
@@ -90,6 +98,14 @@ public:
 	void PlayUnLock();
 	void PlayDoorHeavyClose();
 	void PlayDoorHeavyOpen();
+	void PlayBossFightIntroJingle();
+	void PlayCastlePortCullis();
+	void PlayBasicBossFight();
+	void PlayBossFightJingleOutro();
+	void PlayPowerUp1();
+	void PlayPowerUp2();
+	void PlayPowerUp3();
+	void PlayPowerUp4();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

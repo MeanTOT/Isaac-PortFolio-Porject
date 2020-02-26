@@ -12,5 +12,7 @@ public:
 	virtual bool init();
 	CREATE_FUNC(LodingScreen1);
 
+	~LodingScreen1();
+
 	void ToNextScene();
 };

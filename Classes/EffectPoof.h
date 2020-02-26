@@ -4,6 +4,7 @@
 #include "Dip.h"
 #include "Horf.h"
 #include "Pooter.h"
+#include "Dingle.h"
 
 class EffectPoof
 {
@@ -19,6 +20,7 @@ private:
 	Dip* DipMaker;
 	Horf* HorfMaker;
 	Pooter* PooterMaker;
+	Dingle* DingleMaker;
 
 public:
 	EffectPoof(Scene* scene, Vec2 position, MonsterKind monsterkind);
@@ -28,6 +30,7 @@ public:
 	void CreateDip(Scene * scene, Vec2 position);
 	void CreateHorf(Scene * scene, Vec2 position);
 	void CreatePooter(Scene* scene, Vec2 position);
+	void CreateDingle(Scene* scene, Vec2 position);
 };
 
 

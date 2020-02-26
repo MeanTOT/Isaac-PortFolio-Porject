@@ -217,6 +217,46 @@ void SoundManager::PlayDoorHeavyOpen()
 	doorHeavyOpen = AudioEngine::play2d("Sound/Sfx/door_heavy_open.mp3", false, sfxVolume);
 }
 
+void SoundManager::PlayBossFightIntroJingle()
+{
+	bossFightIntroJingle = AudioEngine::play2d("Sound/Jingle/boss fight intro jingle v2.1.mp3", false, bgmVolume);
+}
+
+void SoundManager::PlayCastlePortCullis()
+{
+	castlePortCullis = AudioEngine::play2d("Sound/Sfx/castleportcullis.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayBasicBossFight()
+{
+	basicBossFight = AudioEngine::play2d("Sound/Bgm/basic boss fight.ogg", true, bgmVolume);
+}
+
+void SoundManager::PlayBossFightJingleOutro()
+{
+	bossFightJingleOutro = AudioEngine::play2d("Sound/Jingle/boss fight jingle outro v2_12.ogg", false, bgmVolume);
+}
+
+void SoundManager::PlayPowerUp1()
+{
+	powerUp1 = AudioEngine::play2d("Sound/Sfx/power up1.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayPowerUp2()
+{
+	powerUp2 = AudioEngine::play2d("Sound/Sfx/power up3.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayPowerUp3()
+{
+	powerUp3 = AudioEngine::play2d("Sound/Sfx/power up4.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayPowerUp4()
+{
+	powerUp4 = AudioEngine::play2d("Sound/Sfx/power up7.mp3", false, sfxVolume);
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);

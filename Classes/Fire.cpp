@@ -6,6 +6,7 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 	{
 		Obcache = SpriteFrameCache::getInstance();
 		Obcache->addSpriteFramesWithFile("Object/Fire/FirePlace_basic.plist");
+		Obcache->addSpriteFramesWithFile("Object/Fire/Effect_poopspawn.plist");
 
 		ObjectAnimation = Animation::create();
 		ObjectAnimation->setDelayPerUnit(0.08f);
@@ -132,6 +133,18 @@ void Fire::CreateObject(Scene * scene, Vec2 position, int index)
 		ObjectHp = 3;
 	}
 
+	poofAnimation = Animation::create();
+	poofAnimation->setDelayPerUnit(0.08f);
+	poofAnimation->addSpriteFrame(Obcache->getSpriteFrameByName("effect_poopspawn_01.png"));
+	poofAnimation->addSpriteFrame(Obcache->getSpriteFrameByName("effect_poopspawn_02.png"));
+	poofAnimation->addSpriteFrame(Obcache->getSpriteFrameByName("effect_poopspawn_03.png"));
+	poofAnimation->addSpriteFrame(Obcache->getSpriteFrameByName("effect_poopspawn_04.png"));
+	poofAnimation->addSpriteFrame(Obcache->getSpriteFrameByName("effect_poopspawn_05.png"));
+	poofAnimation->addSpriteFrame(Obcache->getSpriteFrameByName("effect_poopspawn_06.png"));
+	poofAnimation->addSpriteFrame(Obcache->getSpriteFrameByName("effect_poopspawn_07.png"));
+	poofAnimate = Animate::create(poofAnimation);
+	poofAnimate->retain();
+
 	_index = index;
 	_scene = scene;
 	_position = position;
@@ -190,6 +203,12 @@ void Fire::tick()
 
 		fire->setVisible(false);
 		fire->runAction(Sequence::createWithTwoActions(DelayTime::create(2), RemoveSelf::create()));
+
+		poof = Sprite::createWithSpriteFrameName("effect_poopspawn_01.png");
+		poof->setPosition(ObjectSprite->getPosition().x, ObjectSprite->getPosition().y + 10);
+		_scene->addChild(poof, poof->getPositionY() * -1);
+
+		poof->runAction(Sequence::create(poofAnimate, RemoveSelf::create(), nullptr));
 
 		if (_index == 1)
 			ObjectSprite->setSpriteFrame("grid_fireplace_02.png");

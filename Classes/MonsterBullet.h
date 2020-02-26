@@ -29,7 +29,10 @@ public:
 	PhysicsBody* bulletShadowPhysics;
 
 	void CreateIsaacBullet(Scene* scene, Vec2 position, float ImpulseX, float ImpulseY, float height);
+	void CreateIsaacBullet(Scene * scene, Vec2 position, float ImpulseX, float ImpulseY);
+
 	void tick();
+
 	void MoveBullet();
 	void EraseBullet();
 	void RangeCount();

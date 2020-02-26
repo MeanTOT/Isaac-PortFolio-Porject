@@ -67,6 +67,8 @@ bool GameStage_1::init()
 	mapCase_ItemRoom1 = new MapCase_ItemRoom1(this, Position_52_50_);
 	mapCase_BossRoom1 = new MapCase_BossRoom(this, Position_51_49_);
 
+	isPlayBgm = false;
+
 
 	// ½ºÄÉÁì °ü¸® //
 	this->schedule(schedule_selector(GameStage_1::tick));
@@ -107,6 +109,7 @@ void GameStage_1::tick(float delta)
 
 	for (int i = 0; i < Player->monsterBulletVec.size(); i++)
 	{
+		
 		Player->monsterBulletVec[i]->tick();
 
 		if (Player->monsterBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
@@ -128,6 +131,7 @@ void GameStage_1::tick(float delta)
 
 	for (int i = 0; i < Player->itemBaseVec.size(); i++)
 	{
+		
 		Player->itemBaseVec[i]->tick();
 
 		if (Player->itemBaseVec[i]->itemSprite->getTag() == ItemErase)
@@ -138,7 +142,8 @@ void GameStage_1::tick(float delta)
 
 	for (int i = 0; i < Player->monsterVec.size(); i++)
 	{
-		Player->monsterVec[i]->tick();
+		if (!Player->getIsLoadingScene())
+			Player->monsterVec[i]->tick();
 
 		if (Player->monsterVec[i]->monsterSprite->getTag() == MonsterErase)
 		{
@@ -152,5 +157,9 @@ void GameStage_1::tick(float delta)
 
 void GameStage_1::onEnterTransitionDidFinish()
 {
-	SMI->PlaydipteraSonata();
+	if (!isPlayBgm)
+	{
+		SMI->PlaydipteraSonata();
+		isPlayBgm = true;
+	}
 }

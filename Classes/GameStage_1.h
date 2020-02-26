@@ -35,6 +35,8 @@ private:
 
 	Dregs* test;
 
+	bool isPlayBgm;
+
 public:
 	static Scene* createScene();
 	virtual bool init();

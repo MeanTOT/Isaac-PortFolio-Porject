@@ -26,6 +26,10 @@ bool LodingScreen1::init()
 	return true;
 }
 
+LodingScreen1::~LodingScreen1()
+{
+}
+
 void LodingScreen1::ToNextScene()
 {
 	auto scene = GameStage_1::createScene();

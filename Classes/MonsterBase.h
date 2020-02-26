@@ -23,17 +23,21 @@ protected:
 	Animate* monsterAnimate3;
 	RepeatForever* monsterRepeatForever3;
 
-	//Animation* monsterAnimation4;
-	//Animate* monsterAnimate4;
-	//RepeatForever* monsterRepeatForever4;
+	Animation* monsterAnimation4;
+	Animate* monsterAnimate4;
+	RepeatForever* monsterRepeatForever4;
 
-	//Animation* monsterAnimation5;
-	//Animate* monsterAnimate5;
-	//RepeatForever* monsterRepeatForever5;
+	Animation* monsterAnimation5;
+	Animate* monsterAnimate5;
+	RepeatForever* monsterRepeatForever5;
 
-	//Animation* monsterAnimation6;
-	//Animate* monsterAnimate6;
-	//RepeatForever* monsterRepeatForever6;
+	Animation* monsterAnimation6;
+	Animate* monsterAnimate6;
+	RepeatForever* monsterRepeatForever6;
+
+	Animation* monsterAnimation7;
+	Animate* monsterAnimate7;
+	RepeatForever* monsterRepeatForever7;
 
 	float monsterHeight;
 	float monsterMoveSpeed;

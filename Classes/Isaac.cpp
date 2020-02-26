@@ -82,6 +82,8 @@ Isaac::Isaac()
 
 	isShowDebug = false;
 
+	isLoadingScene = false;
+
 	// ------- First Scene ------- //
 
 	nowScene = PressStartScene;
@@ -638,6 +640,7 @@ void Isaac::SetGodMode()
 	}
 }
 
+// 아이템먹었을때 액션
 void Isaac::doGetItemAction(ItemKind itemkind)
 {
 	//_isaacInfo = IsaacGetItem;
@@ -658,6 +661,21 @@ void Isaac::doGetItemAction(ItemKind itemkind)
 		getItemInfoText2->setString("DMG + HP up");
 	}
 		break;
+	case TheSadOnionITEM:
+	{
+		BulletFireCycle -= 0.03f;
+
+		BulletFireAnimateR->setDuration(BulletFireCycle * 2);
+		BulletFireAnimateL->setDuration(BulletFireCycle * 2);
+		BulletFireAnimateU->setDuration(BulletFireCycle * 2);
+		BulletFireAnimateD->setDuration(BulletFireCycle * 2);
+
+		getItemSprite->setTexture("ITEMS/collectibles_001_thesadonion.png");
+
+		getItemInfoText1->setString("THE SAD ONION");
+		getItemInfoText2->setString("Ters up");
+	}
+		break;
 	default:
 		break;
 	}
@@ -675,6 +693,9 @@ void Isaac::doGetItemAction(ItemKind itemkind)
 
 	getItemBackGround->setVisible(true);
 	getItemBackGround->runAction(ScaleTo::create(0.2f, 1.f));
+
+	SMI->PlayPowerUp1();
+
 }
 
 void Isaac::IsaacChangeInfo1()

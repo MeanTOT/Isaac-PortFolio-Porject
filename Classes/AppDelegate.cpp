@@ -25,6 +25,7 @@
 #include "AppDelegate.h"
 #include "MainMenu.h"
 #include "GameStage_1.h"
+#include "BossLoadingScene_Dingle.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
