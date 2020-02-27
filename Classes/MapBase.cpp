@@ -61,8 +61,8 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_1.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 		break;
@@ -70,8 +70,8 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_2.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 		break;
@@ -79,8 +79,8 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_3.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 		break;
@@ -88,8 +88,8 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_4.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 		break;
@@ -97,8 +97,8 @@ void MapBase::CreateBaseMentRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_5.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 		break;
@@ -161,8 +161,8 @@ void MapBase::CreateBaseMentBossRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_1.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 	break;
@@ -170,8 +170,8 @@ void MapBase::CreateBaseMentBossRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_2.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 	break;
@@ -179,8 +179,8 @@ void MapBase::CreateBaseMentBossRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_3.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 	break;
@@ -188,8 +188,8 @@ void MapBase::CreateBaseMentBossRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_4.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 	break;
@@ -197,8 +197,8 @@ void MapBase::CreateBaseMentBossRoom(Scene * scene, Vec2 position)
 	{
 		overlay_1_1 = Sprite::create("MapImage/basement/1x1_overlay_5.png");
 		overlay_1_1->setPosition(position);
-		overlay_1_1->setScaleX(0.72398);
-		overlay_1_1->setScaleY(0.62937);
+		overlay_1_1->setScaleX(0.72398f);
+		overlay_1_1->setScaleY(0.62937f);
 		scene->addChild(overlay_1_1, StageOverlayZoder);
 	}
 	break;
@@ -785,6 +785,8 @@ void MapBase::CollisionToDoor()
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x, Player->getIsaacBody()->getPosition().y - 70);
 			
 				CI->MoveB();
+				
+				Player->setMiniMapPlayerD(true);
 			}
 		}
 
@@ -796,6 +798,8 @@ void MapBase::CollisionToDoor()
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x, Player->getIsaacBody()->getPosition().y + 70);
 				
 				CI->MoveT();
+
+				Player->setMiniMapPlayerU(true);
 			}
 		}
 
@@ -807,6 +811,8 @@ void MapBase::CollisionToDoor()
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x + 100, Player->getIsaacBody()->getPosition().y);
 				
 				CI->MoveR();
+
+				Player->setMiniMapPlayerR(true);
 			}
 		}
 
@@ -818,6 +824,8 @@ void MapBase::CollisionToDoor()
 				Player->getIsaacBody()->setPosition(Player->getIsaacBody()->getPosition().x - 100, Player->getIsaacBody()->getPosition().y);
 				
 				CI->MoveL();
+
+				Player->setMiniMapPlayerL(true);
 			}
 		}
 

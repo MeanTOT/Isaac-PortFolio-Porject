@@ -8,7 +8,6 @@ MapCase_1::MapCase_1(Scene* scene, Vec2 position)
 	scene->addChild(controlsImage, BackGroundZoder + 1);
 
 	this->CreateBaseMentRoom(scene, position);
-	this->CreateDoorR(scene, position, NormalDoor);
 	this->CreateDoorL(scene, position, NormalDoor);
 	this->CreateDoorT(scene, position, NormalDoor);
 	this->CreateDoorB(scene, position, NormalDoor);

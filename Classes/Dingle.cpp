@@ -6,8 +6,8 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 	monsterHeight = 20.0f;
 	monsterMoveSpeed = 4000.0f;
 	mosnterBulletMoveSpeed = 200.0f;
-	maxHp = 3.0f;
-	hp = 3.0f;
+	maxHp = 330.0f;
+	hp = 330.0f;
 
 	AttackCycle = 200;
 
@@ -56,6 +56,7 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 	monsterAnimation->addSpriteFrame(cache->getSpriteFrameByName("boss_dingle_03.png"));
 	monsterAnimate = Animate::create(monsterAnimation);
 	monsterAnimate->retain();
+	monsterAnimate->setTag(1);
 
 	// 총알발사스킬
 	monsterAnimation2 = Animation::create();
@@ -220,7 +221,7 @@ void Dingle::MonsterSetTag()
 		this->HitEffect();
 	}
 
-	if (hp <= 0 && monsterSprite->getTag() != MonsterErase)
+	if (hp <= 30 && monsterSprite->getTag() != MonsterErase)
 	{
 		_dregs = new Dregs(_scene, monsterSprite->getPosition(), ObjectPoop, monsterSprite->getLocalZOrder());
 
@@ -267,40 +268,46 @@ void Dingle::MonsterEraseCall()
 
 void Dingle::DoAttack()
 {
-	if (monsterSprite->getTag() == MonsterIdle)
+	if (monsterSprite->getNumberOfRunningActionsByTag(1))
 		AttackCycle--;
 
 	if (AttackCycle <= 0)
 	{
 		AttackCycle = 100;
 
+		auto randomAttack = RGI->getRandomNumberWithRange(1, 2);
 
-		if (Player->getIsaacBody()->getPosition().y > monsterSprite->getPosition().y - 70 && Player->getIsaacBody()->getPosition().y < monsterSprite->getPosition().y + 70 &&
-			Player->getIsaacBody()->getPosition().x > monsterSprite->getPosition().x - 70 && Player->getIsaacBody()->getPosition().x < monsterSprite->getPosition().x + 70)
+		if (Player->getIsaacBody()->getPosition().y > monsterSprite->getPosition().y - 30 && Player->getIsaacBody()->getPosition().y < monsterSprite->getPosition().y + 30 && randomAttack == 1 ||
+			Player->getIsaacBody()->getPosition().x > monsterSprite->getPosition().x - 30 && Player->getIsaacBody()->getPosition().x < monsterSprite->getPosition().x + 30 && randomAttack == 1)
 		{
 			monsterSprite->stopAllActions();
 			monsterSprite->setTag(MonsterAttack);
-			monsterSprite->runAction(Sequence::create(monsterAnimate6, CallFunc::create(CC_CALLBACK_0(Dingle::CreateBullet, this)),
+			monsterSprite->runAction(Sequence::create(monsterAnimate6,CallFunc::create(CC_CALLBACK_0(Dingle::DIngleBulletFireSound,this)),
+				CallFunc::create(CC_CALLBACK_0(Dingle::CreateBullet, this)),
 				monsterAnimate2, CallFunc::create(CC_CALLBACK_0(Dingle::ChangeTag, this)), nullptr));
 		}
 		else
 		{
-			auto randomAction = RGI->getPercentage(0.7f);
+			auto randomAction = RGI->getPercentage(0.5f);
 
 			if (randomAction)
 			{
 				monsterSprite->stopAllActions();
 				monsterSprite->setTag(MonsterAttack);
-				monsterSprite->runAction(Sequence::create(monsterAnimate6, CallFunc::create(CC_CALLBACK_0(Dingle::RushAttack, this)),
+				monsterSprite->runAction(Sequence::create(monsterAnimate6, CallFunc::create(CC_CALLBACK_0(Dingle::DingleRushSound,this)),
+					CallFunc::create(CC_CALLBACK_0(Dingle::RushAttack, this)),
 					CallFunc::create(CC_CALLBACK_0(Dingle::CreateTrace, this)),
-					monsterAnimate3, monsterAnimate6, CallFunc::create(CC_CALLBACK_0(Dingle::RushAttack, this)),
+					monsterAnimate3, monsterAnimate6, CallFunc::create(CC_CALLBACK_0(Dingle::DingleRushSound, this)),
+					CallFunc::create(CC_CALLBACK_0(Dingle::RushAttack, this)),
 					CallFunc::create(CC_CALLBACK_0(Dingle::CreateTrace, this)), monsterAnimate3,
-					monsterAnimate6, CallFunc::create(CC_CALLBACK_0(Dingle::RushAttack, this)),
+					monsterAnimate6, CallFunc::create(CC_CALLBACK_0(Dingle::DingleRushSound, this)),
+					CallFunc::create(CC_CALLBACK_0(Dingle::RushAttack, this)),
 					CallFunc::create(CC_CALLBACK_0(Dingle::CreateTrace, this)), monsterAnimate3,
 					CallFunc::create(CC_CALLBACK_0(Dingle::ChangeTag, this)), nullptr));
 			}
 			else
 			{
+				SMI->PlayDingleWhistle();
 				monsterSprite->stopAllActions();
 				monsterSprite->setTag(MonsterAttack);
 				monsterSprite->runAction(Sequence::create(monsterAnimate5, CallFunc::create(CC_CALLBACK_0(Dingle::SommonsDip, this)),
@@ -416,4 +423,14 @@ void Dingle::CreateTrace()
 	default:
 		break;
 	}
+}
+
+void Dingle::DingleRushSound()
+{
+	SMI->PlayDingleRush();
+}
+
+void Dingle::DIngleBulletFireSound()
+{
+	SMI->PlayDingleBulletFire();
 }

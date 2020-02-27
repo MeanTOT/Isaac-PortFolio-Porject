@@ -32,7 +32,7 @@ Isaac::Isaac()
 	// [Isaac Info] //
 	BombCount = 1;
 	coinCount = 0;
-	keyCount = 0;
+	keyCount = 1;
 	MaxHp = 6;
 	Hp = 6;
 	stageNumber = 1;
@@ -46,10 +46,10 @@ Isaac::Isaac()
 	// [Isaac Info] //
 	MoveSpeed = 25.0f;
 	BulletFireCycle = 0.15f;
-	bulletRange = 450.0f;
-	bulletMoveSpeed = 3000.0f;
-	basicHeight = 15.0f;
-	maxHeight = 15.0f;
+	bulletRange = 650.0f;
+	bulletMoveSpeed = 4000.0f;
+	basicHeight = 23.0f;
+	maxHeight = 23.0f;
 	BaseDmg = 3.5f;
 	totalDmgUps = 0.0f;
 	effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
@@ -83,6 +83,11 @@ Isaac::Isaac()
 	isShowDebug = false;
 
 	isLoadingScene = false;
+
+	miniMapPlayerMoveU = false;
+	miniMapPlayerMoveD = false;
+	miniMapPlayerMoveR = false;
+	miniMapPlayerMoveL = false;
 
 	// ------- First Scene ------- //
 

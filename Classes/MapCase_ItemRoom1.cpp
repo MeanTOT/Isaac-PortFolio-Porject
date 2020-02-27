@@ -3,7 +3,7 @@
 MapCase_ItemRoom1::MapCase_ItemRoom1(Scene * scene, Vec2 position)
 {
 	this->CreateBaseMentRoom(scene, position);
-	this->CreateDoorL(scene, position, TreasureNoneKeyDoor);
+	this->CreateDoorT(scene, position, TreasureNoneKeyDoor);
 
 	_scene = scene;
 	_position = position;

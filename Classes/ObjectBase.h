@@ -2,6 +2,8 @@
 #include "ProjectFW.h"
 #include "Dregs.h"
 #include "Coin.h"
+#include "Key.h"
+#include "Bomb.h"
 
 class ObjectBase
 {
@@ -27,7 +29,12 @@ public:
 	Animate* ObjectAnimate;
 
 	Coin* coinMaker;
+	Key* keyMaker;
+	Bomb* bombMaker;
 
 	virtual void tick() {}
 	virtual void CreateObject(Scene* scene, Vec2 position, int index) {}
+
+	void RandomItemDrop();
+	void RandomItemDropSpecial();
 };

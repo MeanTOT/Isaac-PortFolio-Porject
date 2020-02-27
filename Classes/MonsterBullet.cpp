@@ -9,6 +9,34 @@ MonsterBullet::MonsterBullet()
 
 void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float ImpulseX, float ImpulseY, float height)
 {
+	auto randomSound = RGI->getRandomNumberWithRange(1, 4);
+
+	switch (randomSound)
+	{
+	case 1:
+	{
+		SMI->PlayBloodFire1();
+	}
+	break;
+	case 2:
+	{
+		SMI->PlayBloodFire2();
+	}
+	break;
+	case 3:
+	{
+		SMI->PlayBloodFire3();
+	}
+	break;
+	case 4:
+	{
+		SMI->PlayBloodFire4();
+	}
+	break;
+	default:
+		break;
+	}
+
 	BulletEraseAnimation = Animation::create();
 	BulletEraseAnimation->setDelayPerUnit(0.04f);
 	BulletEraseAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_bloodtear_01.png"));
@@ -42,7 +70,6 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 	scene->addChild(bullet, -1 * bullet->getPosition().y);
 
 	bulletShadow = Sprite::create("Player/shadow.png");
-	//bulletShadow->setPosition(bullet->getPosition().x, bullet->getPosition().y - height);
 	bulletShadow->setPosition(bullet->getPosition().x, bullet->getPosition().y);
 	bulletShadow->setScale(0.1f);
 	bulletShadow->setOpacity(100);
@@ -72,8 +99,6 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 	eraseAction3 = Sequence::create(JumpBy::create(height / 30,Vec2(0,0), height, 1), CallFunc::create(CC_CALLBACK_0(MonsterBullet::ChangeTag,this)) ,nullptr);
 	eraseAction3->setTag(3);
 	eraseAction3->retain();
-	
-
 
 	Player->monsterBulletVec.push_back(this);
 
@@ -121,7 +146,6 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 	scene->addChild(bullet, -1 * bullet->getPosition().y);
 
 	bulletShadow = Sprite::create("Player/shadow.png");
-	//bulletShadow->setPosition(bullet->getPosition().x, bullet->getPosition().y - height);
 	bulletShadow->setPosition(bullet->getPosition().x, bullet->getPosition().y);
 	bulletShadow->setScale(0.1f);
 	bulletShadow->setOpacity(100);
@@ -209,19 +233,19 @@ void MonsterBullet::EraseBulletVec()
 
 void MonsterBullet::PlayBulletEraseSound()
 {
+	SMI->PlayTearBlock();
 }
 
 void MonsterBullet::SetZorder()
 {
 	if (bulletShadow->getTag() == ActivationBulletTag)
 	{
-		bulletShadow->setLocalZOrder(bulletShadow->getPositionY() * -1 + _height);
-		bullet->setLocalZOrder(bullet->getPositionY() * -1 + _height);
+		bulletShadow->setLocalZOrder(bulletShadow->getPositionY() * -1 + (_height / 2));
+		bullet->setLocalZOrder(bullet->getPositionY() * -1 + (_height / 2));
 	}
 }
 
 void MonsterBullet::ChangeTag()
 {
-	log("체인지태그");
 	bulletShadow->setTag(EraseBulletTag2);
 }

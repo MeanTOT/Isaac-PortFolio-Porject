@@ -196,8 +196,7 @@ void Fire::tick()
 		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
 		ObjectPhysics->removeFromWorld();
 
-		if (RGI->getPercentage(Player->getItemInvLuck()))
-			coinMaker = new Coin(_scene, _position);
+		this->RandomItemDrop();
 
 		SMI->PlayOffFire();
 

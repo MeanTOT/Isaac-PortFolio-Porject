@@ -257,6 +257,56 @@ void SoundManager::PlayPowerUp4()
 	powerUp4 = AudioEngine::play2d("Sound/Sfx/power up7.mp3", false, sfxVolume);
 }
 
+void SoundManager::PlayKeyDrop()
+{
+	keyDrop = AudioEngine::play2d("Sound/Sfx/key_drop_2.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayKeyPickUp()
+{
+	keyPickUp = AudioEngine::play2d("Sound/Sfx/key_pickup_guantlet_4.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayBombPickUp()
+{
+	BombPickUp = AudioEngine::play2d("Sound/Sfx/fetus feet.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayDingleWhistle()
+{
+	dingWhistle = AudioEngine::play2d("Sound/Sfx/ding whistle whistle.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayDingleBulletFire()
+{
+	dingleBulletFire = AudioEngine::play2d("Sound/Sfx/sink drain gurgle.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayDingleRush()
+{
+	dingleRush = AudioEngine::play2d("Sound/Sfx/fart gurg.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayBloodFire1()
+{
+	bloodFire1 = AudioEngine::play2d("Sound/Sfx/blood fire.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayBloodFire2()
+{
+	bloodFire2 = AudioEngine::play2d("Sound/Sfx/blood fire 2.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayBloodFire3()
+{
+	bloodFire3 = AudioEngine::play2d("Sound/Sfx/blood fire 3.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayBloodFire4()
+{
+	bloodFire4 = AudioEngine::play2d("Sound/Sfx/blood fire 4.mp3", false, sfxVolume);
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);

@@ -40,7 +40,8 @@ bool GameStage_1::init()
 	edgeSegment[5] = PhysicsBody::createEdgeSegment(Vec2(-180, -135), Vec2(-180, -10));
 	edgeSegment[6] = PhysicsBody::createEdgeSegment(Vec2(180, 135), Vec2(180, 10));
 	edgeSegment[7] = PhysicsBody::createEdgeSegment(Vec2(180, -135), Vec2(180, -10));
-	
+
+	isPlayBgm = false;
 
 	for (int i = 0; i < 8; i++)
 	{
@@ -53,30 +54,34 @@ bool GameStage_1::init()
 		CI->camera->addChild(edgeNode[i]);
 	}
 
-	
 	// 맵 제작 //
+	MapCase[0] = new MapCase_1(this, Position_50_50_);
+	MapCase[1] = new MapCase_2(this, Position_50_51_);
+	MapCase[2] = new MapCase_3(this, Position_49_50_);
+	MapCase[3] = new MapCase_4(this, Position_50_49_);
+	MapCase[4] = new MapCase_5(this, Position_51_49_);
+	MapCase[5] = new MapCase_6(this, Position_50_48_);
+	MapCase[6] = new MapCase_7(this, Position_49_47_);
+	MapCase[7] = new MapCase_8(this, Position_50_47_);
+	MapCase[8] = new MapCase_ItemRoom1(this, Position_50_46_);
+	MapCase[9] = new MapCase_BossRoom(this, Position_52_49_);
 
-	mapCase_1 = new MapCase_1(this, Position_50_50_);
-	mapCase_2 = new MapCase_2(this, Position_50_49_);
-	mapCase_3 = new MapCase_3(this, Position_51_50_);
-	mapCase_4 = new MapCase_4(this, Position_49_50_);
-	mapCase_5 = new MapCase_5(this, Position_50_51_);
-	mapCase_6 = new MapCase_6(this, Position_50_48_);
-	mapCase_7 = new MapCase_7(this, Position_50_52_);
-	mapCase_8 = new MapCase_8(this, Position_48_50_);
-	mapCase_ItemRoom1 = new MapCase_ItemRoom1(this, Position_52_50_);
-	mapCase_BossRoom1 = new MapCase_BossRoom(this, Position_51_49_);
-
-	isPlayBgm = false;
-
+	// 미니맵 제작 //
+	miniMap = new MiniMap(this, MapCase);
 
 	// 스케쥴 관리 //
 	this->schedule(schedule_selector(GameStage_1::tick));
 
-
+	// 플레이어를 만든다.
 	Player->CreateIsaac(this);
+
+	// 스테이지 번호 설정
 	Player->setStageNumber(1);
+
+	// 키보드를 만든다.
 	KCI->CreateKeyListener(this);
+
+	// Physics 충돌 리스너를 만든다.
 	KCI->CreateContactListener(this);
 
 	return true;
@@ -85,28 +90,27 @@ bool GameStage_1::init()
 void GameStage_1::tick(float delta)
 {
 	Player->tick();
-	mapCase_1->tick();
-	mapCase_2->tick();
-	mapCase_3->tick();
-	mapCase_4->tick();
-	mapCase_5->tick();
-	mapCase_6->tick();
-	mapCase_7->tick();
-	mapCase_8->tick();
-	mapCase_ItemRoom1->tick();
-	mapCase_BossRoom1->tick();
 
+	miniMap->tick();
+
+	// 방 tick함수 실행
+	for (int i = 0; i < 10; i++)
+	{
+		MapCase[i]->tick();
+	}
+
+	// 아이작의 총알 백터
 	for (int i = 0; i < Player->isaacBulletVec.size(); i++)
 	{
 		Player->isaacBulletVec[i]->tick();
 
 		if (Player->isaacBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
 		{
-			//delete[] Player->isaacBulletVec[i];
 			Player->isaacBulletVec.erase(Player->isaacBulletVec.begin() + i);
 		}
 	}
 
+	// 몬스터의 총알 백터
 	for (int i = 0; i < Player->monsterBulletVec.size(); i++)
 	{
 		
@@ -114,11 +118,11 @@ void GameStage_1::tick(float delta)
 
 		if (Player->monsterBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
 		{
-			//delete[] Player->isaacBulletVec[i];
 			Player->monsterBulletVec.erase(Player->monsterBulletVec.begin() + i);
 		}
 	}
 
+	// 오브젝트 백터
 	for (int i = 0; i < Player->objectVec.size(); i++)
 	{
 		Player->objectVec[i]->tick();
@@ -129,6 +133,7 @@ void GameStage_1::tick(float delta)
 		}
 	}
 
+	// 아이템 백터
 	for (int i = 0; i < Player->itemBaseVec.size(); i++)
 	{
 		
@@ -140,6 +145,7 @@ void GameStage_1::tick(float delta)
 		}
 	}
 
+	// 몬스터 백터
 	for (int i = 0; i < Player->monsterVec.size(); i++)
 	{
 		if (!Player->getIsLoadingScene())
@@ -151,12 +157,14 @@ void GameStage_1::tick(float delta)
 		}
 	}
 
+	// 디버그를 보여줄지에 대한 여부
 	DCI->ShowDebug(sceneWorld);
 
 }
 
 void GameStage_1::onEnterTransitionDidFinish()
 {
+	// BGM 재생 [처음 씬이 전환됬을때만 실행된다.]
 	if (!isPlayBgm)
 	{
 		SMI->PlaydipteraSonata();

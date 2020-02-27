@@ -58,7 +58,7 @@ Horf::Horf(Scene* scene, Vec2 position)
 
 	auto act1 = MoveBy::create(0.05, Vec2(5, 0));
 	auto act2 = MoveBy::create(0.05, Vec2(-5, 0));
-	auto act3 = DelayTime::create(3);
+	auto act3 = DelayTime::create(2);
 	auto act4 = monsterAnimate;
 
 	monsterSprite->runAction(monsterAnimate);

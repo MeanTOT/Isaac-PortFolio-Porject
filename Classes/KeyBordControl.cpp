@@ -711,6 +711,13 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 		return false;
 	}
 
+	// 아이작총알과 액티브아이템
+	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 12 ||
+		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 12)
+	{
+		return false;
+	}
+
 
 	// --------------------------------------------- [몬스터 바디] --------------------------------------------- //
 

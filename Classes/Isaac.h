@@ -227,6 +227,11 @@ private:
 	bool isShowDebug;
 	bool isLoadingScene;
 
+	bool miniMapPlayerMoveU;
+	bool miniMapPlayerMoveD;
+	bool miniMapPlayerMoveR;
+	bool miniMapPlayerMoveL;
+
 public:
 	static Isaac* getInstance();
 	static void releaseInstance();
@@ -323,6 +328,15 @@ public:
 	
 	bool getIsLoadingScene() { return isLoadingScene; }
 	void setIsLoadingScene(bool isloadingscene) { isLoadingScene = isloadingscene; }
+
+	bool getMiniMapPlayerU() { return miniMapPlayerMoveU; }
+	void setMiniMapPlayerU(bool minimapplayeru) { miniMapPlayerMoveU = minimapplayeru; }
+	bool getMiniMapPlayerD() { return miniMapPlayerMoveD; }
+	void setMiniMapPlayerD(bool minimapplayerd) { miniMapPlayerMoveD = minimapplayerd; }
+	bool getMiniMapPlayerR() { return miniMapPlayerMoveR; }
+	void setMiniMapPlayerR(bool minimapplayerr) { miniMapPlayerMoveR = minimapplayerr; }
+	bool getMiniMapPlayerL() { return miniMapPlayerMoveL; }
+	void setMiniMapPlayerL(bool minimapplayerl) { miniMapPlayerMoveL = minimapplayerl; }
 
 
 	// vector //

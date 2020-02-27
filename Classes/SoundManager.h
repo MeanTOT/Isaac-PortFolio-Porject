@@ -48,7 +48,16 @@ private:
 	int powerUp2;
 	int powerUp3;
 	int powerUp4;
-
+	int keyDrop;
+	int keyPickUp;
+	int BombPickUp;
+	int dingWhistle;
+	int dingleBulletFire;
+	int dingleRush;
+	int bloodFire1;
+	int bloodFire2;
+	int bloodFire3;
+	int bloodFire4;
 
 	SoundManager();
 	~SoundManager() {};
@@ -106,6 +115,17 @@ public:
 	void PlayPowerUp2();
 	void PlayPowerUp3();
 	void PlayPowerUp4();
+	void PlayKeyDrop();
+	void PlayKeyPickUp();
+	void PlayBombPickUp();
+	void PlayDingleWhistle();
+	void PlayDingleBulletFire();
+	void PlayDingleRush();
+	void PlayBloodFire1();
+	void PlayBloodFire2();
+	void PlayBloodFire3();
+	void PlayBloodFire4();
+
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

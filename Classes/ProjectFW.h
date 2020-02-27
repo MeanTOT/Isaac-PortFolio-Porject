@@ -46,10 +46,16 @@
 #define Position_48_50_ Vec2((Director::getInstance()->getWinSize().width / 2) * -3, Director::getInstance()->getWinSize().height / 2)
 #define Position_50_52_ Vec2(Director::getInstance()->getWinSize().width / 2, (Director::getInstance()->getWinSize().height / 2) * 5)
 #define Position_52_50_ Vec2((Director::getInstance()->getWinSize().width / 2) * 5, Director::getInstance()->getWinSize().height / 2)
+#define Position_52_49_ Vec2((Director::getInstance()->getWinSize().width / 2) * 5, (Director::getInstance()->getWinSize().height / 2) * -1)
+#define Position_50_47_ Vec2(Director::getInstance()->getWinSize().width / 2, (Director::getInstance()->getWinSize().height / 2) * -5)
+#define Position_49_48_ Vec2((Director::getInstance()->getWinSize().width / 2) * -1, (Director::getInstance()->getWinSize().height / 2) * -3)
+#define Position_49_47_ Vec2((Director::getInstance()->getWinSize().width / 2) * -1, (Director::getInstance()->getWinSize().height / 2) * -5)
+#define Position_50_46_ Vec2((Director::getInstance()->getWinSize().width / 2), (Director::getInstance()->getWinSize().height / 2) * -7)
 
 #define BackGroundZoder -100000
 #define DoorZoder -90000
 #define StageOverlayZoder 5000
+#define MiniMapZoder 7000
 
 #define DoorCorrectionRL 200
 #define DoorCorrectionUD 111

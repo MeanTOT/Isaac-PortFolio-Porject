@@ -33,5 +33,7 @@ public:
 	void RushAttack();
 	void SommonsDip();
 	void CreateTrace();
+	void DingleRushSound();
+	void DIngleBulletFireSound();
 
 };

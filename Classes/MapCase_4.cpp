@@ -4,7 +4,9 @@ MapCase_4::MapCase_4(Scene * scene, Vec2 position)
 {
 	this->CreateBaseMentRoom(scene, position);
 	this->CreateDoorR(scene, position, NormalDoor);
-	this->CreateDoorL(scene, position, NormalDoor);
+	this->CreateDoorT(scene, position, NormalDoor);
+	this->CreateDoorB(scene, position, NormalDoor);
+
 
 	_scene = scene;
 	_position = position;

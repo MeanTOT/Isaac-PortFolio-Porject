@@ -116,8 +116,7 @@ void Rocks::tick()
 
 		_dregs = new Dregs(_scene, _position, ObjectRock, ObjectSprite->getLocalZOrder());
 		
-		if (RGI->getPercentage(Player->getItemInvLuck()))
-			coinMaker = new Coin(_scene, _position);
+		this->RandomItemDrop();
 
 		log("%f", Player->getItemInvLuck());
 
