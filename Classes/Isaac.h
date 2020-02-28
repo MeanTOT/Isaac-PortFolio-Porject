@@ -21,7 +21,8 @@ enum NowScene // 1 ~ 50
 	CharSelectScene,
 	OptionScene,
 	StatsScreen,
-	StageScreen
+	StageScreen,
+	PlayerDeadScreen,
 };
 
 enum BulletVector // 51 ~ 100
@@ -147,6 +148,12 @@ private:
 	Sprite* DoorOpenKey;
 	Sprite* getItemSprite;
 	Sprite* getItemBackGround;
+	Sprite* IsaacDeadChar;
+	Sprite* DeathPortraits;
+	Sprite* ExitPost;
+	Sprite* ReStartPost;
+
+	LayerColor* DeathBackGround;
 
 	PhysicsBody* isaacPhysicBody; // Isaac 피직스 몸통 
 
@@ -180,6 +187,8 @@ private:
 	Animate* DoorOpenkeyAnimate;
 	Animation* GetItemAnimation;
 	Animate* GetItemAnimate;
+	Animation* IsaacDeadAnimation;
+	Animate* IsaacDeadAnimate;
 
 	int mainMenuIndex; // 메인메뉴 인덱스
 	int charSelectIndex; // 캐릭터 선택 인덱스
@@ -226,6 +235,7 @@ private:
 	bool isIsaacGetItem;
 	bool isShowDebug;
 	bool isLoadingScene;
+	bool PlayerIsDead; // 플레이어 죽음
 
 	bool miniMapPlayerMoveU;
 	bool miniMapPlayerMoveD;
@@ -259,6 +269,8 @@ public:
 	void setControlAtivation(int controlativation) { ControlAtivation = controlativation; }
 	bool getSceneChange() { return SceneChange; }
 	void setSceneChange(int scenechange) { SceneChange = scenechange; }
+	bool getPlayerIsDead() { return PlayerIsDead; }
+	void setPlayerIsDead(bool playerisdead) { PlayerIsDead = playerisdead; }
 
 	// Isaac Move //
 	bool getMoveR() { return MoveR; }
@@ -363,8 +375,7 @@ public:
 	void doGetItemAction(ItemKind itemkind);
 	void IsaacChangeInfo1();
 	void showDebugInfo();
-
-
+	void IsaacDeadCheck();
 };
 
 

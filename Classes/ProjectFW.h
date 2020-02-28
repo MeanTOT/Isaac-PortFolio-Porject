@@ -56,6 +56,7 @@
 #define DoorZoder -90000
 #define StageOverlayZoder 5000
 #define MiniMapZoder 7000
+#define DeathScrennZoder 9000
 
 #define DoorCorrectionRL 200
 #define DoorCorrectionUD 111

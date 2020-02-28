@@ -14,6 +14,7 @@ Isaac::Isaac()
 	cache->addSpriteFramesWithFile("Player/IsaacHead_Base.plist");
 	cache->addSpriteFramesWithFile("Player/IsaacWalk_Base.plist");
 	cache->addSpriteFramesWithFile("Player/IsaacInfo.plist");
+	cache->addSpriteFramesWithFile("Player/DeadAnimation.plist");
 	cache->addSpriteFramesWithFile("Player/GetItemAction.plist");
 	cache->addSpriteFramesWithFile("MapImage/Door/TreasureDoor_KeyAnimation.plist");
 	
@@ -34,7 +35,7 @@ Isaac::Isaac()
 	coinCount = 0;
 	keyCount = 1;
 	MaxHp = 6;
-	Hp = 6;
+	Hp = 1;
 	stageNumber = 1;
 	godModeCount1 = 15;
 	godModeCount2 = 10;
@@ -88,6 +89,7 @@ Isaac::Isaac()
 	miniMapPlayerMoveD = false;
 	miniMapPlayerMoveR = false;
 	miniMapPlayerMoveL = false;
+	PlayerIsDead = false;
 
 	// ------- First Scene ------- //
 
@@ -176,6 +178,17 @@ Isaac::Isaac()
 	GetItemAnimation->addSpriteFrame(cache->getSpriteFrameByName("character_isaac_3.png"));
 	GetItemAnimate = Animate::create(GetItemAnimation);
 	GetItemAnimate->retain();
+
+	IsaacDeadAnimation = Animation::create();
+	IsaacDeadAnimation->setDelayPerUnit(0.1f);
+	IsaacDeadAnimation->addSpriteFrame(cache->getSpriteFrameByName("DeadAnimation1.png"));
+	IsaacDeadAnimation->addSpriteFrame(cache->getSpriteFrameByName("DeadAnimation2.png"));
+	IsaacDeadAnimation->addSpriteFrame(cache->getSpriteFrameByName("DeadAnimation3.png"));
+	IsaacDeadAnimation->addSpriteFrame(cache->getSpriteFrameByName("DeadAnimation4.png"));
+	IsaacDeadAnimate = Animate::create(IsaacDeadAnimation);
+	IsaacDeadAnimate->retain();
+
+
 }
 
 Isaac * Isaac::getInstance()
@@ -303,6 +316,27 @@ void Isaac::CreateIsaac(Scene* scene)
 	getItemInfoText2->enableOutline(Color4B::BLACK, 1);
 	scene->addChild(getItemInfoText2, 5000);
 
+	IsaacDeadChar = Sprite::createWithSpriteFrameName("DeadAnimation1.png");
+	IsaacDeadChar->setVisible(false);
+	scene->addChild(IsaacDeadChar);
+
+	DeathBackGround = LayerColor::create(Color4B::BLACK);
+	DeathBackGround->setVisible(false);
+	DeathBackGround->setOpacity(100);
+	scene->addChild(DeathBackGround, DeathScrennZoder);
+
+	DeathPortraits = Sprite::create("TitleMenu/death portraits.png");
+	DeathPortraits->setVisible(false);
+	scene->addChild(DeathPortraits , DeathScrennZoder + 1);
+
+	ExitPost = Sprite::create("TitleMenu/Exit.png");
+	ExitPost->setVisible(false);
+	scene->addChild(ExitPost, DeathScrennZoder + 1);
+
+	ReStartPost = Sprite::create("TitleMenu/Restart.png");
+	ReStartPost->setVisible(false);
+	scene->addChild(ReStartPost, DeathScrennZoder + 1);
+
 	showDebug_moveSeepd->setVisible(false);
 	showDebug_FireCycle->setVisible(false);
 	showDebug_bulletRange->setVisible(false);
@@ -324,29 +358,34 @@ void Isaac::CreateIsaac(Scene* scene)
 
 void Isaac::tick()
 {
-	IsaacMoving();
-	BulletFire();
-	IsaacSetZoder();
-	setUIPosition();
-	SetGodMode();
-
-	if (isIsaacGetItem)
+	if (!PlayerIsDead)
 	{
-		getItemCount1--;
+		IsaacDeadCheck();
+		IsaacMoving();
+		BulletFire();
+		IsaacSetZoder();
+		setUIPosition();
+		SetGodMode();
 
-
-		if (getItemCount1 <= 0)
+		if (isIsaacGetItem)
 		{
-			IsaacChangeInfo1();
-			getItemCount1 = 100;
+			getItemCount1--;
+
+
+			if (getItemCount1 <= 0)
+			{
+				IsaacChangeInfo1();
+				getItemCount1 = 100;
+			}
 		}
+
+		effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
+		itemInvLuck = totalLuck / BaseLuck;
+
+		getItemBackGround->setPosition(CI->camera->getPosition().x, CI->camera->getPosition().y + 90);
 	}
-
-	effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
-	itemInvLuck = totalLuck / BaseLuck;
-
-	getItemBackGround->setPosition(CI->camera->getPosition().x, CI->camera->getPosition().y + 90);
 }
+	
 
 void Isaac::IsaacMoving()
 {
@@ -736,4 +775,9 @@ void Isaac::showDebugInfo()
 		showDebug_ItemInvLuck->setVisible(false);
 	}
 }
- 
+
+void Isaac::IsaacDeadCheck()
+{
+	if (Hp <= 0)
+		PlayerIsDead = true;
+}

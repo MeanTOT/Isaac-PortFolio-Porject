@@ -1,4 +1,5 @@
 #include "KeyBordControl.h"
+#include "LodingScreen1.h"
 
 KeyBordControl* KeyBordControl::instance = nullptr;
 
@@ -549,9 +550,9 @@ void KeyBordControl::DifficultBloodSetFade(Sprite * sprite)
 	if (up || down)
 	{
 		if (Player->getDifficultySelectIndex() == 0)
-			sprite->runAction(FadeOut::create(0.3));
+			sprite->runAction(FadeOut::create(0.3f));
 		if (Player->getDifficultySelectIndex() == 1)
-			sprite->runAction(FadeIn::create(0.3));
+			sprite->runAction(FadeIn::create(0.3f));
 
 		up = false;
 		down = false;

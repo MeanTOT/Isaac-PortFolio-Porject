@@ -89,73 +89,83 @@ bool GameStage_1::init()
 
 void GameStage_1::tick(float delta)
 {
-	Player->tick();
-
-	miniMap->tick();
-
-	// 방 tick함수 실행
-	for (int i = 0; i < 10; i++)
+	if (!Player->getPlayerIsDead())
 	{
-		MapCase[i]->tick();
-	}
+		Player->tick();
 
-	// 아이작의 총알 백터
-	for (int i = 0; i < Player->isaacBulletVec.size(); i++)
-	{
-		Player->isaacBulletVec[i]->tick();
+		miniMap->tick();
 
-		if (Player->isaacBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
+		// 방 tick함수 실행
+		for (int i = 0; i < 10; i++)
 		{
-			Player->isaacBulletVec.erase(Player->isaacBulletVec.begin() + i);
+			MapCase[i]->tick();
+		}
+
+		// 아이작의 총알 백터
+		for (int i = 0; i < Player->isaacBulletVec.size(); i++)
+		{
+			Player->isaacBulletVec[i]->tick();
+
+			if (Player->isaacBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
+			{
+				Player->isaacBulletVec.erase(Player->isaacBulletVec.begin() + i);
+			}
+		}
+
+		// 몬스터의 총알 백터
+		for (int i = 0; i < Player->monsterBulletVec.size(); i++)
+		{
+
+			Player->monsterBulletVec[i]->tick();
+
+			if (Player->monsterBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
+			{
+				Player->monsterBulletVec.erase(Player->monsterBulletVec.begin() + i);
+			}
+		}
+
+		// 오브젝트 백터
+		for (int i = 0; i < Player->objectVec.size(); i++)
+		{
+			Player->objectVec[i]->tick();
+
+			if (Player->objectVec[i]->ObjectSprite->getTag() == ObjectErase)
+			{
+				Player->objectVec.erase(Player->objectVec.begin() + i);
+			}
+		}
+
+		// 아이템 백터
+		for (int i = 0; i < Player->itemBaseVec.size(); i++)
+		{
+
+			Player->itemBaseVec[i]->tick();
+
+			if (Player->itemBaseVec[i]->itemSprite->getTag() == ItemErase)
+			{
+				Player->itemBaseVec.erase(Player->itemBaseVec.begin() + i);
+			}
+		}
+
+		// 몬스터 백터
+		for (int i = 0; i < Player->monsterVec.size(); i++)
+		{
+			if (!Player->getIsLoadingScene())
+				Player->monsterVec[i]->tick();
+
+			if (Player->monsterVec[i]->monsterSprite->getTag() == MonsterErase)
+			{
+				Player->monsterVec.erase(Player->monsterVec.begin() + i);
+			}
 		}
 	}
 
-	// 몬스터의 총알 백터
-	for (int i = 0; i < Player->monsterBulletVec.size(); i++)
-	{
-		
-		Player->monsterBulletVec[i]->tick();
+	//if (Player->getPlayerIsDead())
+	//{
+	//	auto pScene = GameStage_2::createScene();
+	//	DI->replaceScene(pScene);
+	//}
 
-		if (Player->monsterBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
-		{
-			Player->monsterBulletVec.erase(Player->monsterBulletVec.begin() + i);
-		}
-	}
-
-	// 오브젝트 백터
-	for (int i = 0; i < Player->objectVec.size(); i++)
-	{
-		Player->objectVec[i]->tick();
-
-		if (Player->objectVec[i]->ObjectSprite->getTag() == ObjectErase)
-		{
-			Player->objectVec.erase(Player->objectVec.begin() + i);
-		}
-	}
-
-	// 아이템 백터
-	for (int i = 0; i < Player->itemBaseVec.size(); i++)
-	{
-		
-		Player->itemBaseVec[i]->tick();
-
-		if (Player->itemBaseVec[i]->itemSprite->getTag() == ItemErase)
-		{
-			Player->itemBaseVec.erase(Player->itemBaseVec.begin() + i);
-		}
-	}
-
-	// 몬스터 백터
-	for (int i = 0; i < Player->monsterVec.size(); i++)
-	{
-		if (!Player->getIsLoadingScene())
-			Player->monsterVec[i]->tick();
-
-		if (Player->monsterVec[i]->monsterSprite->getTag() == MonsterErase)
-		{
-			Player->monsterVec.erase(Player->monsterVec.begin() + i);
-		}
-	}
 
 	// 디버그를 보여줄지에 대한 여부
 	DCI->ShowDebug(sceneWorld);

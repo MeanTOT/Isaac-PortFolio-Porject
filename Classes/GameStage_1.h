@@ -13,6 +13,7 @@
 #include "Bullet.h"
 #include "Dregs.h"
 #include "MiniMap.h"
+#include "GameStage_2.h"
 
 class GameStage_1 : public Scene
 {
@@ -37,8 +38,6 @@ private:
 
 	PhysicsBody* edgeSegment[8];
 	Node* edgeNode[8];
-
-	Dregs* test;
 
 	bool isPlayBgm;
 
