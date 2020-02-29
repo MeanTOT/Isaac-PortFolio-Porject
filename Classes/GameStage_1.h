@@ -24,18 +24,6 @@ private:
 
 	MiniMap* miniMap;
 
-	//MapCase_1* mapCase_1;
-	//MapCase_2* mapCase_2;
-	//MapCase_3* mapCase_3;
-	//MapCase_4* mapCase_4;
-	//MapCase_5* mapCase_5;
-	//MapCase_6* mapCase_6;
-	//MapCase_7* mapCase_7;
-	//MapCase_8* mapCase_8;
-	//MapCase_ItemRoom1* mapCase_ItemRoom1;
-	//MapCase_BossRoom* mapCase_BossRoom1;
-
-
 	PhysicsBody* edgeSegment[8];
 	Node* edgeNode[8];
 

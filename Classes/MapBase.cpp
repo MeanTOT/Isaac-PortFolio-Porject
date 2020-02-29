@@ -1037,7 +1037,7 @@ void MapBase::ClearCheck()
 
 void MapBase::SetRoomNumber()
 {
-	if (mapRect.containsPoint(Player->getIsaacBody()->getPosition()))
+	if (mapRect.containsPoint(Player->getIsaacBody()->getPosition()) && !CI->camera->getNumberOfRunningActions())
 	{
 		Player->setRoomNumber(RoomNumber);
 	}

@@ -160,12 +160,19 @@ void GameStage_1::tick(float delta)
 		}
 	}
 
-	//if (Player->getPlayerIsDead())
-	//{
-	//	auto pScene = GameStage_2::createScene();
-	//	DI->replaceScene(pScene);
-	//}
+	if (Player->getSceneChange())
+	{
+		Player->isaacBulletVec.clear();
+		Player->monsterBulletVec.clear();
+		Player->objectVec.clear();
+		Player->itemBaseVec.clear();
+		Player->monsterVec.clear();
 
+		AudioEngine::stopAll();
+		auto pScene = GameStage_2::createScene();
+		DI->replaceScene(TransitionFade::create(1.0f, pScene));
+		Player->setSceneChange(false);
+	}
 
 	// 디버그를 보여줄지에 대한 여부
 	DCI->ShowDebug(sceneWorld);

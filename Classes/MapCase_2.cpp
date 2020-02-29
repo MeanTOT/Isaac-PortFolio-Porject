@@ -12,6 +12,23 @@ MapCase_2::MapCase_2(Scene* scene, Vec2 position)
 	RoomClear = true;
 	FirstEnter = false;
 
+
+	for (int i = 0; i < 4; i++)
+	{
+		RocksMaker[i] = new Rocks;
+
+		if (i >= 2)
+			continue;
+
+		PoopMaker[i] = new Poop;
+	}
+
+	RocksMaker[0]->CreateObject(_scene, Vec2(_position.x - 32, _position.y - 32), 1);
+	RocksMaker[1]->CreateObject(_scene, Vec2(_position.x - 32, _position.y + 32), 2);
+	RocksMaker[2]->CreateObject(_scene, Vec2(_position.x + 32, _position.y - 32), 3);
+	RocksMaker[3]->CreateObject(_scene, Vec2(_position.x + 32, _position.y + 32), 5);
+	PoopMaker[0]->CreateObject(_scene, Vec2(_position.x - 170, _position.y + 80), 1);
+	PoopMaker[1]->CreateObject(_scene, Vec2(_position.x + 170, _position.y - 80), 1);
 }
 
 MapCase_2::~MapCase_2()
@@ -25,23 +42,6 @@ void MapCase_2::tick()
 		FirstEnter = true;
 
 		log("2번방 첫입장");
-
-		for (int i = 0; i < 4; i++)
-		{
-			RocksMaker[i] = new Rocks;
-
-			if (i >= 2)
-				continue;
-
-			PoopMaker[i] = new Poop;
-		}
-
-		RocksMaker[0]->CreateObject(_scene, Vec2(_position.x - 32, _position.y - 32), 1);
-		RocksMaker[1]->CreateObject(_scene, Vec2(_position.x - 32, _position.y + 32), 2);
-		RocksMaker[2]->CreateObject(_scene, Vec2(_position.x + 32, _position.y - 32), 3);
-		RocksMaker[3]->CreateObject(_scene, Vec2(_position.x + 32, _position.y + 32), 5);
-		PoopMaker[0]->CreateObject(_scene, Vec2(_position.x - 170, _position.y + 80), 1);
-		PoopMaker[1]->CreateObject(_scene, Vec2(_position.x + 170, _position.y - 80), 1);
 
 	}
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "ProjectFW.h"
 #include "GameStage_1.h"
+#include "GameStage_2.h"
 
 class LodingScreen1 : public Scene
 {

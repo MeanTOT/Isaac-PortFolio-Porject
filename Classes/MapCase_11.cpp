@@ -1,12 +1,7 @@
-#include "MapCase_1.h"
+#include "MapCase_11.h"
 
-MapCase_1::MapCase_1(Scene* scene, Vec2 position)
+MapCase_11::MapCase_11(Scene* scene, Vec2 position)
 {
-
-	controlsImage = Sprite::create("MapImage/controls.png");
-	controlsImage->setPosition(position);
-	scene->addChild(controlsImage, BackGroundZoder + 1);
-
 	this->CreateBaseMentRoom(scene, position);
 	this->CreateDoorL(scene, position, NormalDoor);
 	this->CreateDoorT(scene, position, NormalDoor);
@@ -20,39 +15,37 @@ MapCase_1::MapCase_1(Scene* scene, Vec2 position)
 
 	_scene = scene;
 	_position = position;
-	RoomNumber = 1;
+	RoomNumber = 11;
 	RoomClear = true;
 	FirstEnter = false;
 }
 
-MapCase_1::~MapCase_1()
+MapCase_11::~MapCase_11()
 {
 }
 
-void MapCase_1::tick()
+void MapCase_11::tick()
 {
 	if (!FirstEnter && Player->getRoomNumber() == RoomNumber)
 	{
 		FirstEnter = true;
 
-	
 		StageNameBackGround->setVisible(true);
 		StageNameBackGround->runAction(Sequence::create(DelayTime::create(1.0f), ScaleTo::create(0.2f, 1.f),
-			CallFunc::create(CC_CALLBACK_0(MapCase_1::ShowStageNameText,this)),
-			DelayTime::create(2.0f), ScaleTo::create(0.2f, 0.01f), RemoveSelf::create(),nullptr));
+			CallFunc::create(CC_CALLBACK_0(MapCase_11::ShowStageNameText, this)),
+			DelayTime::create(2.0f), ScaleTo::create(0.2f, 0.01f), RemoveSelf::create(), nullptr));
 
-		log("1번방 첫입장");
+		log("11번방 첫입장");
 	}
 
-	
 	this->CollisionToDoor();
 	this->ClearCheck();
-	this->SetRoomNumber();	
+	this->SetRoomNumber();
 }
 
-void MapCase_1::ShowStageNameText()
+void MapCase_11::ShowStageNameText()
 {
-	StageNameText = Label::createWithTTF("BASEMENT I", "Fonts/upheavtt.ttf", 20);
+	StageNameText = Label::createWithTTF("CAVES I", "Fonts/upheavtt.ttf", 20);
 	StageNameText->setColor(Color3B::WHITE);
 	StageNameText->setVisible(true);
 	StageNameText->setPosition(StageNameBackGround->getContentSize().width / 2 + 10, StageNameBackGround->getContentSize().height / 2 + 5);

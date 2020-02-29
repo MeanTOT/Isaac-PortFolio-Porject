@@ -32,7 +32,7 @@ LodingScreen1::~LodingScreen1()
 
 void LodingScreen1::ToNextScene()
 {
-	auto scene = GameStage_1::createScene();
+	auto scene = GameStage_2::createScene();
 	DI->replaceScene(TransitionFade::create(1.0f, scene));
 }
 

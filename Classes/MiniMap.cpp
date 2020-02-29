@@ -178,6 +178,4 @@ void MiniMap::MiniMapClarify()
 		miniMapClarify[8] = true;
 		miniMapClarify[6] = true;
 	}
-
-	log("%d", Player->getRoomNumber());
 }

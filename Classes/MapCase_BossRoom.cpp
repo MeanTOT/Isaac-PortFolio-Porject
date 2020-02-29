@@ -22,6 +22,9 @@ void MapCase_BossRoom::ClearOnDidFinish()
 {
 	if (!clearOnDidFinish && !CI->camera->getNumberOfRunningActions())
 	{
+		trapDoorMaker = new TrapDoor;
+		trapDoorMaker->CreateObject(_scene, Vec2(_position.x, _position.y + 50), 1);
+
 		theSadOnion = new TheSadOnion(_scene, Vec2(_position.x, _position.y + 18 - 30));
 		_altar = new altar;
 		_altar->CreateObject(_scene, Vec2(_position.x,_position.y - 30), 1);
@@ -45,6 +48,7 @@ void MapCase_BossRoom::tick()
 		FirstEnter = true;
 
 		DingleMaker = new EffectPoof(_scene, Vec2(_position), MonsterKind_Dingle);
+
 
 		log("10[보스방]번방 첫입장");
 	}

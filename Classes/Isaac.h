@@ -148,12 +148,7 @@ private:
 	Sprite* DoorOpenKey;
 	Sprite* getItemSprite;
 	Sprite* getItemBackGround;
-	Sprite* IsaacDeadChar;
-	Sprite* DeathPortraits;
-	Sprite* ExitPost;
-	Sprite* ReStartPost;
-
-	LayerColor* DeathBackGround;
+	Sprite* IsaacVirtualBody; // 여러 특수 액션에 사용할 가상스프라이트
 
 	PhysicsBody* isaacPhysicBody; // Isaac 피직스 몸통 
 
@@ -187,8 +182,8 @@ private:
 	Animate* DoorOpenkeyAnimate;
 	Animation* GetItemAnimation;
 	Animate* GetItemAnimate;
-	Animation* IsaacDeadAnimation;
-	Animate* IsaacDeadAnimate;
+	Animation* IsaacGoToNextDoorAnimation;
+	Animate* IsaacGoToNextDoorAnimate;
 
 	int mainMenuIndex; // 메인메뉴 인덱스
 	int charSelectIndex; // 캐릭터 선택 인덱스
@@ -203,8 +198,8 @@ private:
 	int keyCount; // 열쇠 갯수
 	int MaxHp; // 최대체력
 	int Hp; // 체력
-	int godModeCount1;
-	int godModeCount2;
+	int godModeCount1; // 갓모드
+	int godModeCount2; // 갓모드
 	int getItemCount1;
 
 	float MoveSpeed; // Isaac 스피드
@@ -287,7 +282,9 @@ public:
 	Sprite* getIsaacBody() { return isaacBody_Base; }
 	Sprite* getIsaacHead() { return isaacHead_Base; }
 	Sprite* getDoorOpenKey() { return DoorOpenKey; }
+	Sprite* getIsaacVirtualBody() { return IsaacVirtualBody; }
 	Animate* getDoorOpenkeyAnimate() { return DoorOpenkeyAnimate; }
+	Animate* getIsaacGoToNextDoorAnimate() { return IsaacGoToNextDoorAnimate; }
 
 	// ------------------------------------------------------ float ------------------------------------------------------ // 
 	float getBulletRange() { return bulletRange; }
@@ -375,7 +372,6 @@ public:
 	void doGetItemAction(ItemKind itemkind);
 	void IsaacChangeInfo1();
 	void showDebugInfo();
-	void IsaacDeadCheck();
 };
 
 

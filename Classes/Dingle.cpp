@@ -6,8 +6,8 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 	monsterHeight = 20.0f;
 	monsterMoveSpeed = 4000.0f;
 	mosnterBulletMoveSpeed = 200.0f;
-	maxHp = 330.0f;
-	hp = 330.0f;
+	maxHp = 3.0f; // 원래 330
+	hp = 3.0f; // 원래 330
 
 	AttackCycle = 200;
 
@@ -153,8 +153,6 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 	monsterAnimation7->addSpriteFrame(cache->getSpriteFrameByName("boss_dingle_51.png"));
 	monsterAnimate7 = Animate::create(monsterAnimation7);
 	monsterAnimate7->retain();
-
-
 
 	Player->monsterVec.push_back(this);
 
