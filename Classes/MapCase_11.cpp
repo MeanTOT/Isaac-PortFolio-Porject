@@ -2,9 +2,9 @@
 
 MapCase_11::MapCase_11(Scene* scene, Vec2 position)
 {
-	this->CreateBaseMentRoom(scene, position);
+	this->CreateCavesRoom(scene, position);
 	this->CreateDoorL(scene, position, NormalDoor);
-	this->CreateDoorT(scene, position, NormalDoor);
+	this->CreateDoorR(scene, position, NormalDoor);
 	this->CreateDoorB(scene, position, NormalDoor);
 
 	StageNameBackGround = Sprite::create("ITEMS/effect_024_streak.png");
@@ -31,7 +31,7 @@ void MapCase_11::tick()
 		FirstEnter = true;
 
 		StageNameBackGround->setVisible(true);
-		StageNameBackGround->runAction(Sequence::create(DelayTime::create(1.0f), ScaleTo::create(0.2f, 1.f),
+		StageNameBackGround->runAction(Sequence::create(ScaleTo::create(0.2f, 1.f),
 			CallFunc::create(CC_CALLBACK_0(MapCase_11::ShowStageNameText, this)),
 			DelayTime::create(2.0f), ScaleTo::create(0.2f, 0.01f), RemoveSelf::create(), nullptr));
 

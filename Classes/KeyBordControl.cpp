@@ -591,6 +591,7 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// 11 . 드랍아이템
 	// 12 . 패시브아이템
 	// 13 . 몬스터 높은 총알
+	// 14 . Pit [구덩이]
 	// 15 . 두번째 벽
 
 	auto a = contact.getShapeA()->getBody();
@@ -712,6 +713,13 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 		return false;
 	}
 
+	// 아이작총알과 구덩이
+	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 14 ||
+		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 14)
+	{
+		return false;
+	}
+
 	// 아이작총알과 액티브아이템
 	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 12 ||
 		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 12)
@@ -790,6 +798,13 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// 몬스터 총알과 내벽 충돌
 	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 15 ||
 		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 15)
+	{
+		return false;
+	}
+
+	// 몬스터 총알과 구덩이 충돌
+	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 14 ||
+		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 14)
 	{
 		return false;
 	}

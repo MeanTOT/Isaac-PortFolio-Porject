@@ -37,8 +37,7 @@ void MapCase_1::tick()
 
 	
 		StageNameBackGround->setVisible(true);
-		StageNameBackGround->runAction(Sequence::create(DelayTime::create(1.0f), ScaleTo::create(0.2f, 1.f),
-			CallFunc::create(CC_CALLBACK_0(MapCase_1::ShowStageNameText,this)),
+		StageNameBackGround->runAction(Sequence::create(ScaleTo::create(0.2f, 1.f), CallFunc::create(CC_CALLBACK_0(MapCase_1::ShowStageNameText,this)),
 			DelayTime::create(2.0f), ScaleTo::create(0.2f, 0.01f), RemoveSelf::create(),nullptr));
 
 		log("1번방 첫입장");

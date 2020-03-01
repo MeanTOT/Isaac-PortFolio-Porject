@@ -1,21 +1,12 @@
 #pragma once
 #include "ProjectFW.h"
-#include "MapBase.h"
-#include "MapCase_1.h"
-#include "MapCase_2.h"
-#include "MapCase_3.h"
-#include "MapCase_4.h"
-#include "MapCase_5.h"
-#include "MapCase_6.h"
-#include "MapCase_7.h"
-#include "MapCase_8.h"
-#include "MapCase_ItemRoom1.h"
-#include "MapCase_BossRoom.h"
 #include "MapCase_11.h"
+#include "MapCase_12.h"
+#include "MapCase_13.h"
+#include "MapCase_14.h"
 #include "Bullet.h"
 #include "Dregs.h"
 #include "MiniMap.h"
-#include "GameStage_2.h"
 
 class GameStage_2 : public Scene
 {

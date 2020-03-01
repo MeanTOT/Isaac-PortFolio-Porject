@@ -95,6 +95,9 @@ enum MonsterKind // 451 ~ 500
 	MonsterKind_Horf,
 	MonsterKind_Pooter,
 	MonsterKind_Dingle,
+	MonsterKind_Tumor,
+	MonsterKind_BoomFly,
+	MonsterKind_WallCreep,
 };
 
 enum IsaacInfo// 501 ~ 550

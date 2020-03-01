@@ -5,6 +5,9 @@
 #include "Horf.h"
 #include "Pooter.h"
 #include "Dingle.h"
+#include "Tumor.h"
+#include "BoomFly.h"
+#include "WallCreep.h"
 
 class EffectPoof
 {
@@ -21,6 +24,9 @@ private:
 	Horf* HorfMaker;
 	Pooter* PooterMaker;
 	Dingle* DingleMaker;
+	Tumor* TumorMaker;
+	BoomFly* BoomFlyMaker;
+	WallCreep* WallCreepMaker;
 
 public:
 	EffectPoof(Scene* scene, Vec2 position, MonsterKind monsterkind);
@@ -31,6 +37,9 @@ public:
 	void CreateHorf(Scene * scene, Vec2 position);
 	void CreatePooter(Scene* scene, Vec2 position);
 	void CreateDingle(Scene* scene, Vec2 position);
+	void CreateTumor(Scene* scene, Vec2 position);
+	void CreateBoomFly(Scene* scene, Vec2 position);
+	void CreateWallCreep(Scene* scene, Vec2 position);
 };
 
 

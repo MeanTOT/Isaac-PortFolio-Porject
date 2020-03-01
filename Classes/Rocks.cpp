@@ -106,6 +106,8 @@ void Rocks::tick()
 
 	if (ObjectHp == 0)
 	{
+		if (_index == 4)
+			return;
 
 		ObjectSprite->setTexture("Object/Rock/rocks_basement_04.png");
 		ObjectSprite->setTag(ObjectErase);

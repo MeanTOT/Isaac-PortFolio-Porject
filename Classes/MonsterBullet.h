@@ -18,6 +18,8 @@ private:
 	float _impulseX;
 	float _impulseY;
 	float _height;
+	float _speed;
+	float _angle;
 
 public:
 	MonsterBullet();
@@ -34,6 +36,7 @@ public:
 	void tick();
 
 	void MoveBullet();
+	void MoveBulletForAngle();
 	void EraseBullet();
 	void RangeCount();
 	void ErasePhysicsBody();

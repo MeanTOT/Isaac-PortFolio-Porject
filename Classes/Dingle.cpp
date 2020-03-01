@@ -6,8 +6,8 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 	monsterHeight = 20.0f;
 	monsterMoveSpeed = 4000.0f;
 	mosnterBulletMoveSpeed = 200.0f;
-	maxHp = 3.0f; // 원래 330
-	hp = 3.0f; // 원래 330
+	maxHp = 330.0f;
+	hp = 330.0f;
 
 	AttackCycle = 200;
 

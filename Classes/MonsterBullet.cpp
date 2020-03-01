@@ -111,8 +111,36 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 	MoveBullet();
 }
 
-void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float ImpulseX, float ImpulseY)
+void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float speed, float angle)
 {
+	auto randomSound = RGI->getRandomNumberWithRange(1, 4);
+
+	switch (randomSound)
+	{
+	case 1:
+	{
+		SMI->PlayBloodFire1();
+	}
+	break;
+	case 2:
+	{
+		SMI->PlayBloodFire2();
+	}
+	break;
+	case 3:
+	{
+		SMI->PlayBloodFire3();
+	}
+	break;
+	case 4:
+	{
+		SMI->PlayBloodFire4();
+	}
+	break;
+	default:
+		break;
+	}
+
 	BulletEraseAnimation = Animation::create();
 	BulletEraseAnimation->setDelayPerUnit(0.04f);
 	BulletEraseAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_bloodtear_01.png"));
@@ -146,7 +174,7 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 	scene->addChild(bullet, -1 * bullet->getPosition().y);
 
 	bulletShadow = Sprite::create("Player/shadow.png");
-	bulletShadow->setPosition(bullet->getPosition().x, bullet->getPosition().y);
+	bulletShadow->setPosition(bullet->getPosition().x, bullet->getPosition().y - 10);
 	bulletShadow->setScale(0.1f);
 	bulletShadow->setOpacity(100);
 	bulletShadow->setTag(ActivationBulletTag);
@@ -154,6 +182,7 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 	bulletShadowPhysics = PhysicsBody::createCircle(bulletShadow->getContentSize().width / 2, PhysicsMaterial(0, 0, 0));
 	bulletShadowPhysics->setPositionOffset(Vec2(0, 0));
 	bulletShadowPhysics->setContactTestBitmask(true);
+	bulletShadowPhysics->setCollisionBitmask(9);
 
 	bulletShadow->addComponent(bulletShadowPhysics);
 
@@ -170,10 +199,12 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float Impuls
 
 	Player->monsterBulletVec.push_back(this);
 
-	_impulseX = ImpulseX;
-	_impulseY = ImpulseY;
+	_angle = angle;
+	_speed = speed;
 
-	MoveBullet();
+	_height = 0;
+
+	MoveBulletForAngle();
 }
 
 void MonsterBullet::tick()
@@ -187,6 +218,12 @@ void MonsterBullet::MoveBullet()
 {
 	bulletPhysics->applyImpulse(Vec2(_impulseX, _impulseY));
 	bulletShadowPhysics->applyImpulse(Vec2(_impulseX, _impulseY));
+}
+
+void MonsterBullet::MoveBulletForAngle()
+{
+	bullet->runAction(MoveBy::create(2.0f, Vec2(cosf(CC_DEGREES_TO_RADIANS(_angle)) * _speed, sinf(CC_DEGREES_TO_RADIANS(_angle)) * _speed)));
+	bulletShadow->runAction(MoveBy::create(2.0f, Vec2(cosf(CC_DEGREES_TO_RADIANS(_angle)) * _speed, sinf(CC_DEGREES_TO_RADIANS(_angle)) * _speed)));
 }
 
 void MonsterBullet::EraseBullet()

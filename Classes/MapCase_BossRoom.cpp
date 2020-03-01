@@ -55,13 +55,13 @@ void MapCase_BossRoom::tick()
 
 	if (Player->getRoomNumber() == RoomNumber)
 	{
-		if (RoomClear)
+		if (RoomClear && clearOnDidFinishCount <= 0)
 		{
 			ClearOnDidFinish();
 		}
 	}
 
-
+	this->ClearOnDidFinishCount();
 	this->CollisionToDoor();
 	this->ClearCheck();
 	this->SetRoomNumber();

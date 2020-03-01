@@ -49,7 +49,7 @@ Isaac::Isaac()
 	basicHeight = 23.0f;
 	maxHeight = 23.0f;
 	BaseDmg = 3.5f;
-	totalDmgUps = 0.0f;
+	totalDmgUps = 10.0f; // ¿ø·¡ 0
 	effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
 	totalLuck = 1.0f;
 	BaseLuck = 10.0f;
@@ -216,7 +216,7 @@ void Isaac::CreateIsaac(Scene* scene)
 	isaacBody_Base = Sprite::createWithSpriteFrameName("IsaacWalk_UD (4).png");
 	isaacBody_Base->setPosition(Position_50_50_);
 
-	isaacPhysicBody = PhysicsBody::createCircle(isaacBody_Base->getContentSize().width / 4, PhysicsMaterial(0, 0, 0));
+	isaacPhysicBody = PhysicsBody::createCircle(isaacBody_Base->getContentSize().width / 4, PhysicsMaterial(0, 1.0f, 0));
 	isaacPhysicBody->setLinearDamping(5.0f);
 	isaacPhysicBody->setContactTestBitmask(true);
 	isaacBody_Base->addComponent(isaacPhysicBody);

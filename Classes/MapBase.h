@@ -5,6 +5,7 @@
 #include "Rocks.h"
 #include "Poop.h"
 #include "altar.h"
+#include "Pit.h"
 #include "Fire.h"
 #include "Fly.h"
 #include "EffectPoof.h"
@@ -22,6 +23,7 @@ public:
 	~MapBase();
 
 	int RoomNumber;
+	int clearOnDidFinishCount;
 	DoorName _doorname;
 
 	bool RoomClear;
@@ -30,6 +32,7 @@ public:
 	bool isMakeDoorL;
 	bool isMakeDoorT;
 	bool isMakeDoorB;
+	bool clearOnDidFinish;
 
 	Scene* _scene;
 	Vec2 _position;
@@ -72,6 +75,7 @@ public:
 
 	void CreateBaseMentRoom(Scene* scene, Vec2 position);
 	void CreateBaseMentBossRoom(Scene* scene, Vec2 position);
+	void CreateCavesRoom(Scene* scene, Vec2 position);
 	void CreateDoorL(Scene* scene, Vec2 position, DoorName doorname);
 	void CreateDoorR(Scene* scene, Vec2 position, DoorName doorname);
 	void CreateDoorT(Scene* scene, Vec2 position, DoorName doorname);
@@ -87,8 +91,11 @@ public:
 	void ChangeDoorBTag();
 	void PlayUnlockSound();
 
+	void ClearOnDidFinishCount();
+
 
 	virtual void tick() {};
+	virtual void ClearOnDidFinish() {};
 	
 
 

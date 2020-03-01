@@ -16,7 +16,7 @@ bool LodingScreen1::init()
 	loadingBackGround = LayerColor::create(Color4B::BLACK);
 	this->addChild(loadingBackGround);
 
-	loadingImage1 = Sprite::create("TitleMenu/loadimages-010.png");
+	loadingImage1 = Sprite::create("LoadingImages/loadimages-001.png");
 	loadingImage1->setPosition(Position_50_50_);
 	this->addChild(loadingImage1);
 

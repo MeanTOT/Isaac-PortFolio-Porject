@@ -45,8 +45,6 @@ void IsaacBoom::ErasePhysicsBody()
 	ExplosionPhysic->setCollisionBitmask(7);
 	ExplosionPhysic->setPositionOffset(Vec2(35, 0));
 	Boom->setPhysicsBody(ExplosionPhysic);
-
-	SMI->PlayExplosion1();
 }
 
 void IsaacBoom::CreateExplosion(Scene* scene, Vec2 position)

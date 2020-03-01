@@ -16,8 +16,6 @@ public:
 	MapCase_BossRoom(Scene* scene, Vec2 position);
 	~MapCase_BossRoom();
 
-	bool clearOnDidFinish;
-
 	void ClearOnDidFinish();
 
 	void tick();

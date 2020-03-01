@@ -87,6 +87,8 @@ Explosion::Explosion(Scene * scene, Vec2 position, BombKind bombkind)
 	ExplosionTraceSprite->setPosition(ExplosionSprite->getPosition().x, ExplosionSprite->getPosition().y - 20);
 	ExplosionTraceSprite->setAnchorPoint({ 0.5,0 });
 	scene->addChild(ExplosionTraceSprite, Player->getIsaacBody()->getLocalZOrder() - 5000);
+
+	SMI->PlayExplosion1();
 }
 
 void Explosion::ErasePhysicsBody()
