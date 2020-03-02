@@ -3,7 +3,7 @@
 BoomFly::BoomFly(Scene* scene, Vec2 position)
 {
 	monsterHeight = 20.0f;
-	monsterMoveSpeed = 80.0f;
+	monsterMoveSpeed = 15000.0f;
 	maxHp = 20.f + (4 * Player->getStageNumber());
 	hp = 20.f + (4 * Player->getStageNumber());
 
@@ -19,7 +19,7 @@ BoomFly::BoomFly(Scene* scene, Vec2 position)
 	monsterSprite->setPosition(position);
 	monsterSprite->setTag(MonsterIdle);
 
-	monsterPhysics = PhysicsBody::createCircle(monsterSprite->getContentSize().width / 4, PhysicsMaterial(0, 1.f, 0));
+	monsterPhysics = PhysicsBody::createCircle(monsterSprite->getContentSize().width / 4, PhysicsMaterial(1.f, 1.f, 0));
 	monsterPhysics->setCollisionBitmask(3);
 	monsterPhysics->setPositionOffset(Vec2(0, -1 * (monsterHeight / 2)));
 	monsterPhysics->setContactTestBitmask(true);
@@ -73,6 +73,15 @@ void BoomFly::tick()
 	if (hp > 0)
 	{
 		SMI->PlayInsectSwarm();
+	}
+
+	if (monsterSprite->getTag() == MonsterColiisionExplosion)
+	{
+		hp -= Player->getBombDmg();
+
+		log("ÆøÆÈ°úÃæµ¹");
+
+		monsterSprite->setTag(MonsterIdle);
 	}
 }
 

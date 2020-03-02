@@ -3,8 +3,7 @@
 MapCase_13::MapCase_13(Scene* scene, Vec2 position)
 {
 	this->CreateCavesRoom(scene, position);
-	this->CreateDoorL(scene, position, NormalDoor);
-	this->CreateDoorR(scene, position, NormalDoor);
+	this->CreateDoorB(scene, position, NormalDoor);
 	this->CreateDoorT(scene, position, NormalDoor);
 
 	_scene = scene;

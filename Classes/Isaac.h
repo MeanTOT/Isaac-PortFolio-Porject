@@ -76,6 +76,7 @@ enum DoorName // 301 ~ 350
 enum MonsterTAG // 351 ~ 400
 {
 	MonsterColiisionBullet = 351,
+	MonsterColiisionExplosion,
 	MonsterIdle,
 	MonsterAttack,
 	MonsterErase,
@@ -98,6 +99,7 @@ enum MonsterKind // 451 ~ 500
 	MonsterKind_Tumor,
 	MonsterKind_BoomFly,
 	MonsterKind_WallCreep,
+	MonsterKind_Nest,
 };
 
 enum IsaacInfo// 501 ~ 550
@@ -217,6 +219,7 @@ private:
 	float totalLuck; // 아이템으로 얻은 운의 합 max == 10
 	float BaseLuck; // 기본 운
 	float itemInvLuck; // 적용될 최종 운
+	float bombDmg;
 
 	bool ControlAtivation; // 유저에게 조종권을 준다.
 	bool SceneChange; // 씬전환
@@ -310,6 +313,8 @@ public:
 	void setBaseLuck(float baseluck) { BaseLuck = baseluck; }
 	float getItemInvLuck() { return itemInvLuck; }
 	void setItemInvLuck(float iteminvluck) { itemInvLuck = iteminvluck; }
+	float getBombDmg() { return bombDmg; }
+	void setBombDmg(float bombdmg) { bombDmg = bombdmg; }
 
 	// ------------------------------------------------------ int ------------------------------------------------------ // 
 	int getBombCount() { return BombCount; }

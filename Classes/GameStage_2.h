@@ -4,6 +4,7 @@
 #include "MapCase_12.h"
 #include "MapCase_13.h"
 #include "MapCase_14.h"
+#include "MapCase_15.h"
 #include "Bullet.h"
 #include "Dregs.h"
 #include "MiniMap.h"

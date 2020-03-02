@@ -31,7 +31,7 @@ Tumor::Tumor(Scene * scene, Vec2 position)
 	scene->addChild(monsterSprite);
 
 	monsterShadowSprite = Sprite::create("Player/shadow.png");
-	monsterShadowSprite->setScale(0.2f);
+	monsterShadowSprite->setScale(0.3f);
 	monsterShadowSprite->setOpacity(100.f);
 	monsterShadowSprite->setPosition(monsterSprite->getContentSize().width / 2, (monsterSprite->getContentSize().height / 2) - monsterHeight);
 	monsterSprite->addChild(monsterShadowSprite, monsterSprite->getLocalZOrder() - 1);
@@ -181,12 +181,12 @@ void Tumor::CreateBullet()
 
 	auto randomAngle = RGI->getRandomNumberWithRange(0, 360);
 
-	_monsterBullet1->CreateIsaacBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, randomAngle + 0);
-	_monsterBullet2->CreateIsaacBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, randomAngle + 60);
-	_monsterBullet3->CreateIsaacBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, randomAngle + 120);
-	_monsterBullet4->CreateIsaacBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, randomAngle + 180);
-	_monsterBullet5->CreateIsaacBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, randomAngle + 240);
-	_monsterBullet6->CreateIsaacBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, randomAngle + 300);
+	_monsterBullet1->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x,monsterSprite->getPosition().y - 15), mosnterBulletMoveSpeed, randomAngle + 0);
+	_monsterBullet2->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x,monsterSprite->getPosition().y - 15), mosnterBulletMoveSpeed, randomAngle + 60);
+	_monsterBullet3->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x,monsterSprite->getPosition().y - 15), mosnterBulletMoveSpeed, randomAngle + 120);
+	_monsterBullet4->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x,monsterSprite->getPosition().y - 15), mosnterBulletMoveSpeed, randomAngle + 180);
+	_monsterBullet5->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x,monsterSprite->getPosition().y - 15), mosnterBulletMoveSpeed, randomAngle + 240);
+	_monsterBullet6->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x,monsterSprite->getPosition().y - 15), mosnterBulletMoveSpeed, randomAngle + 300);
 }
 
 void Tumor::FollowPlayer()

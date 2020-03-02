@@ -202,7 +202,7 @@ void MonsterBullet::CreateIsaacBullet(Scene * scene, Vec2 position, float speed,
 	_angle = angle;
 	_speed = speed;
 
-	_height = 0;
+	_height = 30;
 
 	MoveBulletForAngle();
 }

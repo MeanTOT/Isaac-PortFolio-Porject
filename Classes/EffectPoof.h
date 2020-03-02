@@ -8,6 +8,7 @@
 #include "Tumor.h"
 #include "BoomFly.h"
 #include "WallCreep.h"
+#include "Nest.h"
 
 class EffectPoof
 {
@@ -27,6 +28,7 @@ private:
 	Tumor* TumorMaker;
 	BoomFly* BoomFlyMaker;
 	WallCreep* WallCreepMaker;
+	Nest* NestMaker;
 
 public:
 	EffectPoof(Scene* scene, Vec2 position, MonsterKind monsterkind);
@@ -40,6 +42,9 @@ public:
 	void CreateTumor(Scene* scene, Vec2 position);
 	void CreateBoomFly(Scene* scene, Vec2 position);
 	void CreateWallCreep(Scene* scene, Vec2 position);
+	void CreateNest(Scene* scene, Vec2 position);
+
+
 };
 
 

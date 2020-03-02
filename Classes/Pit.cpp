@@ -6,12 +6,27 @@ void Pit::CreateObject(Scene* scene, Vec2 position, int index)
 	{
 	case 1:
 	{
-		ObjectSprite = Sprite::create("Object/Pit/grid_pit_catacombs_07.png");
+		ObjectSprite = Sprite::create("Object/Pit/grid_pit_catacombs_11.png");
 	}
 	break;
 	case 2:
 	{
 		ObjectSprite = Sprite::create("Object/Pit/grid_pit_catacombs_07.png");
+	}
+	break;
+	case 3:
+	{
+		ObjectSprite = Sprite::create("Object/Pit/grid_pit_catacombs_08.png");
+	}
+	break;
+	case 4:
+	{
+		ObjectSprite = Sprite::create("Object/Pit/grid_pit_catacombs_02.png");
+	}
+	break;
+	case 5:
+	{
+		ObjectSprite = Sprite::create("Object/Pit/grid_pit_catacombs_22.png");
 	}
 	break;
 	default:

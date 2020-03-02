@@ -782,6 +782,26 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			a->getNode()->setTag(MonsterColiisionBullet);
 	}
 
+	// 몬스터와 폭팔 충돌
+	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 7 ||
+		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 7)
+	{
+		if (b->getCollisionBitmask() == 4)
+			b->getNode()->setTag(MonsterColiisionExplosion);
+		if (a->getCollisionBitmask() == 4)
+			a->getNode()->setTag(MonsterColiisionExplosion);
+	}
+
+	// 몬스터와 폭팔 충돌
+	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 7 ||
+		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 7)
+	{
+		if (b->getCollisionBitmask() == 3)
+			b->getNode()->setTag(MonsterColiisionExplosion);
+		if (a->getCollisionBitmask() == 3)
+			a->getNode()->setTag(MonsterColiisionExplosion);
+	}
+
 	// 몬스터와 아이작 충돌
 	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 1 ||
 		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 1)
