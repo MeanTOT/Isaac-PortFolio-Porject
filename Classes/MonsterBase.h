@@ -42,10 +42,13 @@ protected:
 	float monsterHeight;
 	float monsterMoveSpeed;
 	float mosnterBulletMoveSpeed;
+	float monsterAngle;
 	float maxHp;
 	float hp;
+	
 
 	float AttackCycle;
+	float AttackCycle2;
 
 private:
 
@@ -54,6 +57,7 @@ public:
 	~MonsterBase();
 
 	Sprite* monsterSprite;
+	Sprite* monsterSubSprite;
 	Sprite* monsterShadowSprite;
 
 	PhysicsBody* monsterPhysics;
@@ -72,4 +76,5 @@ public:
 
 	void HitEffect();
 	void ChangeColor();
+	float GetAngleToPlayer();
 };

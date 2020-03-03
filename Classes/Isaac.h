@@ -100,6 +100,7 @@ enum MonsterKind // 451 ~ 500
 	MonsterKind_BoomFly,
 	MonsterKind_WallCreep,
 	MonsterKind_Nest,
+	MonsterKind_Boney,
 };
 
 enum IsaacInfo// 501 ~ 550
@@ -119,6 +120,7 @@ enum ItemKind// 601 ~ 650
 {
 	StigmataITEM = 601,
 	TheSadOnionITEM,
+	MagicMushRoomITEM,
 };
 
 //enum AtionTag // 1001 ~ 1500

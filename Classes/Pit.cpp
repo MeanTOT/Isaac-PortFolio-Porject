@@ -41,7 +41,7 @@ void Pit::CreateObject(Scene* scene, Vec2 position, int index)
 	ObjectSprite->setPosition(position);
 	ObjectSprite->setTag(ObjectIdle);
 
-	scene->addChild(ObjectSprite, -1 * ObjectSprite->getPosition().y - 500);
+	scene->addChild(ObjectSprite, -1 * ObjectSprite->getPosition().y - 7000);
 
 	Player->objectVec.push_back(this);
 

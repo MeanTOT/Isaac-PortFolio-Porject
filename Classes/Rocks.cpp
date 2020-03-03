@@ -74,6 +74,11 @@ void Rocks::CreateObject(Scene* scene, Vec2 position, int index)
 		ObjectSprite = Sprite::create("Object/Rock/rocks_basement_19.png");
 	}
 	break;
+	case 15:
+	{
+		ObjectSprite = Sprite::create("Object/Rock/rocks_basement_07.png");
+	}
+	break;
 	default:
 		break;
 	}

@@ -4,8 +4,8 @@ Fly::Fly(Scene* scene, Vec2 position)
 {
 	monsterHeight = 10.0f;
 	monsterMoveSpeed = 2.0f;
-	maxHp = 5.f * Player->getStageNumber();
-	hp = 5.f * Player->getStageNumber();
+	maxHp = 1.0f + (4 * Player->getStageNumber());
+	hp = 1.0f + (4 * Player->getStageNumber());
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Fly/Monster_Fly.plist");

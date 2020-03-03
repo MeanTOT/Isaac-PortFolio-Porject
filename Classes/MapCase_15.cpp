@@ -56,8 +56,8 @@ void MapCase_15::tick()
 	{
 		FirstEnter = true;
 
-		//WallCreepMaker[0] = new EffectPoof(_scene, Vec2(_position.x - 120, _position.y - 100), MonsterKind_WallCreep);
-		//WallCreepMaker[0] = new EffectPoof(_scene, Vec2(_position.x - 120, _position.y - 100), MonsterKind_WallCreep);
+		NestMaker[0] = new EffectPoof(_scene, Vec2(_position.x - 140, _position.y - 50), MonsterKind_Nest);
+		NestMaker[1] = new EffectPoof(_scene, Vec2(_position.x + 140, _position.y + 50), MonsterKind_Nest);
 
 		log("15번방 첫입장");
 	}

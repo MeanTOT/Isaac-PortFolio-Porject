@@ -705,6 +705,22 @@ void Isaac::doGetItemAction(ItemKind itemkind)
 		getItemInfoText2->setString("Ters up");
 	}
 		break;
+	case MagicMushRoomITEM:
+	{
+		MaxHp = MaxHp + 2;
+		Hp = Hp + 2;
+
+		totalDmgUps = totalDmgUps + 0.5f;
+		bulletRange = bulletRange + 150.0f;
+
+		BulletFireCycle -= 0.03f;
+
+		getItemSprite->setTexture("ITEMS/collectibles_012_magicmushroom.png");
+
+		getItemInfoText1->setString("MAGIC MUSHROOM");
+		getItemInfoText2->setString("All stats up!");
+	}
+		break;
 	default:
 		break;
 	}

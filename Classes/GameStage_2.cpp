@@ -59,9 +59,9 @@ bool GameStage_2::init()
 	MapCase[2] = new MapCase_13(this, Position_50_49_);
 	MapCase[3] = new MapCase_14(this, Position_51_50_);
 	MapCase[4] = new MapCase_15(this, Position_50_48_);
-	//MapCase[5] = new MapCase_6(this, Position_50_48_);
-	//MapCase[6] = new MapCase_7(this, Position_49_47_);
-	//MapCase[7] = new MapCase_8(this, Position_50_47_);
+	MapCase[5] = new MapCase_16_ItemRoom2(this, Position_48_50_);
+	MapCase[6] = new MapCase_17(this, Position_49_51_);
+	MapCase[7] = new MapCase_18(this, Position_51_51_);
 	//MapCase[8] = new MapCase_ItemRoom1(this, Position_50_46_);
 	//MapCase[9] = new MapCase_BossRoom(this, Position_52_49_);
 
@@ -104,6 +104,9 @@ void GameStage_2::tick(float delta)
 		MapCase[2]->tick();
 		MapCase[3]->tick();
 		MapCase[4]->tick();
+		MapCase[5]->tick();
+		MapCase[6]->tick();
+		MapCase[7]->tick();
 
 		// 아이작의 총알 백터
 		for (int i = 0; i < Player->isaacBulletVec.size(); i++)

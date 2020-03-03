@@ -4,7 +4,7 @@
 class MapCase_15 : public MapBase
 {
 private:
-	//EffectPoof* WallCreepMaker[2];
+	EffectPoof* NestMaker[2];
 	Fire* FireMaker;
 	Pit* PitMaker[12];
 public:

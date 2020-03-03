@@ -9,6 +9,7 @@
 #include "Fire.h"
 #include "Fly.h"
 #include "EffectPoof.h"
+#include "MushRoom.h"
 
 class MapBase : public Scene
 {
