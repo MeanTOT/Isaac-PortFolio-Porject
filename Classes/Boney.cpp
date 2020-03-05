@@ -6,7 +6,7 @@ Boney::Boney(Scene * scene, Vec2 position)
 	monsterMoveSpeed = 0.5f;
 	maxHp = 8.0f + (4 * Player->getStageNumber());
 	hp = 8.0f + (4 * Player->getStageNumber());
-	mosnterBulletMoveSpeed = 250.f;
+	mosnterBulletMoveSpeed = 400.f;
 
 	auto randomAngle = RGI->getRandomNumberWithRange(0, 360);
 
@@ -260,7 +260,7 @@ void Boney::DoAttack()
 
 	if (AttackCycle2 <= 0)
 	{
-		AttackCycle2 = 30;
+		AttackCycle2 = 80;
 
 		if (monsterSprite->getPosition().x - 30 < Player->getIsaacBody()->getPosition().x && monsterSprite->getPosition().x + 30 > Player->getIsaacBody()->getPosition().x)
 		{
@@ -270,7 +270,19 @@ void Boney::DoAttack()
 
 			monsterSprite->setTag(MonsterAttack);
 
-			auto _monsterBullet = new MonsterBullet;
+			auto _monsterBullet = new Bone;
+			_monsterBullet->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 15), mosnterBulletMoveSpeed, this->GetAngleToPlayer());
+
+		}
+		else if (monsterSprite->getPosition().y - 30 < Player->getIsaacBody()->getPosition().y && monsterSprite->getPosition().y + 30 > Player->getIsaacBody()->getPosition().y)
+		{
+			monsterSprite->stopAllActions();
+			monsterSubSprite->setSpriteFrame("monster_boney-head_01.png");
+			monsterSprite->setSpriteFrame("monster_boney-body_01.png");
+
+			monsterSprite->setTag(MonsterAttack);
+
+			auto _monsterBullet = new Bone;
 			_monsterBullet->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 15), mosnterBulletMoveSpeed, this->GetAngleToPlayer());
 
 		}

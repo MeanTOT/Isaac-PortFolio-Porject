@@ -340,6 +340,108 @@ EffectPoof::EffectPoof(Scene * scene, Vec2 position, MonsterKind monsterkind)
 		EffectPoofSprite->runAction(Sequence::create(Spawn::createWithTwoActions(EffectPoofAnimate, CallFunc::create(CC_CALLBACK_0(EffectPoof::CreateBoney, this, scene, position))), RemoveSelf::create(), nullptr));
 	}
 		break;
+	case MonsterKind_Charger:
+	{
+		cache = SpriteFrameCache::getInstance();
+		cache->addSpriteFramesWithFile("Monster/Poof/Effect_Poof_Normal.plist");
+
+		EffectPoofSprite = Sprite::createWithSpriteFrameName("effect_poof_01.png");
+		EffectPoofSprite->setPosition(position);
+		EffectPoofSprite->setScale(1.5f);
+		EffectPoofSprite->setAnchorPoint({ 0.5,0 });
+		scene->addChild(EffectPoofSprite);
+
+		EffectPoofAnimation = Animation::create();
+		EffectPoofAnimation->setDelayPerUnit(0.05f);
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_01.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_02.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_03.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_04.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_05.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_06.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_07.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_08.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_09.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_10.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_11.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_12.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_13.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_14.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_15.png"));
+		EffectPoofAnimate = Animate::create(EffectPoofAnimation);
+		EffectPoofAnimate->retain();
+
+		EffectPoofSprite->runAction(Sequence::create(Spawn::createWithTwoActions(EffectPoofAnimate, CallFunc::create(CC_CALLBACK_0(EffectPoof::CreateCharger, this, scene, position))), RemoveSelf::create(), nullptr));
+	}
+		break;
+	case MonsterKind_Blubber:
+	{
+		cache = SpriteFrameCache::getInstance();
+		cache->addSpriteFramesWithFile("Monster/Poof/Effect_Poof_Normal.plist");
+
+		EffectPoofSprite = Sprite::createWithSpriteFrameName("effect_poof_01.png");
+		EffectPoofSprite->setPosition(position);
+		EffectPoofSprite->setScale(1.5f);
+		EffectPoofSprite->setAnchorPoint({ 0.5,0 });
+		scene->addChild(EffectPoofSprite);
+
+		EffectPoofAnimation = Animation::create();
+		EffectPoofAnimation->setDelayPerUnit(0.05f);
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_01.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_02.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_03.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_04.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_05.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_06.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_07.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_08.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_09.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_10.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_11.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_12.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_13.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_14.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_15.png"));
+		EffectPoofAnimate = Animate::create(EffectPoofAnimation);
+		EffectPoofAnimate->retain();
+
+		EffectPoofSprite->runAction(Sequence::create(Spawn::createWithTwoActions(EffectPoofAnimate, CallFunc::create(CC_CALLBACK_0(EffectPoof::CreateBlubber, this, scene, position))), RemoveSelf::create(), nullptr));
+	}
+		break;
+	case MonsterKind_MegaMaw:
+	{
+		cache = SpriteFrameCache::getInstance();
+		cache->addSpriteFramesWithFile("Monster/Poof/Effect_Poof_Normal.plist");
+
+		EffectPoofSprite = Sprite::createWithSpriteFrameName("effect_poof_01.png");
+		EffectPoofSprite->setPosition(position);
+		EffectPoofSprite->setScale(1.5f);
+		EffectPoofSprite->setAnchorPoint({ 0.5,0 });
+		scene->addChild(EffectPoofSprite);
+
+		EffectPoofAnimation = Animation::create();
+		EffectPoofAnimation->setDelayPerUnit(0.05f);
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_01.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_02.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_03.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_04.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_05.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_06.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_07.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_08.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_09.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_10.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_11.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_12.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_13.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_14.png"));
+		EffectPoofAnimation->addSpriteFrame(cache->getSpriteFrameByName("effect_poof_15.png"));
+		EffectPoofAnimate = Animate::create(EffectPoofAnimation);
+		EffectPoofAnimate->retain();
+
+		EffectPoofSprite->runAction(Sequence::create(Spawn::createWithTwoActions(EffectPoofAnimate, CallFunc::create(CC_CALLBACK_0(EffectPoof::CreateMegaMaw, this, scene, position))), RemoveSelf::create(), nullptr));
+	}
+		break;
 	default:
 		break;
 	}
@@ -393,6 +495,21 @@ void EffectPoof::CreateNest(Scene * scene, Vec2 position)
 void EffectPoof::CreateBoney(Scene * scene, Vec2 position)
 {
 	BoneyMaker = new Boney(scene, position);
+}
+
+void EffectPoof::CreateCharger(Scene * scene, Vec2 position)
+{
+	ChargerMaker = new Charger(scene, position);
+}
+
+void EffectPoof::CreateBlubber(Scene * scene, Vec2 position)
+{
+	BlubberMaker = new Blubber(scene, position);
+}
+
+void EffectPoof::CreateMegaMaw(Scene * scene, Vec2 position)
+{
+	MegaMawMaker = new MegaMaw(scene, position);
 }
 
 

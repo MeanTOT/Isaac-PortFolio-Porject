@@ -6,7 +6,7 @@ Tumor::Tumor(Scene * scene, Vec2 position)
 	monsterMoveSpeed = 1.5f;
 	maxHp = 20.f + (4 * Player->getStageNumber());
 	hp = 20.f + (4 * Player->getStageNumber());
-	mosnterBulletMoveSpeed = 300.f;
+	mosnterBulletMoveSpeed = 500.f;
 
 	auto randomCycle = RGI->getRandomNumberWithRange(70, 130);
 

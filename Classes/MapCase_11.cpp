@@ -30,11 +30,6 @@ void MapCase_11::tick()
 	{
 		FirstEnter = true;
 
-		StageNameBackGround->setVisible(true);
-		StageNameBackGround->runAction(Sequence::create(ScaleTo::create(0.2f, 1.f),
-			CallFunc::create(CC_CALLBACK_0(MapCase_11::ShowStageNameText, this)),
-			DelayTime::create(2.0f), ScaleTo::create(0.2f, 0.01f), RemoveSelf::create(), nullptr));
-
 		log("11번방 첫입장");
 	}
 

@@ -19,7 +19,7 @@ void MushRoom::CreateObject(Scene* scene, Vec2 position, int index)
 		ObjectSprite = Sprite::create("Object/Rock_Cave/rocks_caves_14.png");
 	}
 	break;
-	case 16:
+	case 4:
 	{
 		ObjectSprite = Sprite::create("Object/Rock_Cave/rocks_caves_15.png");
 	}
@@ -54,11 +54,8 @@ void MushRoom::tick()
 		ObjectHp = 0;
 	}
 
-	if (ObjectHp == 0)
+	if (ObjectHp <= 0)
 	{
-		if (_index == 4)
-			return;
-
 		ObjectSprite->setTexture("Object/Rock/rocks_basement_04.png");
 		ObjectSprite->setTag(ObjectErase);
 		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);
@@ -66,11 +63,9 @@ void MushRoom::tick()
 
 		ObjectPhysics->removeFromWorld();
 
-		_dregs = new Dregs(_scene, _position, ObjectRock, ObjectSprite->getLocalZOrder());
+		_dregs = new Dregs(_scene, _position, ObjectMushRoom_Cave, ObjectSprite->getLocalZOrder());
 
 		this->RandomItemDrop();
-
-		log("%f", Player->getItemInvLuck());
 
 		auto randomindex = RGI->getRandomNumberWithRange(1, 3);
 

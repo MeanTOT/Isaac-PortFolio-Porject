@@ -5,6 +5,7 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Object/Dregs/PoopDregs1.plist");
 	cache->addSpriteFramesWithFile("Object/Dregs/BloodGibs.plist");
+	cache->addSpriteFramesWithFile("Object/Dregs/Effect_Toothgibs.plist");
 
 	switch (objectname)
 	{
@@ -104,6 +105,67 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 100);
 
 			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+		}
+	}
+		break;
+	case ObjectRock_Cave:
+	{
+		dregs[0] = Sprite::create("Object/Rock_Cave/rocks_caves_dregs_01.png");
+		dregs[1] = Sprite::create("Object/Rock_Cave/rocks_caves_dregs_02.png");
+		dregs[2] = Sprite::create("Object/Rock_Cave/rocks_caves_dregs_03.png");
+		dregs[3] = Sprite::create("Object/Rock_Cave/rocks_caves_dregs_04.png");
+
+		for (int i = 0; i < 4; i++)
+		{
+			dregs[i]->setPosition(position.x, position.y);
+			scene->addChild(dregs[i], zoder - 5000);
+			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
+
+			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+		}
+	}
+		break;
+	case ObjectMushRoom_Cave:
+	{
+		dregs[0] = Sprite::create("Object/Rock_Cave/mushroom_caves_dregs_01.png");
+		dregs[1] = Sprite::create("Object/Rock_Cave/mushroom_caves_dregs_02.png");
+		dregs[2] = Sprite::create("Object/Rock_Cave/mushroom_caves_dregs_03.png");
+		dregs[3] = Sprite::create("Object/Rock_Cave/mushroom_caves_dregs_04.png");
+
+		for (int i = 0; i < 4; i++)
+		{
+			dregs[i]->setPosition(position.x, position.y);
+			scene->addChild(dregs[i], zoder - 5000);
+			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
+
+			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+		}
+	}
+		break;
+	case ObjectBone:
+	{
+		dregs[0] = Sprite::createWithSpriteFrameName("effect_toothgibs_01.png");
+		dregs[1] = Sprite::createWithSpriteFrameName("effect_toothgibs_02.png");
+		dregs[2] = Sprite::createWithSpriteFrameName("effect_toothgibs_03.png");
+		dregs[3] = Sprite::createWithSpriteFrameName("effect_toothgibs_04.png");
+		dregs[4] = Sprite::createWithSpriteFrameName("effect_toothgibs_05.png");
+		dregs[5] = Sprite::createWithSpriteFrameName("effect_toothgibs_06.png");
+		dregs[6] = Sprite::createWithSpriteFrameName("effect_toothgibs_07.png");
+		dregs[7] = Sprite::createWithSpriteFrameName("effect_toothgibs_08.png");
+
+		for (int i = 0; i < 8; i++)
+		{
+			dregs[i]->setPosition(position.x, position.y);
+			scene->addChild(dregs[i], zoder - 5000);
+			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
+			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
+
+			dregs[i]->runAction(Sequence::createWithTwoActions(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1), RemoveSelf::create()));
 		}
 	}
 		break;

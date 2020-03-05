@@ -13,6 +13,8 @@ class MonsterBase;
 
 class ItemBase;
 
+class Bone;
+
 enum NowScene // 1 ~ 50
 {
 	PressStartScene = 1,
@@ -58,9 +60,12 @@ enum ObjectTAG // 201 ~ 250
 enum ObjectName // 251 ~ 300
 {
 	ObjectRock = 251,
+	ObjectRock_Cave,
 	ObjectFire,
 	ObjectPoop,
 	ObjectMonster,
+	ObjectMushRoom_Cave,
+	ObjectBone,
 };
 
 enum DoorName // 301 ~ 350
@@ -101,6 +106,9 @@ enum MonsterKind // 451 ~ 500
 	MonsterKind_WallCreep,
 	MonsterKind_Nest,
 	MonsterKind_Boney,
+	MonsterKind_Charger,
+	MonsterKind_Blubber,
+	MonsterKind_MegaMaw,
 };
 
 enum IsaacInfo// 501 ~ 550
@@ -364,6 +372,7 @@ public:
 	std::vector <MonsterBase*> monsterVec;
 	std::vector <MonsterBullet*> monsterBulletVec;
 	std::vector <ItemBase*> itemBaseVec;
+	std::vector <Bone*> BoneVec;
 
 
 	// 함수들을 모으는 함수 //

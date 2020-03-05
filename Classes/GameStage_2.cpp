@@ -62,8 +62,11 @@ bool GameStage_2::init()
 	MapCase[5] = new MapCase_16_ItemRoom2(this, Position_48_50_);
 	MapCase[6] = new MapCase_17(this, Position_49_51_);
 	MapCase[7] = new MapCase_18(this, Position_51_51_);
-	//MapCase[8] = new MapCase_ItemRoom1(this, Position_50_46_);
-	//MapCase[9] = new MapCase_BossRoom(this, Position_52_49_);
+	MapCase[8] = new MapCase_19(this, Position_51_52_);
+	MapCase[9] = new MapCase_20(this, Position_52_50_);
+	MapCase[10] = new MapCase_21(this, Position_52_49_);
+	MapCase[11] = new MapCase_22(this, Position_53_50_);
+	MapCase[12] = new MapCase_23_BossRoom(this, Position_53_51_);
 
 	// 미니맵 제작 //
 	miniMap = new MiniMap(this, MapCase);
@@ -107,6 +110,11 @@ void GameStage_2::tick(float delta)
 		MapCase[5]->tick();
 		MapCase[6]->tick();
 		MapCase[7]->tick();
+		MapCase[8]->tick();
+		MapCase[9]->tick();
+		MapCase[10]->tick();
+		MapCase[11]->tick();
+		MapCase[12]->tick();
 
 		// 아이작의 총알 백터
 		for (int i = 0; i < Player->isaacBulletVec.size(); i++)
@@ -128,6 +136,18 @@ void GameStage_2::tick(float delta)
 			if (Player->monsterBulletVec[i]->bulletShadow->getTag() == EraseOnVec)
 			{
 				Player->monsterBulletVec.erase(Player->monsterBulletVec.begin() + i);
+			}
+		}
+
+		// Bone(뼈) 백터
+		for (int i = 0; i < Player->BoneVec.size(); i++)
+		{
+
+			Player->BoneVec[i]->tick();
+
+			if (Player->BoneVec[i]->bulletShadow->getTag() == EraseOnVec)
+			{
+				Player->BoneVec.erase(Player->BoneVec.begin() + i);
 			}
 		}
 

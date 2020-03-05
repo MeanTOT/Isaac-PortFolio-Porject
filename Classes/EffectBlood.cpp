@@ -104,6 +104,19 @@ EffectBlood::EffectBlood(Scene * scene, Vec2 position, MonsterKind monsterkind)
 		scene->addChild(EffectBloodSprite, -20000);
 	}
 		break;
+	case MonsterKind_MegaMaw:
+	{
+		cache = SpriteFrameCache::getInstance();
+		cache->addSpriteFramesWithFile("Object/Dregs/Effect_BloodStains.plist");
+
+	
+		EffectBloodSprite = Sprite::createWithSpriteFrameName("effect_bloodstains_30.png");
+
+		EffectBloodSprite->setPosition(position.x, position.y - 20);
+		EffectBloodSprite->setAnchorPoint({ 0.5,0 });
+		scene->addChild(EffectBloodSprite, -20000);
+	}
+		break;
 	default:
 		break;
 	}

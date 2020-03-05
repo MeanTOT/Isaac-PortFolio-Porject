@@ -8,16 +8,22 @@
 #include "MapCase_16_ItemRoom2.h"
 #include "MapCase_17.h"
 #include "MapCase_18.h"
+#include "MapCase_19.h"
+#include "MapCase_20.h"
+#include "MapCase_21.h"
+#include "MapCase_22.h"
+#include "MapCase_23_BossRoom.h"
 #include "Bullet.h"
 #include "Dregs.h"
 #include "MiniMap.h"
+#include "Bone.h"
 
 class GameStage_2 : public Scene
 {
 private:
 	PhysicsWorld* sceneWorld;
 
-	MapBase* MapCase[10];
+	MapBase* MapCase[13];
 
 	MiniMap* miniMap;
 

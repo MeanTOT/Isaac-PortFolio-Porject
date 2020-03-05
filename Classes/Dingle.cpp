@@ -33,13 +33,13 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 
 	bossHpBar = ProgressTimer::create(Sprite::create("UI/ui_bosshealthbar_01.png"));
 	bossHpBar->setType(ProgressTimer::Type::BAR);
-	bossHpBar->setPosition(position.x, position.y + 100);
+	bossHpBar->setPosition(position.x, position.y + 125);
 	bossHpBar->setMidpoint({ 0,0 });
 	bossHpBar->setBarChangeRate({ 1,0 });
 	scene->addChild(bossHpBar, 10000);
 
 	bossHpBackBar = Sprite::create("UI/ui_bosshealthbar_02.png");
-	bossHpBackBar->setPosition(position.x, position.y + 100);
+	bossHpBackBar->setPosition(position.x, position.y + 125);
 	scene->addChild(bossHpBackBar, bossHpBar->getLocalZOrder() - 1);
 
 	monsterShadowSprite = Sprite::create("Player/shadow.png");

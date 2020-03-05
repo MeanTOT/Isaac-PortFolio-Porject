@@ -31,7 +31,8 @@ public:
 	PhysicsBody* bulletShadowPhysics;
 
 	void CreateIsaacBullet(Scene* scene, Vec2 position, float ImpulseX, float ImpulseY, float height);
-	void CreateIsaacBullet(Scene * scene, Vec2 position, float ImpulseX, float ImpulseY);
+	void CreateIsaacBullet(Scene * scene, Vec2 position, float speed, float angle);
+	void CreateBullet(Scene * scene, Vec2 position, float speed, float angle, float height);
 
 	void tick();
 

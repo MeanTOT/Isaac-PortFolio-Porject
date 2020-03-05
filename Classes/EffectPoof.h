@@ -10,6 +10,9 @@
 #include "WallCreep.h"
 #include "Nest.h"
 #include "Boney.h"
+#include "Charger.h"
+#include "Blubber.h"
+#include "MegaMaw.h"
 
 class EffectPoof
 {
@@ -31,6 +34,9 @@ private:
 	WallCreep* WallCreepMaker;
 	Nest* NestMaker;
 	Boney* BoneyMaker;
+	Charger* ChargerMaker;
+	Blubber* BlubberMaker;
+	MegaMaw* MegaMawMaker;
 
 public:
 	EffectPoof(Scene* scene, Vec2 position, MonsterKind monsterkind);
@@ -46,7 +52,9 @@ public:
 	void CreateWallCreep(Scene* scene, Vec2 position);
 	void CreateNest(Scene* scene, Vec2 position);
 	void CreateBoney(Scene* scene, Vec2 position);
-
+	void CreateCharger(Scene* scene, Vec2 position);
+	void CreateBlubber(Scene* scene, Vec2 position);
+	void CreateMegaMaw(Scene* scene, Vec2 position);
 
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "MonsterBase.h"
-#include "MonsterBullet.h"
+#include "Bone.h"
 
 class Boney : public MonsterBase
 {

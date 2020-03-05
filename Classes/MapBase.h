@@ -3,6 +3,7 @@
 #include "ObjectBase.h"
 #include "MonsterBase.h"
 #include "Rocks.h"
+#include "Rocks_Cave.h"
 #include "Poop.h"
 #include "altar.h"
 #include "Pit.h"

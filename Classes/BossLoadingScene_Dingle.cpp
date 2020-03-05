@@ -42,7 +42,7 @@ bool BossLoadingScene_Dingle::init()
 	vsnamasIsaac->setPosition(Position_50_50_.x - 240, Position_50_50_.y + 100);
 	this->addChild(vsnamasIsaac);
 
-	vsnamesDingle = Sprite::create("BossLoading/vsnames_01.png");
+	vsnamesDingle = Sprite::create("BossLoading/vsnames_05.png");
 	vsnamesDingle->setPosition(Position_50_50_.x + 240, Position_50_50_.y + 100);
 	this->addChild(vsnamesDingle);
 
