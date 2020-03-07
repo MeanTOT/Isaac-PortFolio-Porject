@@ -17,6 +17,8 @@ Bomb::Bomb(Scene * scene, Vec2 position)
 
 	scene->addChild(itemSprite, -1 * itemSprite->getPosition().y);;
 
+	ItemSummonAnimation(itemSprite);
+
 	Player->itemBaseVec.push_back(this);
 }
 

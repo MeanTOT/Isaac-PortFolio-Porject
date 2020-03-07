@@ -600,42 +600,42 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// --------------------------------------------- [아이작 바디] --------------------------------------------- //
 
 	// 아이작과 아이작총알,그림자 충돌
-	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 5)
+	if (a->getCollisionBitmask() == ISAAC_BODY && b->getCollisionBitmask() == ISAAC_BULLET_SHADOW ||
+		b->getCollisionBitmask() == ISAAC_BODY && a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 	{
 		return false;
 	}
 
 	// 아이작과 폭팔 충돌
-	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 7)
+	if (a->getCollisionBitmask() == ISAAC_BODY && b->getCollisionBitmask() == EXPLOSION ||
+		b->getCollisionBitmask() == ISAAC_BODY && a->getCollisionBitmask() == EXPLOSION)
 	{
 		Player->setIsaacInfo(IsaacTakeDamage);
 	}
 
 	// 아이작과 드랍 아이템
-	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 11 ||
-		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 11)
+	if (a->getCollisionBitmask() == ISAAC_BODY && b->getCollisionBitmask() == ITEM_DROP ||
+		b->getCollisionBitmask() == ISAAC_BODY && a->getCollisionBitmask() == ITEM_DROP)
 	{
-		if (b->getCollisionBitmask() == 11)
+		if (b->getCollisionBitmask() == ITEM_DROP)
 			b->getNode()->setTag(ItemErase);
-		if (a->getCollisionBitmask() == 11)
+		if (a->getCollisionBitmask() == ITEM_DROP)
 			a->getNode()->setTag(ItemErase);
 	}
 
 	// 아이작과 패시브 아이템
-	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 12 ||
-		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 12)
+	if (a->getCollisionBitmask() == ISAAC_BODY && b->getCollisionBitmask() == ITEM_PASSIVE ||
+		b->getCollisionBitmask() == ISAAC_BODY && a->getCollisionBitmask() == ITEM_PASSIVE)
 	{
-		if (b->getCollisionBitmask() == 12)
+		if (b->getCollisionBitmask() == ITEM_PASSIVE)
 			b->getNode()->setTag(ItemErase);
-		if (a->getCollisionBitmask() == 12)
+		if (a->getCollisionBitmask() == ITEM_PASSIVE)
 			a->getNode()->setTag(ItemErase);
 	}
 
 	// 아이작과 불,가시 등등 과 충돌
-	if (a->getCollisionBitmask() == 1 && b->getCollisionBitmask() == 8 ||
-		b->getCollisionBitmask() == 1 && a->getCollisionBitmask() == 8)
+	if (a->getCollisionBitmask() == ISAAC_BODY && b->getCollisionBitmask() == OBJECT_FIRE ||
+		b->getCollisionBitmask() == ISAAC_BODY && a->getCollisionBitmask() == OBJECT_FIRE)
 	{
 		Player->setIsaacInfo(IsaacTakeDamage);
 	}
@@ -643,86 +643,86 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// --------------------------------------------- [아이작 총알] --------------------------------------------- //
 
 	// 아이작 총알끼리 충돌
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 5)
+	if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW && b->getCollisionBitmask() == ISAAC_BULLET_SHADOW ||
+		b->getCollisionBitmask() == ISAAC_BULLET_SHADOW && a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 	{
 		return false;
 	}
 
 	// 아이작 총알과 두번째 벽 충돌
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 15 ||
-		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 15)
+	if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW && b->getCollisionBitmask() == WALL_INSIDE ||
+		b->getCollisionBitmask() == ISAAC_BULLET_SHADOW && a->getCollisionBitmask() == WALL_INSIDE)
 	{
 		return false;
 	}
 
 	// 아이작 총알과 오브젝트 충돌
-	if (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 8 && a->getCollisionBitmask() == 5)
+	if (a->getCollisionBitmask() == OBJECT_FIRE && b->getCollisionBitmask() == ISAAC_BULLET_SHADOW ||
+		b->getCollisionBitmask() == OBJECT_FIRE && a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 	{
-		if (b->getCollisionBitmask() == 5)
+		if (b->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
+		if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			a->getNode()->setTag(EraseBulletTag);
 
-		if (b->getCollisionBitmask() == 8)
+		if (b->getCollisionBitmask() == OBJECT_FIRE)
 			b->getNode()->setTag(ObjectHit);
-		if (a->getCollisionBitmask() == 8)
+		if (a->getCollisionBitmask() == OBJECT_FIRE)
 			a->getNode()->setTag(ObjectHit);
 	}
 
 	// 아이작 총알과 오브젝트 충돌
-	if (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 2 && a->getCollisionBitmask() == 5)
+	if (a->getCollisionBitmask() == OBJECT && b->getCollisionBitmask() == ISAAC_BULLET_SHADOW ||
+		b->getCollisionBitmask() == OBJECT && a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 	{
-		if (b->getCollisionBitmask() == 5)
+		if (b->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
+		if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			a->getNode()->setTag(EraseBulletTag);
 
-		if (b->getCollisionBitmask() == 2)
+		if (b->getCollisionBitmask() == OBJECT)
 			b->getNode()->setTag(ObjectHit);
-		if (a->getCollisionBitmask() == 2)
+		if (a->getCollisionBitmask() == OBJECT)
 			a->getNode()->setTag(ObjectHit);
 	}
 
 	//아이작 총알과 벽 충돌
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 10 ||
-		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 10)
+	if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW && b->getCollisionBitmask() == WALL_OUTER ||
+		b->getCollisionBitmask() == ISAAC_BULLET_SHADOW && a->getCollisionBitmask() == WALL_OUTER)
 	{
-		if (b->getCollisionBitmask() == 5)
+		if (b->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
+		if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			a->getNode()->setTag(EraseBulletTag);
 	}
 
 	// 아이작 총알과 폭탄 충돌 
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 6 ||
-		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 6)
+	if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW && b->getCollisionBitmask() == ISAAC_BOBM ||
+		b->getCollisionBitmask() == ISAAC_BULLET_SHADOW && a->getCollisionBitmask() == ISAAC_BOBM)
 	{
-		if (b->getCollisionBitmask() == 5)
+		if (b->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
+		if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			a->getNode()->setTag(EraseBulletTag);
 	}
 
 	// 아이작총알과 드랍아이템
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 11 ||
-		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 11)
+	if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW && b->getCollisionBitmask() == ITEM_DROP ||
+		b->getCollisionBitmask() == ISAAC_BULLET_SHADOW && a->getCollisionBitmask() == ITEM_DROP)
 	{
 		return false;
 	}
 
 	// 아이작총알과 구덩이
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 14 ||
-		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 14)
+	if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW && b->getCollisionBitmask() == PIT ||
+		b->getCollisionBitmask() == ISAAC_BULLET_SHADOW && a->getCollisionBitmask() == PIT)
 	{
 		return false;
 	}
 
-	// 아이작총알과 액티브아이템
-	if (a->getCollisionBitmask() == 5 && b->getCollisionBitmask() == 12 ||
-		b->getCollisionBitmask() == 5 && a->getCollisionBitmask() == 12)
+	// 아이작총알과 패시브아이템
+	if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW && b->getCollisionBitmask() == ITEM_PASSIVE ||
+		b->getCollisionBitmask() == ISAAC_BULLET_SHADOW && a->getCollisionBitmask() == ITEM_PASSIVE)
 	{
 		return false;
 	}
@@ -731,276 +731,273 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 	// --------------------------------------------- [몬스터 바디] --------------------------------------------- //
 
 	// 몬스터와 두번째벽 충돌
-	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 15 ||
-		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 15)
+	if (a->getCollisionBitmask() == MONSTER_BODY_AIR && b->getCollisionBitmask() == WALL_INSIDE ||
+		b->getCollisionBitmask() == MONSTER_BODY_AIR && a->getCollisionBitmask() == WALL_INSIDE)
 	{
 		return false;
 	}
 
 	// 몬스터와 두번째벽 충돌
-	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 15 ||
-		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 15)
+	if (a->getCollisionBitmask() == MONSTER_BODY_GROUND && b->getCollisionBitmask() == WALL_INSIDE ||
+		b->getCollisionBitmask() == MONSTER_BODY_GROUND && a->getCollisionBitmask() == WALL_INSIDE)
 	{
 		return false;
 	}
 
 	// 몬스터(공중)와 오브젝트 충돌
-	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 2 ||
-		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 2)
+	if (a->getCollisionBitmask() == MONSTER_BODY_AIR && b->getCollisionBitmask() == OBJECT ||
+		b->getCollisionBitmask() == MONSTER_BODY_AIR && a->getCollisionBitmask() == OBJECT)
 	{
 		return false;
 	}
 
 	// 몬스터와 아이작총알 충돌
-	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 5)
+	if (a->getCollisionBitmask() == MONSTER_BODY_AIR && b->getCollisionBitmask() == ISAAC_BULLET_SHADOW ||
+		b->getCollisionBitmask() == MONSTER_BODY_AIR && a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 	{
-		if (b->getCollisionBitmask() == 5)
+		if (b->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
+		if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			a->getNode()->setTag(EraseBulletTag);
 
-		if (b->getCollisionBitmask() == 3)
+		if (b->getCollisionBitmask() == MONSTER_BODY_AIR)
 			b->getNode()->setTag(MonsterColiisionBullet);
-		if (a->getCollisionBitmask() == 3)
+		if (a->getCollisionBitmask() == MONSTER_BODY_AIR)
 			a->getNode()->setTag(MonsterColiisionBullet);
 	}
 
 
 	// 몬스터와 아이작총알 충돌
-	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 5)
+	if (a->getCollisionBitmask() == MONSTER_BODY_GROUND && b->getCollisionBitmask() == ISAAC_BULLET_SHADOW ||
+		b->getCollisionBitmask() == MONSTER_BODY_GROUND && a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 	{
-		if (b->getCollisionBitmask() == 5)
+		if (b->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 5)
+		if (a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 			a->getNode()->setTag(EraseBulletTag);
 
-		if (b->getCollisionBitmask() == 4)
+		if (b->getCollisionBitmask() == MONSTER_BODY_GROUND)
 			b->getNode()->setTag(MonsterColiisionBullet);
-		if (a->getCollisionBitmask() == 4)
+		if (a->getCollisionBitmask() == MONSTER_BODY_GROUND)
 			a->getNode()->setTag(MonsterColiisionBullet);
 	}
 
 	// 몬스터와 폭팔 충돌
-	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 7)
+	if (a->getCollisionBitmask() == MONSTER_BODY_GROUND && b->getCollisionBitmask() == EXPLOSION ||
+		b->getCollisionBitmask() == MONSTER_BODY_GROUND && a->getCollisionBitmask() == EXPLOSION)
 	{
-		if (b->getCollisionBitmask() == 4)
+		if (b->getCollisionBitmask() == MONSTER_BODY_GROUND)
 			b->getNode()->setTag(MonsterColiisionExplosion);
-		if (a->getCollisionBitmask() == 4)
+		if (a->getCollisionBitmask() == MONSTER_BODY_GROUND)
 			a->getNode()->setTag(MonsterColiisionExplosion);
 	}
 
 	// 몬스터와 폭팔 충돌
-	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 7)
+	if (a->getCollisionBitmask() == MONSTER_BODY_AIR && b->getCollisionBitmask() == EXPLOSION ||
+		b->getCollisionBitmask() == MONSTER_BODY_AIR && a->getCollisionBitmask() == EXPLOSION)
 	{
-		if (b->getCollisionBitmask() == 3)
+		if (b->getCollisionBitmask() == MONSTER_BODY_AIR)
 			b->getNode()->setTag(MonsterColiisionExplosion);
-		if (a->getCollisionBitmask() == 3)
+		if (a->getCollisionBitmask() == MONSTER_BODY_AIR)
 			a->getNode()->setTag(MonsterColiisionExplosion);
 	}
 
 	// 몬스터와 아이작 충돌
-	if (a->getCollisionBitmask() == 3 && b->getCollisionBitmask() == 1 ||
-		b->getCollisionBitmask() == 3 && a->getCollisionBitmask() == 1)
+	if (a->getCollisionBitmask() == MONSTER_BODY_AIR && b->getCollisionBitmask() == ISAAC_BODY ||
+		b->getCollisionBitmask() == MONSTER_BODY_AIR && a->getCollisionBitmask() == ISAAC_BODY)
 		Player->setIsaacInfo(IsaacTakeDamage);
 
 	// 몬스터와 아이작 충돌
-	if (a->getCollisionBitmask() == 4 && b->getCollisionBitmask() == 1 ||
-		b->getCollisionBitmask() == 4 && a->getCollisionBitmask() == 1)
+	if (a->getCollisionBitmask() == MONSTER_BODY_GROUND && b->getCollisionBitmask() == ISAAC_BODY ||
+		b->getCollisionBitmask() == MONSTER_BODY_GROUND && a->getCollisionBitmask() == ISAAC_BODY)
 		Player->setIsaacInfo(IsaacTakeDamage);
 
 
 	// --------------------------------------------- [몬스터 총알] --------------------------------------------- //
 
 	// 몬스터 총알과 내벽 충돌
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 15 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 15)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == WALL_INSIDE ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == WALL_INSIDE)
 	{
 		return false;
 	}
 
 	// 몬스터 총알과 구덩이 충돌
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 14 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 14)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == PIT ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == PIT)
 	{
 		return false;
 	}
 
 	// 몬스터 높은총알과 내벽 충돌
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 15 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 15)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == WALL_INSIDE ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == WALL_INSIDE)
 	{
 		return false;
 	}
 
 	// 몬스터 총알과 몬스터바디
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 4 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 4)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == MONSTER_BODY_GROUND ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == MONSTER_BODY_GROUND)
 	{
 		return false;
 	}
 
 	// 몬스터 높은총알과 몬스터 바디
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 4 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 4)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == MONSTER_BODY_GROUND ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == MONSTER_BODY_GROUND)
 	{
 		return false;
 	}
 
 	// 몬스터 총알과 몬스터 바디
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 3 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 3)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == MONSTER_BODY_AIR ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == MONSTER_BODY_AIR)
 	{
 		return false;
 	}
 
 	// 몬스터 높은총알과 몬스터 바디
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 3 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 3)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == MONSTER_BODY_AIR ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == MONSTER_BODY_AIR)
 	{
 		return false;
 	}
 
 	// 몬스터 총알과 몬스터 총알 
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 9 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 9)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == MONSTER_BULLET ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == MONSTER_BULLET)
 	{
 		return false;
 	}
 
 	// 몬스터 높은총알과 몬스터 높은총알
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 13 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 13)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == MONSTER_BULLET_HIGH ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == MONSTER_BULLET_HIGH)
 	{
 		return false;
 	}
 
 	// 몬스터 총알과 아이작 총알 
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 5)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == ISAAC_BULLET_SHADOW ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 	{
 		return false;
 	}
 
 	// 몬스터 높은총알과 아이작총알
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 5 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 5)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == ISAAC_BULLET_SHADOW ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == ISAAC_BULLET_SHADOW)
 	{
 		return false;
 	}
 
 	// 몬스터 총알과 폭탄
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 6 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 6)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == ISAAC_BOBM ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == ISAAC_BOBM)
 	{
 		return false;
 	}
 
 	// 몬스터 높은총알과 폭탄
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 6 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 6)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == ISAAC_BOBM ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == ISAAC_BOBM)
 	{
 		return false;
 	}
 
 	// 몬스터 총알과 폭팔 
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 7)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == EXPLOSION ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == EXPLOSION)
 	{
 		return false;
 	}
 
 	// 몬스터 높은총알과 폭팔
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 7)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == EXPLOSION ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == EXPLOSION)
 	{
 		return false;
 	}
 
 	// 몬스터 높은총알과 내벽 충돌
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 2 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 2)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == OBJECT ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == OBJECT)
 	{
 		return false;
 	}
 
 	// 몬스터 총알과 오브젝트 충돌
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 2 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 2)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == OBJECT ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == OBJECT)
 	{
-		if (b->getCollisionBitmask() == 9)
+		if (b->getCollisionBitmask() == MONSTER_BULLET)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 9)
+		if (a->getCollisionBitmask() == MONSTER_BULLET)
 			a->getNode()->setTag(EraseBulletTag);
 	}
 
 	// 몬스터 총알과 외벽 충돌
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 10 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 10)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == WALL_OUTER ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == WALL_OUTER)
 	{
-		if (b->getCollisionBitmask() == 9)
+		if (b->getCollisionBitmask() == MONSTER_BULLET)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 9)
+		if (a->getCollisionBitmask() == MONSTER_BULLET)
 			a->getNode()->setTag(EraseBulletTag);
 	}
 
 	// 몬스터 총알과 외벽 충돌
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 10 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 10)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == WALL_OUTER ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == WALL_OUTER)
 	{
-		if (b->getCollisionBitmask() == 13)
+		if (b->getCollisionBitmask() == MONSTER_BULLET_HIGH)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 13)
+		if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH)
 			a->getNode()->setTag(EraseBulletTag);
 	}
 
 	// 몬스터총알 과 아이작 충돌
-	if (a->getCollisionBitmask() == 9 && b->getCollisionBitmask() == 1 ||
-		b->getCollisionBitmask() == 9 && a->getCollisionBitmask() == 1)
+	if (a->getCollisionBitmask() == MONSTER_BULLET && b->getCollisionBitmask() == ISAAC_BODY ||
+		b->getCollisionBitmask() == MONSTER_BULLET && a->getCollisionBitmask() == ISAAC_BODY)
 	{
 		Player->setIsaacInfo(IsaacTakeDamage);
 
-		if (b->getCollisionBitmask() == 9)
+		if (b->getCollisionBitmask() == MONSTER_BULLET)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 9)
+		if (a->getCollisionBitmask() == MONSTER_BULLET)
 			a->getNode()->setTag(EraseBulletTag);
 	}
 
 	// 몬스터총알 과 아이작 충돌
-	if (a->getCollisionBitmask() == 13 && b->getCollisionBitmask() == 1 ||
-		b->getCollisionBitmask() == 13 && a->getCollisionBitmask() == 1)
+	if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH && b->getCollisionBitmask() == ISAAC_BODY ||
+		b->getCollisionBitmask() == MONSTER_BULLET_HIGH && a->getCollisionBitmask() == ISAAC_BODY)
 	{
 		Player->setIsaacInfo(IsaacTakeDamage);
 
-		if (b->getCollisionBitmask() == 13)
+		if (b->getCollisionBitmask() == MONSTER_BULLET_HIGH)
 			b->getNode()->setTag(EraseBulletTag);
-		if (a->getCollisionBitmask() == 13)
+		if (a->getCollisionBitmask() == MONSTER_BULLET_HIGH)
 			a->getNode()->setTag(EraseBulletTag);
 	}
-
-
-
 
 	// 오브젝트와 폭팔 충돌
-	if (a->getCollisionBitmask() == 2 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 2 && a->getCollisionBitmask() == 7)
+	if (a->getCollisionBitmask() == OBJECT && b->getCollisionBitmask() == EXPLOSION ||
+		b->getCollisionBitmask() == OBJECT && a->getCollisionBitmask() == EXPLOSION)
 	{
-		if (b->getCollisionBitmask() == 2)
+		if (b->getCollisionBitmask() == OBJECT)
 			b->getNode()->setTag(ObjectCollisionBomb);
-		if (a->getCollisionBitmask() == 2)
+		if (a->getCollisionBitmask() == OBJECT)
 			a->getNode()->setTag(ObjectCollisionBomb);
 	}
 
 	// 오브젝트와 폭팔 충돌
-	if (a->getCollisionBitmask() == 8 && b->getCollisionBitmask() == 7 ||
-		b->getCollisionBitmask() == 8 && a->getCollisionBitmask() == 7)
+	if (a->getCollisionBitmask() == OBJECT_FIRE && b->getCollisionBitmask() == EXPLOSION ||
+		b->getCollisionBitmask() == OBJECT_FIRE && a->getCollisionBitmask() == EXPLOSION)
 	{
-		if (b->getCollisionBitmask() == 8)
+		if (b->getCollisionBitmask() == OBJECT_FIRE)
 			b->getNode()->setTag(ObjectCollisionBomb);
-		if (a->getCollisionBitmask() == 8)
+		if (a->getCollisionBitmask() == OBJECT_FIRE)
 			a->getNode()->setTag(ObjectCollisionBomb);
 	}
 	

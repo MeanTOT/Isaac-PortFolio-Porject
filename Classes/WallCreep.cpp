@@ -111,6 +111,8 @@ void WallCreep::FollowPlayer()
 		if (Player->getIsaacBody()->getPosition().x > monsterSprite->getPosition().x - 30 && Player->getIsaacBody()->getPosition().x < monsterSprite->getPosition().x + 30 &&
 			AttackCycle == 50)
 		{
+			SMI->PlaySpiderCoughs();
+
 			AttackCycle = 49;
 			monsterPhysics->setVelocity(Vec2(0,0));
 			monsterSprite->setTag(MonsterAttack);

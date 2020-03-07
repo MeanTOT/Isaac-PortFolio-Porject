@@ -14,6 +14,7 @@
 #include "Dregs.h"
 #include "MiniMap.h"
 #include "GameStage_2.h"
+#include "LoadingScreen2.h"
 
 class GameStage_1 : public Scene
 {

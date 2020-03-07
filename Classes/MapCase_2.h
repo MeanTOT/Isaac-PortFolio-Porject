@@ -1,5 +1,6 @@
 #pragma once
 #include "MapBase.h"
+#include "Heart.h"
 
 class MapCase_2 : public MapBase
 {

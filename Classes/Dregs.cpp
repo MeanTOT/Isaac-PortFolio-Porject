@@ -7,6 +7,11 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 	cache->addSpriteFramesWithFile("Object/Dregs/BloodGibs.plist");
 	cache->addSpriteFramesWithFile("Object/Dregs/Effect_Toothgibs.plist");
 
+	for (int i = 0; i < 30; i++)
+	{
+		dregsPhysics[i] = nullptr;
+	}
+
 	switch (objectname)
 	{
 	case ObjectRock:
@@ -19,12 +24,14 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 		for (int i = 0; i < 4; i++)
 		{
 			dregs[i]->setPosition(position.x, position.y);
+
 			scene->addChild(dregs[i], zoder - 5000);
 			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
 
-			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+			dregs[i]->runAction(Sequence::create(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1), 
+				CallFunc::create(CC_CALLBACK_0(Dregs::RemovePhysicsBody,this)),nullptr));
 		}
 	}
 		break;
@@ -57,7 +64,8 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
 
-			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+			dregs[i]->runAction(Sequence::create(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1),
+				CallFunc::create(CC_CALLBACK_0(Dregs::RemovePhysicsBody, this)), nullptr));
 		}
 	}		 
 		break;
@@ -104,7 +112,8 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 100);
 
-			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+			dregs[i]->runAction(Sequence::create(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1),
+				CallFunc::create(CC_CALLBACK_0(Dregs::RemovePhysicsBody, this)), nullptr));
 		}
 	}
 		break;
@@ -123,7 +132,8 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
 
-			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+			dregs[i]->runAction(Sequence::create(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1),
+				CallFunc::create(CC_CALLBACK_0(Dregs::RemovePhysicsBody, this)), nullptr));
 		}
 	}
 		break;
@@ -142,7 +152,8 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
 
-			dregs[i]->runAction(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1));
+			dregs[i]->runAction(Sequence::create(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1),
+				CallFunc::create(CC_CALLBACK_0(Dregs::RemovePhysicsBody, this)), nullptr));
 		}
 	}
 		break;
@@ -160,12 +171,13 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 		for (int i = 0; i < 8; i++)
 		{
 			dregs[i]->setPosition(position.x, position.y);
+
 			scene->addChild(dregs[i], zoder - 5000);
 			randomPosX[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomPosY[i] = RGI->getRandomNumberWithRange(-25, 25);
 			randomHeight[i] = RGI->getRandomNumberWithRange(0, 50);
 
-			dregs[i]->runAction(Sequence::createWithTwoActions(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1), RemoveSelf::create()));
+			dregs[i]->runAction(Sequence::create(JumpBy::create(0.5f, Vec2(randomPosX[i], randomPosY[i]), randomHeight[i], 1), RemoveSelf::create(), nullptr));
 		}
 	}
 		break;
@@ -177,4 +189,13 @@ Dregs::Dregs(Scene * scene, Vec2 position, ObjectName objectname, int zoder)
 
 Dregs::~Dregs()
 {
+}
+
+void Dregs::RemovePhysicsBody()
+{
+	for (int i = 0; i < 30; i++)
+	{
+		if (dregsPhysics[i] != nullptr)
+			dregsPhysics[i]->removeFromWorld();
+	}
 }

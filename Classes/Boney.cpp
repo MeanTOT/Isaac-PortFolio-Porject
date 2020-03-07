@@ -260,7 +260,7 @@ void Boney::DoAttack()
 
 	if (AttackCycle2 <= 0)
 	{
-		AttackCycle2 = 80;
+		AttackCycle2 = 30;
 
 		if (monsterSprite->getPosition().x - 30 < Player->getIsaacBody()->getPosition().x && monsterSprite->getPosition().x + 30 > Player->getIsaacBody()->getPosition().x)
 		{

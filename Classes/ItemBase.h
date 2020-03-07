@@ -27,4 +27,6 @@ public:
 	virtual void tick() {}
 	virtual void SetZorder() {}
 	virtual void EraseItem() {}
+
+	void ItemSummonAnimation(Sprite* pSprite);
 };

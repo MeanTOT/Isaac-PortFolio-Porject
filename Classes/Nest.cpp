@@ -268,8 +268,13 @@ void Nest::DoAttack()
 
 		monsterAngle = randomAngle;
 
+		if (RGI->getPercentage(0.3f))
+		{
+			SMI->PlayScaredWhimper2();
+		}
+
 		monsterSprite->stopAllActions();
-		// 울음소리 재생
+
 	}
 }
 

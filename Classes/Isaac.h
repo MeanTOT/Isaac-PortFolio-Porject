@@ -131,6 +131,26 @@ enum ItemKind// 601 ~ 650
 	MagicMushRoomITEM,
 };
 
+enum CollisionBitMask
+{
+	ISAAC_BODY  = 1,
+	OBJECT = 2,
+	MONSTER_BODY_AIR = 3,
+	MONSTER_BODY_GROUND = 4,
+	ISAAC_BULLET_SHADOW = 5,
+	ISAAC_BOBM = 6,
+	EXPLOSION = 7,
+	OBJECT_FIRE = 8,
+	MONSTER_BULLET = 9,
+	WALL_OUTER = 10,
+	ITEM_DROP = 11,
+	ITEM_PASSIVE = 12,
+	MONSTER_BULLET_HIGH = 13,
+	PIT = 14,
+	WALL_INSIDE = 15,
+	DREGS = 16,
+};
+
 //enum AtionTag // 1001 ~ 1500
 //{
 //

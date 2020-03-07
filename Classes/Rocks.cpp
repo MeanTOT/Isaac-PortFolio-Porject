@@ -129,6 +129,14 @@ void Rocks::tick()
 		if (_index == 4)
 			return;
 
+		if (_index == 5)
+		{
+			heartMaker = new Heart(_scene, _position);
+			auto coinMaker1 = new Coin(_scene, _position);
+			auto coinMaker2 = new Coin(_scene, _position);
+			bombMaker = new Bomb(_scene, _position);
+		}
+
 		ObjectSprite->setTexture("Object/Rock/rocks_basement_04.png");
 		ObjectSprite->setTag(ObjectErase);
 		ObjectSprite->setLocalZOrder(ObjectSprite->getLocalZOrder() - 5000);

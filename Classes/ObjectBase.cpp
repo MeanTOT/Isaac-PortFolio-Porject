@@ -4,7 +4,7 @@ void ObjectBase::RandomItemDrop()
 {
 	if (RGI->getPercentage(Player->getItemInvLuck()))
 	{
-		auto randomIndex = RGI->getRandomNumberWithRange(1, 3);
+		auto randomIndex = RGI->getRandomNumberWithRange(1, 4);
 
 		switch (randomIndex)
 		{
@@ -21,6 +21,11 @@ void ObjectBase::RandomItemDrop()
 		case 3:
 		{
 			bombMaker = new Bomb(_scene, _position);
+		}
+			break;
+		case 4:
+		{
+			heartMaker = new Heart(_scene, _position);
 		}
 			break;
 		default:

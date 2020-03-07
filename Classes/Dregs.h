@@ -8,6 +8,7 @@ private:
 
 
 	Sprite* dregs[30];
+	PhysicsBody* dregsPhysics[30];
 
 	int randomPosX[30];
 	int randomPosY[30];
@@ -19,4 +20,6 @@ private:
 public:
 	Dregs(Scene* scene, Vec2 position, ObjectName objectname, int zoder);
 	~Dregs();
+
+	void RemovePhysicsBody();
 };

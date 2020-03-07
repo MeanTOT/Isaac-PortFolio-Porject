@@ -1,24 +1,16 @@
 #pragma once
 #include "MonsterBase.h"
-
 #include "MonsterBullet.h"
+#include "Heart.h"
 
 class EffectPoof;
-
-enum DingleInfo
-{
-	DingleRight = 1,
-	DingleLeft,
-	DingleTop,
-	DingleBottom,
-};
 
 class Dingle : public MonsterBase
 {
 private:
-	DingleInfo dingleInfo;
 	ProgressTimer* bossHpBar;
 	Sprite* bossHpBackBar;
+	Heart* heartMaker[2];
 public:
 	Dingle(Scene* scene, Vec2 position);
 	~Dingle() {}
@@ -35,5 +27,7 @@ public:
 	void CreateTrace();
 	void DingleRushSound();
 	void DIngleBulletFireSound();
+	void ResetAttackCycle();
+	void CreateDropItem();
 
 };

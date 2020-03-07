@@ -196,7 +196,7 @@ void GameStage_2::onEnterTransitionDidFinish()
 	// BGM 재생 [처음 씬이 전환됬을때만 실행된다.]
 	if (!isPlayBgm)
 	{
-		SMI->PlaydipteraSonata();
+		SMI->PlayTheCave();
 		isPlayBgm = true;
 	}
 

@@ -2,11 +2,11 @@
 
 Horf::Horf(Scene* scene, Vec2 position)
 {
-	monsterHeight = 15.0f;
+	monsterHeight = 20.0f;
 	monsterMoveSpeed = 0.0f;
 	maxHp = 10.f * Player->getStageNumber();
 	hp = 10.f * Player->getStageNumber();
-	mosnterBulletMoveSpeed = 2.3f;
+	mosnterBulletMoveSpeed = 600.0f;
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Horf/Monster_Horf.plist");
@@ -158,16 +158,14 @@ void Horf::CreateBullet()
 	if (monsterSprite->getPosition().x - 60 < Player->getIsaacBody()->getPosition().x && monsterSprite->getPosition().x + 60 > Player->getIsaacBody()->getPosition().x)
 	{
 		auto _monsterBullet = new MonsterBullet;
-		_monsterBullet->CreateIsaacBullet(_scene, monsterSprite->getPosition(), (Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x) * mosnterBulletMoveSpeed,
-			(Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)  * mosnterBulletMoveSpeed, monsterHeight);
+		_monsterBullet->CreateBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, this->GetAngleToPlayer(), monsterHeight);
 
 		SMI->PlayShakeyKidRoar();
 	}
 	else if (monsterSprite->getPosition().y - 60 < Player->getIsaacBody()->getPosition().y && monsterSprite->getPosition().y + 60 > Player->getIsaacBody()->getPosition().y)
 	{
 		auto _monsterBullet = new MonsterBullet;
-		_monsterBullet->CreateIsaacBullet(_scene, monsterSprite->getPosition(), (Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x) * mosnterBulletMoveSpeed,
-			(Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)  * mosnterBulletMoveSpeed, monsterHeight);
+		_monsterBullet->CreateBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, this->GetAngleToPlayer(), monsterHeight);
 
 		SMI->PlayShakeyKidRoar();
 	}

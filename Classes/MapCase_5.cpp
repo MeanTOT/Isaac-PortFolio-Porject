@@ -22,7 +22,7 @@ MapCase_5::MapCase_5(Scene * scene, Vec2 position)
 	RocksMaker[2]->CreateObject(_scene, Vec2(_position.x - 32, _position.y - 64), 2);
 	RocksMaker[3]->CreateObject(_scene, Vec2(_position.x + 32, _position.y - 64), 2);
 	RocksMaker[4]->CreateObject(_scene, Vec2(_position.x + 96, _position.y - 64), 1);
-	RocksMaker[5]->CreateObject(_scene, Vec2(_position.x + 160, _position.y - 64), 3);
+	RocksMaker[5]->CreateObject(_scene, Vec2(_position.x + 160, _position.y - 64), 5);
 	RocksMaker[6]->CreateObject(_scene, Vec2(_position.x - 128, _position.y), 1);
 	RocksMaker[7]->CreateObject(_scene, Vec2(_position.x - 64, _position.y), 1);
 	RocksMaker[8]->CreateObject(_scene, Vec2(_position.x, _position.y), 1);

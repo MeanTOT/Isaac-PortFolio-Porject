@@ -4,14 +4,12 @@
 Dingle::Dingle(Scene * scene, Vec2 position)
 {
 	monsterHeight = 20.0f;
-	monsterMoveSpeed = 4000.0f;
-	mosnterBulletMoveSpeed = 200.0f;
+	monsterMoveSpeed = 6000.0f;
+	mosnterBulletMoveSpeed = 400.0f;
 	maxHp = 330.0f;
 	hp = 330.0f;
 
 	AttackCycle = 200;
-
-	dingleInfo = DingleLeft;
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Dingle/Boss_Dingle.plist");
@@ -97,7 +95,7 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 
 	// 돌진공격이후 휴식
 	monsterAnimation4 = Animation::create();
-	monsterAnimation4->setDelayPerUnit(0.1f);
+	monsterAnimation4->setDelayPerUnit(0.2f);
 	monsterAnimation4->addSpriteFrame(cache->getSpriteFrameByName("boss_dingle_28.png"));
 	monsterAnimation4->addSpriteFrame(cache->getSpriteFrameByName("boss_dingle_29.png"));
 	monsterAnimation4->addSpriteFrame(cache->getSpriteFrameByName("boss_dingle_28.png"));
@@ -167,26 +165,6 @@ void Dingle::tick()
 	SetZorder();
 	MonsterSetTag();
 
-	/*if (!monsterSprite->getNumberOfRunningActions())
-		monsterSprite->runAction(monsterAnimate);*/
-
-	if (Player->getIsaacBody()->getPosition().x > monsterSprite->getPosition().x)
-	{
-		dingleInfo = DingleRight;
-	}
-	if (Player->getIsaacBody()->getPosition().x < monsterSprite->getPosition().x)
-	{
-		dingleInfo = DingleLeft;
-	}
-	if (Player->getIsaacBody()->getPosition().y < monsterSprite->getPosition().y)
-	{
-		dingleInfo = DingleBottom;
-	}
-	if (Player->getIsaacBody()->getPosition().y > monsterSprite->getPosition().y)
-	{
-		dingleInfo = DingleTop;
-	}
-
 	bossHpBar->setPercentage((hp / maxHp) * 100);
 }
 
@@ -213,7 +191,7 @@ void Dingle::MonsterSetTag()
 		hp -= Player->getEffectiveDmg();
 		monsterSprite->setTag(MonsterIdle);
 
-		if (hp <= 0)
+		if (hp <= 30)
 			return;
 
 		this->HitEffect();
@@ -228,7 +206,8 @@ void Dingle::MonsterSetTag()
 		monsterShadowSprite->setVisible(false);
 
 		monsterSprite->stopAllActions();
-		monsterSprite->runAction(Sequence::create(monsterAnimate7, CallFunc::create(CC_CALLBACK_0(Dingle::MonsterEraseCall, this)), RemoveSelf::create(), nullptr));
+		monsterSprite->runAction(Sequence::create(monsterAnimate7, CallFunc::create(CC_CALLBACK_0(Dingle::MonsterEraseCall, this)),
+			CallFunc::create(CC_CALLBACK_0(Dingle::CreateDropItem, this)), RemoveSelf::create(), nullptr));
 		monsterSprite->setTag(MonsterErase);
 
 		auto randomindex = RGI->getRandomNumberWithRange(1, 5);
@@ -266,13 +245,11 @@ void Dingle::MonsterEraseCall()
 
 void Dingle::DoAttack()
 {
-	if (monsterSprite->getNumberOfRunningActionsByTag(1))
-		AttackCycle--;
+	/*if (monsterSprite->getNumberOfRunningActionsByTag(1))*/
+	AttackCycle--;
 
-	if (AttackCycle <= 0)
+	if (AttackCycle == 0)
 	{
-		AttackCycle = 100;
-
 		auto randomAttack = RGI->getRandomNumberWithRange(1, 2);
 
 		if (Player->getIsaacBody()->getPosition().y > monsterSprite->getPosition().y - 30 && Player->getIsaacBody()->getPosition().y < monsterSprite->getPosition().y + 30 && randomAttack == 1 ||
@@ -282,7 +259,7 @@ void Dingle::DoAttack()
 			monsterSprite->setTag(MonsterAttack);
 			monsterSprite->runAction(Sequence::create(monsterAnimate6,CallFunc::create(CC_CALLBACK_0(Dingle::DIngleBulletFireSound,this)),
 				CallFunc::create(CC_CALLBACK_0(Dingle::CreateBullet, this)),
-				monsterAnimate2, CallFunc::create(CC_CALLBACK_0(Dingle::ChangeTag, this)), nullptr));
+				monsterAnimate2, CallFunc::create(CC_CALLBACK_0(Dingle::ResetAttackCycle, this)), CallFunc::create(CC_CALLBACK_0(Dingle::ChangeTag, this)), nullptr));
 		}
 		else
 		{
@@ -300,7 +277,8 @@ void Dingle::DoAttack()
 					CallFunc::create(CC_CALLBACK_0(Dingle::CreateTrace, this)), monsterAnimate3,
 					monsterAnimate6, CallFunc::create(CC_CALLBACK_0(Dingle::DingleRushSound, this)),
 					CallFunc::create(CC_CALLBACK_0(Dingle::RushAttack, this)),
-					CallFunc::create(CC_CALLBACK_0(Dingle::CreateTrace, this)), monsterAnimate3,
+					CallFunc::create(CC_CALLBACK_0(Dingle::CreateTrace, this)), monsterAnimate3, monsterAnimate4,
+					CallFunc::create(CC_CALLBACK_0(Dingle::ResetAttackCycle, this)),
 					CallFunc::create(CC_CALLBACK_0(Dingle::ChangeTag, this)), nullptr));
 			}
 			else
@@ -309,7 +287,7 @@ void Dingle::DoAttack()
 				monsterSprite->stopAllActions();
 				monsterSprite->setTag(MonsterAttack);
 				monsterSprite->runAction(Sequence::create(monsterAnimate5, CallFunc::create(CC_CALLBACK_0(Dingle::SommonsDip, this)),
-					CallFunc::create(CC_CALLBACK_0(Dingle::ChangeTag, this)), nullptr));
+					CallFunc::create(CC_CALLBACK_0(Dingle::ResetAttackCycle, this)), CallFunc::create(CC_CALLBACK_0(Dingle::ChangeTag, this)), nullptr));
 			}
 		}
 	}
@@ -317,52 +295,18 @@ void Dingle::DoAttack()
 
 void Dingle::CreateBullet()
 {
-
 	auto _monsterBullet1 = new MonsterBullet;
 	auto _monsterBullet2 = new MonsterBullet;
 	auto _monsterBullet3 = new MonsterBullet;
 
-	if (Player->getIsaacBody()->getPosition().y > monsterSprite->getPosition().y - 70 && Player->getIsaacBody()->getPosition().y < monsterSprite->getPosition().y + 70 &&
-		Player->getIsaacBody()->getPosition().x > monsterSprite->getPosition().x)
-	{
-		_monsterBullet1->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), mosnterBulletMoveSpeed, 0, 30);
-		_monsterBullet2->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), mosnterBulletMoveSpeed, -45, 30);
-		_monsterBullet3->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), mosnterBulletMoveSpeed, 45, 30);
-	}
-	else if (Player->getIsaacBody()->getPosition().y > monsterSprite->getPosition().y - 70 && Player->getIsaacBody()->getPosition().y < monsterSprite->getPosition().y + 70 &&
-		Player->getIsaacBody()->getPosition().x < monsterSprite->getPosition().x)
-	{
-		_monsterBullet1->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), -mosnterBulletMoveSpeed, 0, 30);
-		_monsterBullet2->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), -mosnterBulletMoveSpeed, -45, 30);
-		_monsterBullet3->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), -mosnterBulletMoveSpeed, 45, 30);
-	}
-	else if (Player->getIsaacBody()->getPosition().x > monsterSprite->getPosition().x - 70 && Player->getIsaacBody()->getPosition().x < monsterSprite->getPosition().x + 70 &&
-		Player->getIsaacBody()->getPosition().y > monsterSprite->getPosition().y)
-	{
-		_monsterBullet1->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), 0  , mosnterBulletMoveSpeed ,30);
-		_monsterBullet2->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), -45, mosnterBulletMoveSpeed ,30);
-		_monsterBullet3->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), 45, mosnterBulletMoveSpeed ,30);
-	}
-	else if (Player->getIsaacBody()->getPosition().x > monsterSprite->getPosition().x - 70 && Player->getIsaacBody()->getPosition().x < monsterSprite->getPosition().x + 70 &&
-		Player->getIsaacBody()->getPosition().y < monsterSprite->getPosition().y)
-	{
-		_monsterBullet1->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), 0,-mosnterBulletMoveSpeed, 30);
-		_monsterBullet2->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), -45,-mosnterBulletMoveSpeed, 30);
-		_monsterBullet3->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), 45,-mosnterBulletMoveSpeed, 30);
-	}
+	_monsterBullet1->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), mosnterBulletMoveSpeed, this->GetAngleToPlayer());
+	_monsterBullet2->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), mosnterBulletMoveSpeed, this->GetAngleToPlayer() - 20);
+	_monsterBullet3->CreateIsaacBullet(_scene, Vec2(monsterSprite->getPosition().x, monsterSprite->getPosition().y - 20), mosnterBulletMoveSpeed, this->GetAngleToPlayer() + 20);
 }
 
 void Dingle::RushAttack()
 {
-	if (monsterSprite->getPositionX() > Player->getIsaacBody()->getPositionX())
-		monsterPhysics->applyImpulse(Vec2(-monsterMoveSpeed, 0));
-	else if (monsterSprite->getPositionX() < Player->getIsaacBody()->getPositionX())
-		monsterPhysics->applyImpulse(Vec2(monsterMoveSpeed, 0));
-
-	if (monsterSprite->getPositionY() > Player->getIsaacBody()->getPositionY())
-		monsterPhysics->applyImpulse(Vec2(0, -monsterMoveSpeed));
-	else if (monsterSprite->getPositionY() < Player->getIsaacBody()->getPositionY())
-		monsterPhysics->applyImpulse(Vec2(0, monsterMoveSpeed));
+	monsterPhysics->applyImpulse(Vec2(cosf(CC_DEGREES_TO_RADIANS(this->GetAngleToPlayer())) * monsterMoveSpeed, sinf(CC_DEGREES_TO_RADIANS(this->GetAngleToPlayer())) * monsterMoveSpeed));
 }
 
 void Dingle::SommonsDip()
@@ -431,4 +375,15 @@ void Dingle::DingleRushSound()
 void Dingle::DIngleBulletFireSound()
 {
 	SMI->PlayDingleBulletFire();
+}
+
+void Dingle::ResetAttackCycle()
+{
+	AttackCycle = 50;
+}
+
+void Dingle::CreateDropItem()
+{
+	heartMaker[0] = new Heart(_scene, monsterSprite->getPosition());
+	heartMaker[1] = new Heart(_scene, monsterSprite->getPosition());
 }

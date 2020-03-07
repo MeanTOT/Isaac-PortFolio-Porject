@@ -6,7 +6,7 @@ Pooter::Pooter(Scene * scene, Vec2 position)
 	monsterMoveSpeed = 1.f;
 	maxHp = 8.f * Player->getStageNumber();
 	hp = 8.f * Player->getStageNumber();
-	mosnterBulletMoveSpeed = 1.5f;
+	mosnterBulletMoveSpeed = 600.0f;
 
 	auto randomCycle = RGI->getRandomNumberWithRange(70, 130);
 
@@ -230,6 +230,5 @@ void Pooter::DoAttack()
 void Pooter::CreateBullet()
 {
 	auto _monsterBullet = new MonsterBullet;
-	_monsterBullet->CreateIsaacBullet(_scene, monsterSprite->getPosition(), (Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x) * mosnterBulletMoveSpeed,
-		(Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)  * mosnterBulletMoveSpeed, monsterHeight);
+	_monsterBullet->CreateBullet(_scene, monsterSprite->getPosition(), mosnterBulletMoveSpeed, this->GetAngleToPlayer(), monsterHeight);
 }

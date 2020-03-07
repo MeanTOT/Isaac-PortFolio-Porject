@@ -4,6 +4,7 @@
 #include "Coin.h"
 #include "Key.h"
 #include "Bomb.h"
+#include "Heart.h"
 
 class ObjectBase
 {
@@ -31,6 +32,7 @@ public:
 	Coin* coinMaker;
 	Key* keyMaker;
 	Bomb* bombMaker;
+	Heart* heartMaker;
 
 	virtual void tick() {}
 	virtual void CreateObject(Scene* scene, Vec2 position, int index) {}

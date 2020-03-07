@@ -169,7 +169,7 @@ void GameStage_1::tick(float delta)
 		Player->monsterVec.clear();
 
 		AudioEngine::stopAll();
-		auto pScene = GameStage_2::createScene();
+		auto pScene = LoadingScreen2::createScene();
 		DI->replaceScene(TransitionFade::create(1.0f, pScene));
 		Player->setSceneChange(false);
 	}

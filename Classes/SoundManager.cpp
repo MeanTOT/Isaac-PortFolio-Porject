@@ -307,6 +307,21 @@ void SoundManager::PlayBloodFire4()
 	bloodFire4 = AudioEngine::play2d("Sound/Sfx/blood fire 4.mp3", false, sfxVolume);
 }
 
+void SoundManager::PlayTheCave()
+{
+	theCave = AudioEngine::play2d("Sound/Bgm/the caves.ogg", true, bgmVolume);
+}
+
+void SoundManager::PlayScaredWhimper2()
+{
+	scaredWhimper2 = AudioEngine::play2d("Sound/Sfx/scared whimper 2.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlaySpiderCoughs()
+{
+	spiderCoughs = AudioEngine::play2d("Sound/Sfx/spider coughs.mp3", false, sfxVolume);
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);

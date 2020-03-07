@@ -29,6 +29,8 @@ MapCase_2::MapCase_2(Scene* scene, Vec2 position)
 	RocksMaker[3]->CreateObject(_scene, Vec2(_position.x + 32, _position.y + 32), 5);
 	PoopMaker[0]->CreateObject(_scene, Vec2(_position.x - 170, _position.y + 80), 1);
 	PoopMaker[1]->CreateObject(_scene, Vec2(_position.x + 170, _position.y - 80), 1);
+
+
 }
 
 MapCase_2::~MapCase_2()

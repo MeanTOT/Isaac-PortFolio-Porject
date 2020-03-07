@@ -58,6 +58,9 @@ private:
 	int bloodFire2;
 	int bloodFire3;
 	int bloodFire4;
+	int theCave;
+	int scaredWhimper2;
+	int spiderCoughs;
 
 	SoundManager();
 	~SoundManager() {};
@@ -125,7 +128,9 @@ public:
 	void PlayBloodFire2();
 	void PlayBloodFire3();
 	void PlayBloodFire4();
-
+	void PlayTheCave();
+	void PlayScaredWhimper2();
+	void PlaySpiderCoughs();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }
