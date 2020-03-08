@@ -5,6 +5,7 @@ MapBase::MapBase()
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("MapImage/basement/basement.plist");
 	cache->addSpriteFramesWithFile("MapImage/Caves/Caves.plist");
+	cache->addSpriteFramesWithFile("MapImage/Shop/MapImage_Shop.plist");
 
 	isMakeDoorR = false;
 	isMakeDoorL = false;
@@ -439,6 +440,52 @@ void MapBase::CreateCavesRoom(Scene * scene, Vec2 position)
 	default:
 		break;
 	}
+
+	//안티 적용
+	mapLT->getTexture()->setAliasTexParameters();
+	mapLB->getTexture()->setAliasTexParameters();
+	mapRT->getTexture()->setAliasTexParameters();
+	mapRB->getTexture()->setAliasTexParameters();
+
+	mapRect = Rect(position.x - DI->getWinSize().width / 2, position.y - DI->getWinSize().height / 2, DI->getWinSize().width, DI->getWinSize().height);
+}
+
+void MapBase::CreateShopRoom(Scene * scene, Vec2 position)
+{
+	_position = position;
+
+	mapLT = Sprite::createWithSpriteFrameName("shop_01.png");
+	mapLT->setAnchorPoint({ 1,0 });
+	mapLT->setScaleY(0.9f);
+	mapLT->setPosition(position);
+	scene->addChild(mapLT, BackGroundZoder);
+
+	mapLB = Sprite::createWithSpriteFrameName("shop_01.png");
+	mapLB->setAnchorPoint({ 1,1 });
+	mapLB->setFlippedY(true);
+	mapLB->setScaleY(0.9f);
+	mapLB->setPosition(position);
+	scene->addChild(mapLB, BackGroundZoder);
+
+	mapRT = Sprite::createWithSpriteFrameName("shop_01.png");
+	mapRT->setAnchorPoint({ 0,0 });
+	mapRT->setFlippedX(true);
+	mapRT->setScaleY(0.9f);
+	mapRT->setPosition(position);
+	scene->addChild(mapRT, BackGroundZoder);
+
+	mapRB = Sprite::createWithSpriteFrameName("shop_01.png");
+	mapRB->setAnchorPoint({ 0,1 });
+	mapRB->setFlippedX(true);
+	mapRB->setFlippedY(true);
+	mapRB->setScaleY(0.9f);
+	mapRB->setPosition(position);
+	scene->addChild(mapRB, BackGroundZoder);
+
+	shading_1_1 = Sprite::create("MapImage/shading.png");
+	shading_1_1->setPosition(position);
+	shading_1_1->setScaleX(1.1f);
+	scene->addChild(shading_1_1);
 
 	//안티 적용
 	mapLT->getTexture()->setAliasTexParameters();

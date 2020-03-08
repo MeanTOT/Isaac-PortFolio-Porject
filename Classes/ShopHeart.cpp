@@ -1,6 +1,6 @@
-#include "Heart.h"
+#include "ShopHeart.h"
 
-Heart::Heart(Scene * scene, Vec2 position)
+ShopHeart::ShopHeart(Scene * scene, Vec2 position)
 {
 	itemSprite = Sprite::create("ITEMS/pickup_heart_01.png");
 	itemSprite->setPosition(position.x, position.y);
@@ -8,8 +8,8 @@ Heart::Heart(Scene * scene, Vec2 position)
 
 	itemPhysics = PhysicsBody::createCircle(itemSprite->getContentSize().width / 4, PhysicsMaterial(0, 0, 0));
 	itemPhysics->setContactTestBitmask(true);
-	itemPhysics->setCollisionBitmask(11);
-	itemPhysics->setLinearDamping(1);
+	itemPhysics->setCollisionBitmask(17);
+	itemPhysics->setDynamic(false);
 	itemSprite->addComponent(itemPhysics);
 
 	scene->addChild(itemSprite, -1 * itemSprite->getPosition().y);;
@@ -19,27 +19,24 @@ Heart::Heart(Scene * scene, Vec2 position)
 	Player->itemBaseVec.push_back(this);
 }
 
-void Heart::tick()
+void ShopHeart::tick()
 {
 	SetZorder();
 	EraseItem();
-
-	if (!itemSprite->getNumberOfRunningActions())
-		itemSprite->runAction(Sequence::create(ScaleTo::create(0.1f, 0.8f, 1.2f), ScaleTo::create(0.1f, 1.2f, 0.8f), ScaleTo::create(0.1f, 1.0f),DelayTime::create(0.5f), nullptr));
 }
 
-void Heart::SetZorder()
+void ShopHeart::SetZorder()
 {
 	itemSprite->setLocalZOrder(itemSprite->getPositionY() * -1);
 }
 
-void Heart::EraseItem()
+void ShopHeart::EraseItem()
 {
 	if (itemSprite->getTag() == ItemErase)
 	{
-		if (Player->getHp() < Player->getMaxHp())
+		if (Player->getHp() < Player->getMaxHp() && Player->getCoinCount() >= 5)
 		{
-			SMI->PlayHeartPickUp();
+			Player->setCoinCount(Player->getCoinCount() - 5);
 
 			itemSprite->runAction(RemoveSelf::create());
 			itemPhysics->removeFromWorld();

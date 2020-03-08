@@ -61,6 +61,7 @@ private:
 	int theCave;
 	int scaredWhimper2;
 	int spiderCoughs;
+	int heartPickUp;
 
 	SoundManager();
 	~SoundManager() {};
@@ -131,6 +132,7 @@ public:
 	void PlayTheCave();
 	void PlayScaredWhimper2();
 	void PlaySpiderCoughs();
+	void PlayHeartPickUp();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

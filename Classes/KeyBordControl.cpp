@@ -633,6 +633,16 @@ bool KeyBordControl::onContactBegin(PhysicsContact & contact)
 			a->getNode()->setTag(ItemErase);
 	}
 
+	// 아이작과 상점 아이템
+	if (a->getCollisionBitmask() == ISAAC_BODY && b->getCollisionBitmask() == SHOP_ITEMS ||
+		b->getCollisionBitmask() == ISAAC_BODY && a->getCollisionBitmask() == SHOP_ITEMS)
+	{
+		if (b->getCollisionBitmask() == SHOP_ITEMS)
+			b->getNode()->setTag(ItemErase);
+		if (a->getCollisionBitmask() == SHOP_ITEMS)
+			a->getNode()->setTag(ItemErase);
+	}
+
 	// 아이작과 불,가시 등등 과 충돌
 	if (a->getCollisionBitmask() == ISAAC_BODY && b->getCollisionBitmask() == OBJECT_FIRE ||
 		b->getCollisionBitmask() == ISAAC_BODY && a->getCollisionBitmask() == OBJECT_FIRE)

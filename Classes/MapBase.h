@@ -11,6 +11,11 @@
 #include "Fly.h"
 #include "EffectPoof.h"
 #include "MushRoom.h"
+#include "ShopMaster.h"
+#include "ShopPriceNumber.h"
+#include "ShopHeart.h"
+#include "ShopKey.h"
+#include "ShopItem_BloodOfTheMarTyr.h"
 
 class MapBase : public Scene
 {
@@ -78,6 +83,7 @@ public:
 	void CreateBaseMentRoom(Scene* scene, Vec2 position);
 	void CreateBaseMentBossRoom(Scene* scene, Vec2 position);
 	void CreateCavesRoom(Scene* scene, Vec2 position);
+	void CreateShopRoom(Scene* scene, Vec2 position);
 	void CreateDoorL(Scene* scene, Vec2 position, DoorName doorname);
 	void CreateDoorR(Scene* scene, Vec2 position, DoorName doorname);
 	void CreateDoorT(Scene* scene, Vec2 position, DoorName doorname);

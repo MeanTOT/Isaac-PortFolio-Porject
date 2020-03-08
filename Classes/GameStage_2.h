@@ -13,6 +13,7 @@
 #include "MapCase_21.h"
 #include "MapCase_22.h"
 #include "MapCase_23_BossRoom.h"
+#include "MapCase_24_ShopRoom.h"
 #include "Bullet.h"
 #include "Dregs.h"
 #include "MiniMap.h"
@@ -23,7 +24,7 @@ class GameStage_2 : public Scene
 private:
 	PhysicsWorld* sceneWorld;
 
-	MapBase* MapCase[13];
+	MapBase* MapCase[20];
 
 	MiniMap* miniMap;
 

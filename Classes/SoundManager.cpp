@@ -322,6 +322,11 @@ void SoundManager::PlaySpiderCoughs()
 	spiderCoughs = AudioEngine::play2d("Sound/Sfx/spider coughs.mp3", false, sfxVolume);
 }
 
+void SoundManager::PlayHeartPickUp()
+{
+	heartPickUp = AudioEngine::play2d("Sound/Sfx/boss 2 bubbles.mp3", false, sfxVolume);
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);

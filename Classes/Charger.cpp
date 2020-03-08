@@ -8,9 +8,7 @@ Charger::Charger(Scene * scene, Vec2 position)
 	hp = 20.0f + (4 * Player->getStageNumber());
 	mosnterBulletMoveSpeed = 250.f;
 
-	auto randomCycle = RGI->getRandomNumberWithRange(70, 130);
-
-	AttackCycle = randomCycle;
+	AttackCycle = 0;
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Monster/Charger/Monster_Charger.plist");

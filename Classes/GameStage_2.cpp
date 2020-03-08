@@ -67,6 +67,7 @@ bool GameStage_2::init()
 	MapCase[10] = new MapCase_21(this, Position_52_49_);
 	MapCase[11] = new MapCase_22(this, Position_53_50_);
 	MapCase[12] = new MapCase_23_BossRoom(this, Position_53_51_);
+	MapCase[13] = new MapCase_24_ShopRoom(this, Position_52_48_);
 
 	// 미니맵 제작 //
 	miniMap = new MiniMap(this, MapCase);
@@ -115,6 +116,7 @@ void GameStage_2::tick(float delta)
 		MapCase[10]->tick();
 		MapCase[11]->tick();
 		MapCase[12]->tick();
+		MapCase[13]->tick();
 
 		// 아이작의 총알 백터
 		for (int i = 0; i < Player->isaacBulletVec.size(); i++)

@@ -5,6 +5,7 @@
 #include "Key.h"
 #include "Bomb.h"
 #include "Heart.h"
+#include "Pill.h"
 
 class ObjectBase
 {
@@ -33,10 +34,12 @@ public:
 	Key* keyMaker;
 	Bomb* bombMaker;
 	Heart* heartMaker;
+	Pill* pillMaker;
 
 	virtual void tick() {}
 	virtual void CreateObject(Scene* scene, Vec2 position, int index) {}
 
 	void RandomItemDrop();
+	void RandomItemDropUnconditional();
 	void RandomItemDropSpecial();
 };

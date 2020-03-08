@@ -129,6 +129,8 @@ enum ItemKind// 601 ~ 650
 	StigmataITEM = 601,
 	TheSadOnionITEM,
 	MagicMushRoomITEM,
+	BloodOfTheMarTyrITEM,
+	PillsItem,
 };
 
 enum CollisionBitMask
@@ -149,6 +151,7 @@ enum CollisionBitMask
 	PIT = 14,
 	WALL_INSIDE = 15,
 	DREGS = 16,
+	SHOP_ITEMS = 17,
 };
 
 //enum AtionTag // 1001 ~ 1500

@@ -16,6 +16,7 @@ Isaac::Isaac()
 	cache->addSpriteFramesWithFile("Player/GetItemAction.plist");
 	cache->addSpriteFramesWithFile("Player/GoToNextStage.plist");
 	cache->addSpriteFramesWithFile("MapImage/Door/TreasureDoor_KeyAnimation.plist");
+	cache->addSpriteFramesWithFile("ITEMS/PickUp_Pills.plist");
 
 	// ------- Int ------- //
 
@@ -36,7 +37,7 @@ Isaac::Isaac()
 	stageNumber = 1;
 	godModeCount1 = 15;
 	godModeCount2 = 10;
-	getItemCount1 = 100;
+	getItemCount1 = 75;
 	
 
 	// ------- Float ------- //
@@ -356,7 +357,7 @@ void Isaac::tick()
 			if (getItemCount1 <= 0)
 			{
 				IsaacChangeInfo1();
-				getItemCount1 = 100;
+				getItemCount1 = 75;
 			}
 		}
 
@@ -721,6 +722,69 @@ void Isaac::doGetItemAction(ItemKind itemkind)
 		getItemInfoText2->setString("All stats up!");
 	}
 		break;
+	case BloodOfTheMarTyrITEM:
+	{
+		totalDmgUps = totalDmgUps + 1.0f;
+
+		getItemSprite->setTexture("ITEMS/collectibles_007_bloodofthemartyr.png");
+
+		getItemInfoText1->setString("BLOOD OF THE MARTYR");
+		getItemInfoText2->setString("DMG up!");
+
+	}
+		break;
+	case PillsItem:
+	{
+		auto randomEffect = RGI->getRandomNumberWithRange(1, 5);
+
+		switch (randomEffect)
+		{
+		case 1:
+		{
+			Hp = MaxHp;
+
+			log("현재체력이 최대체력이된다.");
+		}
+			break;
+		case 2:
+		{
+			auto temp = Player->getBombCount();
+			Player->setBombCount(Player->getKeyCount());
+			Player->setKeyCount(temp);
+
+			log("열쇠수와 폭탄수를 바꿔준다");
+		}
+			break;
+		case 3:
+		{
+			MoveSpeed = MoveSpeed + 8.0f;
+
+			log("이동속도 증가!");
+		}
+			break;
+		case 4:
+		{
+			totalLuck += 1.0f;
+
+			log("운 증가!");
+		}
+			break;
+		case 5:
+		{
+			log("아무효과없음!");
+		}
+			break;
+		default:
+			break;
+		}
+
+		getItemSprite->setSpriteFrame("pickup_pill_01.png");
+
+		getItemInfoText1->setString("PILL");
+		getItemInfoText2->setString("???");
+
+	}
+		break;
 	default:
 		break;
 	}
@@ -739,8 +803,11 @@ void Isaac::doGetItemAction(ItemKind itemkind)
 	getItemBackGround->setVisible(true);
 	getItemBackGround->runAction(ScaleTo::create(0.2f, 1.f));
 
-	SMI->PlayPowerUp1();
 
+	auto randomSound = RGI->getRandomNumberWithRange(1, 4);
+	
+
+	SMI->PlayPowerUp1();
 }
 
 void Isaac::IsaacChangeInfo1()
