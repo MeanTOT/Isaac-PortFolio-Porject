@@ -75,6 +75,8 @@ public:
 	virtual void CreateBullet() {}
 
 	void HitEffect();
+	void HitEffect2();
 	void ChangeColor();
+	void ChangeColor2();
 	float GetAngleToPlayer();
 };

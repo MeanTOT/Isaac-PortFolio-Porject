@@ -20,6 +20,10 @@ bool GameStage_2::init()
 
 	CI->CreateCamera(this);
 
+	endingScreenBg = LayerColor::create(Color4B::BLACK);
+	endingScreenBg->setOpacity(0);
+	this->addChild(endingScreenBg, 100000);
+
 	// 물리효과 구현 범위 //
 	auto edgeBody = PhysicsBody::createEdgeBox(Size(DI->getWinSize().width - 100, DI->getWinSize().height - 70), PhysicsMaterial(0, 1, 0), 3);
 	edgeBody->setContactTestBitmask(true);
@@ -68,9 +72,11 @@ bool GameStage_2::init()
 	MapCase[11] = new MapCase_22(this, Position_53_50_);
 	MapCase[12] = new MapCase_23_BossRoom(this, Position_53_51_);
 	MapCase[13] = new MapCase_24_ShopRoom(this, Position_52_48_);
+	MapCase[14] = new MapCase_25(this, Position_50_47_);
+	MapCase[15] = new MapCase_26(this, Position_49_52_);
 
 	// 미니맵 제작 //
-	miniMap = new MiniMap(this, MapCase);
+	miniMap = new MiniMap_2(this, MapCase);
 
 	// 스케쥴 관리 //
 
@@ -117,6 +123,8 @@ void GameStage_2::tick(float delta)
 		MapCase[11]->tick();
 		MapCase[12]->tick();
 		MapCase[13]->tick();
+		MapCase[14]->tick();
+		MapCase[15]->tick();
 
 		// 아이작의 총알 백터
 		for (int i = 0; i < Player->isaacBulletVec.size(); i++)
@@ -187,6 +195,24 @@ void GameStage_2::tick(float delta)
 				Player->monsterVec.erase(Player->monsterVec.begin() + i);
 			}
 		}
+	}
+
+	if (Player->getSceneChange())
+	{
+		Player->isaacBulletVec.clear();
+		Player->monsterBulletVec.clear();
+		Player->objectVec.clear();
+		Player->itemBaseVec.clear();
+		Player->monsterVec.clear();
+
+		// 엔딩 부분 !!
+		log("엔딩!");
+
+		endingScreenBg->setPosition(Vec2(CI->camera->getPosition().x - DI->getWinSize().width / 2, CI->camera->getPosition().y - DI->getWinSize().height / 2));
+		endingScreenBg->runAction(FadeIn::create(1.f));
+
+
+		Player->setSceneChange(false);
 	}
 
 	// 디버그를 보여줄지에 대한 여부

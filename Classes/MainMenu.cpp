@@ -13,6 +13,10 @@ bool MainMenu::init()
 	// 朝五虞 持失
 	CI->CreateCamera(this);
 
+	outSideBackGround = Sprite::create("TitleMenu/titlemenu_01.png");
+	outSideBackGround->setPosition(Position_50_47_);
+	this->addChild(outSideBackGround);
+
 
 	// ---------- PressStart Screen ---------- //
 	

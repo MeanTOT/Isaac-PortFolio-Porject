@@ -9,8 +9,6 @@ class MapCase_23_BossRoom : public MapBase
 {
 private:
 	EffectPoof* MagaMawMaker;
-	altar* _altar;
-	TheSadOnion* theSadOnion;
 	TrapDoor* trapDoorMaker;
 public:
 	MapCase_23_BossRoom(Scene* scene, Vec2 position);

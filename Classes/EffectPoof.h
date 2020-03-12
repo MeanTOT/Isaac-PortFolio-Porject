@@ -13,6 +13,7 @@
 #include "Charger.h"
 #include "Blubber.h"
 #include "MegaMaw.h"
+#include "Clotty.h"
 
 class EffectPoof
 {
@@ -37,6 +38,7 @@ private:
 	Charger* ChargerMaker;
 	Blubber* BlubberMaker;
 	MegaMaw* MegaMawMaker;
+	Clotty* ClottyMaker;
 
 public:
 	EffectPoof(Scene* scene, Vec2 position, MonsterKind monsterkind);
@@ -55,7 +57,7 @@ public:
 	void CreateCharger(Scene* scene, Vec2 position);
 	void CreateBlubber(Scene* scene, Vec2 position);
 	void CreateMegaMaw(Scene* scene, Vec2 position);
-
+	void CreateClotty(Scene* scene, Vec2 position);
 };
 
 

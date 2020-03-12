@@ -57,6 +57,7 @@
 #define Position_53_50_ Vec2((Director::getInstance()->getWinSize().width / 2) * 7, Director::getInstance()->getWinSize().height / 2)
 #define Position_53_51_ Vec2((Director::getInstance()->getWinSize().width / 2) * 7, (Director::getInstance()->getWinSize().height / 2) * 3)
 #define Position_52_48_ Vec2((Director::getInstance()->getWinSize().width / 2) * 5, (Director::getInstance()->getWinSize().height / 2) * -3)
+#define Position_49_52_ Vec2((Director::getInstance()->getWinSize().width / 2) * -1, (Director::getInstance()->getWinSize().height / 2) * 5)
 
 #define BackGroundZoder -100000
 #define DoorZoder -90000

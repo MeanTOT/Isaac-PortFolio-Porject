@@ -4,6 +4,7 @@ MapCase_15::MapCase_15(Scene* scene, Vec2 position)
 {
 	this->CreateCavesRoom(scene, position);
 	this->CreateDoorT(scene, position, NormalDoor);
+	this->CreateDoorB(scene, position, NormalDoor);
 
 	_scene = scene;
 	_position = position;

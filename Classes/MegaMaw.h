@@ -31,5 +31,6 @@ public:
 	void SetPositionToPlayerPosition();
 	void RunShadowMoveAction();
 	void CreateDregs();
+	void PlaySoundStomp();
 
 };

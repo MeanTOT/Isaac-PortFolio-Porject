@@ -109,6 +109,7 @@ enum MonsterKind // 451 ~ 500
 	MonsterKind_Charger,
 	MonsterKind_Blubber,
 	MonsterKind_MegaMaw,
+	MonsterKind_Clotty,
 };
 
 enum IsaacInfo// 501 ~ 550

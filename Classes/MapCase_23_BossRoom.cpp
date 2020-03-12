@@ -21,12 +21,9 @@ void MapCase_23_BossRoom::ClearOnDidFinish()
 {
 	if (!clearOnDidFinish && !CI->camera->getNumberOfRunningActions())
 	{
-		/*trapDoorMaker = new TrapDoor;
+		trapDoorMaker = new TrapDoor;
 		trapDoorMaker->CreateObject(_scene, Vec2(_position.x, _position.y + 50), 1);
 
-		theSadOnion = new TheSadOnion(_scene, Vec2(_position.x, _position.y + 18 - 30));
-		_altar = new altar;
-		_altar->CreateObject(_scene, Vec2(_position.x, _position.y - 30), 1);*/
 		AudioEngine::stopAll();
 		SMI->PlayBossFightJingleOutro();
 

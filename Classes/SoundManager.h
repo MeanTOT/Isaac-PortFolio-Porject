@@ -62,6 +62,12 @@ private:
 	int scaredWhimper2;
 	int spiderCoughs;
 	int heartPickUp;
+	int lockBreak;
+	int monstroBulletFire1;
+	int monstroBulletFire2;
+	int monstroBulletFire3;
+	int monstroStomp;
+	int monstroRoar;
 
 	SoundManager();
 	~SoundManager() {};
@@ -133,6 +139,12 @@ public:
 	void PlayScaredWhimper2();
 	void PlaySpiderCoughs();
 	void PlayHeartPickUp();
+	void PlayLockBreak();
+	void PlayMonstroBulletFire1();
+	void PlayMonstroBulletFire2();
+	void PlayMonstroBulletFire3();
+	void PlayMonstroStomp();
+	void PlayMonstroRoar();
 
 	// ---- GET/SET ---- //
 	float getBgmVolume() { return bgmVolume; }

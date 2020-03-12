@@ -14,9 +14,11 @@
 #include "MapCase_22.h"
 #include "MapCase_23_BossRoom.h"
 #include "MapCase_24_ShopRoom.h"
+#include "MapCase_25.h"
+#include "MapCase_26.h"
 #include "Bullet.h"
 #include "Dregs.h"
-#include "MiniMap.h"
+#include "MiniMap_2.h"
 #include "Bone.h"
 
 class GameStage_2 : public Scene
@@ -26,10 +28,12 @@ private:
 
 	MapBase* MapCase[20];
 
-	MiniMap* miniMap;
+	MiniMap_2* miniMap;
 
 	PhysicsBody* edgeSegment[8];
 	Node* edgeNode[8];
+
+	LayerColor* endingScreenBg;
 
 	bool isPlayBgm;
 public:

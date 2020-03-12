@@ -190,7 +190,7 @@ void Boney::MonsterSetTag()
 		if (hp <= 0)
 			return;
 
-		this->HitEffect();
+		this->HitEffect2();
 	}
 
 	if (hp <= 0 && monsterSprite->getTag() != MonsterErase)

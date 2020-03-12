@@ -16,6 +16,7 @@
 #include "ShopHeart.h"
 #include "ShopKey.h"
 #include "ShopItem_BloodOfTheMarTyr.h"
+#include "Locks.h"
 
 class MapBase : public Scene
 {

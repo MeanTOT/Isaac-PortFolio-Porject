@@ -174,7 +174,7 @@ void Charger::FollowPlayer()
 			monsterSprite->stopAllActions();
 			monsterSprite->setSpriteFrame("monster_charger_14.png");
 
-			monsterSprite->runAction(Sequence::create(MoveBy::create(1.f, Vec2(Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x, 0)),
+			monsterSprite->runAction(Sequence::create(MoveBy::create(2.f, Vec2(Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x, 0)),
 				CallFunc::create(CC_CALLBACK_0(Charger::ChangeTag, this)),
 				CallFunc::create(CC_CALLBACK_0(Charger::MakeAttackCycleZero, this)),nullptr));
 		}
@@ -190,7 +190,7 @@ void Charger::FollowPlayer()
 			monsterSprite->stopAllActions();
 			monsterSprite->setSpriteFrame("monster_charger_14.png");
 
-			monsterSprite->runAction(Sequence::create(MoveBy::create(1.f, Vec2(Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x, 0)),
+			monsterSprite->runAction(Sequence::create(MoveBy::create(2.f, Vec2(Player->getIsaacBody()->getPosition().x - monsterSprite->getPosition().x, 0)),
 				CallFunc::create(CC_CALLBACK_0(Charger::ChangeTag, this)),
 				CallFunc::create(CC_CALLBACK_0(Charger::MakeAttackCycleZero, this)), nullptr));
 		}
@@ -205,7 +205,7 @@ void Charger::FollowPlayer()
 			monsterSprite->stopAllActions();
 			monsterSprite->setSpriteFrame("monster_charger_13.png");
 
-			monsterSprite->runAction(Sequence::create(MoveBy::create(1.f, Vec2(0, Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)),
+			monsterSprite->runAction(Sequence::create(MoveBy::create(2.f, Vec2(0, Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)),
 				CallFunc::create(CC_CALLBACK_0(Charger::ChangeTag, this)),
 				CallFunc::create(CC_CALLBACK_0(Charger::MakeAttackCycleZero, this)), nullptr));
 		}
@@ -219,7 +219,7 @@ void Charger::FollowPlayer()
 			monsterSprite->stopAllActions();
 			monsterSprite->setSpriteFrame("monster_charger_15.png");
 
-			monsterSprite->runAction(Sequence::create(MoveBy::create(1.f, Vec2(0, Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)),
+			monsterSprite->runAction(Sequence::create(MoveBy::create(2.f, Vec2(0, Player->getIsaacBody()->getPosition().y - monsterSprite->getPosition().y)),
 				CallFunc::create(CC_CALLBACK_0(Charger::ChangeTag, this)),
 				CallFunc::create(CC_CALLBACK_0(Charger::MakeAttackCycleZero, this)), nullptr));
 		}

@@ -50,9 +50,9 @@ Isaac::Isaac()
 	basicHeight = 23.0f;
 	maxHeight = 23.0f;
 	BaseDmg = 3.5f;
-	totalDmgUps = 100.0f; // ¿ø·¡ 0    
+	totalDmgUps = 0.0f;
 	effectiveDmg = BaseDmg * sqrt(totalDmgUps * 1.2 + 1);
-	totalLuck = 1.0f;
+	totalLuck = 3.0f;
 	BaseLuck = 10.0f;
 	itemInvLuck = totalLuck / BaseLuck;
 	bombDmg = 60.0f;

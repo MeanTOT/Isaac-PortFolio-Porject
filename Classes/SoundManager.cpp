@@ -327,6 +327,36 @@ void SoundManager::PlayHeartPickUp()
 	heartPickUp = AudioEngine::play2d("Sound/Sfx/boss 2 bubbles.mp3", false, sfxVolume);
 }
 
+void SoundManager::PlayLockBreak()
+{
+	lockBreak = AudioEngine::play2d("Sound/Sfx/lock break 1.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMonstroBulletFire1()
+{
+	monstroBulletFire1 = AudioEngine::play2d("Sound/Sfx/boss spit blob barf 1.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMonstroBulletFire2()
+{
+	monstroBulletFire2 = AudioEngine::play2d("Sound/Sfx/boss spit blob barf 2.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMonstroBulletFire3()
+{
+	monstroBulletFire3 = AudioEngine::play2d("Sound/Sfx/boss spit blob barf 3.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMonstroStomp()
+{
+	monstroStomp = AudioEngine::play2d("Sound/Sfx/forest boss stomp.mp3", false, sfxVolume);
+}
+
+void SoundManager::PlayMonstroRoar()
+{
+	monstroRoar = AudioEngine::play2d("Sound/Sfx/boss lite roar 3.mp3", false, sfxVolume);
+}
+
 void SoundManager::RunnigBgmVolume()
 {
 	AudioEngine::setVolume(mainMenuBgm, bgmVolume);

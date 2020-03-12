@@ -242,14 +242,31 @@ void MegaMaw::DoAttack()
 
 		switch (randomAttack)
 		{
-		case 1:
+		case 1: // 총알발사
 		{
+			auto randomSound = RGI->getRandomNumberWithRange(1, 3);
+
+			switch (randomSound)
+			{
+			case 1:
+				SMI->PlayMonstroBulletFire1();
+				break;
+			case 2:
+				SMI->PlayMonstroBulletFire2();
+				break;
+			case 3:
+				SMI->PlayMonstroBulletFire3();
+				break;
+			default:
+				break;
+			}
+
 			monsterSprite->runAction(Sequence::create(monsterAnimate, CallFunc::create(CC_CALLBACK_0(MegaMaw::CreateBullet, this)), monsterAnimate3, CallFunc::create(CC_CALLBACK_0(MegaMaw::SetAttackCycle, this)),
 				CallFunc::create(CC_CALLBACK_0(MegaMaw::ChangeTag, this)), nullptr));
 			monsterSprite->runAction(Repeat::create(act2, 10));
 		}
 		break;
-		case 2:
+		case 2: // 일반점프
 		{
 			monsterSprite->runAction(Sequence::create(monsterAnimate2, CallFunc::create(CC_CALLBACK_0(MegaMaw::SetAttackCycle, this)),
 				CallFunc::create(CC_CALLBACK_0(MegaMaw::ChangeTag, this)), nullptr));
@@ -260,13 +277,15 @@ void MegaMaw::DoAttack()
 			monsterShadowSprite->runAction(MoveTo::create(1.0f, Vec2(Player->getIsaacBody()->getPosition().x, Player->getIsaacBody()->getPosition().y - 30)));
 		}
 		break;
-		case 3:
+		case 3: // 높은점프
 		{
+			SMI->PlayMonstroRoar();
 			monsterSprite->runAction(Sequence::create(monsterAnimate4, MoveBy::create(0.2f, Vec2(0,400)), CallFunc::create(CC_CALLBACK_0(MegaMaw::SetCollisionBitMaskZero, this)),
 				CallFunc::create(CC_CALLBACK_0(MegaMaw::RunShadowMoveAction, this)),
 				DelayTime::create(1.2f),
 				CallFunc::create(CC_CALLBACK_0(MegaMaw::SetPositionToPlayerPosition,this)),
 				MoveBy::create(0.2f, Vec2(0, -370)),
+				CallFunc::create(CC_CALLBACK_0(MegaMaw::PlaySoundStomp, this)),
 				CallFunc::create(CC_CALLBACK_0(MegaMaw::SetCollisionBitMaskBasic, this)),
 				CallFunc::create(CC_CALLBACK_0(MegaMaw::CreateBullet2, this)),
 				Spawn::createWithTwoActions(monsterAnimate6, act3),
@@ -358,4 +377,9 @@ void MegaMaw::CreateDregs()
 {
 	effectBlood = new EffectBlood(_scene, monsterSprite->getPosition(), MonsterKind_MegaMaw);
 	_dregs = new Dregs(_scene, monsterSprite->getPosition(), ObjectMonster, monsterSprite->getLocalZOrder());
+}
+
+void MegaMaw::PlaySoundStomp()
+{
+	SMI->PlayMonstroStomp();
 }

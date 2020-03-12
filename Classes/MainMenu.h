@@ -5,6 +5,7 @@
 class MainMenu : public Scene
 {
 private:
+	Sprite* outSideBackGround;
 
 	// All Screen
 	Sprite* menuOverlay1;
