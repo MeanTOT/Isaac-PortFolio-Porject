@@ -6,8 +6,8 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 	monsterHeight = 20.0f;
 	monsterMoveSpeed = 6000.0f;
 	mosnterBulletMoveSpeed = 400.0f;
-	maxHp = 330.0f;
-	hp = 330.0f;
+	maxHp = 280;
+	hp = 280.0f;
 
 	AttackCycle = 200;
 
@@ -19,7 +19,7 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 	monsterSprite->setPosition(position);
 	monsterSprite->setTag(MonsterIdle);
 
-	monsterPhysics = PhysicsBody::createCircle(monsterSprite->getContentSize().width / 6, PhysicsMaterial(0.05f, 1.f, 0));
+	monsterPhysics = PhysicsBody::createCircle(monsterSprite->getContentSize().width / 5, PhysicsMaterial(0.05f, 1.f, 0));
 	monsterPhysics->setCollisionBitmask(4);
 	monsterPhysics->setLinearDamping(0.5f);
 	//monsterPhysics->setPositionOffset(Vec2(0, -1 * monsterHeight));
@@ -154,7 +154,7 @@ Dingle::Dingle(Scene * scene, Vec2 position)
 
 	Player->monsterVec.push_back(this);
 
-	_scene = scene;
+	_scene = scene; 
 	_position = position;
 
 }
@@ -311,7 +311,10 @@ void Dingle::RushAttack()
 
 void Dingle::SommonsDip()
 {
-	auto HorfMaker1 = new EffectPoof(_scene, Vec2(monsterSprite->getPosition().x - 32, monsterSprite->getPosition().y), MonsterKind_Dip);
+	if (monsterSprite->getPositionX() < Player->getIsaacBody()->getPositionX())
+		auto HorfMaker1 = new EffectPoof(_scene, Vec2(monsterSprite->getPosition().x + 32, monsterSprite->getPosition().y), MonsterKind_Dip);
+	if (monsterSprite->getPositionX() > Player->getIsaacBody()->getPositionX())
+		auto HorfMaker1 = new EffectPoof(_scene, Vec2(monsterSprite->getPosition().x - 32, monsterSprite->getPosition().y), MonsterKind_Dip);
 }
 
 void Dingle::CreateTrace()

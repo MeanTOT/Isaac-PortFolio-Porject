@@ -47,11 +47,7 @@ void MapCase_19::tick()
 	{
 		FirstEnter = true;
 
-		ChargerMaker[0] = new EffectPoof(_scene, Vec2(_position.x + 32 * 2, _position.y - 32 * 2), MonsterKind_Charger);
-		ChargerMaker[1] = new EffectPoof(_scene, Vec2(_position.x + 32 * 3, _position.y + 32 * 2), MonsterKind_Charger);
-		ChargerMaker[2] = new EffectPoof(_scene, Vec2(_position.x + 32, _position.y + 32 * 2), MonsterKind_Charger);
-		ChargerMaker[3] = new EffectPoof(_scene, Vec2(_position.x - 32 * 2, _position.y + 80), MonsterKind_Charger);
-		ChargerMaker[4] = new EffectPoof(_scene, Vec2(_position.x + 170, _position.y + 32 * 2), MonsterKind_Charger);
+		BombMaker = new Bomb(_scene, _position);
 
 		log("19번방 첫입장");
 	}

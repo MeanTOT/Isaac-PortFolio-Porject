@@ -7,6 +7,7 @@ private:
 	EffectPoof* ChargerMaker[5];
 	MushRoom* MushRoomMaker[4];
 	Rocks_Cave* RocksCaveMaker[4];
+	Bomb* BombMaker;
 public:
 	MapCase_19(Scene* scene, Vec2 position);
 	~MapCase_19();

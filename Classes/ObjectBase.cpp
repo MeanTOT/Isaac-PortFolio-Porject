@@ -30,7 +30,8 @@ void ObjectBase::RandomItemDrop()
 			break;
 		case 5:
 		{
-			pillMaker = new Pill(_scene, _position);
+			if (RGI->getPercentage(0.5f))
+				pillMaker = new Pill(_scene, _position);
 		}
 			break;
 		default:
